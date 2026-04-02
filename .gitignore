@@ -1,4 +1,4 @@
-﻿__pycache__/
+__pycache__/
 *.py[cod]
 *.egg-info/
 dist/
@@ -27,3 +27,10 @@ desktop.ini
 
 *.log
 *.bak
+
+# Docker volumes (local override)
+qdrant_storage/
+logs/
+
+# Docker env override
+.env.local

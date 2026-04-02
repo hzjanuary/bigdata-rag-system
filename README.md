@@ -248,6 +248,86 @@ chat_dir = Config.get_chat_dir("My Project")            # database/chat_history/
 collection = Config.get_collection_name("My Project")   # ws_my_project
 ```
 
+## Docker Deployment
+
+The recommended way to run easyResearch is via Docker Compose, which starts Qdrant, the FastAPI backend, and the Streamlit UI together.
+
+### Prerequisites
+
+- [Docker Desktop](https://www.docker.com/products/docker-desktop/) (Windows / macOS) or Docker Engine + Docker Compose v2 (Linux)
+- For GPU support: NVIDIA GPU with [nvidia-container-toolkit](https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/install-guide.html)
+
+### 1. Configure environment variables
+
+```bash
+cp .env.example .env
+```
+
+Edit `.env` and set your API key:
+
+```env
+GROQ_API_KEY=gsk_your_groq_api_key_here
+```
+
+### 2. Build and start (CPU mode)
+
+```bash
+docker compose up -d --build
+```
+
+| Service | URL |
+| ------- | --- |
+| Streamlit UI | <http://localhost:8501> |
+| FastAPI Swagger | <http://localhost:8000/docs> |
+| Qdrant Dashboard | <http://localhost:6333/dashboard> |
+
+> The first build downloads the PyTorch base image (~5 GB) and installs all dependencies. Subsequent builds are cached and much faster.
+
+### 3. Start with GPU support (NVIDIA)
+
+Requires `nvidia-container-toolkit` installed on the host.
+
+```bash
+docker compose --profile gpu up -d --build
+```
+
+This activates `api-gpu` and `ui-gpu` services with full CUDA access, replacing the CPU services.
+
+### Useful commands
+
+```bash
+# View logs for all services
+docker compose logs -f
+
+# View logs for a specific service
+docker compose logs -f api
+
+# Stop all services (data is preserved in Docker volumes)
+docker compose down
+
+# Stop and remove volumes (clears all data)
+docker compose down -v
+
+# Rebuild after code changes
+docker compose up -d --build
+
+# Check service health
+docker compose ps
+```
+
+### Persistent volumes
+
+All data is stored in named Docker volumes and survives container restarts:
+
+| Volume | Contents |
+| ------ | -------- |
+| `easyresearch_qdrant_storage` | Qdrant vector index |
+| `easyresearch_uploads` | Uploaded documents |
+| `easyresearch_database` | Chat history & summaries |
+| `easyresearch_logs` | RAG traces & metrics |
+
+---
+
 ## Quick Start
 
 ### 1. Start Qdrant (Docker)
