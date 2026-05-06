@@ -353,7 +353,7 @@ with st.sidebar:
                     st.rerun()
 
         if start_btn:
-            with st.sidebar.status("Đang xử lý pipeline...", expanded=True) as status:
+            with st.sidebar.status("Processing pipeline...", expanded=True) as status:
                 status.write("Cleaning documents...")
                 result = run_pipeline(
                     source_dir=ws_upload_dir,
