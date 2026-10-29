@@ -1,0 +1,40 @@
+[build-system]
+requires = ["hatchling==1.27.0"]
+build-backend = "hatchling.build"
+
+[project]
+name = "workspace-rag-core"
+version = "0.1.0"
+description = "Private CPU-first multi-workspace document retrieval with Qdrant"
+requires-python = ">=3.12,<3.13"
+license = "MIT"
+dependencies = [
+  "fastapi==0.162.0", "uvicorn==0.38.0", "pydantic==2.12.4",
+  "httpx==0.28.1", "numpy==2.3.5", "qdrant-client==1.16.0",
+  "pypdf==6.21.4", "defusedxml==0.7.1", "tokenizers==0.22.1",
+  "onnxruntime==1.31.1",
+]
+
+[project.optional-dependencies]
+ui = ["streamlit==1.66.1"]
+
+[dependency-groups]
+dev = ["pytest==9.0.1", "pytest-cov==7.0.0", "ruff==0.14.6", "pip-audit==2.9.0", "cyclonedx-bom==7.2.1"]
+
+[project.scripts]
+rag = "rag_core.cli:main"
+
+[tool.hatch.build.targets.wheel]
+packages = ["rag_core"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+markers = ["integration: requires an isolated real Qdrant server", "live_model: requires explicitly acquired local model"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py312"
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "B", "UP"]
+ignore = ["E501", "B008"]

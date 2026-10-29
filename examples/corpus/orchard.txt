@@ -1,0 +1,3 @@
+The synthetic Cedar Orchard stores collected rainwater in a blue tank.
+Its drip irrigation runs for twelve minutes at sunrise. The tank capacity is 240 liters.
+A moisture sensor pauses irrigation when the soil is already wet.
