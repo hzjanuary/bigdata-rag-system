@@ -1,8 +1,11 @@
 # SPEC-001 execution plan
 
-Current checkpoint: final source287212b source CI and inactive cpuq2 configuration
-PASS; ten artifacts verified, read-only prior/source audit PASS. STOP before separate
-owner cpuq2 label action. Local CPU41 PASS, RAG12 restored, current21/1/2; plan active.
+Current checkpoint: independent campaign41040402221 at runtime287212b verified
+41/41 PASS, attempt1; artifact ZIP and every manifest size/hash verified. RAG20 PASS,
+RAG12 PASS, RAG15 BLOCKED, RAG21 FAIL: **22 PASS / one FAIL / one BLOCKED**.
+SOURCE-ONLY READY FOR OWNER DECISION; plan remains active. STOP before any push of
+new reconciliation evidence, Draft transition, merge/tag/release/image publication.
+Both CPU authorizations are consumed; no rerun or additional campaign.
 
 Started 2026-10-29. Branch: `feat/spec-001-oss-rag-core`.
 Authoritative requirements: `docs/specs/SPEC-001-open-source-rag-core.md` (unchanged).
@@ -37,6 +40,33 @@ The full matrix is in `docs/release/verification.md`. Each criterion starts NOT_
 - Publication, tags, remote deploy and touching existing volumes remain prohibited.
 
 ## Execution log
+
+### Final independent acceptance and source-only decision (2026-10-30)
+
+- Verified actual hosted Ubuntu24.04 run41040402221 at exact runtime287212be8f5683221d2449158331e59d4c639c15,
+  attempt1, CPU-only pinned MiniLM revision/hash, all41 real checks PASS including
+  exact restart ranking, isolation/citations, worker crash, outage/retry and separate
+  SQLite/Qdrant backup/restore. ZIP30a57bc2c2a7df2a6b0399936134a05e88d5df8da00ff8465e05f9458734164c,
+  CRC/exact manifest/file sizes/SHA-256 verified; complete actual logs retained.
+- RAG20's unchanged original loopback/private-network/clean-Linux requirement is
+  met by reviewed default Compose source and fresh hosted execution. RAG12 remains
+  PASS; 22/1/1. Do not equate CPU success with generative/image qualification.
+- Preserved cpuq1 run41029994294/marker123977248159 consumed FAIL and cpuq2
+  marker124011605279 consumed PASS evidence. Original private operands remain
+  unavailable. No marker/label reset, model acquisition or campaign during review.
+- Preserved unpushed e2dc537 and runtime/packaging identity. New README, SECURITY,
+  checklist, ledger and JSON are documentation/evidence-only. Development license
+  inventory now includes all92 existing locked tools; no dependency/lock change.
+- Local194 PASS/one skipped, actual Qdrant contract1 PASS; quality/lock/audit/license,
+  Compose and final source/archive/secret checks recorded in verification.md.
+  Known host Docker subnet exhaustion retained; successful disposable contract
+  probe uses existing bridge without deleting data or changing runtime source.
+- Reviewed active main rulesets read-only: required source status/up-to-date PR,
+  resolved threads, no force push/deletion/bypass. PR#1 remains open/Draft at287212b.
+  Source CI PASS; three image jobs FAIL at unchanged known HIGH gates. No all-green claim.
+- Early source-only v0.1.0 pre-release is ready for an explicit owner decision;
+  Docker images remain unapproved and RAG15 live generation remains BLOCKED.
+  No merge/tag/release/deploy/rename/publication is performed or inferred.
 
 - S0 checkpoint (0b09ca5): baseline/history detector completed before runtime implementation began.
 

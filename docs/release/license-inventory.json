@@ -30,11 +30,25 @@
       "metadata_url": "Documentation, https://arrow.readthedocs.io"
     },
     {
+      "name": "ast-serialize",
+      "version": "0.13.1",
+      "license": "MIT",
+      "approved": true,
+      "metadata_url": "Homepage, https://github.com/mypyc/ast_serialize"
+    },
+    {
       "name": "attrs",
       "version": "26.1.0",
       "license": "MIT",
       "approved": true,
       "metadata_url": "Documentation, https://www.attrs.org/"
+    },
+    {
+      "name": "black",
+      "version": "26.10.1",
+      "license": "MIT",
+      "approved": true,
+      "metadata_url": "Documentation, https://black.readthedocs.io/"
     },
     {
       "name": "boolean.py",
@@ -247,6 +261,13 @@
       "metadata_url": "Documentation, https://jsonschema-specifications.readthedocs.io/"
     },
     {
+      "name": "librt",
+      "version": "0.16.0",
+      "license": "MIT",
+      "approved": true,
+      "metadata_url": "Homepage, https://github.com/mypyc/librt"
+    },
+    {
       "name": "license-expression",
       "version": "30.4.4",
       "license": "Apache-2.0",
@@ -282,6 +303,20 @@
       "metadata_url": "Homepage, https://msgpack.org/"
     },
     {
+      "name": "mypy",
+      "version": "2.4.1",
+      "license": "MIT",
+      "approved": true,
+      "metadata_url": "Homepage, https://www.mypy-lang.org/"
+    },
+    {
+      "name": "mypy-extensions",
+      "version": "1.1.0",
+      "license": "MIT",
+      "approved": true,
+      "metadata_url": "Homepage, https://github.com/python/mypy_extensions"
+    },
+    {
       "name": "numpy",
       "version": "2.3.5",
       "license": "BSD-3-Clause",
@@ -315,6 +350,13 @@
       "license": "Apache-2.0 OR BSD-2-Clause",
       "approved": true,
       "metadata_url": "Documentation, https://packaging.pypa.io/"
+    },
+    {
+      "name": "pathspec",
+      "version": "1.1.1",
+      "license": "MPL-2.0",
+      "approved": true,
+      "metadata_url": "Change Log, https://python-path-specification.readthedocs.io/en/latest/changes.html"
     },
     {
       "name": "pip",
@@ -434,6 +476,13 @@
       "license": "Apache-2.0 OR BSD-3-Clause",
       "approved": true,
       "metadata_url": "https://github.com/dateutil/dateutil"
+    },
+    {
+      "name": "pytokens",
+      "version": "0.4.1",
+      "license": "MIT",
+      "approved": true,
+      "metadata_url": "Homepage, https://github.com/tusharsadhwani/pytokens"
     },
     {
       "name": "pyyaml",

@@ -6,6 +6,17 @@ dense embeddings, BM25, reciprocal-rank fusion and a deterministic term-coverage
 reranker. Every result identifies the stored document, chunk, source hash and real
 PDF page (TXT/DOCX page is null). Generation is disabled by default.
 
+> **Security Notice — early source-only v0.1.0 preview.** This is experimental
+> self-hosted source, not a production-certified deployment. Independent CPU/Qdrant
+> acceptance passed 41/41 on GitHub-hosted Ubuntu 24.04; that does not clear image
+> security. Existing Trivy HIGH findings remain **core 44, Qdrant 43, optional UI 44**
+> (separate per-image package findings, not summed unique CVEs). Image security jobs
+> remain FAIL; **no prebuilt Docker images are approved for publication**. Building
+> locally inherits these unresolved OS findings. Real generative LLM answering has
+> **not** been live-verified (RAG-15); keep generation disabled unless separately
+> authorized and privately configured. Read [SECURITY.md](SECURITY.md) and the
+> [actual acceptance/CI evidence](docs/release/verification.md) before installation.
+
 This replaces the historical easyResearch prototype. Existing uploads/collections
 are **not migrated or reset** automatically. Preserve old volumes and check out the
 original history separately if needed. This is a single-instance self-hosted core,
@@ -14,7 +25,7 @@ tested identities, limitations and separate source/image release decisions.
 
 ## Local first run (Linux, Python 3.12)
 
-Install [uv](https://docs.astral.sh/uv/), then:
+Use Python 3.12 and [uv](https://docs.astral.sh/uv/) (verified CI uses uv 0.9.7), then:
 
 ```bash
 uv sync --frozen
@@ -52,7 +63,6 @@ uv run rag search WORKSPACE_ID 'How is rainwater stored?'
 uv run rag search WORKSPACE_ID 'How is rainwater stored?' --no-rerank
 uv run rag ask WORKSPACE_ID 'How is rainwater stored?'
 # ask returns generation_disabled until explicitly configured.
-uv run rag workspace delete WORKSPACE_ID --confirm WORKSPACE_ID
 ```
 
 `rag ingest` imports one bounded regular local file; it rejects symlinks in every
@@ -60,6 +70,12 @@ path component. It uploads bytes through the authenticated API. The server never
 accepts a caller-chosen filesystem path. Duplicate content with the same format
 returns its existing job; reusing a filename with different content adds a new
 immutable document. Deletion is owner-only and requires the exact ID.
+
+Optional cleanup, only for the workspace you intend to delete:
+
+```bash
+uv run rag workspace delete WORKSPACE_ID --confirm WORKSPACE_ID
+```
 
 For a workspace client, put its capability in a private process environment and
 use `rag --token-env RAG_WORKSPACE_TOKEN search WORKSPACE_ID 'question'`. The owner
@@ -109,10 +125,18 @@ uv run pip-audit --require-hashes --disable-pip --no-deps -r requirements.txt
 ```
 
 Deterministic tests forbid network access and inject fixtures through Python only.
-Fixtures are never selectable production models/providers. The explicit
-`scripts/isolated_acceptance.py` campaign requires prior model authorization and a
-preinstalled model, downloads nothing, and tests actual images, Qdrant, crash,
-outage and independent backup/restore using synthetic data. It is never run by CI.
+Fixtures are never selectable production models/providers. The independent campaign
+at [run 41040402221](https://github.com/hzjanuary/bigdata-rag-system/actions/runs/41040402221)
+passed all 41 real CPU/Qdrant checks at runtime source
+`287212be8f5683221d2449158331e59d4c639c15`. RAG-20 is PASS; overall SPEC-001 remains
+**22 PASS / one FAIL / one BLOCKED**, including image-security FAIL and live
+generation BLOCKED. The complete CI workflow is not green.
+
+`scripts/isolated_acceptance.py` downloads nothing and uses a preinstalled model.
+It tests actual images, Qdrant, crash/outage and independent backup/restore with
+synthetic data. Hosted execution required a separately authorized owner label;
+both historical campaign budgets are consumed. Do not reapply labels or rerun them.
+Ordinary source CI never downloads the embedding model or invokes generation.
 
 Read [security](SECURITY.md), [contribution](CONTRIBUTING.md), [architecture](docs/architecture.md),
 [backup/restore](docs/backup-restore.md), [NOTICE](NOTICE) and [MIT license](LICENSE).

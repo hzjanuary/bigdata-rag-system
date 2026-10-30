@@ -1,6 +1,112 @@
 # SPEC-001 verification ledger — 2026-10-30
 
-## Final remediation source verified — STOP before cpuq2 activation
+## Final reconciliation — SOURCE-ONLY READY FOR OWNER DECISION
+
+The actual [independent run41040402221](https://github.com/hzjanuary/bigdata-rag-system/actions/runs/41040402221)
+completed **41/41 real CPU/Qdrant checks PASS**, attempt **1**, on fresh
+GitHub-hosted **Ubuntu24.04.5 LTS** (runner image20261026.354.1, Python3.12.15).
+Runtime checkout: **`287212be8f5683221d2449158331e59d4c639c15`**.
+The workflow merge-source SHA `a743b65a3b946d9d3cdf37c554f2c3ca53f49af2`
+is recorded separately in the receipt; acceptance explicitly checked out the reviewed
+PR head287212b. No moving-branch or documentation-head runtime claim.
+
+Downloaded actual artifact **independent-cpu-41040402221**, ID **12969962055**.
+ZIP SHA-256 (also equal to GitHub's artifact digest):
+`30a57bc2c2a7df2a6b0399936134a05e88d5df8da00ff8465e05f9458734164c`.
+CRC, exact unique regular member set and every manifest byte size/SHA-256 pass.
+Reports are bounded below the unchanged2,000,000-byte per-file limit. Complete logs,
+ZIP and original sanitized receipt are retained in ignored
+`.local/final-acceptance-41040402221/`; no private runner result is reconstructed.
+[Verified campaign, all41 checks and original sanitized receipt](evidence/final-independent-acceptance.json).
+
+Only official `sentence-transformers/all-MiniLM-L6-v2`, revision
+`10dbd2f06a8baf40ad285b037edda610c1b9a57c`, was acquired: ONNX90,405,214 bytes,
+SHA-256 `6fd5d72fe4589f189f8ebc006442dbb529bb7ce38f8082112682524616046452`,
+plus tokenizer466,247 bytes with pinned Git blob/hash. Actual CPUExecutionProvider,
+384-dimensional masked-mean/L2 output: reference maximum error1.7898752063816303e-08,
+batch/single difference0, norms1.000000016007465 and0.9999999949888099. Actual two
+384-value embeddings, tolerances, synthetic citations and collection state are
+preserved in the verified receipt. Zero generative/paid calls or provider fallback.
+
+TXT/PDF/DOCX, real PDF page2 citations, workspace denials, hybrid/rerank, idempotent
+retry, worker SIGKILL/recovery, Qdrant outage/restart and independent backup/restore
+all PASS. Eight separately observed API-restart checks PASS, ranking differences[];
+exact score checks were retained. Restore matches two green384-dimensional
+collections (1+5 points), six committed chunks and durable jobs5 COMPLETED/1 FAILED.
+The FAILED job is the intentional outage-ingest negative case; subsequent retry
+completes and it remains accurately represented in job history.
+
+**RAG-20 PASS** on its exact unchanged original requirement: “Default Docker Compose
+binds API to loopback and Qdrant to private network; CPU path verified on clean Linux
+host.” Reviewed default Compose publishes API only at127.0.0.1, Qdrant has no host
+port and uses the private internal network. Actual fresh hosted execution used that
+default Compose with fresh synthetic configuration. This combines exact source
+inspection and real execution; no separate post-launch network-inspection artifact
+was exported. RAG-12 remains PASS; **22 PASS / one FAIL / one BLOCKED**.
+
+Both budgets are consumed permanently. Preserve original failed cpuq1
+run41029994294/marker123977248159 and successful cpuq2 run41040402221/
+marker124011605279, including their labels, logs, artifacts and neutral reservation
+check conclusions. Markers record consumption; actual campaign evidence establishes
+PASS/FAIL. The original private post-restart values remain unavailable; later success
+does not prove that first hosted failure had no additional cause. No reset/rerun,
+label action, model acquisition or CPU campaign occurred during this reconciliation.
+Historical preparation checkpoints below describe their state at that earlier time.
+
+### Source, images and final review boundaries
+
+- Runtime and latest PR#1 head:287212be8f5683221d2449158331e59d4c639c15. PR remains
+  open/Draft. Preserved local unpushed e2dc53794ebaf8da85ab7cff7696bec22df0bb75
+  changes only three docs/evidence files; this final reconciliation also changes
+  only README/SECURITY and docs. No executable, workflow, lock, LICENSE/NOTICE,
+  Docker/Compose or packaging input changed. The final local commit/source archive
+  are recorded separately in the ignored handoff manifest, avoiding self-reference.
+- Runtime source archive from source CI:95b9ef21d11df4d98678e85bb38b1906f92326394e0b1097426a318535c9e0b6.
+  Final documentation-candidate archive is a separate identity. Neither is a
+  published release asset. Documentation HEAD does not require rerunning consumed CPU campaigns.
+- Campaign Docker image IDs: core
+  sha256:c69881b500ac2ef060d845063db473f69c1e0f7f5672b0f68651049dff51c969;
+  Qdrant sha256:05227f8fccb7abfe5553aabdc0f36762058e1730eba9a2cb1a81577d01d15033.
+  These functional build IDs differ from the separately retained security-scan
+  builds; no byte-identical or published-registry-digest claim. Source build args
+  target287212b; no separate campaign image-config inspection export was produced.
+- Source jobs41038452232/41038457036 PASS; source/image workflows overall FAIL.
+  Actual core/Qdrant/UI image jobs retain Trivy HIGH findings **44 /43 /44**, zero
+  CRITICAL, unchanged HIGH/CRITICAL gates exit1. These are separate per-image
+  package findings, not a sum of unique CVEs. Raw vulnerability/license/SBOM reports
+  and their checksums remain unchanged. No image rebuild/scan was needed for this
+  documentation-only review; no refreshed vulnerability-database claim is made.
+- Local rerun:194 deterministic PASS/one skipped, JUnit generated; separate real
+  Qdrant contract1 PASS. Initial host default subnet exhaustion is retained, with
+  no source defect inferred: the successful fresh disposable Qdrant probe used the
+  existing bridge and loopback ephemeral port, no deleted retained data/networks.
+  No model/inference during this review. Ruff lint/format, Black, MyPy13 files,
+  frozen lock/install, Compose default/UI,92-package development license gate and
+ 38-package hash-locked runtime audit (zero known findings) PASS. Development
+  inventory now includes seven already-locked quality-tool packages previously
+  omitted; runtime/UI inventories remain tied to their actual scan builds.
+- Exact final source/archive/private-path and current/history secret gates verified;
+  raw checks and final hashes live under `.local/final-acceptance-41040402221/`.
+  Existing historical public tokenizer Git-hash finding remains specifically
+  reviewed; no new secret exceptions. MIT LICENSE and scoped NOTICE unchanged.
+- Main rulesets26194925/26194913/26194964 reviewed read-only: PR required, threads
+  resolved, source status from Actions integration15368 with strict up-to-date
+  policy; deletion/force push blocked, bypass actors[]. No unresolved review
+  threads at review. Classic protection API404 does not negate effective rulesets.
+  No protection/settings change or bypass. Required source CI must pass on the
+  final pushed head before an authorized merge; no push performed in this review.
+
+[Source-only readiness/provenance](evidence/source-only-readiness.json) and
+[owner publication checklist](RELEASE-CHECKLIST.md) separate the decisions.
+**RAG-15 BLOCKED**: live generative answer verification is not authorized/completed.
+**RAG-21 FAIL**: known OS vulnerabilities remain; no prebuilt Docker image approval.
+This early source-only v0.1.0 pre-release is ready for the owner's explicit decision,
+not production certification or permission to publish. README has a prominent
+security notice before installation. Stop before push/merge/tag/release/deploy,
+repository rename or any publication; source-only authorization for other
+repositories does not apply here.
+
+## Historical checkpoint — final remediation source verified before cpuq2 activation
 
 Final remote PR #1 head: **`287212be8f5683221d2449158331e59d4c639c15`**.
 Exact future owner label: **`cpuq2:287212be8f5683221d2449158331e59d4c639c15`**.
@@ -431,7 +537,7 @@ The authoritative RAG-01..24 conditions in SPEC-001 are unchanged. The plan rema
 active because LIVE generation, independent host qualification, remote CI and image
 security signoff are incomplete. This ledger deliberately does not call those PASS.
 
-## Tested identities
+## Original tested identities (historical, superseded by runtime287212b above)
 
 - Original baseline: `74931fedcf99408e8b15b9052c0e8aed1fd6d8fc`; history retained.
 - **F** (final runtime/packaging): `02ad20787fd5a8c475aa0efa2e0802e98fb74d8b`.
@@ -451,7 +557,7 @@ and [locked image inventory](evidence/image-inventory.json). The exact final sou
 archive/file manifest and checksums are retained under `.local/artifacts/`; they
 are generated after the evidence commit to avoid a self-referential manifest.
 
-## Commands and evidence keys
+## Original commands and evidence keys (historical scope)
 
 | Key | Executed command / scope | Evidence |
 | --- | --- | --- |
@@ -465,7 +571,7 @@ are generated after the evidence commit to avoid a self-referential manifest.
 | V | Actual Trivy image scans and CycloneDX generation; `trivy image --scanners vuln --severity HIGH,CRITICAL --exit-code 1` on all three final images | [Raw-report hashes, counts, DB identity](evidence/image-security.json), [actual nonzero gate exits](evidence/image-gate-exits.json). Raw JSON and actual OS/application SBOMs: `.local/scans/{core,qdrant,ui}.{json,cdx.json}`. |
 | UI | Read-only/no-data-mount optional UI container, GET `/` and `/_stcore/health` | [HTTP smoke](evidence/ui-smoke.json), F: PASS. Browser interaction is NOT_RUN; backend ACL is independently covered by U/L. No UI search/generation was run. |
 
-## Exact acceptance statuses
+## Current exact acceptance statuses — final reconciliation
 
 Status scope is the complete authoritative criterion, not merely its easiest subtest.
 F/U/L/A above supply exact source/image identities for every referenced evidence key.
@@ -491,17 +597,17 @@ F/U/L/A above supply exact source/image identities for every referenced evidence
 | RAG-17 | PASS | U error/caplog/stdout redaction with secret/content/path sentinels, including CLI storage failures; default access/prompt traces absent; authenticated fixed-schema events only. |
 | RAG-18 | PASS | L actual Qdrant stop -> readiness/search 503; restart restores identical committed retrieval. U/Q outage and dimension contracts. |
 | RAG-19 | PASS | L actual private logical backup and read-only restore to a separate Qdrant, exact source hashes/manifests/jobs/capability hashes, ranking within 1e-6 float round-trip tolerance. Original documents/volumes untouched. |
-| RAG-20 | BLOCKED | Hosted campaign 41029994294 consumed authorization and passed 21 checks, then failed restart assertion before remaining outage/crash/restore scenarios. Local diagnosis is not independent-host completion. New explicit campaign authorization required; preserve original marker. |
-| RAG-21 | FAIL | Latest source jobs/artifacts PASS in runs 41012209423/41012213478 at ba78e94 (154 PASS, one skipped). All three actual hosted image jobs per run execute and security gates exit **1**, unchanged 44/43/44 HIGH. Raw reports/checksums preserved, no suppression. |
+| RAG-20 | PASS | Exact original loopback/private-network/clean-Linux requirement satisfied: reviewed default Compose at287212b plus genuine fresh GitHub-hosted Ubuntu24.04 run41040402221, attempt1, all41 real CPU/Qdrant/restart/crash/outage/restore checks PASS. Verified ZIP/manifest/model and both consumed markers retained; original cpuq1 remains historical FAIL. See final-independent-acceptance.json. |
+| RAG-21 | FAIL | Latest source jobs/artifacts PASS in runs41038452232/41038457036 at287212b (194 PASS, one skipped). All three actual hosted image jobs per run execute and security gates exit **1**, unchanged core44/Qdrant43/UI44 HIGH, zero CRITICAL. Raw reports/checksums preserved, no suppression; whole source/image workflow is FAIL. |
 | RAG-22 | PASS | S exact tracked-file/archive inventory and adversarial bypass tests; I excludes private/model/index data and unused bundled ONNX demo graphs; no operator fixtures in source. One historical public-hash detector finding independently reviewed, not hidden. |
 | RAG-23 | PASS | C + L README/CLI walkthrough; required architecture/self-host/provider/security/backup/contribution/license/NOTICE/release docs and inventories present. No production, GPU, OCR, provider-quality or benchmark claims. |
 | RAG-24 | PASS | This explicit review separates source preview, actual model evidence, LIVE provider scope, remote CI and image security. Neither publication decision is inferred from deterministic tests. |
 
-Totals: **21 PASS, 2 BLOCKED, 1 FAIL**. Previous PASS rows retain their stated
-historical evidence scope; they are not a claim that the full current hosted stack
-was requalified. No acceptance criterion was edited to obtain PASS.
+Totals: **22 PASS, 1 BLOCKED, 1 FAIL**. Previous PASS rows retain their stated
+evidence scope; independent CPU/Qdrant completion does not qualify live generation
+or clear image security. No acceptance criterion was edited to obtain PASS.
 
-## Model integrity and the one approved campaign
+## Original local model integrity and campaign (historical)
 
 Official repository: `sentence-transformers/all-MiniLM-L6-v2`.
 Revision: `10dbd2f06a8baf40ad285b037edda610c1b9a57c`, Apache-2.0.

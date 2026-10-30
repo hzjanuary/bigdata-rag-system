@@ -1,5 +1,12 @@
 # CPU/Qdrant remediation campaign 2 — installed preparation, owner activation only
 
+> **COMPLETED / CONSUMED — historical preparation below.** Owner activation ran
+> campaign `41040402221` once at source `287212be8f5683221d2449158331e59d4c639c15`:
+> 41/41 PASS, attempt 1. Marker `124011605279` remains permanently consumed.
+> Do not apply/reapply a label, rerun, reset or acquire another model package.
+> Both cpuq1 and cpuq2 authorizations are consumed. See the current
+> [verification ledger](verification.md) and [verified evidence](evidence/final-independent-acceptance.json).
+
 The owner authorizes **at most ONE additional independently triggered campaign**.
 Preparation never creates/applies a label, reserves a marker or downloads a model.
 The final reviewed SHA and exact label are reported only after normal push and
