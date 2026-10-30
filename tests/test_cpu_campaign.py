@@ -14,7 +14,26 @@ spec = importlib.util.spec_from_file_location("cpu_campaign", ROOT / "scripts/cp
 policy = importlib.util.module_from_spec(spec)
 spec.loader.exec_module(policy)
 TARGET = "a" * 40
-NOW = dt.datetime(2026, 10, 30, 5, tzinfo=dt.UTC)
+NOW = dt.datetime(2026, 10, 30, 12, tzinfo=dt.UTC)
+
+
+def prior_record():
+    return {
+        "run_id": policy.OLD_RUN,
+        "source_sha": policy.OLD_SHA,
+        "marker_id": policy.OLD_MARKER_ID,
+        "consumed": True,
+        "result": "FAIL",
+        "artifact_id": policy.OLD_ARTIFACT,
+        "artifact_digest": policy.OLD_ARTIFACT_DIGEST,
+    }
+
+
+@pytest.fixture(autouse=True)
+def isolated_history_contract(monkeypatch):
+    # Exact ZIP/marker/log verification is independently exercised in test_campaign2_evidence.
+    monkeypatch.setattr(policy, "verify_known_failure", lambda api: prior_record())
+    monkeypatch.setattr(policy, "source_archive_proof", lambda *args: "fixture-source-archive")
 
 
 @pytest.fixture
@@ -116,6 +135,8 @@ def test_stale_checkout_and_expiry_reject(approval):
         policy.activation(event, env, "b" * 40, NOW)
     with pytest.raises(ValueError, match="expired"):
         policy.activation(event, env, TARGET, policy.DEADLINE)
+    with pytest.raises(ValueError, match="not_open"):
+        policy.activation(event, env, TARGET, policy.WINDOW_START - dt.timedelta(microseconds=1))
 
 
 class History:
@@ -129,6 +150,9 @@ class History:
             ),
         ]
         self.trigger = [self.run(30, policy.WORKFLOW), self.run(29, policy.WORKFLOW)]
+        old = self.run(policy.OLD_RUN, policy.WORKFLOW, policy.OLD_SHA)
+        old["conclusion"] = "failure"
+        self.trigger.append(old)
         steps = [
             {"name": n, "conclusion": "success"}
             for n in (
@@ -162,7 +186,9 @@ class History:
     def __call__(self, path, value=None):
         assert value is None, "Authorization/history tests must perform no API writes"
         self.calls.append(path)
-        path = urllib.parse.urlsplit(path).path
+        parsed = urllib.parse.urlsplit(path)
+        query = urllib.parse.parse_qs(parsed.query)
+        path = parsed.path
         if path == "/pulls/1":
             return self.pr
         if path == "/actions/runs/41006993655":
@@ -174,7 +200,11 @@ class History:
         elif path.endswith("/artifacts"):
             rows, key = self.artifacts, "artifacts"
         elif path.endswith("/check-runs"):
-            rows, key = self.checks, "check_runs"
+            if query.get("check_name") == [policy.OLD_MARKER]:
+                rows = [{"id": policy.OLD_MARKER_ID}] if policy.OLD_SHA in path else []
+            else:
+                rows = self.checks
+            key = "check_runs"
         else:
             raise AssertionError("Unexpected API path")
         return {"total_count": len(rows), key: rows}
@@ -188,6 +218,44 @@ def test_complete_unconsumed_exact_head_source_proof(approval):
     assert record["source_artifact_id"] == 50
     assert "consumed" not in record  # Read-only verification cannot consume the campaign.
     assert len(policy.PREFIX + TARGET) <= 50
+
+
+@pytest.mark.parametrize(
+    "defect",
+    ["prior-run-omitted", "prior-run-rerun", "unrelated-started-attempt", "old-marker-omitted"],
+)
+def test_known_failure_exception_never_waives_other_history(approval, defect):
+    event, env = approval
+    api = History(approval)
+    if defect == "prior-run-omitted":
+        api.trigger = api.trigger[:-1]
+    if defect == "prior-run-rerun":
+        api.trigger[-1]["run_attempt"] = 2
+    if defect == "unrelated-started-attempt":
+        api.jobs[29][1]["conclusion"] = "success"
+    original = api.__call__
+
+    def read(path, value=None):
+        if defect == "old-marker-omitted" and "check_name=" + policy.OLD_MARKER in path:
+            return {"total_count": 0, "check_runs": []}
+        return original(path, value)
+
+    with pytest.raises(ValueError):
+        policy.authorize(read, event, env, TARGET, NOW)
+
+
+def test_cpuq1_label_cannot_authorize_remediation(approval):
+    event, env = approval
+    event["label"]["name"] = "cpuq1:" + TARGET
+    with pytest.raises(ValueError, match="wrong_label"):
+        policy.activation(event, env, TARGET, NOW)
+
+
+def test_original_run_identity_cannot_be_reused_as_second_activation(approval):
+    event, env = approval
+    env["GITHUB_RUN_ID"] = str(policy.OLD_RUN)
+    with pytest.raises(ValueError, match="old_run_cannot"):
+        policy.authorize(History(approval), event, env, TARGET, NOW)
 
 
 @pytest.mark.parametrize(
@@ -273,9 +341,14 @@ def test_intact_marker_source_and_current_head_required_before_acquisition(appro
         "source_artifact_id": 50,
         "source_artifact_digest": "sha256:" + "f" * 64,
         "source_run_id": 20,
+        "prior_campaign": prior_record(),
     }
     responses = {
         "/check-runs/7": {
+            "id": 7,
+            "status": "completed",
+            "conclusion": "neutral",
+            "app": {"slug": "github-actions"},
             "head_sha": TARGET,
             "name": policy.MARKER,
             "external_id": policy.CAMPAIGN + ":30",

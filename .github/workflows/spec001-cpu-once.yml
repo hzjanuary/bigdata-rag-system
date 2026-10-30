@@ -1,4 +1,4 @@
-name: spec001-cpu-once-pr1
+name: spec001-cpu-remediation-2-pr1
 on:
   push:
     branches: [feat/spec-001-oss-rag-core]
@@ -38,7 +38,7 @@ jobs:
       github.head_ref == 'feat/spec-001-oss-rag-core' &&
       github.actor == 'hzjanuary' && github.event.sender.login == 'hzjanuary' &&
       github.run_attempt == 1 &&
-      github.event.label.name == format('cpuq1:{0}', github.event.pull_request.head.sha)
+      github.event.label.name == format('cpuq2:{0}', github.event.pull_request.head.sha)
     runs-on: ubuntu-24.04
     timeout-minutes: 25
     permissions:

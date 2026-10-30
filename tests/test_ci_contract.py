@@ -28,7 +28,7 @@ def test_model_campaign_never_runs_on_normal_push_or_synchronize():
     assert "head.repo.full_name == github.repository" in job["if"]
     assert "github.event.pull_request.number == 1" in job["if"]
     assert "github.run_attempt == 1" in job["if"]
-    assert "format('cpuq1:{0}', github.event.pull_request.head.sha)" in job["if"]
+    assert "format('cpuq2:{0}', github.event.pull_request.head.sha)" in job["if"]
     assert job["runs-on"] == "ubuntu-24.04"
     steps = "\n".join(s.get("run", "") for s in job["steps"])
     assert "--accept-license-and-download" in steps

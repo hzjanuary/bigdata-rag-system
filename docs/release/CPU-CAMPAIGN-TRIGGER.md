@@ -1,3 +1,7 @@
+**Historical cpuq1 instructions.** That campaign is consumed and its marker must remain.
+Current separately authorized preparation: [CPU-CAMPAIGN-2.md](CPU-CAMPAIGN-2.md).
+Do not reuse the old label or rerun the old workflow.
+
 # Installed one-time CPU/Qdrant trigger — PR #1
 
 Installed configuration is verified without activation. **The owner must perform

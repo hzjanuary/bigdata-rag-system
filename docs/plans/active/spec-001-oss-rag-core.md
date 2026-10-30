@@ -1,9 +1,8 @@
 # SPEC-001 execution plan
 
-Current checkpoint: minimal sorted-term fix verified across processes and full local
-CPU/Qdrant path (41 PASS). Source CI pending before preparing separate authorized
-cpuq2 policy. Original hosted run/marker consumed and retained. Current 21/1/2;
-no independent campaign activation, plan active.
+Current checkpoint: fix source59a7103 CI PASS; full local CPU path41 PASS. Separate
+cpuq2 policy prepared and actual read-only history/archive audit PASS; final policy
+push/source CI pending. Original consumed marker intact; no activation. Current21/1/2.
 
 Started 2026-10-29. Branch: `feat/spec-001-oss-rag-core`.
 Authoritative requirements: `docs/specs/SPEC-001-open-source-rag-core.md` (unchanged).
@@ -261,3 +260,22 @@ The full matrix is in `docs/release/verification.md`. Each criterion starts NOT_
   failures stop before activation preparation. Only then implement/audit cpuq2's
   distinct identity/marker/label, preserving exactly the known prior failure and
   rejecting all other attempts/missing history. Never create/apply activation label.
+
+### Additional campaign preparation after corrected source CI (2026-10-30)
+
+- Corrected source59a7103: source jobs41035999451/41036006533 PASS (168 tests/one
+  skipped); ten artifacts downloaded/digests/manifests verified. Actual image gates
+  preserve known HIGH failure behavior; no unexpected source failure.
+- Separate policy `spec001-pr1-cpu-qdrant-remediation-2`, marker
+  `spec001-cpu-pr1-remediation-2-consumed`, prefixcpuq2. Fixed window Oct30 10:00
+  through Oct31 00:00 UTC; exact SHA resolved only after final push/CI.
+- Read-only actual GitHub audit validates exact oldrun41029994294, actor/job/steps,
+  consumed marker123977248159, pinned ZIP/receipt/checksums and failure logs. Only
+  that verified old failure is exempted; missing history/markers, every other
+  started attempt or new marker rejects. No reinterpretation as unused.
+- Downloaded source ZIP/tar membership and hashes required for exact target; new
+  reservation/receipt and original proof/current PR rechecked before acquisition.
+  No retries; concurrency and rerun guards retained; admin/retention limits explicit.
+- 194 tests PASS/one skipped, quality/actionlint green. New policy not activated,
+  no model acquisition, no new marker or label. Final normal push/CI then stop at
+  owner activation boundary, retaining RAG-15/20 BLOCKED and RAG-21 FAIL.

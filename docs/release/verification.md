@@ -1,5 +1,36 @@
 # SPEC-001 verification ledger — 2026-10-30
 
+## Corrected source CI verified; separate remediation policy prepared inactive
+
+Fix source `59a7103314eba9d63863774ca55d65e5f21dc7a5` passed genuine source jobs
+in [push41035999451](https://github.com/hzjanuary/bigdata-rag-system/actions/runs/41035999451)
+and [PR41036006533](https://github.com/hzjanuary/bigdata-rag-system/actions/runs/41036006533).
+Both have 168 PASS / one skipped, actual Qdrant and source/secret/license/audit gates
+PASS. All ten artifacts (including inactive configuration) were downloaded/verified.
+Image gates remain FAIL on unchanged known HIGH records; no unexpected source defect.
+
+Only after that verification, prepared the separately authorized policy:
+`spec001-pr1-cpu-qdrant-remediation-2`, marker
+`spec001-cpu-pr1-remediation-2-consumed`, label `cpuq2:<final reviewed full SHA>`.
+The exact activation head must be resolved after final policy push/CI. Fixed UTC
+window 2026-10-30 10:00 through 2026-10-31 00:00. No label/marker/download/hosted
+campaign is triggered in preparation. [Instructions](CPU-CAMPAIGN-2.md).
+
+Actual read-only GitHub audit validated all accessible history, original run/job/
+marker, pinned original ZIP checksum/manifests/receipt and named-failure logs, plus
+the verified source tar. The old consumed attempt is the ONLY precise exception;
+every other attempt/marker/missing record rejects. New-marker reservation remains
+before acquisition; receipt/old failure/current head are rechecked. New source ZIP
+and tar are verified, not merely trusted by artifact name. No public/private
+historical values are reconstructed or reset. Original private post-state limitation
+is retained. Tests: **194 PASS / one skipped**; policy mismatch/archive checks and
+actionlint pass. No production change beyond canonical BM25 traversal.
+
+[Preparation evidence](evidence/remediation-campaign-2-preparation.json) separates
+the local 41-PASS path, verified source CI, old consumed failure and new unconsumed
+authority. Next: final normal push and source/inactive CI, exact head/label report,
+then STOP for owner action. RAG-12 PASS, RAG-15/20 BLOCKED, RAG-21 FAIL: 21/1/2.
+
 ## BM25 corrected: deterministic/local CPU proof complete, source CI pending
 
 The only production change is sorted query-term traversal. The original six-process
