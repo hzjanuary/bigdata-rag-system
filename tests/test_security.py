@@ -243,3 +243,22 @@ def test_no_seed(service):
     assert service.store.list_workspaces("owner") == []
     with service.store.connect() as db:
         assert db.execute("SELECT count(*) FROM jobs").fetchone()[0] == 0
+
+
+def test_default_production_embedder_stays_unloaded_during_startup(settings, monkeypatch):
+    from conftest import FixtureVectors
+    from fastapi.testclient import TestClient
+
+    from rag_core.api import create_app
+    from rag_core.embedding import OnnxEmbedder
+    from rag_core.service import Service
+
+    def reject_load(_):
+        pytest.fail("startup must not load/download/infer a model")
+
+    monkeypatch.setattr(OnnxEmbedder, "_load", reject_load)
+    actual = Service(settings, vectors=FixtureVectors())
+    with TestClient(create_app(settings, service=actual)) as client:
+        assert client.get("/health").status_code == 200
+        assert actual.embedder.session is None
+        assert actual.store.list_workspaces("owner") == []
