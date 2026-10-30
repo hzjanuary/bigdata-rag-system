@@ -1,8 +1,8 @@
 # SPEC-001 execution plan
 
-Current checkpoint: narrow JUnit correction remotely verified at d54b899; source
-jobs/artifacts PASS, known image security gates FAIL. Inert one-time CPU trigger
-prepared for operator review, not installed/executed. Plan remains active.
+Current checkpoint: operator-only trigger implementation locally verified; normal
+push/source CI pending. Preparation does not activate or consume the campaign.
+Plan remains active; RAG-15/20 BLOCKED and RAG-21 FAIL.
 
 Started 2026-10-29. Branch: `feat/spec-001-oss-rag-core`.
 Authoritative requirements: `docs/specs/SPEC-001-open-source-rag-core.md` (unchanged).
@@ -172,3 +172,23 @@ The full matrix is in `docs/release/verification.md`. Each criterion starts NOT_
 - Final evidence/template committed locally without push to stop after remote
   verification and avoid more CI. All historical logs/XML/scans/state preserved;
   full results in docs/release/evidence/junit-correction-ci.json and verification.md.
+
+### Explicit trigger implementation authorization (2026-10-30)
+
+- Preserved 1ccf0d0 and all previous evidence. Installed dedicated workflow and
+  standard-library approval/history/consumption/export helper. Replaced only the
+  obsolete CPU block in ci.yml; source/image/security/artifact jobs remain intact.
+- Exact current PR #1 head is approved through owner-only `cpuq1:<full SHA>` label.
+  No old ancestor target: SHA is resolved after final implementation push and must
+  match checkout/event/live PR/source CI/receipt. No label created/applied.
+- Complete bounded read-only run/job-attempt/marker history, exact-SHA source
+  upload proof, first-attempt checks, fixed concurrency, pre-acquisition persistent
+  reservation and live head/receipt recheck fail closed. Previous unskipped attempts
+  block retries even when consumption evidence is missing; no fabricated unused state.
+- Model/revision/hash/acquisition/acceptance unchanged. Public export excludes raw
+  DB rows/private configuration. No runtime/package change, download/model call,
+  generative provider, paid API, publication or consumption during preparation.
+- 154 deterministic PASS / one skipped, one separate actual Qdrant PASS, lock,
+  Ruff/Black/MyPy, license/audit and actionlint syntax/expression checks PASS.
+  Next: source/archive/secret gates, normal push, existing PR #1 update and genuine
+  source/configuration CI; record exact remote SHA/label and stop before activation.

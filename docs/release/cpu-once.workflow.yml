@@ -1,3 +1,5 @@
+# HISTORICAL TEMPLATE at 1ccf0d0; superseded by .github/workflows/spec001-cpu-once.yml.
+# Do not install/use this ancestor-SHA template or its old label. Retained for provenance.
 # PREPARED ONLY. This file is outside .github/workflows and cannot trigger Actions.
 # Installation and the owner's label action require a separate explicit decision.
 name: spec001-cpu-once-pr1

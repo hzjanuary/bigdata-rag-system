@@ -18,10 +18,17 @@ def test_image_gates_never_convert_known_findings_to_success():
 
 
 def test_model_campaign_never_runs_on_normal_push_or_synchronize():
-    job = workflow()["jobs"]["independent-cpu"]
+    assert "independent-cpu" not in workflow()["jobs"]
+    data = yaml.safe_load(
+        (Path(__file__).parents[1] / ".github/workflows/spec001-cpu-once.yml").read_text()
+    )
+    job = data["jobs"]["campaign"]
     assert "github.event_name == 'pull_request'" in job["if"]
-    assert "github.event.action == 'opened'" in job["if"]
+    assert "github.event.action == 'labeled'" in job["if"]
     assert "head.repo.full_name == github.repository" in job["if"]
+    assert "github.event.pull_request.number == 1" in job["if"]
+    assert "github.run_attempt == 1" in job["if"]
+    assert "format('cpuq1:{0}', github.event.pull_request.head.sha)" in job["if"]
     assert job["runs-on"] == "ubuntu-24.04"
     steps = "\n".join(s.get("run", "") for s in job["steps"])
     assert "--accept-license-and-download" in steps

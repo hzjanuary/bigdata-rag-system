@@ -1,120 +1,109 @@
-# Prepared single CPU campaign for existing Draft PR #1
+# Installed one-time CPU/Qdrant trigger — PR #1
 
-**PREPARED, NOT INSTALLED OR EXECUTED.** The original independent campaign remains
-unconsumed. Do not copy this workflow into `.github/workflows`, create/apply its
-label, dispatch, or rerun anything without the final operator decision. This is
-not an approval for another model or for generation.
+Installed configuration is verified without activation. **The owner must perform
+the final label action separately. No label is created/applied during preparation.**
+The earlier template at `cpu-once.workflow.yml` is historical, not the installed
+policy. Its older ancestor-SHA allowance and fixed old target are superseded.
 
-## Exact target and prerequisites
+## Identity and explicit activation
 
-- Repository `hzjanuary/bigdata-rag-system`, existing same-repository Draft PR #1,
-  feature branch `feat/spec-001-oss-rag-core`, target main.
-- Reviewed/tested source: `d54b899d665b04dff2db3bd8b7415f96d8b36c9a`.
-- Genuine PR CI run `41008651605`: source PASS; actual image jobs retain expected
-  OS security FAIL. Source artifact ID `12956337422`, ZIP digest
-  `sha256:5669244d1b93f2d434129427926d72cd557acc9622558d3779f211480c7b78cc`.
-  Its archive/manifest/checksums were independently downloaded and verified.
-- Source archive SHA-256:
-  `71d0ec6409dde0a07df21d5bc477cfcba6dcec16a5ac455053a6dddefa38f2df`.
-- Official model only: `sentence-transformers/all-MiniLM-L6-v2`, revision
-  `10dbd2f06a8baf40ad285b037edda610c1b9a57c`, ONNX SHA-256
-  `6fd5d72fe4589f189f8ebc006442dbb529bb7ce38f8082112682524616046452`.
-  Acquisition at this source SHA permits only the ONNX file and tokenizer with
-  exact byte/hash/revision checks, official Hugging Face URLs, 20-second requests
-  and a 180-second total deadline. No model cache or mirror substitution.
+Active workflow: `.github/workflows/spec001-cpu-once.yml`. Policy implementation:
+`scripts/cpu_campaign.py`. Only same-repository open Draft PR #1 from
+`hzjanuary/bigdata-rag-system`, branch `feat/spec-001-oss-rag-core`, base main,
+with both event sender and GitHub actor `hzjanuary` may activate.
 
-## Concrete mechanism
+Label format: **`cpuq1:<exact lowercase full 40-character current PR head SHA>`**.
+`cpuq1:` identifies this PR's CPU embedding/Qdrant acceptance campaign. The full
+label is 46 characters. The actual activation SHA/label is resolved and reported
+only AFTER pushing the final implementation; do not use d54b899 or an ancestor.
+An embedded constant cannot equal the hash of its own commit, so the operator's
+exact-SHA label is the explicit review/approval binding.
 
-The complete [prepared workflow](cpu-once.workflow.yml) is inert under `docs/`.
-After a separate review/installation decision, its intended installed path is
-`.github/workflows/spec001-cpu-once.yml`. No active workflow was changed during
-the JUnit correction. A normal push/synchronize does not start this campaign.
+The event head, label, actual checkout, live PR head, source CI head and consumption
+receipt must match exactly. No ancestor allowance or moving-branch checkout. The
+live PR/label and persistent receipt are rechecked immediately before acquisition.
 
-The trigger is **pull_request.labeled** by owner `hzjanuary` on PR #1, with the
-exact label `spec001-cpu-once-d54b899d665b04dff2db3bd8b7415f96d8b36c9a`.
-The owner must apply that label through the GitHub UI or their own authenticated
-CLI after inspecting the installed workflow and source outcome. The agent has
-not created the label or performed this action.
+Uses `pull_request.labeled`, never `pull_request_target`. Push/synchronize execute
+only the read-only `configuration` job, which emits `consumed: false` and never
+calls the API or a model command. `campaign` is SKIPPED. The old opened-only CPU
+job was removed from ci.yml; source/image jobs and security thresholds are intact.
+There is no dispatch/manual-rerun fallback or default-branch assumption. See
+[GitHub events](https://docs.github.com/en/actions/reference/workflows-and-actions/events-that-trigger-workflows#pull_request).
 
-This avoids the already-spent `pull_request.opened` event and the default-branch
-limitations of manual dispatch. `workflow_dispatch`, `repository_dispatch`,
-`issue_comment` and `workflow_run` are not used. PR label events are documented
-in [GitHub's trigger reference](https://docs.github.com/en/actions/reference/workflows-and-actions/events-that-trigger-workflows#pull_request);
-the same reference states the default-branch prerequisite for dispatch. An
-ordinary rerun retains its original SHA/ref and is not a way to test new source:
-[GitHub rerun behavior](https://docs.github.com/en/actions/how-tos/manage-workflow-runs/re-run-workflows-and-jobs).
+## Before any model acquisition
 
-The prepared workflow checks out the **exact reviewed target**, not a moving
-branch or PR merge ref. Its later installation commit is a different identity,
-recorded as `workflow_sha`/`pr_head_sha` in the consumption report. The guard
-requires that target to remain an ancestor and permits only docs and this one
-workflow path in the intervening diff, including prior paths for renames. Runtime,
-packaging, other workflow changes, incomplete comparisons, more than ten intervening
-commits, changed PR state/head, missing source history/artifact or API errors stop
-before acquisition. It does not claim the installation HEAD itself was CPU-tested.
+- Owner/PR/repository/branch/base/event/label/SHA validation occurs before API calls.
+- `run_attempt` must be 1 in job expressions and the policy. Workflow/job reruns
+  cannot acquire or run the campaign.
+- Complete bounded read-only Actions history is required for ci.yml and the new
+  workflow, including all job attempts. A prior unskipped campaign/CPU/reservation
+  job, absent job history, incomplete pagination, missing original run anchor or
+  API error rejects. No prior-attempt result is treated as unused without evidence.
+- Exact-SHA source job must have succeeded, including secret/export/upload steps,
+  and have a nonexpired source artifact with SHA-256 digest. Known image gate FAIL
+  does not become PASS and does not invalidate the separately verified source job.
+- Check-run consumption markers are checked across every source SHA visible in
+  both histories. Only after these checks is one persistent marker reserved.
+- A checked receipt and marker plus source artifact/run identity and current PR
+  are required again before acquisition. Missing evidence has no fallback.
 
-## Single-use controls and limits
+One fixed workflow concurrency group serializes preparation and activation events
+without cancelling an active campaign. The marker is written BEFORE building or
+downloading. Reservation conservatively consumes the authorization even if a later
+step fails. A previous campaign job that started but failed before reservation
+blocks automatic retry, without pretending its budget was actually consumed.
+The neutral marker records usage only; it does not certify acceptance or bypass
+any security check. Preparation does not create it.
 
-1. The entire workflow uses one fixed concurrency group with cancellation disabled.
-   Duplicate label events are serialized; they do not run campaigns in parallel.
-2. Both jobs reject `run_attempt != 1`. UI/CLI full-job or single-job reruns cannot
-   run the acquisition/campaign. The CPU job also checks this in a shell step.
-3. Before any model acquisition, the reservation job queries the pinned source's
-   check runs and refuses an existing `spec001-cpu-pr1-consumed` marker. It then
-   writes that marker and a checksummed `consumption.json` artifact. A marker is a
-   **budget reservation, not an acceptance or security PASS**; its neutral status
-   does not change any existing source/image gate.
-4. Only the reservation job requests `checks: write`; the CPU job has read-only
-   repository access. The built-in ephemeral GitHub App token is used solely for
-   GitHub API checks/marker creation, never model inference. No new PAT, private
-   credentials or paid account are needed. These job-specific permissions are
-   proposed only: no repository permission/settings change has been made.
-5. The template expires at **2026-10-31 00:00:00 UTC** (07:00 Vietnam). It fails
-   closed thereafter. This is less than one day from preparation, bounding the
-   period in which its check marker must survive. Do not extend the deadline or
-   change the target silently.
-6. Budget is conservatively consumed at marker creation, even if checkout/build,
-   download or acceptance later fails. Preserve its check ID, run ID, source and
-   workflow SHAs, acquisition/acceptance step outcomes and actual raw reports.
-   There is no automatic retry, rollback or deletion of the marker.
+Only the campaign job requests checks write for that marker; Actions history and
+PR reads use the built-in ephemeral token. Model/acceptance steps do not receive
+that token as an environment variable. There is no PAT or new account/billing.
+The approval window remains **2026-10-31 00:00 UTC (07:00 Vietnam)**, with no
+automatic extension. API calls are bounded, single attempt, official GitHub only;
+redirects and oversized replies fail closed.
 
-[GitHub Checks API](https://docs.github.com/en/rest/checks/runs#create-a-check-run)
-supports the marker through GitHub App tokens with checks write permission. The
-[built-in token is a GitHub App installation token](https://docs.github.com/en/actions/concepts/security/github_token).
-Checks/run/artifact retention is finite; current [GitHub retention documentation](https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/enabling-features-for-your-repository/managing-github-actions-settings-for-a-repository)
-describes configurable retention and its application to checks. The expiry avoids
-depending on a marker beyond that retention window.
+## Authorized model, stack and public evidence
 
-**Limit:** this is not an immutable external single-use authority. An administrator
-could delete check history, alter the guard/permissions, or install another workflow.
-GitHub's live checks-write policy/label execution has not been exercised because
-doing so would consume the campaign. API, marker or permission failure must stop;
-never fall back to an unguarded campaign. Static validation is not live trigger
-verification. The owner must review the installed definition and perform the one
-final label action; do not claim absolute exactly-once execution under admin changes.
+Only `sentence-transformers/all-MiniLM-L6-v2`, revision
+`10dbd2f06a8baf40ad285b037edda610c1b9a57c`. Expected ONNX SHA-256:
+`6fd5d72fe4589f189f8ebc006442dbb529bb7ce38f8082112682524616046452`.
+Unchanged acquisition permits exactly ONNX plus tokenizer, official pinned Hugging
+Face URLs, fixed sizes/hashes, 20-second requests and a 180-second total deadline.
+No model substitution, mirror, retry, paid/generative provider or external search.
 
-## Allowed campaign and evidence
+A fresh GitHub-hosted Ubuntu 24.04 runner builds CPU/core and Qdrant locally, then
+runs the existing synthetic TXT/PDF/DOCX campaign once. It checks CPUExecutionProvider,
+masked pooling/L2, actual indexing/citations/isolation/hybrid/rerank, durable jobs,
+worker crash, outage/restart and independent restore without destructive reset.
+No generation config or provider credential is enabled. No release/image publish.
 
-Fresh GitHub-hosted Ubuntu 24.04, clean checkout, fresh CPU images/private runtime
-configuration, existing bounded official acquisition and one synthetic TXT/PDF/DOCX
-Qdrant campaign. The script records 384-dimensional vectors and tokenization
-metadata, masked mean pooling/L2 reference tolerances, actual chunk
-provenance/page citations, isolation, hybrid/rerank, durable jobs/retry/crash recovery,
-outage/recovery, independent restore and resource limits. No generation/provider
-call, paid inference, release, deploy, push, merge or image publication step exists.
+Public artifacts contain bounded environment metadata, acquisition hash proof and
+consumption/execution evidence with campaign/run/source/workflow identities, actual
+image IDs, CPU vectors/tolerances, citations, individual checks and measured elapsed
+time. Raw acceptance output stays outside the export directory. Export projection
+drops configuration, unknown fields and SQLite job rows, keeping only state counts
+and Qdrant collection summaries. No weights, documents, credentials, backups or DB
+files are uploaded. Existing evidence gate and 2,000,000-byte per-file limit apply;
+checksums manifest and GitHub artifact ZIP digests protect exported files. Failures
+remain FAIL; expected model pins are distinguished from actually verified metadata.
 
-The reservation artifact and final campaign artifact have the unchanged evidence
-guard and checksum manifest. Failed/partial outcomes remain evidence, never PASS.
-Collect artifact ZIP digests, every manifest checksum, actual model revision/file
-hashes, host/source/image identity, vectors/Qdrant state/citations and consumption
-marker. RAG-20 stays BLOCKED until that genuine campaign completes successfully;
-RAG-15 and RAG-21 retain their independent live/security blockers.
+## Replay limitations and final operator procedure
 
-## Final operator action required
+GitHub labels are not a mathematically exactly-once authority. Administrative
+deletion of runs/checks, policy/permission changes or another workflow can defeat
+history controls. Retention is finite. The fixed short approval window bounds the
+marker lifetime; source/history/artifact/permission failures reject, never retry
+unguarded. A rejected or partial activation needs a separate operator investigation,
+not a normal rerun. Live marker-write permission is not exercised in preparation.
 
-Review this inert template, the exact target/source artifact, the limited check-write
-permission and the expiry. If approved, install it with a normal feature-branch push
-and review that installation SHA/diff; then apply the exact owner label to PR #1
-once before expiry. This turn neither installs nor executes it. If the deadline or
-retained prerequisites expire first, request a new explicit operator decision rather
-than silently refreshing the authority or consuming a replacement campaign.
+1. Read the final reported remote PR head SHA and the source CI/artifact evidence.
+2. Recheck PR #1 still has that exact head, remains Draft and source CI is PASS;
+   wait for both inactive-configuration runs to complete. Review installed files.
+3. As `hzjanuary`, create the exact `cpuq1:<reported full SHA>` label and apply it
+   to existing PR #1 ONCE before expiry. This is the separate activation action;
+   the agent does not do it in this task. Do not use an older SHA or another PR.
+4. Preserve run/marker IDs and all raw/checksummed outcomes. Do not remove/re-add
+   the label or rerun jobs. Inspect partial failures before any further authority.
+
+Until actual independent acceptance succeeds, RAG-20 remains BLOCKED. RAG-15 stays
+BLOCKED (no live generation authorization); RAG-21 stays FAIL on known OS findings.

@@ -1,5 +1,36 @@
 # SPEC-001 verification ledger — 2026-10-30
 
+## Operator-only trigger installation (local verification complete; remote pending)
+
+Explicit authorization now covers implementing/pushing the trigger, without
+activation. `.github/workflows/spec001-cpu-once.yml` and `scripts/cpu_campaign.py`
+replace the obsolete opened-only CPU job; source/image CI and all severity/artifact
+gates are unchanged. Push/synchronize run only a configuration check, whose receipt
+states consumed=false; the campaign job requires the owner label on PR #1.
+
+The template's old ancestor allowance is removed. Label format is
+`cpuq1:<exact lowercase 40-character current PR head SHA>`; the final SHA is resolved
+AFTER push, and must equal label/event/checkout/live-PR/source-CI/receipt identities.
+No embedded old source SHA or workflow_dispatch/default-branch assumption.
+
+Complete read-only Actions/job-attempt history and exact-SHA source export proof
+are required. Missing/incomplete history, any prior unskipped campaign job, marker,
+rerun, stale SHA, wrong owner/PR/repo/branch or API failure rejects before model
+acquisition. One concurrency group and a persistent pre-download reservation marker
+limit replay; admin deletion/retention/permission changes remain documented limits.
+The original fixed expiry stays 2026-10-31 00:00 UTC; no automatic retry/extension.
+
+Local checks: 154 deterministic PASS / one skipped (40 new policy regressions),
+separate actual Qdrant contract one PASS, lock/Ruff/Black/MyPy, 92-package license
+inventory and zero-finding dependency audit. Official actionlint v1.7.12 syntax and
+event-expression checks PASS; tool archive SHA-256 verified against official release
+metadata. Existing acquisition/acceptance and runtime/packaging inputs unchanged.
+Public acceptance projection strips raw SQLite job rows/configuration and preserves
+synthetic citations/vectors/collection summaries, individual checks and measured time.
+No label, marker, acquisition or independent campaign was executed. RAG-15/20 remain
+BLOCKED, RAG-21 FAIL; 21 PASS / 1 FAIL / 2 BLOCKED. Remote outcome will be appended
+after genuine CI, then work stops at the separate operator label action.
+
 ## JUnit correction: remote verification complete
 
 Normal push preserved `a9b68db` and advanced existing Draft PR #1 to exact tested

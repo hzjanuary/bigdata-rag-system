@@ -1,0 +1,99 @@
+name: spec001-cpu-once-pr1
+on:
+  push:
+    branches: [feat/spec-001-oss-rag-core]
+  pull_request:
+    types: [synchronize, labeled]
+permissions:
+  contents: read
+concurrency:
+  group: spec001-authorized-cpu-campaign-pr1
+  cancel-in-progress: false
+jobs:
+  configuration:
+    if: github.event.action != 'labeled'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
+          persist-credentials: false
+      - run: python3 scripts/cpu_campaign.py inactive
+      - id: evidence_guard
+        run: python3 scripts/evidence_gate.py .local/ci-evidence
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        if: steps.evidence_guard.outcome == 'success'
+        with:
+          name: trigger-inactive-${{ github.run_id }}
+          path: .local/ci-evidence/
+          retention-days: 14
+          if-no-files-found: error
+  campaign:
+    if: >-
+      github.event_name == 'pull_request' && github.event.action == 'labeled' &&
+      github.repository == 'hzjanuary/bigdata-rag-system' &&
+      github.event.pull_request.number == 1 &&
+      github.event.pull_request.head.repo.full_name == github.repository &&
+      github.head_ref == 'feat/spec-001-oss-rag-core' &&
+      github.actor == 'hzjanuary' && github.event.sender.login == 'hzjanuary' &&
+      github.run_attempt == 1 &&
+      github.event.label.name == format('cpuq1:{0}', github.event.pull_request.head.sha)
+    runs-on: ubuntu-24.04
+    timeout-minutes: 25
+    permissions:
+      contents: read
+      actions: read
+      checks: write
+      pull-requests: read
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}
+          persist-credentials: false
+      - name: Fail-closed history and consumption reservation
+        env:
+          GH_TOKEN: ${{ github.token }}
+          WORKFLOW_SHA: ${{ github.workflow_sha }}
+        run: python3 scripts/cpu_campaign.py reserve
+      - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065
+        with:
+          python-version: '3.12'
+      - run: python -m pip install uv==0.9.7 && uv sync --frozen
+      - run: uv run python scripts/runner_environment.py
+      - name: Build fresh CPU images without publication
+        env:
+          TARGET_SHA: ${{ github.event.pull_request.head.sha }}
+        run: |
+          docker build --build-arg SOURCE_REVISION="$TARGET_SHA" -t workspace-rag-core:local .
+          docker build --build-arg SOURCE_REVISION="$TARGET_SHA" -f Dockerfile.qdrant -t workspace-rag-qdrant:local .
+      - name: Require intact reservation and current exact head before acquisition
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: python3 scripts/cpu_campaign.py verify
+      - name: Verify bounded public reservation
+        run: uv run python scripts/evidence_gate.py .local/ci-evidence
+      - name: Bounded official pinned model acquisition
+        id: acquisition
+        timeout-minutes: 4
+        run: uv run python scripts/acquire_model.py --accept-license-and-download --destination .local/models/minilm-10dbd2f > .local/ci-evidence/model-acquisition.json
+      - name: ONE synthetic CPU embedding and Qdrant acceptance
+        id: acceptance
+        timeout-minutes: 12
+        run: uv run python scripts/isolated_acceptance.py --approved-local-model-test --model-dir .local/models/minilm-10dbd2f --evidence .local/cpu-private-result.json
+      - name: Export sanitized outcome and measured campaign time
+        if: always()
+        env:
+          ACQUISITION_OUTCOME: ${{ steps.acquisition.outcome }}
+          ACCEPTANCE_OUTCOME: ${{ steps.acceptance.outcome }}
+        run: python3 scripts/cpu_campaign.py finish
+      - id: evidence_guard
+        if: always()
+        run: python3 scripts/evidence_gate.py .local/ci-evidence
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        if: always() && steps.evidence_guard.outcome == 'success'
+        with:
+          name: independent-cpu-${{ github.run_id }}
+          path: .local/ci-evidence/
+          retention-days: 14
+          if-no-files-found: error
