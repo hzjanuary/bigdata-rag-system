@@ -24,7 +24,7 @@ Authoritative requirements: `docs/specs/SPEC-001-open-source-rag-core.md` (uncha
 
 The full matrix is in `docs/release/verification.md`. Each criterion starts NOT_RUN. Test doubles cannot satisfy RAG-11/15/18/20. Source preview and image security have independent decisions.
 
-## External constraints / pending evidence
+## Original external constraints / pending evidence (follow-up supersedes authorization)
 
 - RAG-11: approved acquisition and ONE same-project CPU/Qdrant campaign are COMPLETE (34 checks); no further model campaign authorized.
 - RAG-15: LIVE generation deliberately BLOCKED until separate approval and operator credentials; do not request secrets in chat.
@@ -76,3 +76,39 @@ The full matrix is in `docs/release/verification.md`. Each criterion starts NOT_
   remain prohibited. RAG-15 stays BLOCKED; separate proposal is in release/.
 - Remote run IDs, actual host evidence, artifacts and final source-only readiness
   will be recorded only after genuine CI completes. Plan remains active meanwhile.
+
+### Remote CI stop checkpoint (2026-10-30)
+
+- Normal push completed at `11736f527612fc659a201b13e38d13c7278e1476`; exactly one
+  Draft PR targets main: https://github.com/hzjanuary/bigdata-rag-system/pull/1.
+  No force push/history rewrite/merge/tag/publication/deployment occurred.
+- Genuine push run 41006969209 and PR run 41006993655 both completed FAIL on
+  GitHub-hosted Ubuntu 24.04.5. Source subchecks passed: 109 deterministic tests,
+  one separate actual Qdrant contract, frozen lock, Ruff/Black/MyPy, source/archive,
+  current/history secrets, Python audit/license/SBOM and Compose checks.
+- NEW defect: report export rejects JUnit containing payload-sized default pytest
+  IDs. Local XML is 6,407,084 bytes, exceeding the unchanged 2,000,000-byte guard.
+  Both uploads were correctly skipped, artifact APIs returned zero artifacts,
+  image jobs and independent-cpu were SKIPPED. Downloaded full log ZIPs pass CRC
+  checks; hashes/API results are preserved in the follow-up evidence report.
+- STOPPED under the user's explicit new-defect condition. No implementation fix,
+  regression test, CI rerun or model download/inference followed discovery. Final
+  docs/evidence are committed locally without push to avoid another CI trigger.
+- Original RAG-21 FAIL remains: supported Debian updates unavailable for known
+  HIGH findings (core 44 / Qdrant 43 / UI 44, zero CRITICAL), unchanged gates and
+  raw reports preserved. New report-export failure also prevents CI PASS.
+- RAG-20 remains BLOCKED: hosted source execution is not the required real CPU
+  model/Qdrant campaign. The one independent campaign authorization is unconsumed.
+  No fresh embedding outputs, Qdrant acceptance state or citations can be claimed.
+- Next proposed bounded correction, NOT APPLIED: short explicit pytest IDs for
+  large payload cases and bounded-JUnit regression, preserving original test
+  payloads/assertions and artifact limit. On authorized resume, define one explicit
+  CPU trigger for the existing Draft PR; synchronize will not run its opened-only
+  job. Do not create another PR or rerun old code to consume the campaign.
+- Acceptance remains 21 PASS / 1 FAIL / 2 BLOCKED with historical PASS scope stated.
+  Source-only preview NO-GO pending export correction, CI artifacts and independent
+  CPU campaign. Docker image approval stays independently NO-GO; RAG-15 remains
+  BLOCKED and no generative campaign is authorized. Active plan is not complete.
+- Details, exact source/image digests, model revision/hash, run URLs and retained
+  log/report hashes: `docs/release/verification.md` and
+  `docs/release/evidence/followup-remote-ci.json`.

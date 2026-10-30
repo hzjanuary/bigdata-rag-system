@@ -1,12 +1,96 @@
 # SPEC-001 verification ledger — 2026-10-30
 
-**Follow-up in progress:** the user now authorizes a normal feature-branch push,
-one Draft PR, genuine remote CI and one independent GitHub-hosted Ubuntu 24.04
-CPU/model/Qdrant campaign. The user explicitly permits observational CI while
-RAG-21 stays FAIL; image gates keep their original thresholds and nonzero exits.
-The historical evidence below is retained and is not presented as a fresh hosted
-run. Remote IDs/results will be added after execution. LIVE generation and any
-merge/tag/publication/deployment remain unauthorized.
+**Follow-up stopped after a new CI evidence-export defect.** Normal push completed
+at `11736f527612fc659a201b13e38d13c7278e1476`; one [Draft PR #1](https://github.com/hzjanuary/bigdata-rag-system/pull/1)
+targets main. Both genuine Actions runs finished FAIL. The user permitted observing
+the original red OS security gate but explicitly required stopping on new defects.
+No correction/rerun/model acquisition followed this new failure. The final evidence
+documentation is retained locally without another push/CI trigger.
+
+## Follow-up outcome and stop decision
+
+Full machine-readable evidence, checksums, job steps, local image identities and
+public runner metadata: [follow-up report](evidence/followup-remote-ci.json).
+Original failure investigation: [Phase 1](evidence/followup-phase1.json).
+
+| Remote run at pushed HEAD `11736f5` | Observed result |
+| --- | --- |
+| [Push 41006969209](https://github.com/hzjanuary/bigdata-rag-system/actions/runs/41006969209) | FAIL: source report export; image and independent CPU jobs SKIPPED |
+| [Draft PR 41006993655](https://github.com/hzjanuary/bigdata-rag-system/actions/runs/41006993655) | FAIL: same export defect; image and independent CPU jobs SKIPPED |
+
+The source job ran on a genuine GitHub-hosted Ubuntu **24.04.5 LTS**, image
+`20261026.354.1`, kernel `7.0.0-1017-azure`, Python `3.12.15`, Docker `28.0.4`.
+Both runs passed frozen lock/install, Ruff/format, Black, MyPy, **109 tests / one
+skipped**, tracked source/private-path checks, exact source archive/current/history
+secret checks, development license inventory, zero-finding Python audit, Python
+SBOM, Compose validation and **one real Qdrant contract test** using fixture vectors.
+These are genuine source-job results; the overall job is FAIL.
+
+`Verify exported reports` then raised `ValueError: binary or oversized source
+artifact`. Local reproduction identifies default pytest parameter IDs containing
+resource-limit payloads: JUnit is **6,407,084 bytes**, with testcase names up to
+4,194,361 characters, versus the unchanged **2,000,000-byte** artifact limit.
+The retained local XML has no NUL bytes. Its exact hash is in the report; remote
+XML bytes are unavailable because upload correctly stayed blocked. This is an
+evidence-generation defect, not a passing security result. No regression correction
+was applied after the stop instruction took effect.
+
+Both artifact APIs returned **zero artifacts**. Complete run logs were downloaded;
+their ZIP CRCs and local SHA-256 checksums were verified. These log ZIPs are not
+workflow artifacts: artifact download/checksum acceptance is **NOT_AVAILABLE**.
+Raw local JUnit, logs, API responses and original scans remain under ignored
+`.local/followup-20261030/`, with hashes in the report. No credentials/model/state
+directories were exported.
+
+The **independent CPU/model campaign did not start**: no hosted model download,
+embedding output, Qdrant acceptance state or citations exist for it. Its one-campaign
+authorization remains unconsumed. RAG-20 stays BLOCKED. The exact approved model is
+`sentence-transformers/all-MiniLM-L6-v2`, revision
+`10dbd2f06a8baf40ad285b037edda610c1b9a57c`, ONNX SHA-256
+`6fd5d72fe4589f189f8ebc006442dbb529bb7ce38f8082112682524616046452`.
+The older local 34-check campaign below remains historical evidence only.
+
+Before push, the same 109-test suite, separate real Qdrant test and source/tooling
+gates passed locally. All three actual local images were rebuilt, inventoried as
+applicable, and scanned for vulnerabilities/licenses/SBOM; core config smoke passed.
+Development Python inventory covers 92 packages with zero unknown licenses;
+core/UI runtime Python license gates passed. Raw OS/application license scans and
+SBOMs are retained separately; this is no blanket legal certification. The pushed
+source tar SHA-256 is
+`7fa57545faeb9a0b7508c90161bcaa5457db450f1354464cadc15d9fb27f386c`.
+New local image IDs/labels and raw scan checksums are recorded in the report,
+distinct from the preserved historical images below. There was no fresh local
+model campaign in this follow-up.
+
+**Exact original FAIL:** RAG-21 requires “Locked CI passes unit/integration/security/CLI/image/license
+checks without inference.” The original failure was actual image gates exiting 1
+on Debian OS findings, with no failing deterministic RAG function test identified.
+Stable/security package candidates equal installed versions; reviewed Debian fixes
+remain in testing/unstable. No small supported stable update was available, so no
+base migration or security-policy change was applied. Current local findings remain
+**core 44 HIGH / Qdrant 43 HIGH / optional UI 44 HIGH**, zero CRITICAL; each image
+has eight distinct HIGH CVEs. Counts are package findings per image, never a summed
+unique-CVE count. DB identity and HIGH records match the original scans. Non-root,
+missing affected components and Compose restrictions are disclosed mitigations,
+not exceptions. Raw CVEs, thresholds and gates remain unchanged. RAG-21 now also
+includes the newly observed report-export failure. Remote image scans were SKIPPED,
+so no refreshed remote vulnerability result is claimed.
+
+**Source-only v0.1.0 preview recommendation: NO-GO pending correction and verification.**
+The source test results are positive, but the new export defect prevents verifiable
+CI artifacts and the independent CPU campaign is incomplete. The smallest proposed
+next correction is short explicit pytest IDs for large payload cases plus a bounded
+JUnit regression, preserving payloads/assertions and the 2 MB guard. Resuming also
+needs a one-shot CPU trigger on this existing Draft PR: its `opened` event already
+passed, so a normal synchronize event will not run the model job. No second PR or
+old-code rerun was attempted. Work stops for the user's decision as instructed.
+
+**Docker image approval remains NO-GO** independently of source readiness. LIVE
+generation remains RAG-15 BLOCKED; the [separate authorization proposal](LIVE-LLM-AUTHORIZATION-PROPOSAL.md)
+is prepared, with no provider request made. No merge, tag, release, deployment,
+paid/generative call or image publication occurred.
+
+## Preserved original local handoff
 
 Local implementation and evidence are delivered. **Publication is not authorized.**
 The authoritative RAG-01..24 conditions in SPEC-001 are unchanged. The plan remains
@@ -73,13 +157,15 @@ F/U/L/A above supply exact source/image identities for every referenced evidence
 | RAG-17 | PASS | U error/caplog/stdout redaction with secret/content/path sentinels, including CLI storage failures; default access/prompt traces absent; authenticated fixed-schema events only. |
 | RAG-18 | PASS | L actual Qdrant stop -> readiness/search 503; restart restores identical committed retrieval. U/Q outage and dimension contracts. |
 | RAG-19 | PASS | L actual private logical backup and read-only restore to a separate Qdrant, exact source hashes/manifests/jobs/capability hashes, ranking within 1e-6 float round-trip tolerance. Original documents/volumes untouched. |
-| RAG-20 | BLOCKED | Loopback API/private unexposed Qdrant/non-root persistent CPU Compose **verified locally** by L/I. The current Linux host is shared; a separately provisioned pristine Linux host/VM has **not** been qualified. An independent hosted campaign is now authorized and pending; no deployment is authorized. |
-| RAG-21 | FAIL | U/Q/C/S/D local source/unit/integration/CLI/license checks pass without inference. Actual image security gates exit **1** (V). GitHub remote CI is **NOT_RUN** for this unpublished branch, not inferred from the workflow file. |
+| RAG-20 | BLOCKED | Local secure CPU Compose verified by L/I. The follow-up source job ran on genuine hosted Ubuntu, but its prerequisite export failed and independent-cpu was SKIPPED. No independent real-model stack qualification is claimed. |
+| RAG-21 | FAIL | Original actual image gates exit **1** (V; unchanged 44/43/44 HIGH). Follow-up remote source subchecks pass, but overall CI FAILS at evidence export; remote image jobs SKIPPED. Exact runs and new defect are recorded above. |
 | RAG-22 | PASS | S exact tracked-file/archive inventory and adversarial bypass tests; I excludes private/model/index data and unused bundled ONNX demo graphs; no operator fixtures in source. One historical public-hash detector finding independently reviewed, not hidden. |
 | RAG-23 | PASS | C + L README/CLI walkthrough; required architecture/self-host/provider/security/backup/contribution/license/NOTICE/release docs and inventories present. No production, GPU, OCR, provider-quality or benchmark claims. |
 | RAG-24 | PASS | This explicit review separates source preview, actual model evidence, LIVE provider scope, remote CI and image security. Neither publication decision is inferred from deterministic tests. |
 
-Totals: **21 PASS, 2 BLOCKED, 1 FAIL**. No acceptance criterion was edited to obtain PASS.
+Totals: **21 PASS, 2 BLOCKED, 1 FAIL**. Previous PASS rows retain their stated
+historical evidence scope; they are not a claim that the full current hosted stack
+was requalified. No acceptance criterion was edited to obtain PASS.
 
 ## Model integrity and the one approved campaign
 
@@ -96,7 +182,7 @@ private `.local/models/minilm-10dbd2f`. [Acquisition proof](evidence/model-acqui
 - Early terminal failures (read-only `docker cp`, WAL sidecars, local Docker address-pool exhaustion) are retained in L's prior attempts and private logs. Stdin import and standalone snapshot restore were corrected. Only the same retained campaign/projects were resumed. No successful test is claimed for a failed attempt.
 - To free a Docker subnet, only the already-stopped disposable original API container and its empty ingress network were removed after saving inspect/log evidence. No operator container/network or any document/volume was deleted. All campaign data, backup directories and Qdrant volumes remain private and stopped.
 
-## Publication-readiness review
+## Original publication-readiness review (historical; follow-up decision above)
 
 **Source-preview decision: NO-GO for publication now.** Local source, model, ACL,
 license and clean-clone evidence is positive, but independent clean-host qualification
@@ -118,6 +204,6 @@ SSO claim, immutable append of new content instead of automatic in-place replace
 no OCR/GPU validation, English MiniLM/truncation/threshold quality limits, logical
 backup RAM/storage requirements, and citation membership rather than semantic proof
 of every generated sentence. UI browser UX and LIVE remote generation are untested.
-A separate pristine-host/model campaign needs approval; do not silently reuse the
-one-campaign authorization. No source/image publication, remote deployment, live
-provider check or paid request is authorized by these findings.
+The follow-up separately authorized one pristine-host/model campaign, which did
+not start because its source prerequisite failed. No source/image publication,
+remote deployment, live provider check or paid request is authorized by these findings.
