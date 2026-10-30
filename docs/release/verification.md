@@ -1,5 +1,57 @@
 # SPEC-001 verification ledger — 2026-10-30
 
+## Final remediation source verified — STOP before cpuq2 activation
+
+Final remote PR #1 head: **`287212be8f5683221d2449158331e59d4c639c15`**.
+Exact future owner label: **`cpuq2:287212be8f5683221d2449158331e59d4c639c15`**.
+No cpuq2 label or marker was created/applied; this campaign is not started/consumed.
+
+| Genuine final run | Observed conclusion |
+| --- | --- |
+| [Source push41038452232](https://github.com/hzjanuary/bigdata-rag-system/actions/runs/41038452232) | source PASS, 194 tests / one skipped; images FAIL only at known security gates |
+| [Source PR41038457036](https://github.com/hzjanuary/bigdata-rag-system/actions/runs/41038457036) | source PASS, 194 tests / one skipped; same image gate results |
+| [cpuq2 configuration push41038452175](https://github.com/hzjanuary/bigdata-rag-system/actions/runs/41038452175) | configuration PASS, campaign SKIPPED |
+| [cpuq2 configuration PR41038457194](https://github.com/hzjanuary/bigdata-rag-system/actions/runs/41038457194) | configuration PASS, campaign SKIPPED |
+
+All ten final artifacts were downloaded and verified (GitHub ZIP digests/CRC, exact
+manifests, every file size/hash and source archive); ten earlier fix artifacts also
+remain verified. Final source tar SHA-256:
+`95b9ef21d11df4d98678e85bb38b1906f92326394e0b1097426a318535c9e0b6`.
+Raw image reports/SBOM/license findings and actual exit1 remain: core44 HIGH,
+Qdrant43 HIGH, UI44 HIGH, zero CRITICAL; no new/removed HIGH records or license
+changes, no suppression or threshold change. No unexpected source/privacy/integrity
+failure. [Complete final evidence](evidence/remediation-campaign-2-ready.json).
+
+Actual read-only audit at final SHA verified 17 accessible runs, the exact old
+consumed marker/failure ZIP/receipt/logs and final source ZIP/tar. Old marker
+123977248159 and cpuq1 label remain intact; new remediation marker count is zero.
+Signed archive ZIP container hashes for logs are recorded per download rather than
+assumed byte-stable; original artifact's pinned digest and named log failure remain
+mandatory. Private original post-state remains unavailable, with no stronger causal
+claim than the diagnosed mechanism.
+
+RAG-12 PASS is supported by original-red/corrected-green process tests, twelve
+bit-identical probes, eight exact real CPU API-restart checks and full 41-PASS local
+CPU/Qdrant/crash/outage/restore path. This Linux Mint evidence does not qualify the
+independent host. RAG-15/20 stay BLOCKED, RAG-21 FAIL; totals **21 PASS / one FAIL /
+two BLOCKED**. The additional independent authority is prepared, not consumed.
+
+Campaign `spec001-pr1-cpu-qdrant-remediation-2`; marker
+`spec001-cpu-pr1-remediation-2-consumed`. Owner must separately review this exact
+head/source evidence and apply the exact cpuq2 label once inside **2026-10-30 10:00
+through 2026-10-31 00:00 UTC** (expiry07:00 Vietnam). No automatic retry/extension,
+old marker reset or old-label reapplication. [Operator procedure](CPU-CAMPAIGN-2.md).
+Admin/retention limits preclude an absolute exactly-once claim; live reservation
+write is intentionally not exercised during preparation.
+
+Final evidence documentation is retained in a local commit without another push,
+keeping the reviewed activation head stable. No merge/tag/release/image publication,
+deployment, generative inference or paid API request occurred. Source-preview
+publication remains a separate decision after independent evidence; Docker approval
+remains blocked by known OS findings.
+
+## Policy preparation checkpoint before final push (historical)
+
 ## Corrected source CI verified; separate remediation policy prepared inactive
 
 Fix source `59a7103314eba9d63863774ca55d65e5f21dc7a5` passed genuine source jobs

@@ -1,8 +1,8 @@
 # SPEC-001 execution plan
 
-Current checkpoint: fix source59a7103 CI PASS; full local CPU path41 PASS. Separate
-cpuq2 policy prepared and actual read-only history/archive audit PASS; final policy
-push/source CI pending. Original consumed marker intact; no activation. Current21/1/2.
+Current checkpoint: final source287212b source CI and inactive cpuq2 configuration
+PASS; ten artifacts verified, read-only prior/source audit PASS. STOP before separate
+owner cpuq2 label action. Local CPU41 PASS, RAG12 restored, current21/1/2; plan active.
 
 Started 2026-10-29. Branch: `feat/spec-001-oss-rag-core`.
 Authoritative requirements: `docs/specs/SPEC-001-open-source-rag-core.md` (unchanged).
@@ -279,3 +279,24 @@ The full matrix is in `docs/release/verification.md`. Each criterion starts NOT_
 - 194 tests PASS/one skipped, quality/actionlint green. New policy not activated,
   no model acquisition, no new marker or label. Final normal push/CI then stop at
   owner activation boundary, retaining RAG-15/20 BLOCKED and RAG-21 FAIL.
+
+### Final cpuq2 operator boundary (2026-10-30)
+
+- Final remote head287212be8f5683221d2449158331e59d4c639c15; future owner label
+  cpuq2:287212be8f5683221d2449158331e59d4c639c15. Never created/applied here.
+- Final source runs41038452232/41038457036: source PASS, 194 tests/one skipped,
+  actual Qdrant/source/secret/license/audit gates green; images only known HIGH FAIL.
+  Configuration runs41038452175/41038457194 PASS with campaign SKIPPED.
+- Ten final plus ten initial-fix artifacts preserved/verified: ZIP digests/CRC,
+  exact manifests and source tar. No changed HIGH/license records, unchanged gates.
+- Read-only final audit verifies17 accessible runs, old marker/receipt/pinned ZIP/
+  failure logs and final source archive. Original cpuq1 label/marker untouched,
+  old consumed=true FAIL remains; new marker count0 and no new acquisition/campaign.
+- Separate identity remediation-2/prefixcpuq2, fixed windowOct30 10:00--Oct31 00:00
+  UTC; strict known-one-old-attempt accounting and complete source/archive proof.
+  Owner must review exact head then activate once separately; fail closed on any
+  missing/inconsistent record. No rerun/reset, no automatic extension, admin limits
+  documented. Stop here before activation.
+- RAG12 PASS on demonstrated determinism and local CPU41-check path; RAG15/20
+  BLOCKED, RAG21 FAIL:21/1/2. No release/merge/tag/deploy/image publication/generation.
+  Final docs evidence retained locally without push, preserving reviewed head.
