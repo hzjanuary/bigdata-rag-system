@@ -13,5 +13,6 @@ ENV PATH=/opt/venv/bin:$PATH HOME=/tmp PYTHONDONTWRITEBYTECODE=1
 RUN python -m pip uninstall -y pip && rm -rf /usr/local/lib/python3.12/ensurepip
 COPY --from=builder /opt/venv /opt/venv
 COPY app.py /app/app.py
+COPY LICENSE NOTICE /usr/share/doc/rag-core/
 USER 10001:10001
 ENTRYPOINT ["streamlit", "run", "/app/app.py", "--server.address=0.0.0.0", "--server.port=8501", "--server.enableCORS=true", "--server.enableXsrfProtection=true", "--browser.gatherUsageStats=false"]

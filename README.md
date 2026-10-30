@@ -87,9 +87,9 @@ docker compose up -d
 # API is loopback-only on port 8000. Qdrant has no published port.
 docker compose exec -T api rag doctor
 docker compose exec -T api rag workspace create research
-# CLI runs inside the container; copy only your permitted input into /tmp first.
-docker compose cp examples/corpus/orchard.txt api:/tmp/orchard.txt
-docker compose exec -T api rag ingest WORKSPACE_ID /tmp/orchard.txt
+# Stream a permitted local file through stdin; no writable container root is needed.
+docker compose exec -T api rag ingest WORKSPACE_ID - --filename orchard.txt \
+  < examples/corpus/orchard.txt
 ```
 
 Qdrant uses a persistent project-scoped volume. Do not use `docker compose down -v`.

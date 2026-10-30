@@ -9,6 +9,7 @@ import hashlib
 import io
 import json
 import os
+import re
 import socket
 import subprocess
 import time
@@ -25,8 +26,8 @@ from rag_core.settings import initialize
 ROOT = Path(__file__).resolve().parents[1]
 
 
-def run(command, *, env=None):
-    result = subprocess.run(command, env=env, capture_output=True, timeout=180)
+def run(command, *, env=None, input=None):
+    result = subprocess.run(command, env=env, input=input, capture_output=True, timeout=180)
     if result.returncode:
         diagnostics = ROOT / ".local" / "acceptance-subprocess.log"
         with diagnostics.open("ab") as output:
@@ -91,16 +92,26 @@ def main():
     parser.add_argument("--approved-local-model-test", action="store_true", required=True)
     parser.add_argument("--model-dir", type=Path, required=True)
     parser.add_argument("--evidence", type=Path, required=True)
+    parser.add_argument(
+        "--resume-project",
+        help="Continue the same stopped disposable campaign after a verified terminal failure",
+    )
     args = parser.parse_args()
     os.umask(0o077)
-    project = "spec001-" + uuid.uuid4().hex[:10]
+    if args.resume_project and not re.fullmatch(r"spec001-[0-9a-f]{10}", args.resume_project):
+        parser.error("invalid disposable project ID")
+    project = args.resume_project or "spec001-" + uuid.uuid4().hex[:10]
     root = ROOT / ".local" / project
-    root.mkdir(parents=True, mode=0o700)
     config = root / "config" / "config.json"
-    initialize(config, root / "state")
-    with socket.socket() as sock:
-        sock.bind(("127.0.0.1", 0))
-        port = sock.getsockname()[1]
+    if args.resume_project:
+        handles = json.loads((root / "handles.json").read_text())
+        port = handles["port"]
+    else:
+        root.mkdir(parents=True, mode=0o700)
+        initialize(config, root / "state")
+        with socket.socket() as sock:
+            sock.bind(("127.0.0.1", 0))
+            port = sock.getsockname()[1]
     settings = json.loads(config.read_text())
     settings.update(
         state_dir="/private/state", qdrant_url="http://qdrant:6333", model_dir="/private/model"
@@ -128,6 +139,16 @@ def main():
         ).strip(),
         "checks": checks,
     }
+    if args.resume_project:
+        previous = json.loads(args.evidence.read_text())
+        if previous["project"] != project or previous["result"] != "FAIL":
+            raise ValueError("resume requires the terminal failed report for this campaign")
+        report["prior_attempts"] = previous.get("prior_attempts", []) + [
+            {
+                k: previous[k]
+                for k in ("source_sha", "image_id", "checks", "result", "failure_class")
+            }
+        ]
     # Save live handles immediately, allowing authoritative inspection after interruption.
     (root / "handles.json").write_text(
         json.dumps({"project": project, "port": port, "compose": compose}, indent=2)
@@ -136,8 +157,10 @@ def main():
     def cp(*args):
         return run(compose + list(args), env=env)
 
-    def cli(*args):
-        return json.loads(cp("exec", "-T", "api", "rag", *args))
+    def cli(*args, content=None):
+        return json.loads(
+            run(compose + ["exec", "-T", "api", "rag", *args], env=env, input=content)
+        )
 
     def check(name, condition):
         assert condition, name
@@ -172,7 +195,12 @@ def main():
             "anonymous API rejected",
             httpx.get(client.base_url.join("/workspaces"), trust_env=False).status_code == 401,
         )
-        a, b = cli("workspace", "create", "orchard"), cli("workspace", "create", "library")
+        if args.resume_project:
+            existing = {workspace["slug"]: workspace for workspace in cli("workspace", "list")}
+            a = existing["orchard"]
+            b = cli("workspace", "create", "library-" + uuid.uuid4().hex[:6])
+        else:
+            a, b = cli("workspace", "create", "orchard"), cli("workspace", "create", "library")
         wa, wb = a["id"], b["id"]
         check("CLI/API workspace parity", cli("workspace", "list") == request("GET", "/workspaces"))
         # Independent mask-weighted mean and normalization reference on actual model outputs.
@@ -198,8 +226,7 @@ print(json.dumps({'dimension':v.shape[1],'pooling':'mask-weighted-mean','normali
             pooling["dimension"] == 384 and pooling["providers"] == ["CPUExecutionProvider"],
         )
         original = (ROOT / "examples/corpus/orchard.txt").read_bytes()
-        cp("cp", str(ROOT / "examples/corpus/orchard.txt"), "api:/tmp/orchard.txt")
-        first = cli("ingest", wa, "/tmp/orchard.txt")
+        first = cli("ingest", wa, "-", "--filename", "orchard.txt", content=original)
         check(
             "real TXT ingestion completes",
             wait(lambda: terminal(wa, first["id"]))["state"] == "COMPLETED",
@@ -257,7 +284,7 @@ print(json.dumps({'dimension':v.shape[1],'pooling':'mask-weighted-mean','normali
             "original source download hash",
             source.status_code == 200 and source.content == original,
         )
-        repeated = cli("ingest", wa, "/tmp/orchard.txt")
+        repeated = cli("ingest", wa, "-", "--filename", "orchard.txt", content=original)
         check(
             "duplicate ingestion idempotent",
             repeated["id"] == first["id"]

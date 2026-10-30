@@ -66,6 +66,7 @@ def parser():
     ingest = commands.add_parser("ingest")
     ingest.add_argument("workspace")
     ingest.add_argument("file", type=Path)
+    ingest.add_argument("--filename", help="Required with '-' to ingest bounded stdin bytes")
     job = commands.add_parser("job").add_subparsers(dest="action", required=True)
     for action in ("show", "cancel"):
         sub = job.add_parser(action)
@@ -142,11 +143,22 @@ def execute(args):
         identifier(args.workspace)
         base = f"/workspaces/{args.workspace}"
         if args.command == "ingest":
-            name = filename(args.file.name)
+            if str(args.file) == "-":
+                if not args.filename:
+                    raise RagError("stdin_filename_required")
+                name = filename(args.filename)
+                data = sys.stdin.buffer.read(MAX_FILE + 1)
+                if len(data) > MAX_FILE:
+                    raise RagError("file_size_limit", 413)
+            else:
+                if args.filename:
+                    raise RagError("filename_only_with_stdin")
+                name = filename(args.file.name)
+                data = read_local(args.file)
             method, path = "POST", base + "/documents"
             kwargs = {
                 "params": {"filename": name},
-                "content": read_local(args.file),
+                "content": data,
                 "headers": {"Content-Type": "application/octet-stream"},
             }
         elif args.command == "job":

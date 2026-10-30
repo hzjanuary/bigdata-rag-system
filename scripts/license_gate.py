@@ -19,6 +19,7 @@ APPROVED = {
     "CC0-1.0",
     "0BSD",
     "Zlib",
+    "MIT-CMU",
 }
 CLASSIFIERS = {
     "MIT License": "MIT",
@@ -50,6 +51,7 @@ OVERRIDES = {
     "tqdm": "MPL-2.0 AND MIT",
     "chardet": "LGPL-2.1-or-later",
     "rfc3987": "GPL-3.0-or-later",
+    "pydeck": "Apache-2.0",
 }
 
 

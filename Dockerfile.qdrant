@@ -4,6 +4,7 @@ LABEL org.opencontainers.image.revision=$SOURCE_REVISION
 USER 0:0
 RUN mkdir -p /qdrant/storage /qdrant/snapshots && chown -R 10001:10001 /qdrant/storage /qdrant/snapshots && chmod 0700 /qdrant/storage /qdrant/snapshots
 USER 10001:10001
+COPY LICENSE NOTICE /usr/share/doc/rag-core/
 ENTRYPOINT ["bash", "-c", "umask 077; exec ./entrypoint.sh \"$@\"", "qdrant"]
 CMD []
 HEALTHCHECK --interval=5s --timeout=3s --retries=20 CMD ["bash", "-c", "exec 3<>/dev/tcp/127.0.0.1/6333; printf 'GET /readyz HTTP/1.0\r\n\r\n' >&3; read -r line <&3; [[ \"$line\" == *'200'* ]]"]
