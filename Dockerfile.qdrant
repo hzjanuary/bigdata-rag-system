@@ -2,7 +2,7 @@ FROM qdrant/qdrant:v1.20.0@sha256:9bfc89f9914fc14876a88c05270685921a55b8877b254a
 ARG SOURCE_REVISION=unverified
 LABEL org.opencontainers.image.revision=$SOURCE_REVISION
 USER 0:0
-RUN mkdir -p /qdrant/storage /qdrant/snapshots && chown -R 10001:10001 /qdrant/storage /qdrant/snapshots && chmod 0700 /qdrant/storage /qdrant/snapshots
+RUN rm -rf /qdrant/static && mkdir -p /qdrant/storage /qdrant/snapshots && chown -R 10001:10001 /qdrant/storage /qdrant/snapshots && chmod 0700 /qdrant/storage /qdrant/snapshots
 USER 10001:10001
 COPY LICENSE NOTICE /usr/share/doc/rag-core/
 ENTRYPOINT ["bash", "-c", "umask 077; exec ./entrypoint.sh \"$@\"", "qdrant"]
