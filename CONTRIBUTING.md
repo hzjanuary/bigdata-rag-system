@@ -1,4 +1,4 @@
-# Contributing
+# Contributing to Multi-Workspace RAG Engine
 
 Use Python 3.12 and `uv sync --frozen`. Run `uv run pytest -q`, `uv run ruff check .`
 and `uv run ruff format --check rag_core scripts tests`. Deterministic tests reject
@@ -10,7 +10,10 @@ Preserve the public contracts in docs/architecture.md and SPEC-001. New routes m
 have anonymous, workspace-isolation and redaction tests. Parser/index changes need
 failure/restart/atomic-visibility coverage. No retry may clear collections. New
 model/provider acquisition, live generation, external side effects or publication
-requires separate operator authorization; CI never runs inference.
+requires separate operator authorization. Ordinary source CI performs no model
+inference. Both historical independent CPU campaigns are consumed; do not rerun or
+reapply activation labels. The [rebranding/retirement plan](docs/maintenance/repository-rebranding.md)
+preserves their original policy and evidence.
 
 Update pyproject.toml and uv.lock together. Regenerate hashed requirements with
 `uv export --frozen --no-dev --no-emit-project -o requirements.txt`, then run the

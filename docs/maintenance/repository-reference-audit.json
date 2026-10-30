@@ -1,0 +1,639 @@
+{
+  "audit_source_commit": "bd2c25ed51a462e6cfe2053a6286a8e55b7f5a70",
+  "original_repository": "hzjanuary/bigdata-rag-system",
+  "target_repository": "hzjanuary/multi-workspace-rag-engine",
+  "observed_repository_id": 1157806659,
+  "observed_full_name": "hzjanuary/multi-workspace-rag-engine",
+  "observation": "Read-only API already reports target name, description and topics at task start. This preparation did not rename or edit repository metadata.",
+  "references": [
+    {
+      "path": ".github/workflows/spec001-cpu-once.yml",
+      "baseline_sha256": "d3031c27ee4af1ee5c02fa61312acafdb45fbdf2ad72f5d8405a37566075f94a",
+      "references": [
+        {
+          "line": 35,
+          "tokens": [
+            "bigdata-rag-system"
+          ]
+        }
+      ],
+      "disposition": "consumed campaign execution policy: preserve bytes and original repository guard; proposed disable-only retirement"
+    },
+    {
+      "path": "NOTICE",
+      "baseline_sha256": "0d7388a7c42a4c690600d21ccbde290141637d5c4cab021ba9d0ca349249f0ea",
+      "references": [
+        {
+          "line": 1,
+          "tokens": [
+            "Workspace RAG Core"
+          ]
+        }
+      ],
+      "disposition": "reviewed reference retained; no runtime/package rename"
+    },
+    {
+      "path": "README.md",
+      "baseline_sha256": "861dadd625912ddc91c5e073b068a6b180885de95322b812cf6efbac718f331b",
+      "references": [
+        {
+          "line": 1,
+          "tokens": [
+            "Workspace RAG Core"
+          ]
+        },
+        {
+          "line": 23,
+          "tokens": [
+            "bigdata-rag-system"
+          ]
+        },
+        {
+          "line": 24,
+          "tokens": [
+            "bigdata-rag-system"
+          ]
+        },
+        {
+          "line": 25,
+          "tokens": [
+            "bigdata-rag-system"
+          ]
+        },
+        {
+          "line": 27,
+          "tokens": [
+            "easyResearch"
+          ]
+        },
+        {
+          "line": 136,
+          "tokens": [
+            "bigdata-rag-system"
+          ]
+        }
+      ],
+      "disposition": "current documentation: update visible brand/canonical links; retain evidence IDs"
+    },
+    {
+      "path": "SECURITY.md",
+      "baseline_sha256": "f0867abb7b5a4da18fc407b3b2ca3183caa3b6f921784074649f325052f762d0",
+      "references": [
+        {
+          "line": 30,
+          "tokens": [
+            "bigdata-rag-system"
+          ]
+        },
+        {
+          "line": 31,
+          "tokens": [
+            "bigdata-rag-system"
+          ]
+        },
+        {
+          "line": 32,
+          "tokens": [
+            "bigdata-rag-system"
+          ]
+        }
+      ],
+      "disposition": "current documentation: update visible brand/canonical links; retain evidence IDs"
+    },
+    {
+      "path": "docs/plans/OSS-ROADMAP.md",
+      "baseline_sha256": "eb82a9c09fb0b08bd76a69a9cd109a32b9fc9f871bc1535e4914ca5a98b7de4e",
+      "references": [
+        {
+          "line": 1,
+          "tokens": [
+            "BigData RAG"
+          ]
+        }
+      ],
+      "disposition": "historical requirement/plan/evidence: preserve bytes, IDs, names, URLs and provenance"
+    },
+    {
+      "path": "docs/plans/active/spec-001-oss-rag-core.md",
+      "baseline_sha256": "78154603a7e0cfa50bc785fce6f0180132924d9d30db3b7bed21e73419251e70",
+      "references": [
+        {
+          "line": 120,
+          "tokens": [
+            "bigdata-rag-system"
+          ]
+        }
+      ],
+      "disposition": "historical requirement/plan/evidence: preserve bytes, IDs, names, URLs and provenance"
+    },
+    {
+      "path": "docs/release/CPU-CAMPAIGN-2.md",
+      "baseline_sha256": "f8ad178b2ad6a4aafa96f966d2f101ec455b20eb3157fd588a7bef6c0e88273a",
+      "references": [
+        {
+          "line": 22,
+          "tokens": [
+            "bigdata-rag-system"
+          ]
+        }
+      ],
+      "disposition": "historical requirement/plan/evidence: preserve bytes, IDs, names, URLs and provenance"
+    },
+    {
+      "path": "docs/release/CPU-CAMPAIGN-TRIGGER.md",
+      "baseline_sha256": "d7582ae6c79e2c50e38e1cb6de7ace795ebea8bb0708c1230ca21c766001a458",
+      "references": [
+        {
+          "line": 16,
+          "tokens": [
+            "bigdata-rag-system"
+          ]
+        }
+      ],
+      "disposition": "historical requirement/plan/evidence: preserve bytes, IDs, names, URLs and provenance"
+    },
+    {
+      "path": "docs/release/CPU-RUN-41029994294-DIAGNOSIS.md",
+      "baseline_sha256": "50f029df50b866d87effd3430b5df996d40ab3066e851a954ad29f6e6ba793f5",
+      "references": [
+        {
+          "line": 3,
+          "tokens": [
+            "bigdata-rag-system"
+          ]
+        }
+      ],
+      "disposition": "historical requirement/plan/evidence: preserve bytes, IDs, names, URLs and provenance"
+    },
+    {
+      "path": "docs/release/cpu-once.workflow.yml",
+      "baseline_sha256": "888836778583999a15a3f55484da1cf7d77b6bc6fe290782716763102f4ae1d4",
+      "references": [
+        {
+          "line": 19,
+          "tokens": [
+            "bigdata-rag-system"
+          ]
+        },
+        {
+          "line": 48,
+          "tokens": [
+            "bigdata-rag-system"
+          ]
+        }
+      ],
+      "disposition": "historical requirement/plan/evidence: preserve bytes, IDs, names, URLs and provenance"
+    },
+    {
+      "path": "docs/release/evidence/cpu-run-41029994294-diagnosis.json",
+      "baseline_sha256": "ee4713d2124b2d60c88a33c6d4a6048c5c636937688cef86b812cc1269b57d66",
+      "references": [
+        {
+          "line": 3,
+          "tokens": [
+            "bigdata-rag-system"
+          ]
+        }
+      ],
+      "disposition": "historical requirement/plan/evidence: preserve bytes, IDs, names, URLs and provenance"
+    },
+    {
+      "path": "docs/release/evidence/cpu-trigger-remote.json",
+      "baseline_sha256": "cc942fdc5c7ecb6566c418e42bd8db204b1a1f8fbbba3b2a7ba79685a2e03d9a",
+      "references": [
+        {
+          "line": 5,
+          "tokens": [
+            "bigdata-rag-system"
+          ]
+        },
+        {
+          "line": 25,
+          "tokens": [
+            "bigdata-rag-system"
+          ]
+        },
+        {
+          "line": 155,
+          "tokens": [
+            "bigdata-rag-system"
+          ]
+        },
+        {
+          "line": 285,
+          "tokens": [
+            "bigdata-rag-system"
+          ]
+        },
+        {
+          "line": 324,
+          "tokens": [
+            "bigdata-rag-system"
+          ]
+        }
+      ],
+      "disposition": "historical requirement/plan/evidence: preserve bytes, IDs, names, URLs and provenance"
+    },
+    {
+      "path": "docs/release/evidence/final-independent-acceptance.json",
+      "baseline_sha256": "cfca54b77573aff6e420c40800e728f33b9bd05b52aa81924290d3de6373cd1f",
+      "references": [
+        {
+          "line": 10,
+          "tokens": [
+            "bigdata-rag-system"
+          ]
+        }
+      ],
+      "disposition": "historical requirement/plan/evidence: preserve bytes, IDs, names, URLs and provenance"
+    },
+    {
+      "path": "docs/release/evidence/followup-remote-ci.json",
+      "baseline_sha256": "197cb6191450464a33ff1b444a79580117dab1a293265f67bdff80736b642fc0",
+      "references": [
+        {
+          "line": 5,
+          "tokens": [
+            "bigdata-rag-system"
+          ]
+        },
+        {
+          "line": 21,
+          "tokens": [
+            "bigdata-rag-system"
+          ]
+        },
+        {
+          "line": 243,
+          "tokens": [
+            "bigdata-rag-system"
+          ]
+        }
+      ],
+      "disposition": "historical requirement/plan/evidence: preserve bytes, IDs, names, URLs and provenance"
+    },
+    {
+      "path": "docs/release/evidence/junit-correction-ci.json",
+      "baseline_sha256": "97daf219aa3465a376f4de880f9dbc5302f7025dc152636cfb0de475f621b9b8",
+      "references": [
+        {
+          "line": 4,
+          "tokens": [
+            "bigdata-rag-system"
+          ]
+        },
+        {
+          "line": 19,
+          "tokens": [
+            "bigdata-rag-system"
+          ]
+        },
+        {
+          "line": 158,
+          "tokens": [
+            "bigdata-rag-system"
+          ]
+        }
+      ],
+      "disposition": "historical requirement/plan/evidence: preserve bytes, IDs, names, URLs and provenance"
+    },
+    {
+      "path": "docs/release/evidence/remediation-campaign-2-preparation.json",
+      "baseline_sha256": "bb3535c11ed1bef0a100c100cfe747fab190e6b9f3390a54b35900476fb30047",
+      "references": [
+        {
+          "line": 11,
+          "tokens": [
+            "bigdata-rag-system"
+          ]
+        },
+        {
+          "line": 135,
+          "tokens": [
+            "bigdata-rag-system"
+          ]
+        },
+        {
+          "line": 259,
+          "tokens": [
+            "bigdata-rag-system"
+          ]
+        },
+        {
+          "line": 299,
+          "tokens": [
+            "bigdata-rag-system"
+          ]
+        }
+      ],
+      "disposition": "historical requirement/plan/evidence: preserve bytes, IDs, names, URLs and provenance"
+    },
+    {
+      "path": "docs/release/evidence/remediation-campaign-2-ready.json",
+      "baseline_sha256": "e0c95fc3adcde67ab4e39f1654c78c35e7c18df9a8df3317af4793c4e005179c",
+      "references": [
+        {
+          "line": 4,
+          "tokens": [
+            "bigdata-rag-system"
+          ]
+        },
+        {
+          "line": 20,
+          "tokens": [
+            "bigdata-rag-system"
+          ]
+        },
+        {
+          "line": 150,
+          "tokens": [
+            "bigdata-rag-system"
+          ]
+        },
+        {
+          "line": 280,
+          "tokens": [
+            "bigdata-rag-system"
+          ]
+        },
+        {
+          "line": 320,
+          "tokens": [
+            "bigdata-rag-system"
+          ]
+        }
+      ],
+      "disposition": "historical requirement/plan/evidence: preserve bytes, IDs, names, URLs and provenance"
+    },
+    {
+      "path": "docs/release/evidence/source-only-readiness.json",
+      "baseline_sha256": "5387fbbed3581fb6fc6f2e547f0d4d68eaaff54794726c334c8f687faa138e06",
+      "references": [
+        {
+          "line": 215,
+          "tokens": [
+            "bigdata-rag-system"
+          ]
+        }
+      ],
+      "disposition": "historical requirement/plan/evidence: preserve bytes, IDs, names, URLs and provenance"
+    },
+    {
+      "path": "docs/release/evidence/source-publication-authorization.json",
+      "baseline_sha256": "d0bf031c3e1a413f7709cf5ac3fdca2f2013d6604e30b793f7c1ad0af2be4e57",
+      "references": [
+        {
+          "line": 3,
+          "tokens": [
+            "bigdata-rag-system"
+          ]
+        }
+      ],
+      "disposition": "historical requirement/plan/evidence: preserve bytes, IDs, names, URLs and provenance"
+    },
+    {
+      "path": "docs/release/v0.1.0.md",
+      "baseline_sha256": "1d647f944413dad756fb765137c6f2e9201d672527ce33f16f9cfb6b4e7da137",
+      "references": [
+        {
+          "line": 17,
+          "tokens": [
+            "bigdata-rag-system"
+          ]
+        }
+      ],
+      "disposition": "historical requirement/plan/evidence: preserve bytes, IDs, names, URLs and provenance"
+    },
+    {
+      "path": "docs/release/verification.md",
+      "baseline_sha256": "dd94fae3b643282bf3092bc7ffecdb2f52c5d2aedb2c3c4e92773a6457436587",
+      "references": [
+        {
+          "line": 25,
+          "tokens": [
+            "bigdata-rag-system"
+          ]
+        },
+        {
+          "line": 137,
+          "tokens": [
+            "bigdata-rag-system"
+          ]
+        },
+        {
+          "line": 138,
+          "tokens": [
+            "bigdata-rag-system"
+          ]
+        },
+        {
+          "line": 139,
+          "tokens": [
+            "bigdata-rag-system"
+          ]
+        },
+        {
+          "line": 140,
+          "tokens": [
+            "bigdata-rag-system"
+          ]
+        },
+        {
+          "line": 184,
+          "tokens": [
+            "bigdata-rag-system"
+          ]
+        },
+        {
+          "line": 185,
+          "tokens": [
+            "bigdata-rag-system"
+          ]
+        },
+        {
+          "line": 264,
+          "tokens": [
+            "bigdata-rag-system"
+          ]
+        },
+        {
+          "line": 297,
+          "tokens": [
+            "bigdata-rag-system"
+          ]
+        },
+        {
+          "line": 298,
+          "tokens": [
+            "bigdata-rag-system"
+          ]
+        },
+        {
+          "line": 299,
+          "tokens": [
+            "bigdata-rag-system"
+          ]
+        },
+        {
+          "line": 300,
+          "tokens": [
+            "bigdata-rag-system"
+          ]
+        },
+        {
+          "line": 393,
+          "tokens": [
+            "bigdata-rag-system"
+          ]
+        },
+        {
+          "line": 394,
+          "tokens": [
+            "bigdata-rag-system"
+          ]
+        },
+        {
+          "line": 464,
+          "tokens": [
+            "bigdata-rag-system"
+          ]
+        },
+        {
+          "line": 478,
+          "tokens": [
+            "bigdata-rag-system"
+          ]
+        },
+        {
+          "line": 479,
+          "tokens": [
+            "bigdata-rag-system"
+          ]
+        }
+      ],
+      "disposition": "historical requirement/plan/evidence: preserve bytes, IDs, names, URLs and provenance"
+    },
+    {
+      "path": "docs/specs/SPEC-001-open-source-rag-core.md",
+      "baseline_sha256": "672ccad60a40fedfa36ef8024337852a31fb96d84b88d67e09054e73a3f5b60e",
+      "references": [
+        {
+          "line": 1,
+          "tokens": [
+            "Workspace RAG Core"
+          ]
+        },
+        {
+          "line": 4,
+          "tokens": [
+            "bigdata-rag-system"
+          ]
+        },
+        {
+          "line": 11,
+          "tokens": [
+            "easyResearch"
+          ]
+        }
+      ],
+      "disposition": "historical requirement/plan/evidence: preserve bytes, IDs, names, URLs and provenance"
+    },
+    {
+      "path": "rag_core/api.py",
+      "baseline_sha256": "013fb07583bd1a2e3470068b60e255b6e58fc2f6e2c88f3f15d589cb9d5bd80e",
+      "references": [
+        {
+          "line": 71,
+          "tokens": [
+            "Workspace RAG Core"
+          ]
+        }
+      ],
+      "disposition": "compatibility identity: preserve runtime API title"
+    },
+    {
+      "path": "scripts/cpu_campaign.py",
+      "baseline_sha256": "40edb72078f5dd42895202d065cd3d8d52be0d9f72fd3c7f82bbf850a0c16f39",
+      "references": [
+        {
+          "line": 20,
+          "tokens": [
+            "bigdata-rag-system"
+          ]
+        }
+      ],
+      "disposition": "consumed campaign execution policy: preserve bytes and original repository guard; proposed disable-only retirement"
+    }
+  ],
+  "compatibility_identifiers_preserved": [
+    "workspace-rag-core distribution",
+    "rag CLI",
+    "rag_core import",
+    "Workspace RAG Core API title",
+    "workspace-rag-{core,qdrant,ui}:local image tags",
+    "RAG_* environment/config names and storage paths",
+    "existing branches/workflow IDs and source required-check context"
+  ],
+  "historical_records_unchanged": true,
+  "workflow_retirement": "Plan only: owner-approved manual disable of401427716; no disable or source workflow edit during preparation",
+  "rulesets_preserved": [
+    26194925,
+    26194913,
+    26194964
+  ],
+  "required_source_check": {
+    "name": "source",
+    "integration_id": 15368,
+    "strict": true
+  },
+  "release_preserved": {
+    "id": 428936675,
+    "tag": "v0.1.0",
+    "tag_object": "1cbd31e09216d44a63685cffe5c212b35264d7a6",
+    "commit": "bd2c25ed51a462e6cfe2053a6286a8e55b7f5a70",
+    "runtime_tested_sha": "287212be8f5683221d2449158331e59d4c639c15"
+  },
+  "acceptance_unchanged": {
+    "PASS": 22,
+    "FAIL": [
+      "RAG-21"
+    ],
+    "BLOCKED": [
+      "RAG-15"
+    ]
+  },
+  "observed_release_archive_containers_after_external_rename": [
+    {
+      "file": "v0.1.0.zip",
+      "sha256": "0aa83e71b520f9fb5ef686a8a10e9c4033e20bcaec8c346220d4965a3bbb6205",
+      "bytes": 369141,
+      "source_sha": "bd2c25ed51a462e6cfe2053a6286a8e55b7f5a70",
+      "tracked_files": 115,
+      "result": "PASS",
+      "checks": [
+        "exact file inventory",
+        "every file byte hash and size",
+        "executable modes",
+        "no symlinks or traversal",
+        "source private-path/credential-pattern gate"
+      ]
+    },
+    {
+      "file": "v0.1.0.tar.gz",
+      "sha256": "1bd0deae48f0e0ee79d2e83e1facf4c02cb5dea4fe793856dc29ba6d245e6fb9",
+      "bytes": 307882,
+      "source_sha": "bd2c25ed51a462e6cfe2053a6286a8e55b7f5a70",
+      "tracked_files": 115,
+      "result": "PASS",
+      "checks": [
+        "exact file inventory",
+        "every file byte hash and size",
+        "executable modes",
+        "no symlinks or traversal",
+        "source private-path/credential-pattern gate"
+      ]
+    }
+  ],
+  "observed_new_archive_root": "multi-workspace-rag-engine-0.1.0",
+  "old_archive_bytes_still_preserved": true
+}
