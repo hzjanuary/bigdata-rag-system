@@ -1,5 +1,13 @@
 # SPEC-001 verification ledger — 2026-10-30
 
+**Follow-up in progress:** the user now authorizes a normal feature-branch push,
+one Draft PR, genuine remote CI and one independent GitHub-hosted Ubuntu 24.04
+CPU/model/Qdrant campaign. The user explicitly permits observational CI while
+RAG-21 stays FAIL; image gates keep their original thresholds and nonzero exits.
+The historical evidence below is retained and is not presented as a fresh hosted
+run. Remote IDs/results will be added after execution. LIVE generation and any
+merge/tag/publication/deployment remain unauthorized.
+
 Local implementation and evidence are delivered. **Publication is not authorized.**
 The authoritative RAG-01..24 conditions in SPEC-001 are unchanged. The plan remains
 active because LIVE generation, independent host qualification, remote CI and image
@@ -65,7 +73,7 @@ F/U/L/A above supply exact source/image identities for every referenced evidence
 | RAG-17 | PASS | U error/caplog/stdout redaction with secret/content/path sentinels, including CLI storage failures; default access/prompt traces absent; authenticated fixed-schema events only. |
 | RAG-18 | PASS | L actual Qdrant stop -> readiness/search 503; restart restores identical committed retrieval. U/Q outage and dimension contracts. |
 | RAG-19 | PASS | L actual private logical backup and read-only restore to a separate Qdrant, exact source hashes/manifests/jobs/capability hashes, ranking within 1e-6 float round-trip tolerance. Original documents/volumes untouched. |
-| RAG-20 | BLOCKED | Loopback API/private unexposed Qdrant/non-root persistent CPU Compose **verified locally** by L/I. The current Linux host is shared; a separately provisioned pristine Linux host/VM has **not** been qualified. No second host/deployment or additional model campaign is authorized. |
+| RAG-20 | BLOCKED | Loopback API/private unexposed Qdrant/non-root persistent CPU Compose **verified locally** by L/I. The current Linux host is shared; a separately provisioned pristine Linux host/VM has **not** been qualified. An independent hosted campaign is now authorized and pending; no deployment is authorized. |
 | RAG-21 | FAIL | U/Q/C/S/D local source/unit/integration/CLI/license checks pass without inference. Actual image security gates exit **1** (V). GitHub remote CI is **NOT_RUN** for this unpublished branch, not inferred from the workflow file. |
 | RAG-22 | PASS | S exact tracked-file/archive inventory and adversarial bypass tests; I excludes private/model/index data and unused bundled ONNX demo graphs; no operator fixtures in source. One historical public-hash detector finding independently reviewed, not hidden. |
 | RAG-23 | PASS | C + L README/CLI walkthrough; required architecture/self-host/provider/security/backup/contribution/license/NOTICE/release docs and inventories present. No production, GPU, OCR, provider-quality or benchmark claims. |
