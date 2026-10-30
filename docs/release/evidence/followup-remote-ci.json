@@ -1,0 +1,752 @@
+{
+  "scope": "Stopped observational CI follow-up; no rerun or hosted CPU/model campaign executed",
+  "tested_remote_head": "11736f527612fc659a201b13e38d13c7278e1476",
+  "branch": "feat/spec-001-oss-rag-core",
+  "draft_pr": "https://github.com/hzjanuary/bigdata-rag-system/pull/1",
+  "draft_pr_state": "OPEN DRAFT; main target; not merged",
+  "stop_reason": "New CI evidence export defect; user explicitly instructed stopping on new integrity/function/security defects.",
+  "original_failed_criterion": {
+    "id": "RAG-21",
+    "requirement": "Locked CI passes unit/integration/security/CLI/image/license checks without inference.",
+    "disposition": "FAIL: known Debian OS findings remain; new artifact export failure also prevents passing CI.",
+    "investigation": "docs/release/evidence/followup-phase1.json"
+  },
+  "runs": [
+    {
+      "id": 41006969209,
+      "head_sha": "11736f527612fc659a201b13e38d13c7278e1476",
+      "event": "push",
+      "status": "completed",
+      "conclusion": "failure",
+      "html_url": "https://github.com/hzjanuary/bigdata-rag-system/actions/runs/41006969209",
+      "created_at": "2026-10-30T05:10:51Z",
+      "updated_at": "2026-10-30T05:11:38Z",
+      "jobs": [
+        {
+          "id": 123903956958,
+          "name": "source",
+          "conclusion": "failure",
+          "runner_name": "GitHub Actions 1000000305",
+          "labels": [
+            "ubuntu-24.04"
+          ],
+          "steps": [
+            {
+              "name": "Set up job",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 1,
+              "started_at": "2026-10-30T05:10:55Z",
+              "completed_at": "2026-10-30T05:10:56Z"
+            },
+            {
+              "name": "Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 2,
+              "started_at": "2026-10-30T05:10:56Z",
+              "completed_at": "2026-10-30T05:10:57Z"
+            },
+            {
+              "name": "Run actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 3,
+              "started_at": "2026-10-30T05:10:57Z",
+              "completed_at": "2026-10-30T05:10:57Z"
+            },
+            {
+              "name": "Run python -m pip install uv==0.9.7",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 4,
+              "started_at": "2026-10-30T05:10:57Z",
+              "completed_at": "2026-10-30T05:10:59Z"
+            },
+            {
+              "name": "Run uv sync --frozen && uv lock --check",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 5,
+              "started_at": "2026-10-30T05:10:59Z",
+              "completed_at": "2026-10-30T05:11:01Z"
+            },
+            {
+              "name": "Run uv run python scripts/runner_environment.py",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 6,
+              "started_at": "2026-10-30T05:11:01Z",
+              "completed_at": "2026-10-30T05:11:01Z"
+            },
+            {
+              "name": "Run uv run ruff check . && uv run ruff format --check rag_core scripts tests",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 7,
+              "started_at": "2026-10-30T05:11:01Z",
+              "completed_at": "2026-10-30T05:11:01Z"
+            },
+            {
+              "name": "Run uv run black --check rag_core scripts tests api_main.py main.py config.py app.py",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 8,
+              "started_at": "2026-10-30T05:11:01Z",
+              "completed_at": "2026-10-30T05:11:02Z"
+            },
+            {
+              "name": "Run uv run mypy",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 9,
+              "started_at": "2026-10-30T05:11:02Z",
+              "completed_at": "2026-10-30T05:11:10Z"
+            },
+            {
+              "name": "Run uv run pytest -q --junitxml=.local/ci-evidence/junit.xml",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 10,
+              "started_at": "2026-10-30T05:11:10Z",
+              "completed_at": "2026-10-30T05:11:20Z"
+            },
+            {
+              "name": "Run uv run python scripts/source_gate.py --output .local/ci-evidence/source-manifest.json",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 11,
+              "started_at": "2026-10-30T05:11:20Z",
+              "completed_at": "2026-10-30T05:11:20Z"
+            },
+            {
+              "name": "Run uv run python scripts/license_gate.py --development-environment --output .local/ci-evidence/license-inventory.json",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 12,
+              "started_at": "2026-10-30T05:11:20Z",
+              "completed_at": "2026-10-30T05:11:21Z"
+            },
+            {
+              "name": "Exact archive and historical secret gates",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 13,
+              "started_at": "2026-10-30T05:11:21Z",
+              "completed_at": "2026-10-30T05:11:24Z"
+            },
+            {
+              "name": "Run uv run pip-audit --require-hashes --disable-pip --no-deps -r requirements.txt --format=json --output .local/ci-evidence/python-audit.json",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 14,
+              "started_at": "2026-10-30T05:11:24Z",
+              "completed_at": "2026-10-30T05:11:26Z"
+            },
+            {
+              "name": "Run uv run cyclonedx-py requirements requirements.txt --output-file .local/ci-evidence/python-sbom.json --output-format JSON",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 15,
+              "started_at": "2026-10-30T05:11:26Z",
+              "completed_at": "2026-10-30T05:11:27Z"
+            },
+            {
+              "name": "Run docker compose config --quiet && docker compose -f docker-compose.yml -f docker-compose.ui.yml --profile ui config --quiet",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 16,
+              "started_at": "2026-10-30T05:11:27Z",
+              "completed_at": "2026-10-30T05:11:28Z"
+            },
+            {
+              "name": "Real Qdrant integration without inference",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 17,
+              "started_at": "2026-10-30T05:11:28Z",
+              "completed_at": "2026-10-30T05:11:35Z"
+            },
+            {
+              "name": "Verify exported reports",
+              "status": "completed",
+              "conclusion": "failure",
+              "number": 18,
+              "started_at": "2026-10-30T05:11:35Z",
+              "completed_at": "2026-10-30T05:11:35Z"
+            },
+            {
+              "name": "Run actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02",
+              "status": "completed",
+              "conclusion": "skipped",
+              "number": 19,
+              "started_at": "2026-10-30T05:11:35Z",
+              "completed_at": "2026-10-30T05:11:35Z"
+            },
+            {
+              "name": "Post Run actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065",
+              "status": "completed",
+              "conclusion": "skipped",
+              "number": 37,
+              "started_at": "2026-10-30T05:11:35Z",
+              "completed_at": "2026-10-30T05:11:35Z"
+            },
+            {
+              "name": "Post Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 38,
+              "started_at": "2026-10-30T05:11:35Z",
+              "completed_at": "2026-10-30T05:11:35Z"
+            },
+            {
+              "name": "Complete job",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 39,
+              "started_at": "2026-10-30T05:11:35Z",
+              "completed_at": "2026-10-30T05:11:35Z"
+            }
+          ]
+        },
+        {
+          "id": 123904185527,
+          "name": "images",
+          "conclusion": "skipped",
+          "runner_name": null,
+          "labels": [
+            "ubuntu-24.04"
+          ],
+          "steps": []
+        },
+        {
+          "id": 123904186476,
+          "name": "independent-cpu",
+          "conclusion": "skipped",
+          "runner_name": null,
+          "labels": [
+            "ubuntu-24.04"
+          ],
+          "steps": []
+        }
+      ],
+      "artifact_count": 0,
+      "artifact_checksum_verification": "NOT_AVAILABLE: upload skipped after failed safety guard",
+      "downloaded_log_zip_integrity": "PASS (ZIP CRCs; these are logs, not workflow artifacts)"
+    },
+    {
+      "id": 41006993655,
+      "head_sha": "11736f527612fc659a201b13e38d13c7278e1476",
+      "event": "pull_request",
+      "status": "completed",
+      "conclusion": "failure",
+      "html_url": "https://github.com/hzjanuary/bigdata-rag-system/actions/runs/41006993655",
+      "created_at": "2026-10-30T05:11:07Z",
+      "updated_at": "2026-10-30T05:11:54Z",
+      "jobs": [
+        {
+          "id": 123904033004,
+          "name": "source",
+          "conclusion": "failure",
+          "runner_name": "GitHub Actions 1000000306",
+          "labels": [
+            "ubuntu-24.04"
+          ],
+          "steps": [
+            {
+              "name": "Set up job",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 1,
+              "started_at": "2026-10-30T05:11:11Z",
+              "completed_at": "2026-10-30T05:11:11Z"
+            },
+            {
+              "name": "Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 2,
+              "started_at": "2026-10-30T05:11:11Z",
+              "completed_at": "2026-10-30T05:11:12Z"
+            },
+            {
+              "name": "Run actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 3,
+              "started_at": "2026-10-30T05:11:12Z",
+              "completed_at": "2026-10-30T05:11:13Z"
+            },
+            {
+              "name": "Run python -m pip install uv==0.9.7",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 4,
+              "started_at": "2026-10-30T05:11:13Z",
+              "completed_at": "2026-10-30T05:11:14Z"
+            },
+            {
+              "name": "Run uv sync --frozen && uv lock --check",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 5,
+              "started_at": "2026-10-30T05:11:14Z",
+              "completed_at": "2026-10-30T05:11:16Z"
+            },
+            {
+              "name": "Run uv run python scripts/runner_environment.py",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 6,
+              "started_at": "2026-10-30T05:11:16Z",
+              "completed_at": "2026-10-30T05:11:16Z"
+            },
+            {
+              "name": "Run uv run ruff check . && uv run ruff format --check rag_core scripts tests",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 7,
+              "started_at": "2026-10-30T05:11:16Z",
+              "completed_at": "2026-10-30T05:11:16Z"
+            },
+            {
+              "name": "Run uv run black --check rag_core scripts tests api_main.py main.py config.py app.py",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 8,
+              "started_at": "2026-10-30T05:11:16Z",
+              "completed_at": "2026-10-30T05:11:18Z"
+            },
+            {
+              "name": "Run uv run mypy",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 9,
+              "started_at": "2026-10-30T05:11:18Z",
+              "completed_at": "2026-10-30T05:11:25Z"
+            },
+            {
+              "name": "Run uv run pytest -q --junitxml=.local/ci-evidence/junit.xml",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 10,
+              "started_at": "2026-10-30T05:11:25Z",
+              "completed_at": "2026-10-30T05:11:36Z"
+            },
+            {
+              "name": "Run uv run python scripts/source_gate.py --output .local/ci-evidence/source-manifest.json",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 11,
+              "started_at": "2026-10-30T05:11:36Z",
+              "completed_at": "2026-10-30T05:11:36Z"
+            },
+            {
+              "name": "Run uv run python scripts/license_gate.py --development-environment --output .local/ci-evidence/license-inventory.json",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 12,
+              "started_at": "2026-10-30T05:11:36Z",
+              "completed_at": "2026-10-30T05:11:37Z"
+            },
+            {
+              "name": "Exact archive and historical secret gates",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 13,
+              "started_at": "2026-10-30T05:11:37Z",
+              "completed_at": "2026-10-30T05:11:41Z"
+            },
+            {
+              "name": "Run uv run pip-audit --require-hashes --disable-pip --no-deps -r requirements.txt --format=json --output .local/ci-evidence/python-audit.json",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 14,
+              "started_at": "2026-10-30T05:11:41Z",
+              "completed_at": "2026-10-30T05:11:42Z"
+            },
+            {
+              "name": "Run uv run cyclonedx-py requirements requirements.txt --output-file .local/ci-evidence/python-sbom.json --output-format JSON",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 15,
+              "started_at": "2026-10-30T05:11:42Z",
+              "completed_at": "2026-10-30T05:11:43Z"
+            },
+            {
+              "name": "Run docker compose config --quiet && docker compose -f docker-compose.yml -f docker-compose.ui.yml --profile ui config --quiet",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 16,
+              "started_at": "2026-10-30T05:11:43Z",
+              "completed_at": "2026-10-30T05:11:43Z"
+            },
+            {
+              "name": "Real Qdrant integration without inference",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 17,
+              "started_at": "2026-10-30T05:11:43Z",
+              "completed_at": "2026-10-30T05:11:51Z"
+            },
+            {
+              "name": "Verify exported reports",
+              "status": "completed",
+              "conclusion": "failure",
+              "number": 18,
+              "started_at": "2026-10-30T05:11:51Z",
+              "completed_at": "2026-10-30T05:11:51Z"
+            },
+            {
+              "name": "Run actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02",
+              "status": "completed",
+              "conclusion": "skipped",
+              "number": 19,
+              "started_at": "2026-10-30T05:11:51Z",
+              "completed_at": "2026-10-30T05:11:51Z"
+            },
+            {
+              "name": "Post Run actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065",
+              "status": "completed",
+              "conclusion": "skipped",
+              "number": 37,
+              "started_at": "2026-10-30T05:11:51Z",
+              "completed_at": "2026-10-30T05:11:51Z"
+            },
+            {
+              "name": "Post Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 38,
+              "started_at": "2026-10-30T05:11:51Z",
+              "completed_at": "2026-10-30T05:11:51Z"
+            },
+            {
+              "name": "Complete job",
+              "status": "completed",
+              "conclusion": "success",
+              "number": 39,
+              "started_at": "2026-10-30T05:11:51Z",
+              "completed_at": "2026-10-30T05:11:51Z"
+            }
+          ]
+        },
+        {
+          "id": 123904270885,
+          "name": "images",
+          "conclusion": "skipped",
+          "runner_name": null,
+          "labels": [
+            "ubuntu-24.04"
+          ],
+          "steps": []
+        },
+        {
+          "id": 123904271056,
+          "name": "independent-cpu",
+          "conclusion": "skipped",
+          "runner_name": null,
+          "labels": [
+            "ubuntu-24.04"
+          ],
+          "steps": []
+        }
+      ],
+      "artifact_count": 0,
+      "artifact_checksum_verification": "NOT_AVAILABLE: upload skipped after failed safety guard",
+      "downloaded_log_zip_integrity": "PASS (ZIP CRCs; these are logs, not workflow artifacts)"
+    }
+  ],
+  "observed_source_runner_environment": {
+    "source_sha": "11736f527612fc659a201b13e38d13c7278e1476",
+    "os_release": "PRETTY_NAME=\"Ubuntu 24.04.5 LTS\"\nNAME=\"Ubuntu\"\nVERSION_ID=\"24.04\"\nVERSION=\"24.04.5 LTS (Noble Numbat)\"\nVERSION_CODENAME=noble\nID=ubuntu\nID_LIKE=debian\nHOME_URL=\"https://www.ubuntu.com/\"\nSUPPORT_URL=\"https://help.ubuntu.com/\"\nBUG_REPORT_URL=\"https://bugs.launchpad.net/ubuntu/\"\nPRIVACY_POLICY_URL=\"https://www.ubuntu.com/legal/terms-and-policies/privacy-policy\"\nUBUNTU_CODENAME=noble\nLOGO=ubuntu-logo\n",
+    "kernel": "7.0.0-1017-azure",
+    "python": "3.12.15",
+    "docker_server": "28.0.4",
+    "github_hosted": true,
+    "runner": {
+      "RUNNER_OS": "Linux",
+      "RUNNER_ARCH": "X64",
+      "RUNNER_ENVIRONMENT": "github-hosted",
+      "ImageOS": "ubuntu24",
+      "ImageVersion": "20261026.354.1",
+      "GITHUB_RUN_ID": "41006993655",
+      "GITHUB_RUN_ATTEMPT": "1",
+      "GITHUB_EVENT_NAME": "pull_request"
+    }
+  },
+  "new_defect": {
+    "remote_observation": "Verify exported reports raises ValueError: binary or oversized source artifact; upload is correctly skipped in both runs. No exported report available to measure remotely.",
+    "local_reproduction": {
+      "path": ".local/followup-20261030/junit.xml",
+      "bytes": 6407084,
+      "sha256": "23365f6a9b9ab6899fa9b4cde31a2029f96fda60e292ddbd80b1d93066dc2f8c"
+    },
+    "local_contains_nul": false,
+    "unchanged_limit_bytes": 2000000,
+    "largest_testcase_names": [
+      {
+        "module": "tests.test_cli",
+        "testcase_name_characters": 4194361
+      },
+      {
+        "module": "tests.test_artifacts",
+        "testcase_name_characters": 2000050
+      },
+      {
+        "module": "tests.test_ingestion",
+        "testcase_name_characters": 200048
+      }
+    ],
+    "root_cause": "Default pytest parameter IDs embed resource-limit test payloads in JUnit testcase names. The same suite locally emits a 6.4 MB XML report and the unchanged evidence guard rejects it.",
+    "proposed_correction_NOT_APPLIED": "Use short explicit pytest ids for oversized binary/text cases, preserving all payload sizes/assertions and the 2 MB guard; add a bounded-JUnit regression.",
+    "regression_status": "NOT_IMPLEMENTED: stopped on discovery as instructed"
+  },
+  "local_validation": {
+    "deterministic": "109 passed, 1 skipped",
+    "actual_qdrant_contract": "1 passed separately; fixture vectors, no embedding inference",
+    "checks_passed": [
+      "uv frozen sync and lock check",
+      "Ruff lint/format",
+      "Black",
+      "MyPy (13 domain modules)",
+      "tracked source/private-path gate",
+      "exact archive integrity",
+      "current source secrets scan",
+      "full history secrets review (one exact public-hash false positive; no unknown finding)",
+      "pip-audit zero known findings",
+      "development and core/UI runtime Python license inventories",
+      "Docker Compose default and UI validation",
+      "all three actual local image builds and SBOM/license/vulnerability scans",
+      "core locked payload inventory and config initialization smoke"
+    ],
+    "local_real_model_campaign": "NOT_RERUN; historical 34-PASS campaign preserved, not new-host evidence",
+    "files": [
+      {
+        "path": ".local/followup-20261030/pytest-final.log",
+        "bytes": 705,
+        "sha256": "e03cffc1af7da9a085d63598e53865f04560cb0d42e1da23e868a67691c38cde"
+      },
+      {
+        "path": ".local/followup-20261030/qdrant-integration.log",
+        "bytes": 611,
+        "sha256": "292d56d30b10852be6e6c8a7b79c5a7937da15a27d022ca6751e8050f4d24b4a"
+      },
+      {
+        "path": ".local/followup-20261030/python-audit.json",
+        "bytes": 2174,
+        "sha256": "e0c7c24c6cce3f6ee636c85048b7851d73674e57d72112113e68cd2bb747168e"
+      },
+      {
+        "path": ".local/followup-20261030/dev-licenses.json",
+        "bytes": 17688,
+        "sha256": "acd53437817e96b4a84b13f1e6b55c362b8e982c8a54c84e5aac85ee98d90b84"
+      },
+      {
+        "path": ".local/followup-20261030/core-inventory.json",
+        "bytes": 2807,
+        "sha256": "37164fda88e6d0e44d072f7b67fb78c5cf0c0efd2701b18b7de5f236d899fd42"
+      },
+      {
+        "path": ".local/followup-20261030/core-smoke.json",
+        "bytes": 58,
+        "sha256": "1fc2b78a54c4798de0c280fe44352d3b83f21bc77a33d847948f3ca507f74255"
+      },
+      {
+        "path": ".local/followup-20261030/prepush-secret-scan.log",
+        "bytes": 132,
+        "sha256": "5d9f4df6f7acbb9465fd1e9fd7033af08803e4ee4c9a88b56732ced96664a720"
+      }
+    ]
+  },
+  "pushed_source_archive": {
+    "path": ".local/followup-20261030/source-artifact/source.tar",
+    "bytes": 727040,
+    "sha256": "7fa57545faeb9a0b7508c90161bcaa5457db450f1354464cadc15d9fb27f386c"
+  },
+  "candidate_local_images": [
+    {
+      "variant": "core",
+      "image_id": "sha256:15a19eef839050fbe464b0adeeaa28be59ca4a79b36c9a7b6af83df150171319",
+      "repo_digests": [
+        "workspace-rag-core@sha256:15a19eef839050fbe464b0adeeaa28be59ca4a79b36c9a7b6af83df150171319"
+      ],
+      "source_label": "49dac84cb2b301db1b47978d45ad4c495c3962f2",
+      "high_findings": 44,
+      "critical_findings": 0,
+      "distinct_high_critical_cves_in_this_image": 8,
+      "gate_exit": {
+        "exit_code": 1
+      },
+      "raw_reports": [
+        {
+          "path": ".local/followup-20261030/local-images/core/vulnerabilities.json",
+          "bytes": 523706,
+          "sha256": "056f9fbe1f2f6513681912a2d316a5d115c29c77615695cabff62fc5c6c95062"
+        },
+        {
+          "path": ".local/followup-20261030/local-images/core/licenses.json",
+          "bytes": 566263,
+          "sha256": "542adbc8ea3493fa9199a1f2d15a018a4026009b1954b98e32a8d12c86f5bbae"
+        },
+        {
+          "path": ".local/followup-20261030/local-images/core/sbom.json",
+          "bytes": 240701,
+          "sha256": "b4737e80f9b7777af4bd22ef563aa2cf21d29b34bc837b1f21c6dbc07bc65cf4"
+        }
+      ],
+      "python_license_inventory": {
+        "path": ".local/followup-20261030/local-images/core/runtime-license-inventory.json",
+        "bytes": 7539,
+        "sha256": "eb7e6b8b9a25e48dc70f7d6e55ad275407e9847f962b47e0e2aa50f631eba4dc"
+      }
+    },
+    {
+      "variant": "qdrant",
+      "image_id": "sha256:929f0fd3c8d3fa88e0ec2b1aa66668b64d414bc8846974e0e2c834562407bbdf",
+      "repo_digests": [
+        "workspace-rag-qdrant@sha256:929f0fd3c8d3fa88e0ec2b1aa66668b64d414bc8846974e0e2c834562407bbdf"
+      ],
+      "source_label": "49dac84cb2b301db1b47978d45ad4c495c3962f2",
+      "high_findings": 43,
+      "critical_findings": 0,
+      "distinct_high_critical_cves_in_this_image": 8,
+      "gate_exit": {
+        "exit_code": 1
+      },
+      "raw_reports": [
+        {
+          "path": ".local/followup-20261030/local-images/qdrant/vulnerabilities.json",
+          "bytes": 1001141,
+          "sha256": "d043bfa8ac9625c463007351104b63a7e711525f549b92bcdc58867d961c6715"
+        },
+        {
+          "path": ".local/followup-20261030/local-images/qdrant/licenses.json",
+          "bytes": 1235081,
+          "sha256": "57c81a7c4b9f4cbab6b70daaa03989e65f9eccfd2d4549f9c53807a725f3e010"
+        },
+        {
+          "path": ".local/followup-20261030/local-images/qdrant/sbom.json",
+          "bytes": 966715,
+          "sha256": "4274e28fb881c759157d2e2b4d7797afb3b1046da51c8b10102707ef4521848f"
+        }
+      ],
+      "python_license_inventory": null
+    },
+    {
+      "variant": "ui",
+      "image_id": "sha256:255e505828291cff8c142465ce353d20457c85209c1c21fe52be94fa8f62d3e0",
+      "repo_digests": [
+        "workspace-rag-ui@sha256:255e505828291cff8c142465ce353d20457c85209c1c21fe52be94fa8f62d3e0"
+      ],
+      "source_label": "49dac84cb2b301db1b47978d45ad4c495c3962f2",
+      "high_findings": 44,
+      "critical_findings": 0,
+      "distinct_high_critical_cves_in_this_image": 8,
+      "gate_exit": {
+        "exit_code": 1
+      },
+      "raw_reports": [
+        {
+          "path": ".local/followup-20261030/local-images/ui/vulnerabilities.json",
+          "bytes": 539343,
+          "sha256": "99a47b64e2139e1d2f070cb7e9e683921de522f59293a00fd21c09cb3e3acc4c"
+        },
+        {
+          "path": ".local/followup-20261030/local-images/ui/licenses.json",
+          "bytes": 588137,
+          "sha256": "99267d544c0de5f5aa348ca8b3dd4c17396c9c10e4278dfff7ac8baf6c1ad5c4"
+        },
+        {
+          "path": ".local/followup-20261030/local-images/ui/sbom.json",
+          "bytes": 268886,
+          "sha256": "3d4476495c1d56102e2116ebdbd5d169dc1518bac1228c88f2cb321f6d821d2f"
+        }
+      ],
+      "python_license_inventory": {
+        "path": ".local/followup-20261030/local-images/ui/runtime-license-inventory.json",
+        "bytes": 12163,
+        "sha256": "8c3e8b3c43c9fe80ec22e0a358c8b842227bf7f19f8224e9963daa252f737710"
+      }
+    }
+  ],
+  "independent_model_campaign": {
+    "status": "BLOCKED / NOT_STARTED: source prerequisite failed; independent-cpu job skipped",
+    "download_count": 0,
+    "inference_calls": 0,
+    "authorization_consumed": false,
+    "model": "sentence-transformers/all-MiniLM-L6-v2",
+    "revision": "10dbd2f06a8baf40ad285b037edda610c1b9a57c",
+    "onnx_sha256": "6fd5d72fe4589f189f8ebc006442dbb529bb7ce38f8082112682524616046452",
+    "real_embedding_outputs_qdrant_state_citations": "NO NEW HOSTED EVIDENCE; historical local campaign retained separately",
+    "future_trigger_decision": "Current trigger only permits PR opened. No second PR or rerun performed; any resumed correction must define one explicit campaign on the existing Draft PR."
+  },
+  "remote_evidence_files": [
+    {
+      "path": ".local/followup-20261030/remote/pr-artifacts.json",
+      "bytes": 32,
+      "sha256": "244563f989470892c537c9a4622920af0d228ee4528f7d00c64a06d6cd95856c"
+    },
+    {
+      "path": ".local/followup-20261030/remote/pr-jobs.json",
+      "bytes": 7307,
+      "sha256": "31379f58bb10563ceb8e5e2487d8bd968d76388fcd94548000fe616014c40b7b"
+    },
+    {
+      "path": ".local/followup-20261030/remote/pr-logs.zip",
+      "bytes": 33431,
+      "sha256": "ed606ab7122330e88e501bc6b6585c4dabb9053283a21ce04b0ef2fdde3a4ed5"
+    },
+    {
+      "path": ".local/followup-20261030/remote/pr-run.json",
+      "bytes": 13496,
+      "sha256": "55e852d44d8f6ee7fc0cfcb694496e8bb31c27865e2ff6aa378cf5a5b9ccc203"
+    },
+    {
+      "path": ".local/followup-20261030/remote/pr-run.log",
+      "bytes": 85368,
+      "sha256": "aa517e65e3f756efffa89415887fc15d6b8ea9a006e25cf51b8ecf6dc68917d5"
+    },
+    {
+      "path": ".local/followup-20261030/remote/push-artifacts.json",
+      "bytes": 32,
+      "sha256": "244563f989470892c537c9a4622920af0d228ee4528f7d00c64a06d6cd95856c"
+    },
+    {
+      "path": ".local/followup-20261030/remote/push-failed.log",
+      "bytes": 2109,
+      "sha256": "36cc031d31317954d0e1c6a0f8a068ec48d405166eb0740abf7cfafa37a1b8be"
+    },
+    {
+      "path": ".local/followup-20261030/remote/push-jobs.json",
+      "bytes": 7307,
+      "sha256": "1437c99f6f2910149ff3c73d9c56b989e445c7912dbcb13913be1b30ca65d926"
+    },
+    {
+      "path": ".local/followup-20261030/remote/push-logs.zip",
+      "bytes": 33523,
+      "sha256": "a906b24dd58d8ed97e36184766284dce39c08cc0f7540dbe1db60fba5313cc9e"
+    },
+    {
+      "path": ".local/followup-20261030/remote/push-run.json",
+      "bytes": 13491,
+      "sha256": "5c7396cc9e0d537f20e2816258a2c171a0c01b88dd8933c1f207594f7aac8955"
+    }
+  ],
+  "acceptance": {
+    "PASS": 21,
+    "FAIL": 1,
+    "BLOCKED": 2,
+    "RAG-15": "BLOCKED: live generation not authorized",
+    "RAG-20": "BLOCKED: independent CPU/model/Qdrant job skipped",
+    "RAG-21": "FAIL: original OS security findings plus new CI evidence-export defect",
+    "previous_PASS_scope": "Retained original evidence, not all independently requalified on current hosted HEAD"
+  },
+  "readiness": {
+    "source_only_v0_1_0_preview": "NO-GO pending new report-export correction, genuine remote artifact verification and independent CPU campaign",
+    "docker_images": "NO-GO: HIGH OS findings and no remote image job execution",
+    "publication": "NOT_AUTHORIZED",
+    "generative_campaign": "NOT_AUTHORIZED; separate proposal only"
+  },
+  "preservation": "Original raw reports, DB metadata, campaign state, private model cache and operator data remain retained; no suppressions, severity changes, history rewrite or security-gate bypass."
+}

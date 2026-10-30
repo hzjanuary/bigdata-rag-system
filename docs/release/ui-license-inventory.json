@@ -1,0 +1,447 @@
+{
+  "scope": "runtime",
+  "packages": [
+    {
+      "name": "altair",
+      "version": "5.5.0",
+      "license": "BSD-3-Clause",
+      "approved": true,
+      "metadata_url": "Documentation, https://altair-viz.github.io"
+    },
+    {
+      "name": "annotated-doc",
+      "version": "0.0.5",
+      "license": "MIT",
+      "approved": true,
+      "metadata_url": "Homepage, https://github.com/fastapi/annotated-doc"
+    },
+    {
+      "name": "annotated-types",
+      "version": "0.8.0",
+      "license": "MIT",
+      "approved": true,
+      "metadata_url": "Homepage, https://github.com/annotated-types/annotated-types"
+    },
+    {
+      "name": "anyio",
+      "version": "4.15.1",
+      "license": "MIT",
+      "approved": true,
+      "metadata_url": "Documentation, https://anyio.readthedocs.io/en/latest/"
+    },
+    {
+      "name": "attrs",
+      "version": "26.1.0",
+      "license": "MIT",
+      "approved": true,
+      "metadata_url": "Documentation, https://www.attrs.org/"
+    },
+    {
+      "name": "certifi",
+      "version": "2026.10.23",
+      "license": "MPL-2.0",
+      "approved": true,
+      "metadata_url": "https://github.com/certifi/python-certifi"
+    },
+    {
+      "name": "charset-normalizer",
+      "version": "3.5.2",
+      "license": "MIT",
+      "approved": true,
+      "metadata_url": "Changelog, https://github.com/jawah/charset_normalizer/blob/master/CHANGELOG.md"
+    },
+    {
+      "name": "click",
+      "version": "8.5.0",
+      "license": "BSD-3-Clause",
+      "approved": true,
+      "metadata_url": "Changes, https://click.palletsprojects.com/page/changes/"
+    },
+    {
+      "name": "defusedxml",
+      "version": "0.7.1",
+      "license": "PSF-2.0",
+      "approved": true,
+      "metadata_url": "https://github.com/tiran/defusedxml"
+    },
+    {
+      "name": "fastapi",
+      "version": "0.162.0",
+      "license": "MIT",
+      "approved": true,
+      "metadata_url": "Homepage, https://github.com/fastapi/fastapi"
+    },
+    {
+      "name": "filelock",
+      "version": "4.2.4",
+      "license": "MIT",
+      "approved": true,
+      "metadata_url": "Documentation, https://py-filelock.readthedocs.io"
+    },
+    {
+      "name": "flatbuffers",
+      "version": "25.12.19",
+      "license": "Apache-2.0",
+      "approved": true,
+      "metadata_url": "https://google.github.io/flatbuffers/"
+    },
+    {
+      "name": "fsspec",
+      "version": "2026.9.0",
+      "license": "BSD-3-Clause",
+      "approved": true,
+      "metadata_url": "Changelog, https://filesystem-spec.readthedocs.io/en/latest/changelog.html"
+    },
+    {
+      "name": "grpcio",
+      "version": "1.85.0",
+      "license": "Apache-2.0",
+      "approved": true,
+      "metadata_url": "Homepage, https://grpc.io"
+    },
+    {
+      "name": "h11",
+      "version": "0.16.0",
+      "license": "MIT",
+      "approved": true,
+      "metadata_url": "https://github.com/python-hyper/h11"
+    },
+    {
+      "name": "h2",
+      "version": "4.4.1",
+      "license": "MIT",
+      "approved": true,
+      "metadata_url": "Homepage, https://github.com/python-hyper/h2/"
+    },
+    {
+      "name": "hf-xet",
+      "version": "1.7.1",
+      "license": "Apache-2.0",
+      "approved": true,
+      "metadata_url": "Documentation, https://huggingface.co/docs/hub/xet/index"
+    },
+    {
+      "name": "hpack",
+      "version": "4.2.0",
+      "license": "MIT",
+      "approved": true,
+      "metadata_url": "Homepage, https://github.com/python-hyper/hpack/"
+    },
+    {
+      "name": "httpcore",
+      "version": "1.0.9",
+      "license": "BSD-3-Clause",
+      "approved": true,
+      "metadata_url": "Documentation, https://www.encode.io/httpcore"
+    },
+    {
+      "name": "httpx",
+      "version": "0.28.1",
+      "license": "BSD-3-Clause",
+      "approved": true,
+      "metadata_url": "Changelog, https://github.com/encode/httpx/blob/master/CHANGELOG.md"
+    },
+    {
+      "name": "huggingface-hub",
+      "version": "1.33.0",
+      "license": "Apache-2.0",
+      "approved": true,
+      "metadata_url": "https://github.com/huggingface/huggingface_hub"
+    },
+    {
+      "name": "hyperframe",
+      "version": "6.1.0",
+      "license": "MIT",
+      "approved": true,
+      "metadata_url": "Homepage, https://github.com/python-hyper/hyperframe/"
+    },
+    {
+      "name": "idna",
+      "version": "3.20",
+      "license": "BSD-3-Clause",
+      "approved": true,
+      "metadata_url": "Changelog, https://github.com/kjd/idna/blob/master/HISTORY.md"
+    },
+    {
+      "name": "itsdangerous",
+      "version": "2.2.0",
+      "license": "BSD-3-Clause",
+      "approved": true,
+      "metadata_url": "Changes, https://itsdangerous.palletsprojects.com/changes/"
+    },
+    {
+      "name": "jinja2",
+      "version": "3.1.6",
+      "license": "BSD-3-Clause",
+      "approved": true,
+      "metadata_url": "Changes, https://jinja.palletsprojects.com/changes/"
+    },
+    {
+      "name": "jsonschema",
+      "version": "4.26.0",
+      "license": "MIT",
+      "approved": true,
+      "metadata_url": "Homepage, https://github.com/python-jsonschema/jsonschema"
+    },
+    {
+      "name": "jsonschema-specifications",
+      "version": "2025.9.1",
+      "license": "MIT",
+      "approved": true,
+      "metadata_url": "Documentation, https://jsonschema-specifications.readthedocs.io/"
+    },
+    {
+      "name": "markupsafe",
+      "version": "3.0.4",
+      "license": "BSD-3-Clause",
+      "approved": true,
+      "metadata_url": "Donate, https://palletsprojects.com/donate"
+    },
+    {
+      "name": "narwhals",
+      "version": "2.28.0",
+      "license": "MIT",
+      "approved": true,
+      "metadata_url": "Homepage, https://github.com/narwhals-dev/narwhals"
+    },
+    {
+      "name": "numpy",
+      "version": "2.3.5",
+      "license": "BSD-3-Clause",
+      "approved": true,
+      "metadata_url": "homepage, https://numpy.org"
+    },
+    {
+      "name": "onnxruntime",
+      "version": "1.31.1",
+      "license": "MIT",
+      "approved": true,
+      "metadata_url": "https://onnxruntime.ai"
+    },
+    {
+      "name": "opentelemetry-api",
+      "version": "1.45.1",
+      "license": "Apache-2.0",
+      "approved": true,
+      "metadata_url": "Homepage, https://github.com/open-telemetry/opentelemetry-python/tree/main/opentelemetry-api"
+    },
+    {
+      "name": "packaging",
+      "version": "25.0",
+      "license": "Apache-2.0 OR BSD-2-Clause",
+      "approved": true,
+      "metadata_url": "Documentation, https://packaging.pypa.io/"
+    },
+    {
+      "name": "pandas",
+      "version": "2.3.3",
+      "license": "BSD-3-Clause",
+      "approved": true,
+      "metadata_url": "homepage, https://pandas.pydata.org"
+    },
+    {
+      "name": "pillow",
+      "version": "13.0.0",
+      "license": "MIT-CMU",
+      "approved": true,
+      "metadata_url": "Release notes, https://pillow.readthedocs.io/en/stable/releasenotes/index.html"
+    },
+    {
+      "name": "portalocker",
+      "version": "3.2.0",
+      "license": "BSD-3-Clause",
+      "approved": true,
+      "metadata_url": "bugs, https://github.com/wolph/portalocker/issues"
+    },
+    {
+      "name": "protobuf",
+      "version": "6.33.6",
+      "license": "BSD-3-Clause",
+      "approved": true,
+      "metadata_url": "https://developers.google.com/protocol-buffers/"
+    },
+    {
+      "name": "pyarrow",
+      "version": "26.0.0",
+      "license": "Apache-2.0",
+      "approved": true,
+      "metadata_url": "Homepage, https://arrow.apache.org/"
+    },
+    {
+      "name": "pydantic",
+      "version": "2.12.4",
+      "license": "MIT",
+      "approved": true,
+      "metadata_url": "Homepage, https://github.com/pydantic/pydantic"
+    },
+    {
+      "name": "pydantic-core",
+      "version": "2.41.5",
+      "license": "MIT",
+      "approved": true,
+      "metadata_url": "https://github.com/pydantic/pydantic-core"
+    },
+    {
+      "name": "pydeck",
+      "version": "0.9.3",
+      "license": "Apache-2.0",
+      "approved": true,
+      "metadata_url": "https://github.com/visgl/deck.gl/tree/master/bindings/pydeck"
+    },
+    {
+      "name": "pypdf",
+      "version": "6.21.4",
+      "license": "BSD-3-Clause",
+      "approved": true,
+      "metadata_url": "Bug Reports, https://github.com/py-pdf/pypdf/issues"
+    },
+    {
+      "name": "python-dateutil",
+      "version": "3.0.0",
+      "license": "Apache-2.0 OR BSD-3-Clause",
+      "approved": true,
+      "metadata_url": "https://github.com/dateutil/dateutil"
+    },
+    {
+      "name": "python-multipart",
+      "version": "0.0.32",
+      "license": "Apache-2.0",
+      "approved": true,
+      "metadata_url": "Homepage, https://github.com/Kludex/python-multipart"
+    },
+    {
+      "name": "pytz",
+      "version": "2026.6",
+      "license": "MIT",
+      "approved": true,
+      "metadata_url": "http://pythonhosted.org/pytz"
+    },
+    {
+      "name": "pyyaml",
+      "version": "6.0.3",
+      "license": "MIT",
+      "approved": true,
+      "metadata_url": "https://pyyaml.org/"
+    },
+    {
+      "name": "qdrant-client",
+      "version": "1.16.0",
+      "license": "Apache-2.0",
+      "approved": true,
+      "metadata_url": "Homepage, https://github.com/qdrant/qdrant-client"
+    },
+    {
+      "name": "referencing",
+      "version": "0.37.0",
+      "license": "MIT",
+      "approved": true,
+      "metadata_url": "Documentation, https://referencing.readthedocs.io/"
+    },
+    {
+      "name": "requests",
+      "version": "2.34.2",
+      "license": "Apache-2.0",
+      "approved": true,
+      "metadata_url": "Documentation, https://requests.readthedocs.io"
+    },
+    {
+      "name": "rpds-py",
+      "version": "2026.9.1",
+      "license": "MIT",
+      "approved": true,
+      "metadata_url": "Documentation, https://rpds.readthedocs.io/"
+    },
+    {
+      "name": "six",
+      "version": "1.17.0",
+      "license": "MIT",
+      "approved": true,
+      "metadata_url": "https://github.com/benjaminp/six"
+    },
+    {
+      "name": "starlette",
+      "version": "1.10.0",
+      "license": "BSD-3-Clause",
+      "approved": true,
+      "metadata_url": "Homepage, https://github.com/Kludex/starlette"
+    },
+    {
+      "name": "streamlit",
+      "version": "1.66.1",
+      "license": "Apache-2.0",
+      "approved": true,
+      "metadata_url": "Homepage, https://streamlit.io"
+    },
+    {
+      "name": "tokenizers",
+      "version": "0.22.1",
+      "license": "Apache-2.0",
+      "approved": true,
+      "metadata_url": "Homepage, https://github.com/huggingface/tokenizers"
+    },
+    {
+      "name": "tqdm",
+      "version": "4.70.1",
+      "license": "MPL-2.0 AND MIT",
+      "approved": true,
+      "metadata_url": "homepage, https://tqdm.github.io"
+    },
+    {
+      "name": "typing-inspection",
+      "version": "0.4.4",
+      "license": "MIT",
+      "approved": true,
+      "metadata_url": "Homepage, https://github.com/pydantic/typing-inspection"
+    },
+    {
+      "name": "typing-extensions",
+      "version": "4.16.0",
+      "license": "PSF-2.0",
+      "approved": true,
+      "metadata_url": "Bug Tracker, https://github.com/python/typing_extensions/issues"
+    },
+    {
+      "name": "tzdata",
+      "version": "2026.6",
+      "license": "Apache-2.0",
+      "approved": true,
+      "metadata_url": "https://github.com/python/tzdata"
+    },
+    {
+      "name": "urllib3",
+      "version": "2.8.0",
+      "license": "MIT",
+      "approved": true,
+      "metadata_url": "Changelog, https://github.com/urllib3/urllib3/blob/main/CHANGES.rst"
+    },
+    {
+      "name": "uvicorn",
+      "version": "0.38.0",
+      "license": "BSD-3-Clause",
+      "approved": true,
+      "metadata_url": "Changelog, https://uvicorn.dev/release-notes"
+    },
+    {
+      "name": "watchdog",
+      "version": "6.0.0",
+      "license": "Apache-2.0",
+      "approved": true,
+      "metadata_url": "https://github.com/gorakhargosh/watchdog"
+    },
+    {
+      "name": "websockets",
+      "version": "17.3",
+      "license": "BSD-3-Clause",
+      "approved": true,
+      "metadata_url": "Homepage, https://github.com/python-websockets/websockets"
+    },
+    {
+      "name": "workspace-rag-core",
+      "version": "0.1.0",
+      "license": "MIT",
+      "approved": true,
+      "metadata_url": null
+    }
+  ],
+  "unknown_or_unapproved": []
+}

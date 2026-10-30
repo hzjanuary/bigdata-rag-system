@@ -1,0 +1,872 @@
+{
+  "status": "INSTALLED_VERIFIED_INACTIVE_STOP_BEFORE_OPERATOR_LABEL",
+  "remote_pr_head": "ba78e94d82b7972e96a9bae962cbb8ada73d6619",
+  "exact_activation_label": "cpuq1:ba78e94d82b7972e96a9bae962cbb8ada73d6619",
+  "pr": "https://github.com/hzjanuary/bigdata-rag-system/pull/1",
+  "branch": "feat/spec-001-oss-rag-core",
+  "preserved_previous_local_head": "1ccf0d0a4f36da74bb6ed6a2fafb273bd8ab2883",
+  "remote_inactive_state": {
+    "remote_pr_head": "ba78e94d82b7972e96a9bae962cbb8ada73d6619",
+    "exact_activation_label": "cpuq1:ba78e94d82b7972e96a9bae962cbb8ada73d6619",
+    "draft": true,
+    "labels": [],
+    "consumption_marker_count": 0,
+    "installed_workflow_sha256": "1765f49a6c8aa5bc065bd64b5b9565bbd7f6219306289ca9193255cb0625cbc5",
+    "installed_workflow_matches_local": true,
+    "campaign_consumed": false
+  },
+  "remote_runs": [
+    {
+      "id": 41012209423,
+      "kind": "push",
+      "head_sha": "ba78e94d82b7972e96a9bae962cbb8ada73d6619",
+      "event": "push",
+      "conclusion": "failure",
+      "url": "https://github.com/hzjanuary/bigdata-rag-system/actions/runs/41012209423",
+      "jobs": [
+        {
+          "id": 123920388379,
+          "name": "source",
+          "conclusion": "success",
+          "failed_steps": []
+        },
+        {
+          "id": 123920615344,
+          "name": "images (qdrant)",
+          "conclusion": "failure",
+          "failed_steps": [
+            "Unchanged HIGH/CRITICAL security gate"
+          ]
+        },
+        {
+          "id": 123920615390,
+          "name": "images (ui)",
+          "conclusion": "failure",
+          "failed_steps": [
+            "Unchanged HIGH/CRITICAL security gate"
+          ]
+        },
+        {
+          "id": 123920615479,
+          "name": "images (core)",
+          "conclusion": "failure",
+          "failed_steps": [
+            "Unchanged HIGH/CRITICAL security gate"
+          ]
+        }
+      ],
+      "artifacts": [
+        {
+          "id": 12958237049,
+          "name": "source-41012209423",
+          "digest": "sha256:f376e7def7a39bd03ed41672be1b33dbfdb7c4737a67c3577ba42fbec2c1c3d3",
+          "zip_bytes": 239208,
+          "manifest_files": 10,
+          "verification": "PASS: GitHub ZIP digest, CRC, exact file set, each byte size/SHA-256",
+          "archive": {
+            "result": "PASS",
+            "source_sha": "ba78e94d82b7972e96a9bae962cbb8ada73d6619",
+            "files": 101,
+            "archive_sha256": "423629d49859c636b7680be257307ddc5a9bad433aea66b8651d69b0c9c5336f"
+          },
+          "junit": {
+            "bytes": 17978,
+            "cases": 155,
+            "max_name_characters": 97,
+            "suite_counts": {
+              "tests": 155,
+              "failures": 0,
+              "errors": 0,
+              "skipped": 1
+            }
+          }
+        },
+        {
+          "id": 12958142664,
+          "name": "image-ui-41012209423",
+          "digest": "sha256:4f829063389739720870bf0b16f2f37f3da507ee89f13487dda99478d0715b1b",
+          "zip_bytes": 119888,
+          "manifest_files": 6,
+          "verification": "PASS: GitHub ZIP digest, CRC, exact file set, each byte size/SHA-256",
+          "image": {
+            "variant": "ui",
+            "image_id": "sha256:afaf083c62d6044e256bd322184f4af13add392158a6ee807c20d3e8cadd309d",
+            "source_label": "ba78e94d82b7972e96a9bae962cbb8ada73d6619",
+            "severity_counts": {
+              "HIGH": 44
+            },
+            "distinct_high_critical_cves": 8,
+            "new_high_critical_records": [],
+            "removed_high_critical_records": [],
+            "actual_security_gate_exit": 1,
+            "license_records_match_baseline": true
+          }
+        },
+        {
+          "id": 12957519425,
+          "name": "image-core-41012209423",
+          "digest": "sha256:0cb4ada82336d28f94998bec39d1010efaa2131efbab08dbdfd9be52f41ebb7d",
+          "zip_bytes": 116310,
+          "manifest_files": 7,
+          "verification": "PASS: GitHub ZIP digest, CRC, exact file set, each byte size/SHA-256",
+          "image": {
+            "variant": "core",
+            "image_id": "sha256:6dab27399747ea5c831ee40a185cba83c843851d754ea7cfb4e8eab1cf0cf956",
+            "source_label": "ba78e94d82b7972e96a9bae962cbb8ada73d6619",
+            "severity_counts": {
+              "HIGH": 44
+            },
+            "distinct_high_critical_cves": 8,
+            "new_high_critical_records": [],
+            "removed_high_critical_records": [],
+            "actual_security_gate_exit": 1,
+            "license_records_match_baseline": true
+          }
+        },
+        {
+          "id": 12957479732,
+          "name": "image-qdrant-41012209423",
+          "digest": "sha256:586cbf78a62688b1cea74590e986897cb5a68503d35b506d1b978e0ceeb5ebf0",
+          "zip_bytes": 221910,
+          "manifest_files": 5,
+          "verification": "PASS: GitHub ZIP digest, CRC, exact file set, each byte size/SHA-256",
+          "image": {
+            "variant": "qdrant",
+            "image_id": "sha256:aaa979ab1a5ac555a19d167e02546becded22c831489e0399132335d6bde9dd4",
+            "source_label": "ba78e94d82b7972e96a9bae962cbb8ada73d6619",
+            "severity_counts": {
+              "HIGH": 43
+            },
+            "distinct_high_critical_cves": 8,
+            "new_high_critical_records": [],
+            "removed_high_critical_records": [],
+            "actual_security_gate_exit": 1,
+            "license_records_match_baseline": true
+          }
+        }
+      ]
+    },
+    {
+      "id": 41012213478,
+      "kind": "pr",
+      "head_sha": "ba78e94d82b7972e96a9bae962cbb8ada73d6619",
+      "event": "pull_request",
+      "conclusion": "failure",
+      "url": "https://github.com/hzjanuary/bigdata-rag-system/actions/runs/41012213478",
+      "jobs": [
+        {
+          "id": 123920400404,
+          "name": "source",
+          "conclusion": "success",
+          "failed_steps": []
+        },
+        {
+          "id": 123920612736,
+          "name": "images (core)",
+          "conclusion": "failure",
+          "failed_steps": [
+            "Unchanged HIGH/CRITICAL security gate"
+          ]
+        },
+        {
+          "id": 123920612768,
+          "name": "images (ui)",
+          "conclusion": "failure",
+          "failed_steps": [
+            "Unchanged HIGH/CRITICAL security gate"
+          ]
+        },
+        {
+          "id": 123920612770,
+          "name": "images (qdrant)",
+          "conclusion": "failure",
+          "failed_steps": [
+            "Unchanged HIGH/CRITICAL security gate"
+          ]
+        }
+      ],
+      "artifacts": [
+        {
+          "id": 12958525619,
+          "name": "source-41012213478",
+          "digest": "sha256:c85a580c93141c57c5f73ba8c0d06c4d4e64bec98ea4b088e53a3b8ae430cea9",
+          "zip_bytes": 239222,
+          "manifest_files": 10,
+          "verification": "PASS: GitHub ZIP digest, CRC, exact file set, each byte size/SHA-256",
+          "archive": {
+            "result": "PASS",
+            "source_sha": "ba78e94d82b7972e96a9bae962cbb8ada73d6619",
+            "files": 101,
+            "archive_sha256": "423629d49859c636b7680be257307ddc5a9bad433aea66b8651d69b0c9c5336f"
+          },
+          "junit": {
+            "bytes": 17977,
+            "cases": 155,
+            "max_name_characters": 97,
+            "suite_counts": {
+              "tests": 155,
+              "failures": 0,
+              "errors": 0,
+              "skipped": 1
+            }
+          }
+        },
+        {
+          "id": 12958401299,
+          "name": "image-core-41012213478",
+          "digest": "sha256:e20c16e9d7ad4f2e13b67a3ae2b81a5a59e3eabbe26547dd713a26623e739fbf",
+          "zip_bytes": 116321,
+          "manifest_files": 7,
+          "verification": "PASS: GitHub ZIP digest, CRC, exact file set, each byte size/SHA-256",
+          "image": {
+            "variant": "core",
+            "image_id": "sha256:0b719912356547cbe3ac69bacba2a97bba99935770eb88b64833bf6903e3862b",
+            "source_label": "ba78e94d82b7972e96a9bae962cbb8ada73d6619",
+            "severity_counts": {
+              "HIGH": 44
+            },
+            "distinct_high_critical_cves": 8,
+            "new_high_critical_records": [],
+            "removed_high_critical_records": [],
+            "actual_security_gate_exit": 1,
+            "license_records_match_baseline": true
+          }
+        },
+        {
+          "id": 12957938211,
+          "name": "image-qdrant-41012213478",
+          "digest": "sha256:1c64a680ea1839f1cd461a423361b8763db4478b8d41bf4391b2500065bc8f65",
+          "zip_bytes": 221929,
+          "manifest_files": 5,
+          "verification": "PASS: GitHub ZIP digest, CRC, exact file set, each byte size/SHA-256",
+          "image": {
+            "variant": "qdrant",
+            "image_id": "sha256:1fdcf76443eed1d189af37937d3567185057ca8808257617de99d0dcd8db0f0e",
+            "source_label": "ba78e94d82b7972e96a9bae962cbb8ada73d6619",
+            "severity_counts": {
+              "HIGH": 43
+            },
+            "distinct_high_critical_cves": 8,
+            "new_high_critical_records": [],
+            "removed_high_critical_records": [],
+            "actual_security_gate_exit": 1,
+            "license_records_match_baseline": true
+          }
+        },
+        {
+          "id": 12957647916,
+          "name": "image-ui-41012213478",
+          "digest": "sha256:2105aa57b6a1108ecec17b4040fa6fa89679b8414516b7e39994986cf1e347d8",
+          "zip_bytes": 119912,
+          "manifest_files": 6,
+          "verification": "PASS: GitHub ZIP digest, CRC, exact file set, each byte size/SHA-256",
+          "image": {
+            "variant": "ui",
+            "image_id": "sha256:5b4122b98e184ba0d4bc2b35f85bf1b4a0bc8ba77efc4b4b0e75d35fecaef2da",
+            "source_label": "ba78e94d82b7972e96a9bae962cbb8ada73d6619",
+            "severity_counts": {
+              "HIGH": 44
+            },
+            "distinct_high_critical_cves": 8,
+            "new_high_critical_records": [],
+            "removed_high_critical_records": [],
+            "actual_security_gate_exit": 1,
+            "license_records_match_baseline": true
+          }
+        }
+      ]
+    },
+    {
+      "id": 41012209492,
+      "kind": "configuration-push",
+      "head_sha": "ba78e94d82b7972e96a9bae962cbb8ada73d6619",
+      "event": "push",
+      "conclusion": "success",
+      "url": "https://github.com/hzjanuary/bigdata-rag-system/actions/runs/41012209492",
+      "jobs": [
+        {
+          "id": 123920388737,
+          "name": "configuration",
+          "conclusion": "success",
+          "failed_steps": []
+        },
+        {
+          "id": 123920390338,
+          "name": "campaign",
+          "conclusion": "skipped",
+          "failed_steps": []
+        }
+      ],
+      "artifacts": [
+        {
+          "id": 12958365643,
+          "name": "trigger-inactive-41012209492",
+          "digest": "sha256:978405ff9bbe830c6795c087cab236da2b4d09b10ce75c4df5b55a2e14f734b5",
+          "zip_bytes": 558,
+          "manifest_files": 1,
+          "verification": "PASS: GitHub ZIP digest, CRC, exact file set, each byte size/SHA-256",
+          "inactive_receipt": {
+            "campaign_id": "spec001-pr1-cpu-qdrant-once",
+            "source_sha": "ba78e94d82b7972e96a9bae962cbb8ada73d6619",
+            "run_id": "41012209492",
+            "consumed": false,
+            "model_download_started": false
+          }
+        }
+      ]
+    },
+    {
+      "id": 41012213570,
+      "kind": "configuration-pr",
+      "head_sha": "ba78e94d82b7972e96a9bae962cbb8ada73d6619",
+      "event": "pull_request",
+      "conclusion": "success",
+      "url": "https://github.com/hzjanuary/bigdata-rag-system/actions/runs/41012213570",
+      "jobs": [
+        {
+          "id": 123920434811,
+          "name": "configuration",
+          "conclusion": "success",
+          "failed_steps": []
+        },
+        {
+          "id": 123920436103,
+          "name": "campaign",
+          "conclusion": "skipped",
+          "failed_steps": []
+        }
+      ],
+      "artifacts": [
+        {
+          "id": 12958057547,
+          "name": "trigger-inactive-41012213570",
+          "digest": "sha256:d08d94438d15cd8ad30187086cbc6da2f3e85131f29e385f26eea1360fd0772a",
+          "zip_bytes": 558,
+          "manifest_files": 1,
+          "verification": "PASS: GitHub ZIP digest, CRC, exact file set, each byte size/SHA-256",
+          "inactive_receipt": {
+            "campaign_id": "spec001-pr1-cpu-qdrant-once",
+            "source_sha": "ba78e94d82b7972e96a9bae962cbb8ada73d6619",
+            "run_id": "41012213570",
+            "consumed": false,
+            "model_download_started": false
+          }
+        }
+      ]
+    }
+  ],
+  "artifacts_verified": 10,
+  "all_zip_digests_manifests_sizes_checksums_verified": true,
+  "local_tests": {
+    "pytest": "154 PASS / one skipped; 40 new policy regressions",
+    "qdrant": "one actual contract PASS; no model",
+    "quality": "Ruff/format, Black, MyPy13, frozen lock, source/archive/private-path/current/history secrets, license92 and dependency audit: PASS",
+    "actionlint": "official v1.7.12 syntax/event expressions PASS; download digest verified",
+    "source_artifact_limit": 2000000
+  },
+  "pins": {
+    "model": "sentence-transformers/all-MiniLM-L6-v2",
+    "revision": "10dbd2f06a8baf40ad285b037edda610c1b9a57c",
+    "onnx_sha256": "6fd5d72fe4589f189f8ebc006442dbb529bb7ce38f8082112682524616046452",
+    "acquisition_and_acceptance_inputs_changed": false
+  },
+  "campaign": {
+    "consumed": false,
+    "label_created": false,
+    "label_applied": false,
+    "marker_created": false,
+    "model_downloads": 0,
+    "independent_campaign_executions": 0,
+    "generative_calls": 0,
+    "replay_controls": "Exact current full SHA bound through owner label; source export proof; complete run/job-attempt/marker history; one concurrency group; rerun rejection; persistent reservation and receipt recheck before acquisition",
+    "limits": "Administrative deletion/policy/retention changes cannot be made immutable. Live checks-write permission and label execution untested; errors fail closed.",
+    "expiry_utc": "2026-10-31 00:00:00",
+    "operator_procedure": "Review exact remote head/source artifact and installed workflow; as hzjanuary create/apply the exact reported label to existing PR1 once before expiry. No activation was performed."
+  },
+  "acceptance": {
+    "PASS": 21,
+    "FAIL": 1,
+    "BLOCKED": 2,
+    "RAG-15": "BLOCKED: generation not authorized",
+    "RAG-20": "BLOCKED: independent CPU campaign not executed",
+    "RAG-21": "FAIL: known OS image gates remain red; source jobs PASS",
+    "security_findings": "Per image: core44 HIGH, Qdrant43 HIGH, UI44 HIGH, zero CRITICAL; eight distinct HIGH CVEs per image, no new records; no suppression/threshold change"
+  },
+  "retained_evidence": [
+    {
+      "path": ".local/trigger-install-20261030/remote/configuration-pr-artifacts.json",
+      "bytes": 939,
+      "sha256": "9b4643232717e6af06e122419f669acb44d13b5f61eeef1b17903f2184d1bd1a"
+    },
+    {
+      "path": ".local/trigger-install-20261030/remote/configuration-pr-jobs.json",
+      "bytes": 4271,
+      "sha256": "079c56318ac1fb1ef9853cdece9a3c008f31394ef9330ca99c7d5adede22cdd5"
+    },
+    {
+      "path": ".local/trigger-install-20261030/remote/configuration-pr-logs.zip",
+      "bytes": 11728,
+      "sha256": "0d9e38bf74f58e44da6487b0e02f9e3b807861a377cdb30cc0f37df1cf2b10bd"
+    },
+    {
+      "path": ".local/trigger-install-20261030/remote/configuration-pr-run.json",
+      "bytes": 15055,
+      "sha256": "f57238744b91593a7fa075e78358f4c8210cc692f8f41d835c6672c751a44898"
+    },
+    {
+      "path": ".local/trigger-install-20261030/remote/configuration-push-artifacts.json",
+      "bytes": 939,
+      "sha256": "fc8ad4826ff49522d2b236bed594f101b8ccf0ccc5b95fad1966ede96fdf4bc7"
+    },
+    {
+      "path": ".local/trigger-install-20261030/remote/configuration-push-jobs.json",
+      "bytes": 4271,
+      "sha256": "96edb8da014ba6dfcbb8f30c11a3c9fc512423510e8f770ce849a3c1337e0e68"
+    },
+    {
+      "path": ".local/trigger-install-20261030/remote/configuration-push-logs.zip",
+      "bytes": 11722,
+      "sha256": "0cbd181b1580b7df470575c4d6b7eab2f66866a24b736b3e9a915d3be85a501f"
+    },
+    {
+      "path": ".local/trigger-install-20261030/remote/configuration-push-run.json",
+      "bytes": 15043,
+      "sha256": "bd40f49e30c5dbf3e1a869e6be9cc06ffcbac1cc9a92b1bf71a9f400c84cc9b6"
+    },
+    {
+      "path": ".local/trigger-install-20261030/remote/image-core-41012209423/checksums.json",
+      "bytes": 1114,
+      "sha256": "2e0dfbfd1e750b027be429d2184dc6ae6fbff438231f52ef10f9f7a21b8e2ff0"
+    },
+    {
+      "path": ".local/trigger-install-20261030/remote/image-core-41012209423/environment.json",
+      "bytes": 899,
+      "sha256": "4af7b72f222f392537bc718f9a06c7bfebc04f719fa38619d43ad56ffe554757"
+    },
+    {
+      "path": ".local/trigger-install-20261030/remote/image-core-41012209423/image-inspect.json",
+      "bytes": 4150,
+      "sha256": "615dbb6a3b7bfdf2246c881753e1d5308940969b54e81ba410b64e76ee5cd245"
+    },
+    {
+      "path": ".local/trigger-install-20261030/remote/image-core-41012209423/image-inventory.json",
+      "bytes": 2807,
+      "sha256": "739a1045c3b45ca29279da798f2ba36ac8be4d39dc74a14eba9a63dff77b0513"
+    },
+    {
+      "path": ".local/trigger-install-20261030/remote/image-core-41012209423/image-licenses.json",
+      "bytes": 553159,
+      "sha256": "3ad97999edfe58a00057174d7ba3ace3ff6cf6ae86110b805b0137f3f9013e00"
+    },
+    {
+      "path": ".local/trigger-install-20261030/remote/image-core-41012209423/image-sbom.json",
+      "bytes": 219142,
+      "sha256": "3798f179f87c4676994817246239bdc5b0253242c736a6fb02fffc8c99b2721a"
+    },
+    {
+      "path": ".local/trigger-install-20261030/remote/image-core-41012209423/image-vulnerabilities.json",
+      "bytes": 503643,
+      "sha256": "5209c16ba2c021950a26b66f3960554e940b185ba19d957ac9fa09b38d850b43"
+    },
+    {
+      "path": ".local/trigger-install-20261030/remote/image-core-41012209423/runtime-license-inventory.json",
+      "bytes": 7539,
+      "sha256": "eb7e6b8b9a25e48dc70f7d6e55ad275407e9847f962b47e0e2aa50f631eba4dc"
+    },
+    {
+      "path": ".local/trigger-install-20261030/remote/image-core-41012209423.zip",
+      "bytes": 116310,
+      "sha256": "0cb4ada82336d28f94998bec39d1010efaa2131efbab08dbdfd9be52f41ebb7d"
+    },
+    {
+      "path": ".local/trigger-install-20261030/remote/image-core-41012213478/checksums.json",
+      "bytes": 1114,
+      "sha256": "832750732712a89626df29bb61707b4ec8db0bced4e4724cc50325ffd1eecc45"
+    },
+    {
+      "path": ".local/trigger-install-20261030/remote/image-core-41012213478/environment.json",
+      "bytes": 907,
+      "sha256": "ee45c1974120f6299b4a1d44c7be5211d51df36c8178237c9846ccf2807ec046"
+    },
+    {
+      "path": ".local/trigger-install-20261030/remote/image-core-41012213478/image-inspect.json",
+      "bytes": 4150,
+      "sha256": "c74cf03baffb1203809a942b9d77a1990f7d02c6b1d1d5a64beba82ae89eddc5"
+    },
+    {
+      "path": ".local/trigger-install-20261030/remote/image-core-41012213478/image-inventory.json",
+      "bytes": 2807,
+      "sha256": "3c0bcb003fcb99c7d638830d62ff25c0f7397b947a6a801743052513c1f2ee32"
+    },
+    {
+      "path": ".local/trigger-install-20261030/remote/image-core-41012213478/image-licenses.json",
+      "bytes": 553159,
+      "sha256": "c0d39bb5484a57f5b19ac9b319248cdecca5c99415dc54b87e209f5cee64d680"
+    },
+    {
+      "path": ".local/trigger-install-20261030/remote/image-core-41012213478/image-sbom.json",
+      "bytes": 219142,
+      "sha256": "70b2d94fcb5db33a8202d552a0db2b48271071b208df5ddf2f4ccf500616c2ea"
+    },
+    {
+      "path": ".local/trigger-install-20261030/remote/image-core-41012213478/image-vulnerabilities.json",
+      "bytes": 503643,
+      "sha256": "8016dcd4140324256f7cd545d70e8959c7de80294caba3c5aaaedef733da9111"
+    },
+    {
+      "path": ".local/trigger-install-20261030/remote/image-core-41012213478/runtime-license-inventory.json",
+      "bytes": 7539,
+      "sha256": "eb7e6b8b9a25e48dc70f7d6e55ad275407e9847f962b47e0e2aa50f631eba4dc"
+    },
+    {
+      "path": ".local/trigger-install-20261030/remote/image-core-41012213478.zip",
+      "bytes": 116321,
+      "sha256": "e20c16e9d7ad4f2e13b67a3ae2b81a5a59e3eabbe26547dd713a26623e739fbf"
+    },
+    {
+      "path": ".local/trigger-install-20261030/remote/image-qdrant-41012209423/checksums.json",
+      "bytes": 795,
+      "sha256": "02e9816f9551f474447214b67df55e65da8df2cc8f8596c5be368ee755884c68"
+    },
+    {
+      "path": ".local/trigger-install-20261030/remote/image-qdrant-41012209423/environment.json",
+      "bytes": 899,
+      "sha256": "4af7b72f222f392537bc718f9a06c7bfebc04f719fa38619d43ad56ffe554757"
+    },
+    {
+      "path": ".local/trigger-install-20261030/remote/image-qdrant-41012209423/image-inspect.json",
+      "bytes": 5942,
+      "sha256": "bf2e455b6abe75aa6e335606cce2e4a1a457abd3bb19679c01a68c7d6c740f6e"
+    },
+    {
+      "path": ".local/trigger-install-20261030/remote/image-qdrant-41012209423/image-licenses.json",
+      "bytes": 1153042,
+      "sha256": "1bdc6bcb0d0e7dbc1d35c64813a08c51cba8b2b92a5ec32bcc574244203611e7"
+    },
+    {
+      "path": ".local/trigger-install-20261030/remote/image-qdrant-41012209423/image-sbom.json",
+      "bytes": 828444,
+      "sha256": "1993c78918235dae8da07b16dd367d889d2ff12971ce092d39db4a70c63cd85f"
+    },
+    {
+      "path": ".local/trigger-install-20261030/remote/image-qdrant-41012209423/image-vulnerabilities.json",
+      "bytes": 914928,
+      "sha256": "b554bcdf897026c6812c12b6235e6d05ced03e4b3e112b3bfed41e8f74e5b2cb"
+    },
+    {
+      "path": ".local/trigger-install-20261030/remote/image-qdrant-41012209423.zip",
+      "bytes": 221910,
+      "sha256": "586cbf78a62688b1cea74590e986897cb5a68503d35b506d1b978e0ceeb5ebf0"
+    },
+    {
+      "path": ".local/trigger-install-20261030/remote/image-qdrant-41012213478/checksums.json",
+      "bytes": 795,
+      "sha256": "b9eea8a1ce88e988b959870d3f44c4e6b654af617426713dbbfbd301f2b28f1d"
+    },
+    {
+      "path": ".local/trigger-install-20261030/remote/image-qdrant-41012213478/environment.json",
+      "bytes": 907,
+      "sha256": "ee45c1974120f6299b4a1d44c7be5211d51df36c8178237c9846ccf2807ec046"
+    },
+    {
+      "path": ".local/trigger-install-20261030/remote/image-qdrant-41012213478/image-inspect.json",
+      "bytes": 5941,
+      "sha256": "2f0db1761481db94ca45c57e5b691e4f38f1e0256981f05340826e2d388ba852"
+    },
+    {
+      "path": ".local/trigger-install-20261030/remote/image-qdrant-41012213478/image-licenses.json",
+      "bytes": 1153042,
+      "sha256": "9347243b456fed55fca0d90f6a06b090bdda178d3dc922e11f87e079aff82410"
+    },
+    {
+      "path": ".local/trigger-install-20261030/remote/image-qdrant-41012213478/image-sbom.json",
+      "bytes": 828444,
+      "sha256": "cc091b13940e4e98e366c23b99997577c63b64de061e1ced5ac80cc9aecc78e1"
+    },
+    {
+      "path": ".local/trigger-install-20261030/remote/image-qdrant-41012213478/image-vulnerabilities.json",
+      "bytes": 914930,
+      "sha256": "0f1ffaa82365608eb3c3e5f0f0351964fe1dea16f76d8a2af7c1a54cc19b348b"
+    },
+    {
+      "path": ".local/trigger-install-20261030/remote/image-qdrant-41012213478.zip",
+      "bytes": 221929,
+      "sha256": "1c64a680ea1839f1cd461a423361b8763db4478b8d41bf4391b2500065bc8f65"
+    },
+    {
+      "path": ".local/trigger-install-20261030/remote/image-ui-41012209423/checksums.json",
+      "bytes": 960,
+      "sha256": "d921a9291cb9ca9e19afa1989de2a86a9b297101195489df432dbc06cd977346"
+    },
+    {
+      "path": ".local/trigger-install-20261030/remote/image-ui-41012209423/environment.json",
+      "bytes": 899,
+      "sha256": "4af7b72f222f392537bc718f9a06c7bfebc04f719fa38619d43ad56ffe554757"
+    },
+    {
+      "path": ".local/trigger-install-20261030/remote/image-ui-41012209423/image-inspect.json",
+      "bytes": 3729,
+      "sha256": "38de5c9908bac8186ef5e0051b2ae5cfcf0c19f070852c6893f38dbe4833f2ed"
+    },
+    {
+      "path": ".local/trigger-install-20261030/remote/image-ui-41012209423/image-licenses.json",
+      "bytes": 572714,
+      "sha256": "dc4ccb8d7efe51a1e37de09a352a29ee1f1d75e14c0134102d007d8442cef549"
+    },
+    {
+      "path": ".local/trigger-install-20261030/remote/image-ui-41012209423/image-sbom.json",
+      "bytes": 243357,
+      "sha256": "48db18dc17df608028eb134af471ff01018bce2630c48f9983b65389b7f021ea"
+    },
+    {
+      "path": ".local/trigger-install-20261030/remote/image-ui-41012209423/image-vulnerabilities.json",
+      "bytes": 515304,
+      "sha256": "6aa9602cda939901c69198aa94633bfb5930b89a2f01d889f613062f48e28826"
+    },
+    {
+      "path": ".local/trigger-install-20261030/remote/image-ui-41012209423/runtime-license-inventory.json",
+      "bytes": 12163,
+      "sha256": "8c3e8b3c43c9fe80ec22e0a358c8b842227bf7f19f8224e9963daa252f737710"
+    },
+    {
+      "path": ".local/trigger-install-20261030/remote/image-ui-41012209423.zip",
+      "bytes": 119888,
+      "sha256": "4f829063389739720870bf0b16f2f37f3da507ee89f13487dda99478d0715b1b"
+    },
+    {
+      "path": ".local/trigger-install-20261030/remote/image-ui-41012213478/checksums.json",
+      "bytes": 960,
+      "sha256": "ea210764f7d4143d0094ca2b79155fa1c38e10dd2cb3c5771f22a1e0d2847901"
+    },
+    {
+      "path": ".local/trigger-install-20261030/remote/image-ui-41012213478/environment.json",
+      "bytes": 907,
+      "sha256": "ee45c1974120f6299b4a1d44c7be5211d51df36c8178237c9846ccf2807ec046"
+    },
+    {
+      "path": ".local/trigger-install-20261030/remote/image-ui-41012213478/image-inspect.json",
+      "bytes": 3729,
+      "sha256": "f862f049ccf3ed6851538a2fdf942c3cc5581976963d6cd0499262af0b69027c"
+    },
+    {
+      "path": ".local/trigger-install-20261030/remote/image-ui-41012213478/image-licenses.json",
+      "bytes": 572714,
+      "sha256": "e178d390d671e81a145a0c1ebf70f4e36823f3241c80c4e9a63a0bcf644284aa"
+    },
+    {
+      "path": ".local/trigger-install-20261030/remote/image-ui-41012213478/image-sbom.json",
+      "bytes": 243357,
+      "sha256": "570e477f5ea0d740522d893b13c813a5dd695245b552545479fefbd74ee269eb"
+    },
+    {
+      "path": ".local/trigger-install-20261030/remote/image-ui-41012213478/image-vulnerabilities.json",
+      "bytes": 515303,
+      "sha256": "0d371e0a0d2b11510297ed728a5316419613b657a20d3f760ef7ee1e3c8e3c1d"
+    },
+    {
+      "path": ".local/trigger-install-20261030/remote/image-ui-41012213478/runtime-license-inventory.json",
+      "bytes": 12163,
+      "sha256": "8c3e8b3c43c9fe80ec22e0a358c8b842227bf7f19f8224e9963daa252f737710"
+    },
+    {
+      "path": ".local/trigger-install-20261030/remote/image-ui-41012213478.zip",
+      "bytes": 119912,
+      "sha256": "2105aa57b6a1108ecec17b4040fa6fa89679b8414516b7e39994986cf1e347d8"
+    },
+    {
+      "path": ".local/trigger-install-20261030/remote/pr-artifacts.json",
+      "bytes": 3608,
+      "sha256": "adff377b68e40b61f06656a8ae77005411ffa7acd7e1f5aa4de3761558b30287"
+    },
+    {
+      "path": ".local/trigger-install-20261030/remote/pr-jobs.json",
+      "bytes": 23518,
+      "sha256": "ed49296f4d54005f059feb4166a1e8958150ced9d02175eb86874c5da438315f"
+    },
+    {
+      "path": ".local/trigger-install-20261030/remote/pr-logs.zip",
+      "bytes": 129755,
+      "sha256": "5c8fd809d28d4a53a919d8330d1e568325a08dc7ad0c3bd185b2770407b56ec5"
+    },
+    {
+      "path": ".local/trigger-install-20261030/remote/pr-run.json",
+      "bytes": 15032,
+      "sha256": "912e0f6a5969c2eb2482db87859bb810472cd175d313f063520e020f118b9708"
+    },
+    {
+      "path": ".local/trigger-install-20261030/remote/push-artifacts.json",
+      "bytes": 3608,
+      "sha256": "0cc2c91236d60001c18e7015b099339bebb0fbd6bc8bf9b65161a5f3f181b5ee"
+    },
+    {
+      "path": ".local/trigger-install-20261030/remote/push-jobs.json",
+      "bytes": 23518,
+      "sha256": "4a66b9c2a88d6042181be121db1b199bdfdd4160c0234da0e9a92b3b073def5c"
+    },
+    {
+      "path": ".local/trigger-install-20261030/remote/push-logs.zip",
+      "bytes": 129490,
+      "sha256": "a325b53fdef19995240ea1729b9f48888618013e70932977f1900ed268d007ca"
+    },
+    {
+      "path": ".local/trigger-install-20261030/remote/push-run.json",
+      "bytes": 15020,
+      "sha256": "7eac91b81af90d1c4480eb02270ae254f8a17783b2a2893821950108ad032eb4"
+    },
+    {
+      "path": ".local/trigger-install-20261030/remote/source-41012209423/archive-verification.json",
+      "bytes": 177,
+      "sha256": "10e3e451b94793b14b764d6bbb7bad65c2a9c6124e54fa4f84c0debfce650c86"
+    },
+    {
+      "path": ".local/trigger-install-20261030/remote/source-41012209423/checksums.json",
+      "bytes": 1553,
+      "sha256": "998fa322f90d41f2dca5520d62717404d8160f3bc2fead579f5befd0dab49558"
+    },
+    {
+      "path": ".local/trigger-install-20261030/remote/source-41012209423/environment.json",
+      "bytes": 899,
+      "sha256": "4af7b72f222f392537bc718f9a06c7bfebc04f719fa38619d43ad56ffe554757"
+    },
+    {
+      "path": ".local/trigger-install-20261030/remote/source-41012209423/history-secret-review.json",
+      "bytes": 511,
+      "sha256": "682e3b5711b431743af050c88662df024218062e2b95c95c70d6e1afe78418a4"
+    },
+    {
+      "path": ".local/trigger-install-20261030/remote/source-41012209423/history-secrets.json",
+      "bytes": 873,
+      "sha256": "e16f81ecf04d6f2cef6378e6d5791a029b6f28e93819653e879bceff40d448b0"
+    },
+    {
+      "path": ".local/trigger-install-20261030/remote/source-41012209423/junit.xml",
+      "bytes": 17978,
+      "sha256": "697696680c825b75363cd49bf2750e7f4adbb9f71fe7301750b7face0e0be763"
+    },
+    {
+      "path": ".local/trigger-install-20261030/remote/source-41012209423/license-inventory.json",
+      "bytes": 17688,
+      "sha256": "acd53437817e96b4a84b13f1e6b55c362b8e982c8a54c84e5aac85ee98d90b84"
+    },
+    {
+      "path": ".local/trigger-install-20261030/remote/source-41012209423/python-audit.json",
+      "bytes": 2174,
+      "sha256": "e0c7c24c6cce3f6ee636c85048b7851d73674e57d72112113e68cd2bb747168e"
+    },
+    {
+      "path": ".local/trigger-install-20261030/remote/source-41012209423/python-sbom.json",
+      "bytes": 59274,
+      "sha256": "0f6658ecf61d83115e5ec9f59dd804a9e3825c53e00c89047fb1162b223cff1f"
+    },
+    {
+      "path": ".local/trigger-install-20261030/remote/source-41012209423/source-manifest.json",
+      "bytes": 16406,
+      "sha256": "2989863b11d81d3f0d75ddd7986c6521a7d3c0837db47697f0dc8aca56e636f5"
+    },
+    {
+      "path": ".local/trigger-install-20261030/remote/source-41012209423/source.tar",
+      "bytes": 880640,
+      "sha256": "423629d49859c636b7680be257307ddc5a9bad433aea66b8651d69b0c9c5336f"
+    },
+    {
+      "path": ".local/trigger-install-20261030/remote/source-41012209423.zip",
+      "bytes": 239208,
+      "sha256": "f376e7def7a39bd03ed41672be1b33dbfdb7c4737a67c3577ba42fbec2c1c3d3"
+    },
+    {
+      "path": ".local/trigger-install-20261030/remote/source-41012213478/archive-verification.json",
+      "bytes": 177,
+      "sha256": "10e3e451b94793b14b764d6bbb7bad65c2a9c6124e54fa4f84c0debfce650c86"
+    },
+    {
+      "path": ".local/trigger-install-20261030/remote/source-41012213478/checksums.json",
+      "bytes": 1553,
+      "sha256": "8470285a5edfbae0b2d0afe0d48ed3cd4ef08f43a7794c194f5a4496a9158198"
+    },
+    {
+      "path": ".local/trigger-install-20261030/remote/source-41012213478/environment.json",
+      "bytes": 907,
+      "sha256": "ee45c1974120f6299b4a1d44c7be5211d51df36c8178237c9846ccf2807ec046"
+    },
+    {
+      "path": ".local/trigger-install-20261030/remote/source-41012213478/history-secret-review.json",
+      "bytes": 511,
+      "sha256": "682e3b5711b431743af050c88662df024218062e2b95c95c70d6e1afe78418a4"
+    },
+    {
+      "path": ".local/trigger-install-20261030/remote/source-41012213478/history-secrets.json",
+      "bytes": 873,
+      "sha256": "e16f81ecf04d6f2cef6378e6d5791a029b6f28e93819653e879bceff40d448b0"
+    },
+    {
+      "path": ".local/trigger-install-20261030/remote/source-41012213478/junit.xml",
+      "bytes": 17977,
+      "sha256": "5d796d8e3f18654810c4cdfefa9fd7fd616a23a9ca3fe6655eeffc36612e5a23"
+    },
+    {
+      "path": ".local/trigger-install-20261030/remote/source-41012213478/license-inventory.json",
+      "bytes": 17688,
+      "sha256": "acd53437817e96b4a84b13f1e6b55c362b8e982c8a54c84e5aac85ee98d90b84"
+    },
+    {
+      "path": ".local/trigger-install-20261030/remote/source-41012213478/python-audit.json",
+      "bytes": 2174,
+      "sha256": "e0c7c24c6cce3f6ee636c85048b7851d73674e57d72112113e68cd2bb747168e"
+    },
+    {
+      "path": ".local/trigger-install-20261030/remote/source-41012213478/python-sbom.json",
+      "bytes": 59274,
+      "sha256": "e6e6188ef9e597bb141d7a43f41fd48cecc6e67d098d08bfefb8a6ea4d983357"
+    },
+    {
+      "path": ".local/trigger-install-20261030/remote/source-41012213478/source-manifest.json",
+      "bytes": 16406,
+      "sha256": "2989863b11d81d3f0d75ddd7986c6521a7d3c0837db47697f0dc8aca56e636f5"
+    },
+    {
+      "path": ".local/trigger-install-20261030/remote/source-41012213478/source.tar",
+      "bytes": 880640,
+      "sha256": "423629d49859c636b7680be257307ddc5a9bad433aea66b8651d69b0c9c5336f"
+    },
+    {
+      "path": ".local/trigger-install-20261030/remote/source-41012213478.zip",
+      "bytes": 239222,
+      "sha256": "c85a580c93141c57c5f73ba8c0d06c4d4e64bec98ea4b088e53a3b8ae430cea9"
+    },
+    {
+      "path": ".local/trigger-install-20261030/remote/trigger-inactive-41012209492/checksums.json",
+      "bytes": 175,
+      "sha256": "29b0115fc5cc6f4140ed4296fefeee49a95cf94195c892cde6b24c1a7973a7f8"
+    },
+    {
+      "path": ".local/trigger-install-20261030/remote/trigger-inactive-41012209492/trigger-inactive.json",
+      "bytes": 194,
+      "sha256": "f0de2d2e590f6d45a24e707a0846b5e493035710247571da29365171f0922078"
+    },
+    {
+      "path": ".local/trigger-install-20261030/remote/trigger-inactive-41012209492.zip",
+      "bytes": 558,
+      "sha256": "978405ff9bbe830c6795c087cab236da2b4d09b10ce75c4df5b55a2e14f734b5"
+    },
+    {
+      "path": ".local/trigger-install-20261030/remote/trigger-inactive-41012213570/checksums.json",
+      "bytes": 175,
+      "sha256": "68c2dac579ef5d4e5acc5013a6fe69274d2fe663b58b7a11e70c3a949d2c4a0a"
+    },
+    {
+      "path": ".local/trigger-install-20261030/remote/trigger-inactive-41012213570/trigger-inactive.json",
+      "bytes": 194,
+      "sha256": "64338c367cd2c2d7c94db477f9d76fb1d6aaf3402b4dfa18fdc91eb49313cd61"
+    },
+    {
+      "path": ".local/trigger-install-20261030/remote/trigger-inactive-41012213570.zip",
+      "bytes": 558,
+      "sha256": "d08d94438d15cd8ad30187086cbc6da2f3e85131f29e385f26eea1360fd0772a"
+    },
+    {
+      "path": ".local/trigger-install-20261030/remote/verification.json",
+      "bytes": 11361,
+      "sha256": "94c0a7cf35cdb78efa07bba23324376da1472712495857bed5536c097ef8e1b9"
+    }
+  ]
+}

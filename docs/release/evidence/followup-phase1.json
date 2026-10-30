@@ -1,0 +1,125 @@
+{
+  "original_handoff_sha": "3f18c179949c7612db5968147a163f47da190d60",
+  "criterion": "RAG-21",
+  "original_requirement": "Locked CI passes unit/integration/security/CLI/image/license checks without inference.",
+  "original_observation": "Actual image security gates exit 1; remote GitHub CI NOT_RUN; no failing deterministic RAG function test identified.",
+  "root_cause": "Pinned supported Debian trixie packages have scanner HIGH findings; installed versions equal stable/security repository candidates. Fixed versions for the affected source packages are in testing/unstable; no small supported stable patch available.",
+  "ordinary_implementation_correction": null,
+  "disposition": "FAIL retained; user explicitly permits observational remote CI with unchanged red security gates.",
+  "no_suppression_or_severity_change": true,
+  "images": [
+    {
+      "variant": "core",
+      "image_id": "sha256:1dcee1bdcff9537a4ad508862f3967ff329335fbb4f71c7c29cbd28fe5346640",
+      "high_findings": 44,
+      "critical_findings": 0,
+      "distinct_cves_in_this_image": 8,
+      "supported_fix_versions_reported": [],
+      "same_high_critical_records_as_original": true,
+      "actual_gate_exit": 1,
+      "raw_report": ".local/followup-20261030/current/core.json",
+      "raw_sha256": "47b3e76c0159f825511db907b26cbd1637232ad713382f59474931338c38e208"
+    },
+    {
+      "variant": "qdrant",
+      "image_id": "sha256:d9bbc4b11a2a7ae6ca86849280131d7c134a84602ae10317d118cc2a1cb4d647",
+      "high_findings": 43,
+      "critical_findings": 0,
+      "distinct_cves_in_this_image": 8,
+      "supported_fix_versions_reported": [],
+      "same_high_critical_records_as_original": true,
+      "actual_gate_exit": 1,
+      "raw_report": ".local/followup-20261030/current/qdrant.json",
+      "raw_sha256": "206d41233006d040633e39c6394d3674c25037d1306cf5f67d384ed684ab6e56"
+    },
+    {
+      "variant": "ui",
+      "image_id": "sha256:f3cbbbdb849765cd0290f25d3c1dca69f71d4f6d5499b59b0734d9674d850e01",
+      "high_findings": 44,
+      "critical_findings": 0,
+      "distinct_cves_in_this_image": 8,
+      "supported_fix_versions_reported": [],
+      "same_high_critical_records_as_original": true,
+      "actual_gate_exit": 1,
+      "raw_report": ".local/followup-20261030/current/ui.json",
+      "raw_sha256": "38690ad09dbef7cfdb3514fee1c80a5bef6cd60ed099748c479a0adbb9a58e9b"
+    }
+  ],
+  "debian_candidate_evidence": ".local/followup-20261030/debian-supported-candidates.txt",
+  "component_evidence": ".local/followup-20261030/installed-applicability.json",
+  "db_before": {
+    "Version": 2,
+    "NextUpdate": "2026-10-31T01:01:11.134359572Z",
+    "UpdatedAt": "2026-10-30T01:01:11.134360213Z",
+    "DownloadedAt": "2026-10-30T03:49:35.130130189Z"
+  },
+  "db_now": {
+    "Version": 2,
+    "NextUpdate": "2026-10-31T01:01:11.134359572Z",
+    "UpdatedAt": "2026-10-30T01:01:11.134360213Z",
+    "DownloadedAt": "2026-10-30T03:49:35.130130189Z"
+  },
+  "advisories": [
+    {
+      "cve": "CVE-2026-76642",
+      "url": "https://security-tracker.debian.org/tracker/CVE-2026-76642",
+      "sha256": "243d0dcce2b7e8a9446611151a404ced874c0c45f912bca021c03061334d197b",
+      "bytes": 4267,
+      "status": "fetched"
+    },
+    {
+      "cve": "CVE-2026-78408",
+      "url": "https://security-tracker.debian.org/tracker/CVE-2026-78408",
+      "sha256": "176ee66ad84e9fdad225f5e0a60fe5cd7bf8a5aa54bd0fd63d07beb795aba5d3",
+      "bytes": 4612,
+      "status": "fetched"
+    },
+    {
+      "cve": "CVE-2026-78409",
+      "url": "https://security-tracker.debian.org/tracker/CVE-2026-78409",
+      "sha256": "55bb3527e79127500681d1309f174a4e010dd14b8de0e8c20dac634deb59f67b",
+      "bytes": 4260,
+      "status": "fetched"
+    },
+    {
+      "cve": "CVE-2026-78410",
+      "url": "https://security-tracker.debian.org/tracker/CVE-2026-78410",
+      "sha256": "370b52136365d440004d915421bd2b2529393511c802bdc04f3e3a873241621b",
+      "bytes": 4292,
+      "status": "fetched"
+    },
+    {
+      "cve": "CVE-2026-54369",
+      "url": "https://security-tracker.debian.org/tracker/CVE-2026-54369",
+      "sha256": "4677cdb2b848eca7bc76f57dd54e5d01e309f438bba58d892550db432fbde5ca",
+      "bytes": 5758,
+      "status": "fetched"
+    },
+    {
+      "cve": "CVE-2025-69720",
+      "url": "https://security-tracker.debian.org/tracker/CVE-2025-69720",
+      "sha256": "3542be519daaef8f60a0fd662f4a6129a238f59ef9b86155869d49cfd2b3af78",
+      "bytes": 4085,
+      "status": "fetched"
+    },
+    {
+      "cve": "CVE-2026-16742",
+      "url": "https://security-tracker.debian.org/tracker/CVE-2026-16742",
+      "sha256": "9def8c0e8dc245c97190f018412a2f08fe7e72ec90ccf943c132ff756b7ef7b0",
+      "bytes": 4885,
+      "status": "fetched"
+    },
+    {
+      "cve": "CVE-2026-9538",
+      "url": "https://security-tracker.debian.org/tracker/CVE-2026-9538",
+      "sha256": "7ef5d867262210dcfd0f600ea409fd1aa470b38d8d2464d6ba885ab275a7fd57",
+      "bytes": 4867,
+      "status": "fetched"
+    }
+  ],
+  "policy_notes": [
+    "Non-root/no-new-privileges/cap-drop are mitigations, not fixes or gate waivers.",
+    "systemd-homed binary and Archive::Tar module are absent; findings remain recorded, with no VEX suppression.",
+    "bsdutils, util-linux and perl-base are marked Essential; pruning/replacing the base is a separate runtime architecture decision, not applied."
+  ]
+}

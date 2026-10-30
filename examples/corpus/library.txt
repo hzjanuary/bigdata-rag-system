@@ -1,0 +1,2 @@
+The synthetic Willow Library lends paper books for twenty-one days.
+Visitors return books through the green return slot. The library closes on Tuesdays.

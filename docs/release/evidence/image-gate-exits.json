@@ -1,0 +1,21 @@
+{
+  "command": "trivy image --scanners vuln --severity HIGH,CRITICAL --exit-code 1 --format json IMAGE",
+  "results": [
+    {
+      "component": "core",
+      "exit_code": 1,
+      "raw_report": ".local/scans/core-gate.json"
+    },
+    {
+      "component": "qdrant",
+      "exit_code": 1,
+      "raw_report": ".local/scans/qdrant-gate.json"
+    },
+    {
+      "component": "ui",
+      "exit_code": 1,
+      "raw_report": ".local/scans/ui-gate.json"
+    }
+  ],
+  "gate_result": "FAIL"
+}

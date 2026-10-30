@@ -1,0 +1,96 @@
+{
+  "scanner": "aquasec/trivy@sha256:790fd66d1697395d8693d1acaa1ea702406a20f109b6fc7bac8db623eca6c06c",
+  "database": {
+    "Version": 2,
+    "NextUpdate": "2026-10-31T01:01:11.134359572Z",
+    "UpdatedAt": "2026-10-30T01:01:11.134360213Z",
+    "DownloadedAt": "2026-10-30T03:49:35.130130189Z"
+  },
+  "images": [
+    {
+      "component": "core",
+      "image_id": "sha256:1dcee1bdcff9537a4ad508862f3967ff329335fbb4f71c7c29cbd28fe5346640",
+      "severity_counts": {
+        "LOW": 61,
+        "HIGH": 44,
+        "MEDIUM": 58,
+        "UNKNOWN": 1
+      },
+      "high_critical_gate_exit": 1,
+      "high_critical_cves": [
+        "CVE-2025-69720",
+        "CVE-2026-16742",
+        "CVE-2026-54369",
+        "CVE-2026-76642",
+        "CVE-2026-78408",
+        "CVE-2026-78409",
+        "CVE-2026-78410",
+        "CVE-2026-9538"
+      ],
+      "raw_report": ".local/scans/core.json",
+      "raw_sha256": "c64b56cd69ff045c64ca430b08f8d50e29fff17fa8944855420bf4d2c939e77c",
+      "sbom": ".local/scans/core.cdx.json",
+      "sbom_sha256": "731ff8ba3639ec0be23715669fdda94d4f91824a591d670a42ed58a7f85e777e",
+      "fixed_high_critical_findings": 0
+    },
+    {
+      "component": "qdrant",
+      "image_id": "sha256:d9bbc4b11a2a7ae6ca86849280131d7c134a84602ae10317d118cc2a1cb4d647",
+      "severity_counts": {
+        "LOW": 65,
+        "HIGH": 43,
+        "MEDIUM": 59,
+        "UNKNOWN": 1
+      },
+      "high_critical_gate_exit": 1,
+      "high_critical_cves": [
+        "CVE-2025-69720",
+        "CVE-2026-16742",
+        "CVE-2026-54369",
+        "CVE-2026-76642",
+        "CVE-2026-78408",
+        "CVE-2026-78409",
+        "CVE-2026-78410",
+        "CVE-2026-9538"
+      ],
+      "raw_report": ".local/scans/qdrant.json",
+      "raw_sha256": "c775ec99b1b048ec9e21576f26a0d29706cb63b89bf84d47c6896b5401a64285",
+      "sbom": ".local/scans/qdrant.cdx.json",
+      "sbom_sha256": "2cf71b101050511dff51999f44e6824005f2d1fdd8487168855ce6a4e2f6765c",
+      "fixed_high_critical_findings": 0
+    },
+    {
+      "component": "ui",
+      "image_id": "sha256:f3cbbbdb849765cd0290f25d3c1dca69f71d4f6d5499b59b0734d9674d850e01",
+      "severity_counts": {
+        "LOW": 61,
+        "HIGH": 44,
+        "MEDIUM": 58,
+        "UNKNOWN": 1
+      },
+      "high_critical_gate_exit": 1,
+      "high_critical_cves": [
+        "CVE-2025-69720",
+        "CVE-2026-16742",
+        "CVE-2026-54369",
+        "CVE-2026-76642",
+        "CVE-2026-78408",
+        "CVE-2026-78409",
+        "CVE-2026-78410",
+        "CVE-2026-9538"
+      ],
+      "raw_report": ".local/scans/ui.json",
+      "raw_sha256": "254f0e5332355335104de2e47b83f45d287f14c3bc140891d33d1c8987b51502",
+      "sbom": ".local/scans/ui.cdx.json",
+      "sbom_sha256": "4ac6ee0755811c7bed26bfbaefb17696a93e2ddadd1011ec053ab56cd0e6f1c1",
+      "fixed_high_critical_findings": 0
+    }
+  ],
+  "image_security": "NO-GO",
+  "notes": [
+    "All raw findings retained; no ignored CVEs, no severity downgrades.",
+    "Python runtime and optional UI findings are zero after locked updates.",
+    "Unused Qdrant web assets removed as a whole component, not just its SBOM.",
+    "No fix version is listed for the remaining HIGH OS package findings; exploitability is not independently certified."
+  ]
+}

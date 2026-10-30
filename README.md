@@ -1,534 +1,151 @@
-# 🧠 easyResearch for Big Data
+# Workspace RAG Core — early source preview
 
-> **v0.1.0** — Production-Grade AI RAG System
+Private, CPU-first document retrieval with Qdrant, SQLite job metadata, an authenticated
+API and CLI. Ingest UTF-8 text, PDF text pages and DOCX paragraphs, then search with
+dense embeddings, BM25, reciprocal-rank fusion and a deterministic term-coverage
+reranker. Every result identifies the stored document, chunk, source hash and real
+PDF page (TXT/DOCX page is null). Generation is disabled by default.
 
-High-performance **RAG (Retrieval-Augmented Generation)** system combining **easyResearch**'s workspace UI with **EpsteinFiles-20k**'s big data pipeline — featuring **multi-workspace isolation**, **hybrid search**, **cross-encoder re-ranking**, and **full observability**.
+> **Security Notice — early source-only v0.1.0 preview.** This is experimental
+> self-hosted source, not a production-certified deployment. Independent CPU/Qdrant
+> acceptance passed 41/41 on GitHub-hosted Ubuntu 24.04; that does not clear image
+> security. Existing Trivy HIGH findings remain **core 44, Qdrant 43, optional UI 44**
+> (separate per-image package findings, not summed unique CVEs). Image security jobs
+> remain FAIL; **no prebuilt Docker images are approved for publication**. Building
+> locally inherits these unresolved OS findings. Real generative LLM answering has
+> **not** been live-verified (RAG-15); keep generation disabled unless separately
+> authorized and privately configured. Read [SECURITY.md](SECURITY.md) and the
+> [actual acceptance/CI evidence](docs/release/verification.md) before installation.
+> Independently review dependencies, OS packages, model/provider data policies,
+> credentials, network exposure and your deployment environment. CPU embeddings,
+> real Qdrant indexing/retrieval and source citations have independent verification;
+> unrestricted Internet exposure is not certified. Raw per-image security reports:
+> [core](https://github.com/hzjanuary/bigdata-rag-system/actions/runs/41038457036/artifacts/12969555839),
+> [Qdrant](https://github.com/hzjanuary/bigdata-rag-system/actions/runs/41038457036/artifacts/12968453916),
+> [UI](https://github.com/hzjanuary/bigdata-rag-system/actions/runs/41038457036/artifacts/12968877744).
 
-[![Python](https://img.shields.io/badge/Python-3.11+-blue.svg)](https://python.org)
-[![FastAPI](https://img.shields.io/badge/FastAPI-0.111+-green.svg)](https://fastapi.tiangolo.com)
-[![Qdrant](https://img.shields.io/badge/Qdrant-1.9+-red.svg)](https://qdrant.tech)
+This replaces the historical easyResearch prototype. Existing uploads/collections
+are **not migrated or reset** automatically. Preserve old volumes and check out the
+original history separately if needed. This is a single-instance self-hosted core,
+not a distributed SaaS. See [verification](docs/release/verification.md) for actual
+tested identities, limitations and separate source/image release decisions.
 
-## Architecture
+## Local first run (Linux, Python 3.12)
 
-```
-┌─────────────────────────────────────────────────────────────────────────────┐
-│                          PRODUCTION RAG SYSTEM v0.1                         │
-└─────────────────────────────────────────────────────────────────────────────┘
-
-                     ┌──────────────────────────────────────┐
-                     │         Multi-Workspace Manager      │
-                     │  Config.get_collection_name()        │
-                     │  Config.get_workspace_dir()          │
-                     └────────────────┬─────────────────────┘
-                                      │
-         ┌────────────────────────────┼────────────────────────────┐
-         ▼                            ▼                            ▼
-┌─────────────────┐        ┌─────────────────┐        ┌─────────────────┐
-│  Workspace A    │        │  Workspace B    │        │  Workspace C    │
-│  ws_project_a   │        │  ws_project_b   │        │  ws_project_c   │
-└────────┬────────┘        └────────┬────────┘        └────────┬────────┘
-         └──────────────────────────┼──────────────────────────┘
-                                    │
-                                    ▼
-┌─────────────────────────────────────────────────────────────────────────┐
-│  Ingestion Pipeline (pipeline.py)                           NEW v0.1    │
-│                                                                         │
-│  Stage 1 — Clean  (multiprocessing)                                     │
-│  Stage 2 — Enrich (LLM metadata: author, tags, summary, doc_type)       │
-│  Stage 3 — Chunk  (SHA-256 dedup)                                       │
-│  Stage 4 — Embed  (CUDA FP16, batch=32) → ws_{workspace} collection     │
-└───────────────────────────────────┬─────────────────────────────────────┘
-                                    │
-                                    ▼
-                         ┌─────────────────────┐
-                         │  Qdrant (Docker)    │
-                         │  localhost:6333     │
-                         │  Enriched Payloads: │
-                         │  - topic_tags       │
-                         │  - document_type    │
-                         │  - summary          │
-                         └──────────┬──────────┘
-                                    │
-                                    ▼
-┌─────────────────────────────────────────────────────────────────────────┐
-│  Hybrid Search Pipeline (rag_engine.py)                     NEW v0.1    │
-│                                                                         │
-│  Question → Contextualisation                                           │
-│           → Dense Vector Search (Qdrant)                                │
-│           → BM25 Sparse Search (keyword: RPC, RMI, OSI)                 │
-│           → Reciprocal Rank Fusion (RRF)                                │
-│           → Cross-Encoder Reranking (FP16, batch=8)                     │
-│           → Parent Document Retrieval                                   │
-│           → LLM Answer (Groq LLaMA 3.3 70B)                             │
-└───────────────────────────────────┬─────────────────────────────────────┘
-                                    │
-                                    ▼
-┌─────────────────────────────────────────────────────────────────────────┐
-│  Observability Layer (observability.py)                     NEW v0.1    │
-│                                                                         │
-│  • Full pipeline tracing (trace_id, timing, scores)                     │
-│  • RAG Metrics: Hit Rate, MRR, P50/P95/P99 latency                      │
-│  • JSONL trace logs: logs/rag_traces.jsonl                              │
-│  • GPU memory monitoring                                                │
-└─────────────────────────────────────────────────────────────────────────┘
-```
-
-## Features
-
-### Core RAG
-- **Multi-Workspace Isolation** — each project has its own Qdrant collection, uploads, summaries, and chat history
-- **Hybrid Search** — Dense vectors + BM25 sparse + Reciprocal Rank Fusion (RRF)
-- **Cross-Encoder Re-ranking** — `ms-marco-MiniLM-L-6-v2` optimized for RTX 3050 (FP16, batch=8)
-- **Parent Document Retrieval** — small child chunks (400 chars) for search, large parent chunks (2000 chars) for LLM context
-
-### Production Pipeline (v0.1) ✨
-- **Metadata Enrichment** — LLM extracts `author`, `topic_tags`, `summary`, `document_type`, `language`, `technical_level`
-- **Filtered Retrieval** — query by format, source, or topic tags stored in Qdrant payload
-- **CUDA Optimization** — FP16 embeddings, batch processing with memory management for 4GB VRAM
-- **Big Data Pipeline** — parallel cleaning & chunking via `ProcessPoolExecutor`
-
-### Observability (v0.1) ✨
-- **Full Tracing** — Query → Retrieval → Re-ranking → Generation with timing
-- **RAG Metrics** — Hit Rate, MRR, P50/P95/P99 latency
-- **JSONL Logs** — `logs/rag_traces.jsonl` for analysis
-
-### API & Resilience (v0.1) ✨
-- **FastAPI Backend** — OpenAPI docs at `/docs`
-- **Qdrant Retry** — Exponential backoff for connection errors
-- **Groq Rate Limiting** — Automatic retry with backoff
-- **Batch Endpoints** — Process multiple queries for evaluation
-
-### Other Features
-- **Qdrant Vector Database** — production-ready vector store running on Docker
-- **Multilingual** — `paraphrase-multilingual-MiniLM-L12-v2` (384 dim, Vietnamese + English)
-- **LLM** — Groq LLaMA 3.3 70B Versatile
-- **Dataset Download** — import from HuggingFace Hub or Kaggle
-- **Smart Contextualisation** — detects pronouns/follow-up patterns and reformulates questions
-- **Dark Theme UI** — AnythingLLM-inspired zinc dark theme in Streamlit
-
-## Tech Stack
-
-| Component     | Technology                                               |
-| ------------- | -------------------------------------------------------- |
-| UI            | Streamlit                                                |
-| API           | FastAPI + Uvicorn                                        |
-| Vector DB     | **Qdrant** (Docker, localhost:6333)                      |
-| Embedding     | sentence-transformers (MiniLM-L12-v2, 384 dim)           |
-| Reranker      | cross-encoder (ms-marco-MiniLM-L-6-v2)                   |
-| BM25          | rank-bm25                                                |
-| LLM           | Groq (LLaMA 3.3 70B Versatile)                           |
-| Framework     | LangChain + langchain-qdrant                             |
-| GPU           | PyTorch CUDA 12.6                                        |
-| Observability | Custom tracing + JSONL logs ✨                           |
-| Resilience    | tenacity (retry with backoff) ✨                         |
-
-## Usage Examples (v0.1)
-
-### Using the New RAG Engine
-
-```python
-from core.rag_engine import query_rag, RetrievalConfig
-
-# Configure retrieval
-config = RetrievalConfig(
-    dense_k=20,           # Initial dense retrieval
-    sparse_k=20,          # BM25 retrieval
-    rerank_top_k=10,      # Final docs after re-ranking
-    reranker_batch_size=8 # Optimized for RTX 3050
-)
-
-# Execute query with hybrid search
-result = query_rag(
-    question="What is RPC in distributed systems?",
-    collection_name="network_programming",
-    chat_history=[],
-    k_target=10,
-    retrieval_config=config
-)
-
-print(result["answer"])
-print(result["sources"])
-print(result["pipeline_info"])  # trace_id, timing info
-```
-
-### Running the Enrichment Pipeline
-
-```python
-from core.pipeline import run_pipeline, PipelineConfig
-
-config = PipelineConfig(
-    chunk_size=400,
-    chunk_overlap=80,
-    batch_size=32,
-    enable_llm_enrichment=True,  # Extract metadata with LLM
-    reset_db=True
-)
-
-result = run_pipeline(
-    source_dir="uploads/my_workspace",
-    collection_name="my_workspace",
-    config=config
-)
-
-print(f"Processed: {result['docs_cleaned']} docs, {result['chunks_embedded']} chunks")
-```
-
-### Accessing Metrics
-
-```python
-from core.observability import get_current_metrics, get_recent_traces
-
-# Get RAG performance metrics
-metrics = get_current_metrics()
-print(f"Hit Rate: {metrics['hit_rate']:.2%}")
-print(f"MRR: {metrics['mrr']:.3f}")
-print(f"P95 Latency: {metrics['p95_total_time_ms']:.0f}ms")
-
-# Get recent traces for debugging
-traces = get_recent_traces(limit=10)
-for trace in traces:
-    print(f"[{trace['trace_id']}] {trace['original_query'][:50]}... ({trace['total_time_ms']:.0f}ms)")
-```
-
-## Project Structure
-
-```
-easyResearchforBigData/
-├── app.py                    # Streamlit UI
-├── main.py                   # Legacy FastAPI (backward compat)
-├── api_main.py               # ✨ Production FastAPI v0.1 (use this)
-├── config.py                 # Central configuration + Config class
-├── requirements.txt
-├── .env                      # API keys (GROQ_API_KEY)
-├── .gitignore
-├── core/
-│   ├── __init__.py           # ✨ Module exports
-│   ├── rag_engine.py         # ✨ Hybrid search + re-ranking (NEW)
-│   ├── pipeline.py           # ✨ Metadata enrichment pipeline (NEW)
-│   ├── observability.py      # ✨ Logging, tracing, metrics (NEW)
-│   ├── cleaner_pro.py        # Multi-format text extraction & cleaning
-│   ├── loader.py             # Document loading & smart splitting
-│   ├── embedder.py           # Embedding & Qdrant management
-│   ├── generator.py          # Legacy RAG (use rag_engine.py)
-│   ├── summarizer.py         # Auto-summarisation
-│   └── ingestion_worker.py   # Legacy pipeline (use pipeline.py)
-├── logs/                     # ✨ Observability logs (NEW)
-│   ├── rag_pipeline.log      # General RAG logs
-│   ├── rag_traces.jsonl      # JSONL trace logs
-│   └── rag_metrics.jsonl     # Metrics data
-├── uploads/
-│   └── {workspace_name}/     # Per-workspace uploads
-└── database/
-    ├── summaries/
-    │   └── {workspace_name}/ # Per-workspace summaries
-    └── chat_history/
-        └── {workspace_name}/ # Per-workspace chat JSON
-```
-
-## Multi-Workspace Architecture
-
-Each workspace is completely isolated with its own:
-
-| Resource          | Path / Name                               |
-| ----------------- | ----------------------------------------- |
-| Qdrant Collection | `ws_{workspace_name}`                     |
-| Upload Directory  | `uploads/{workspace_name}/`               |
-| Summary Directory | `database/summaries/{workspace_name}/`    |
-| Chat History      | `database/chat_history/{workspace_name}/` |
-
-The `Config` class in `config.py` provides centralized workspace management:
-
-```python
-from config import Config
-
-# Get workspace-specific paths
-upload_dir = Config.get_workspace_dir("My Project")     # uploads/my_project/
-summary_dir = Config.get_summary_dir("My Project")      # database/summaries/my_project/
-chat_dir = Config.get_chat_dir("My Project")            # database/chat_history/my_project/
-collection = Config.get_collection_name("My Project")   # ws_my_project
-```
-
-## Docker Deployment
-
-The recommended way to run easyResearch is via Docker Compose, which starts Qdrant, the FastAPI backend, and the Streamlit UI together.
-
-### Prerequisites
-
-- [Docker Desktop](https://www.docker.com/products/docker-desktop/) (Windows / macOS) or Docker Engine + Docker Compose v2 (Linux)
-- For GPU support: NVIDIA GPU with [nvidia-container-toolkit](https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/install-guide.html)
-
-### 1. Configure environment variables
+Use Python 3.12 and [uv](https://docs.astral.sh/uv/) (verified CI uses uv 0.9.7), then:
 
 ```bash
-cp .env.example .env
+uv sync --frozen
+uv run rag --config "$HOME/.config/rag-core/config.json" config init \
+  --state-dir "$HOME/.local/share/rag-core"
 ```
 
-Edit `.env` and set your API key:
+Init creates mode-0600 config and mode-0700 storage, refuses overwrite and creates
+no workspace. Do not paste the private config or capability into chat, issues or logs.
+Run your own private Qdrant, or follow the isolated Docker setup below. The default
+Qdrant URL is loopback. No model, dataset or provider is contacted on startup.
 
-```env
-GROQ_API_KEY=gsk_your_groq_api_key_here
-```
-
-### 2. Build and start (CPU mode)
+Embedding acquisition is a separate explicit step (about 91 MB download; allow
+roughly 500 MB RAM for inference). Read [model licenses and privacy](docs/provider-models.md):
 
 ```bash
-docker compose up -d --build
+uv run python scripts/acquire_model.py --accept-license-and-download \
+  --destination .local/models/minilm-10dbd2f
 ```
 
-| Service | URL |
-| ------- | --- |
-| Streamlit UI | <http://localhost:8501> |
-| FastAPI Swagger | <http://localhost:8000/docs> |
-| Qdrant Dashboard | <http://localhost:6333/dashboard> |
-
-> The first build downloads the PyTorch base image (~5 GB) and installs all dependencies. Subsequent builds are cached and much faster.
-
-### 3. Start with GPU support (NVIDIA)
-
-Requires `nvidia-container-toolkit` installed on the host.
+Only `onnx/model.onnx` and `tokenizer.json` are acquired from the pinned official
+repository. The installer refuses an existing destination and verifies upstream
+Git/LFS integrity. Set `model_dir` in the private JSON to that directory's absolute
+path; set `qdrant_url` to your private Qdrant address. Model files remain private.
 
 ```bash
-docker compose --profile gpu up -d --build
+uv run rag serve
+# In a second terminal, using the same private config:
+uv run rag doctor
+uv run rag workspace create research
+# Save the returned capability privately; substitute the returned opaque ID below.
+uv run rag ingest WORKSPACE_ID examples/corpus/orchard.txt
+uv run rag job show WORKSPACE_ID JOB_ID
+uv run rag search WORKSPACE_ID 'How is rainwater stored?'
+uv run rag search WORKSPACE_ID 'How is rainwater stored?' --no-rerank
+uv run rag ask WORKSPACE_ID 'How is rainwater stored?'
+# ask returns generation_disabled until explicitly configured.
 ```
 
-This activates `api-gpu` and `ui-gpu` services with full CUDA access, replacing the CPU services.
+`rag ingest` imports one bounded regular local file; it rejects symlinks in every
+path component. It uploads bytes through the authenticated API. The server never
+accepts a caller-chosen filesystem path. Duplicate content with the same format
+returns its existing job; reusing a filename with different content adds a new
+immutable document. Deletion is owner-only and requires the exact ID.
 
-### Useful commands
+Optional cleanup, only for the workspace you intend to delete:
 
 ```bash
-# View logs for all services
-docker compose logs -f
-
-# View logs for a specific service
-docker compose logs -f api
-
-# Stop all services (data is preserved in Docker volumes)
-docker compose down
-
-# Stop and remove volumes (clears all data)
-docker compose down -v
-
-# Rebuild after code changes
-docker compose up -d --build
-
-# Check service health
-docker compose ps
+uv run rag workspace delete WORKSPACE_ID --confirm WORKSPACE_ID
 ```
 
-### Persistent volumes
+For a workspace client, put its capability in a private process environment and
+use `rag --token-env RAG_WORKSPACE_TOKEN search WORKSPACE_ID 'question'`. The owner
+can administer all workspaces; a capability authorizes exactly one. The owner
+config remains trusted administrative material. See [API contracts](docs/architecture.md).
 
-All data is stored in named Docker volumes and survives container restarts:
-
-| Volume | Contents |
-| ------ | -------- |
-| `easyresearch_qdrant_storage` | Qdrant vector index |
-| `easyresearch_uploads` | Uploaded documents |
-| `easyresearch_database` | Chat history & summaries |
-| `easyresearch_logs` | RAG traces & metrics |
-
----
-
-## Quick Start
-
-### 1. Start Qdrant (Docker)
+## Private CPU Docker Compose
 
 ```bash
-docker run -p 6333:6333 -p 6334:6334 qdrant/qdrant
+docker compose build
+mkdir -p .local/operator
+# Bootstrap as your host UID, without root-owned operator files:
+docker run --rm --user "$(id -u):$(id -g)" \
+  -v "$PWD/.local/operator:/private" workspace-rag-core:local \
+  config init --state-dir /private/state
 ```
 
-Or with persistent storage:
+Edit `.local/operator/config/config.json` locally: `qdrant_url` is
+`http://qdrant:6333`; `model_dir` is `/private/model`. Use the explicit acquisition
+above first. If retrieval is not needed yet, `model_dir` can stay null. Then:
 
 ```bash
-docker run -p 6333:6333 -p 6334:6334 \
-    -v $(pwd)/qdrant_storage:/qdrant/storage \
-    qdrant/qdrant
+export RAG_UID="$(id -u)" RAG_GID="$(id -g)"
+docker compose up -d
+# API is loopback-only on port 8000. Qdrant has no published port.
+docker compose exec -T api rag doctor
+docker compose exec -T api rag workspace create research
+# Stream a permitted local file through stdin; no writable container root is needed.
+docker compose exec -T api rag ingest WORKSPACE_ID - --filename orchard.txt \
+  < examples/corpus/orchard.txt
 ```
 
-### 2. Clone & install
+Qdrant uses a persistent project-scoped volume. Do not use `docker compose down -v`.
+Do not point experimental projects at retained operator volumes. Qdrant stays on an internal network; the API also uses an ingress bridge for
+loopback port publishing. Generation is disabled in private config by default. Full setup, opt-in UI, storage, TLS and
+provider egress are in [self-hosting](docs/self-hosting.md). GPU execution is not
+validated or shipped; no automatic GPU detection or CUDA download occurs.
+
+## Development and evidence
 
 ```bash
-git clone <repo-url>
-cd easyResearchforBigData
-python -m venv .venv
+uv run pytest -q
+uv run ruff check .
+uv run ruff format --check rag_core scripts tests
+uv run python scripts/source_gate.py
+uv run pip-audit --require-hashes --disable-pip --no-deps -r requirements.txt
 ```
 
-**Activate virtual environment:**
+Deterministic tests forbid network access and inject fixtures through Python only.
+Fixtures are never selectable production models/providers. The independent campaign
+at [run 41040402221](https://github.com/hzjanuary/bigdata-rag-system/actions/runs/41040402221)
+passed all 41 real CPU/Qdrant checks at runtime source
+`287212be8f5683221d2449158331e59d4c639c15`. RAG-20 is PASS; overall SPEC-001 remains
+**22 PASS / one FAIL / one BLOCKED**, including image-security FAIL and live
+generation BLOCKED. The complete CI workflow is not green.
 
-```bash
-# Linux / macOS
-source .venv/bin/activate
+`scripts/isolated_acceptance.py` downloads nothing and uses a preinstalled model.
+It tests actual images, Qdrant, crash/outage and independent backup/restore with
+synthetic data. Hosted execution required a separately authorized owner label;
+both historical campaign budgets are consumed. Do not reapply labels or rerun them.
+Ordinary source CI never downloads the embedding model or invokes generation.
 
-# Windows
-.venv\Scripts\activate
-```
-
-**Install dependencies:**
-
-```bash
-pip install -r requirements.txt
-```
-
-### 3. Configure API keys
-
-Create a `.env` file:
-
-```env
-GROQ_API_KEY=gsk_...
-
-# Optional Qdrant settings (defaults shown)
-QDRANT_HOST=localhost
-QDRANT_PORT=6333
-```
-
-### 4. Run
-
-**Streamlit UI:**
-
-```bash
-streamlit run app.py
-```
-
-**FastAPI v0.1 (Production):**
-
-```bash
-uvicorn api_main:app --host 0.0.0.0 --port 8000 --reload
-```
-
-**Pipeline CLI:**
-
-```bash
-python -m core.pipeline --source uploads/my_workspace --collection my_workspace
-```
-
-**Legacy FastAPI (backward compat):**
-
-```bash
-uvicorn main:app --reload
-```
-
-## API Endpoints
-
-### Query Endpoints
-| Method | Endpoint                | Description                                |
-| ------ | ----------------------- | ------------------------------------------ |
-| POST   | `/ask`                  | RAG query with hybrid search + re-ranking  |
-| GET    | `/search/{collection}`  | Semantic search without LLM generation     |
-| POST   | `/batch/query`          | Process multiple queries (max 20)          |
-
-### Ingestion Endpoints
-| Method | Endpoint            | Description                                    |
-| ------ | ------------------- | ---------------------------------------------- |
-| POST   | `/upload`           | Upload & embed a single document               |
-| POST   | `/pipeline/start`   | Start background ingestion with enrichment ✨  |
-| GET    | `/pipeline/status`  | Get current pipeline status                    |
-
-### Workspace Endpoints
-| Method | Endpoint                           | Description                  |
-| ------ | ---------------------------------- | ---------------------------- |
-| GET    | `/workspaces`                      | List all workspaces          |
-| GET    | `/workspaces/{name}`               | Workspace statistics         |
-| DELETE | `/workspaces/{name}`               | Delete workspace             |
-| DELETE | `/workspaces/{name}/files/{file}`  | Remove file from workspace   |
-
-### Observability Endpoints ✨
-| Method | Endpoint   | Description                              |
-| ------ | ---------- | ---------------------------------------- |
-| GET    | `/health`  | Health check (GPU, Qdrant, version)      |
-| GET    | `/metrics` | RAG metrics (Hit Rate, MRR, latency)     |
-| GET    | `/traces`  | Recent pipeline traces                   |
-| DELETE | `/logs`    | Clear all log files                      |
-
-## Configuration
-
-### Core Settings (`config.py`)
-
-| Parameter               | Default                               | Description                       |
-| ----------------------- | ------------------------------------- | --------------------------------- |
-| `QDRANT_HOST`           | localhost                             | Qdrant server host                |
-| `QDRANT_PORT`           | 6333                                  | Qdrant server port                |
-| `QDRANT_VECTOR_SIZE`    | 384                                   | Vector dimensions (MiniLM-L12-v2) |
-| `EMBEDDING_MODEL`       | paraphrase-multilingual-MiniLM-L12-v2 | Multilingual embedding            |
-| `EMBED_BATCH_SIZE`      | 32                                    | Batch size for 4 GB VRAM          |
-| `RERANKER_MODEL`        | cross-encoder/ms-marco-MiniLM-L-6-v2  | Cross-encoder for re-ranking      |
-| `DEFAULT_CHUNK_SIZE`    | 400                                   | Characters per chunk              |
-| `DEFAULT_CHUNK_OVERLAP` | 80                                    | Overlap between chunks            |
-| `SEARCH_K`              | 12                                    | Final docs returned               |
-| `HYBRID_WEIGHT_RERANK`  | 0.7                                   | Cross-encoder weight              |
-| `HYBRID_WEIGHT_BM25`    | 0.3                                   | BM25 keyword weight               |
-| `MAX_WORKERS`           | cpu_count - 2                         | Parallel cleaning/chunking        |
-| `LLM_MODEL_GROQ`        | llama-3.3-70b-versatile               | Groq model ID                     |
-
-### RetrievalConfig (v0.1) ✨
-
-```python
-from core.rag_engine import RetrievalConfig
-
-config = RetrievalConfig(
-    dense_k=20,              # Initial dense retrieval count
-    sparse_k=20,             # BM25 retrieval count
-    rerank_top_k=10,         # Final docs after re-ranking
-    dense_weight=0.5,        # Dense score weight
-    sparse_weight=0.2,       # BM25 score weight
-    rerank_weight=0.3,       # Re-ranker score weight
-    min_score_threshold=0.1, # Minimum hybrid score
-    reranker_batch_size=8,   # Batch size for RTX 3050
-    use_fp16=True            # Half precision for memory
-)
-```
-
-### PipelineConfig (v0.1) ✨
-
-```python
-from core.pipeline import PipelineConfig
-
-config = PipelineConfig(
-    chunk_size=400,              # Chunk size
-    chunk_overlap=80,            # Overlap
-    batch_size=32,               # Embedding batch size
-    use_cuda=True,               # Use GPU
-    enable_llm_enrichment=True,  # LLM metadata extraction
-    enrichment_batch_size=5,     # Docs per LLM call
-    max_workers=4,               # Parallel workers
-    reset_db=True,               # Reset collection
-    clear_cache_every=10         # GPU cache clearing frequency
-)
-```
-
-### Config Class Methods
-
-| Method                           | Returns                               |
-| -------------------------------- | ------------------------------------- |
-| `Config.get_collection_name(ws)` | `ws_{workspace_name}`                 |
-| `Config.get_workspace_dir(ws)`   | `Path("uploads/{workspace}/")`        |
-| `Config.get_summary_dir(ws)`     | `Path("database/summaries/{ws}/")`    |
-| `Config.get_chat_dir(ws)`        | `Path("database/chat_history/{ws}/")` |
-
-## Hardware Requirements
-
-- **GPU:** NVIDIA RTX 3050 (4 GB VRAM) or better — optimized for low VRAM
-- **CPU:** Any multi-core processor
-- **RAM:** 16 GB recommended
-- **Storage:** Depends on dataset size
-- **Docker:** Required for Qdrant
-
-### GPU Memory Optimization (v0.1)
-
-The system is specifically optimized for RTX 3050 with 4GB VRAM:
-
-| Component       | Optimization                                  |
-| --------------- | --------------------------------------------- |
-| Cross-Encoder   | FP16 precision, batch size 8                  |
-| Embeddings      | Batch size 32, cache cleared every 10 batches |
-| Re-ranker       | Lazy loading, truncated inputs (512 tokens)   |
-| GPU Cache       | `torch.cuda.empty_cache()` after batches      |
-
-## License
-
-MIT License - See [LICENSE](LICENSE) file for more details.
-
----
-
-<p align="center">
-  Made with ❤️ by easyResearch<br>
-  <sub>v0.1.0 — Production-Grade RAG System</sub>
-</p>
+Read [security](SECURITY.md), [contribution](CONTRIBUTING.md), [architecture](docs/architecture.md),
+[backup/restore](docs/backup-restore.md), [NOTICE](NOTICE) and [MIT license](LICENSE).
+Third-party weights, packages and OS files retain their own licenses. No source,
+image, tag or remote deployment is published by this implementation workflow.

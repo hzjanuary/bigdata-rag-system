@@ -1,0 +1,61 @@
+{
+  "status": "LOCAL_PASS_REMOTE_PENDING",
+  "preserved_local_head": "1ccf0d0a4f36da74bb6ed6a2fafb273bd8ab2883",
+  "previous_remote_sha": "d54b899d665b04dff2db3bd8b7415f96d8b36c9a",
+  "policy": "owner-only PR1 current exact-SHA cpuq1 label; complete read-only history, no prior attempts/markers, source export proof, reservation before model; first attempt and serialized execution",
+  "activation_sha": "RESOLVED_AFTER_PUSH_ONLY",
+  "label_format": "cpuq1:<40-character exact current PR head SHA>",
+  "consumed": false,
+  "label_created": false,
+  "label_applied": false,
+  "downloads": 0,
+  "generative_calls": 0,
+  "pytest_counts": {
+    "tests": 155,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 1
+  },
+  "junit_bytes": 17962,
+  "qdrant": "1 PASS using existing disposable image; no model",
+  "quality": "lock, Ruff/format, Black, MyPy13, license92 approved, Python audit0: PASS",
+  "actionlint": {
+    "version": "1.7.12",
+    "official_archive_sha256": "8aca8db96f1b94770f1b0d72b6dddcb1ebb8123cb3712530b08cc387b349a3d8",
+    "syntax_event_expressions": "PASS"
+  },
+  "runtime_packaging_acquisition_acceptance_changed": false,
+  "single_use_limit": "Enforced against accessible complete history/markers within fixed approval window; administrator deletions and policy/retention changes are not immutable-proof. No live checks-write exercise in preparation.",
+  "acceptance": {
+    "PASS": 21,
+    "FAIL": 1,
+    "BLOCKED": 2
+  },
+  "files": [
+    {
+      "path": ".local/trigger-install-20261030/junit.xml",
+      "sha256": "f61c14845e122d9bde90bfd235860e6cab454a8afa0402be9689838b1828e214",
+      "bytes": 17962
+    },
+    {
+      "path": ".local/trigger-install-20261030/pytest.log",
+      "sha256": "88341e98275763ed30ba116c8ebfda0c4fb0b18eaf9ceddf12617062abc8fe37",
+      "bytes": 785
+    },
+    {
+      "path": ".local/trigger-install-20261030/qdrant.log",
+      "sha256": "61017095ff13ad0ea17bfb9056d08a576ae2161381a82be4cffa6b52af0409f4",
+      "bytes": 611
+    },
+    {
+      "path": ".local/trigger-install-20261030/licenses.json",
+      "sha256": "acd53437817e96b4a84b13f1e6b55c362b8e982c8a54c84e5aac85ee98d90b84",
+      "bytes": 17688
+    },
+    {
+      "path": ".local/trigger-install-20261030/python-audit.json",
+      "sha256": "e0c7c24c6cce3f6ee636c85048b7851d73674e57d72112113e68cd2bb747168e",
+      "bytes": 2174
+    }
+  ]
+}

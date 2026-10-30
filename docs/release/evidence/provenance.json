@@ -1,0 +1,64 @@
+{
+  "baseline": "74931fedcf99408e8b15b9052c0e8aed1fd6d8fc",
+  "runtime_source_sha": "02ad20787fd5a8c475aa0efa2e0802e98fb74d8b",
+  "test_source_sha": "0e476bd16ec75c189c58616b4f4eae9688acfed7",
+  "images": [
+    {
+      "name": "workspace-rag-core:local",
+      "image_id": "sha256:1dcee1bdcff9537a4ad508862f3967ff329335fbb4f71c7c29cbd28fe5346640",
+      "descriptor": {
+        "mediaType": "application/vnd.oci.image.index.v1+json",
+        "digest": "sha256:1dcee1bdcff9537a4ad508862f3967ff329335fbb4f71c7c29cbd28fe5346640",
+        "size": 856
+      },
+      "repo_digests": [
+        "workspace-rag-core@sha256:1dcee1bdcff9537a4ad508862f3967ff329335fbb4f71c7c29cbd28fe5346640"
+      ],
+      "source_revision": "02ad20787fd5a8c475aa0efa2e0802e98fb74d8b",
+      "architecture": "amd64",
+      "os": "linux",
+      "user": "10001:10001",
+      "size": 436157617
+    },
+    {
+      "name": "workspace-rag-qdrant:local",
+      "image_id": "sha256:d9bbc4b11a2a7ae6ca86849280131d7c134a84602ae10317d118cc2a1cb4d647",
+      "descriptor": {
+        "mediaType": "application/vnd.oci.image.index.v1+json",
+        "digest": "sha256:d9bbc4b11a2a7ae6ca86849280131d7c134a84602ae10317d118cc2a1cb4d647",
+        "size": 856
+      },
+      "repo_digests": [
+        "workspace-rag-qdrant@sha256:d9bbc4b11a2a7ae6ca86849280131d7c134a84602ae10317d118cc2a1cb4d647"
+      ],
+      "source_revision": "02ad20787fd5a8c475aa0efa2e0802e98fb74d8b",
+      "architecture": "amd64",
+      "os": "linux",
+      "user": "10001:10001",
+      "size": 276420765
+    },
+    {
+      "name": "workspace-rag-ui:local",
+      "image_id": "sha256:f3cbbbdb849765cd0290f25d3c1dca69f71d4f6d5499b59b0734d9674d850e01",
+      "descriptor": {
+        "mediaType": "application/vnd.oci.image.index.v1+json",
+        "digest": "sha256:f3cbbbdb849765cd0290f25d3c1dca69f71d4f6d5499b59b0734d9674d850e01",
+        "size": 856
+      },
+      "repo_digests": [
+        "workspace-rag-ui@sha256:f3cbbbdb849765cd0290f25d3c1dca69f71d4f6d5499b59b0734d9674d850e01"
+      ],
+      "source_revision": "02ad20787fd5a8c475aa0efa2e0802e98fb74d8b",
+      "architecture": "amd64",
+      "os": "linux",
+      "user": "10001:10001",
+      "size": 871920319
+    }
+  ],
+  "published": false,
+  "notes": [
+    "Local OCI image index descriptors, not registry publication digests.",
+    "Docker build required --network=host because ambient bridge DNS failed; failed logs preserved.",
+    "No Git push/tag/merge; no source/image publication, model generation, paid API request or remote deployment. Local image tags were built for verification."
+  ]
+}

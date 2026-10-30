@@ -1,0 +1,866 @@
+{
+  "phase": "ADDITIONAL_CAMPAIGN_POLICY_PREPARED_SOURCE_CI_PENDING",
+  "source_fix_verified_sha": "59a7103314eba9d63863774ca55d65e5f21dc7a5",
+  "source_fix_runs": [
+    {
+      "id": 41035999451,
+      "kind": "push",
+      "head_sha": "59a7103314eba9d63863774ca55d65e5f21dc7a5",
+      "event": "push",
+      "conclusion": "failure",
+      "url": "https://github.com/hzjanuary/bigdata-rag-system/actions/runs/41035999451",
+      "jobs": [
+        {
+          "id": 123996854205,
+          "name": "source",
+          "conclusion": "success",
+          "failed_steps": []
+        },
+        {
+          "id": 123997251232,
+          "name": "images (ui)",
+          "conclusion": "failure",
+          "failed_steps": [
+            "Unchanged HIGH/CRITICAL security gate"
+          ]
+        },
+        {
+          "id": 123997251256,
+          "name": "images (core)",
+          "conclusion": "failure",
+          "failed_steps": [
+            "Unchanged HIGH/CRITICAL security gate"
+          ]
+        },
+        {
+          "id": 123997251333,
+          "name": "images (qdrant)",
+          "conclusion": "failure",
+          "failed_steps": [
+            "Unchanged HIGH/CRITICAL security gate"
+          ]
+        }
+      ],
+      "artifacts": [
+        {
+          "id": 12968531386,
+          "name": "image-ui-41035999451",
+          "digest": "sha256:f619ba2c6e3343bd31f3ad23efe981f109255682ac8ef751a7032b1cf8b71354",
+          "zip_bytes": 119915,
+          "manifest_files": 6,
+          "verification": "PASS: GitHub ZIP digest, CRC, exact file set, each byte size/SHA-256",
+          "image": {
+            "variant": "ui",
+            "image_id": "sha256:800528123210b3bf8e0efe02e9f205936cd5d6d992bbd9e830a8a4345c7b7f9f",
+            "source_label": "59a7103314eba9d63863774ca55d65e5f21dc7a5",
+            "severity_counts": {
+              "HIGH": 44
+            },
+            "distinct_high_critical_cves": 8,
+            "new_high_critical_records": [],
+            "removed_high_critical_records": []
+          }
+        },
+        {
+          "id": 12968446420,
+          "name": "source-41035999451",
+          "digest": "sha256:921a1f3aeffcc5346a3792a6ee8e89a76c891e217e0ca755e6875e8a39688af1",
+          "zip_bytes": 275840,
+          "manifest_files": 10,
+          "verification": "PASS: GitHub ZIP digest, CRC, exact file set, each byte size/SHA-256",
+          "archive": {
+            "result": "PASS",
+            "source_sha": "59a7103314eba9d63863774ca55d65e5f21dc7a5",
+            "files": 107,
+            "archive_sha256": "611cc14d6cf16044922c186087588958ad8a9b30b36a4fa010c06f8606bde8ed"
+          },
+          "junit": {
+            "bytes": 19931,
+            "cases": 169,
+            "max_name_characters": 97,
+            "suite_counts": {
+              "tests": 169,
+              "failures": 0,
+              "errors": 0,
+              "skipped": 1
+            }
+          }
+        },
+        {
+          "id": 12968072037,
+          "name": "image-qdrant-41035999451",
+          "digest": "sha256:a7df544f97942bbbcefdbe3c9b12a082f8d65bbec62eb509bd49745fccb56183",
+          "zip_bytes": 221904,
+          "manifest_files": 5,
+          "verification": "PASS: GitHub ZIP digest, CRC, exact file set, each byte size/SHA-256",
+          "image": {
+            "variant": "qdrant",
+            "image_id": "sha256:911c5685f1f4cbe02475ab56ee2161278740a265b377792c2afa7a53cf03cbb2",
+            "source_label": "59a7103314eba9d63863774ca55d65e5f21dc7a5",
+            "severity_counts": {
+              "HIGH": 43
+            },
+            "distinct_high_critical_cves": 8,
+            "new_high_critical_records": [],
+            "removed_high_critical_records": []
+          }
+        },
+        {
+          "id": 12967888179,
+          "name": "image-core-41035999451",
+          "digest": "sha256:5e42101de573f1586f4f85f58d0e5d4d3382f9012bcfd8be83f10de2dd9f8702",
+          "zip_bytes": 116326,
+          "manifest_files": 7,
+          "verification": "PASS: GitHub ZIP digest, CRC, exact file set, each byte size/SHA-256",
+          "image": {
+            "variant": "core",
+            "image_id": "sha256:8fbc7769647fd1e5d8bbc025848a43469194380346e83cd8fa472c5dec3281b3",
+            "source_label": "59a7103314eba9d63863774ca55d65e5f21dc7a5",
+            "severity_counts": {
+              "HIGH": 44
+            },
+            "distinct_high_critical_cves": 8,
+            "new_high_critical_records": [],
+            "removed_high_critical_records": []
+          }
+        }
+      ]
+    },
+    {
+      "id": 41036006533,
+      "kind": "pr",
+      "head_sha": "59a7103314eba9d63863774ca55d65e5f21dc7a5",
+      "event": "pull_request",
+      "conclusion": "failure",
+      "url": "https://github.com/hzjanuary/bigdata-rag-system/actions/runs/41036006533",
+      "jobs": [
+        {
+          "id": 123996878622,
+          "name": "source",
+          "conclusion": "success",
+          "failed_steps": []
+        },
+        {
+          "id": 123997275952,
+          "name": "images (ui)",
+          "conclusion": "failure",
+          "failed_steps": [
+            "Unchanged HIGH/CRITICAL security gate"
+          ]
+        },
+        {
+          "id": 123997275988,
+          "name": "images (qdrant)",
+          "conclusion": "failure",
+          "failed_steps": [
+            "Unchanged HIGH/CRITICAL security gate"
+          ]
+        },
+        {
+          "id": 123997276053,
+          "name": "images (core)",
+          "conclusion": "failure",
+          "failed_steps": [
+            "Unchanged HIGH/CRITICAL security gate"
+          ]
+        }
+      ],
+      "artifacts": [
+        {
+          "id": 12968416271,
+          "name": "image-qdrant-41036006533",
+          "digest": "sha256:ca2f6296d98c373590c248c6b066025929c2badb21887a301c2210662e0595eb",
+          "zip_bytes": 221951,
+          "manifest_files": 5,
+          "verification": "PASS: GitHub ZIP digest, CRC, exact file set, each byte size/SHA-256",
+          "image": {
+            "variant": "qdrant",
+            "image_id": "sha256:ff4909a2d0d36b0faebe0bd3ef09ad1176e2f8d34641815e921dd97ff7929650",
+            "source_label": "59a7103314eba9d63863774ca55d65e5f21dc7a5",
+            "severity_counts": {
+              "HIGH": 43
+            },
+            "distinct_high_critical_cves": 8,
+            "new_high_critical_records": [],
+            "removed_high_critical_records": []
+          }
+        },
+        {
+          "id": 12968182599,
+          "name": "image-core-41036006533",
+          "digest": "sha256:f2419cfd86a4da5592c52e749c7b1b3198d080e608b5bf85034dfdedcd1001db",
+          "zip_bytes": 116321,
+          "manifest_files": 7,
+          "verification": "PASS: GitHub ZIP digest, CRC, exact file set, each byte size/SHA-256",
+          "image": {
+            "variant": "core",
+            "image_id": "sha256:7ee3215aec41343db74e9617f415638b0c2a55fa6421da171a9cce2e3e3d135e",
+            "source_label": "59a7103314eba9d63863774ca55d65e5f21dc7a5",
+            "severity_counts": {
+              "HIGH": 44
+            },
+            "distinct_high_critical_cves": 8,
+            "new_high_critical_records": [],
+            "removed_high_critical_records": []
+          }
+        },
+        {
+          "id": 12967987006,
+          "name": "source-41036006533",
+          "digest": "sha256:bba2e29a4c69488826fe35c4bc77fecbb269910ba05cf8fceedcf61be41c7a06",
+          "zip_bytes": 275809,
+          "manifest_files": 10,
+          "verification": "PASS: GitHub ZIP digest, CRC, exact file set, each byte size/SHA-256",
+          "archive": {
+            "result": "PASS",
+            "source_sha": "59a7103314eba9d63863774ca55d65e5f21dc7a5",
+            "files": 107,
+            "archive_sha256": "611cc14d6cf16044922c186087588958ad8a9b30b36a4fa010c06f8606bde8ed"
+          },
+          "junit": {
+            "bytes": 19931,
+            "cases": 169,
+            "max_name_characters": 97,
+            "suite_counts": {
+              "tests": 169,
+              "failures": 0,
+              "errors": 0,
+              "skipped": 1
+            }
+          }
+        },
+        {
+          "id": 12967618407,
+          "name": "image-ui-41036006533",
+          "digest": "sha256:beb4e20468dd6dab613ee30c79d0f74336c01b32690c4d460f43322a382b70d9",
+          "zip_bytes": 119921,
+          "manifest_files": 6,
+          "verification": "PASS: GitHub ZIP digest, CRC, exact file set, each byte size/SHA-256",
+          "image": {
+            "variant": "ui",
+            "image_id": "sha256:c730c2be95b8bb81882a803a9e9052105f2241192659c70136e61bfb0ef2ab63",
+            "source_label": "59a7103314eba9d63863774ca55d65e5f21dc7a5",
+            "severity_counts": {
+              "HIGH": 44
+            },
+            "distinct_high_critical_cves": 8,
+            "new_high_critical_records": [],
+            "removed_high_critical_records": []
+          }
+        }
+      ]
+    },
+    {
+      "id": 41035999381,
+      "kind": "configuration-push",
+      "head_sha": "59a7103314eba9d63863774ca55d65e5f21dc7a5",
+      "event": "push",
+      "conclusion": "success",
+      "url": "https://github.com/hzjanuary/bigdata-rag-system/actions/runs/41035999381",
+      "jobs": [
+        {
+          "id": 123996854433,
+          "name": "configuration",
+          "conclusion": "success",
+          "failed_steps": []
+        },
+        {
+          "id": 123996855951,
+          "name": "campaign",
+          "conclusion": "skipped",
+          "failed_steps": []
+        }
+      ],
+      "artifacts": [
+        {
+          "id": 12968291969,
+          "name": "trigger-inactive-41035999381",
+          "digest": "sha256:d742597e9ecfffd750f7791911d60efafda833984084d682144f97ec2ba544f6",
+          "zip_bytes": 604,
+          "manifest_files": 1,
+          "verification": "PASS: GitHub ZIP digest, CRC, exact file set, each byte size/SHA-256",
+          "inactive_receipt": {
+            "campaign_id": "spec001-pr1-cpu-qdrant-once",
+            "source_sha": "59a7103314eba9d63863774ca55d65e5f21dc7a5",
+            "run_id": "41035999381",
+            "consumed_by_this_event": false,
+            "authorization_state": "not_evaluated_in_configuration",
+            "model_download_started": false
+          }
+        }
+      ]
+    },
+    {
+      "id": 41036006247,
+      "kind": "configuration-pr",
+      "head_sha": "59a7103314eba9d63863774ca55d65e5f21dc7a5",
+      "event": "pull_request",
+      "conclusion": "success",
+      "url": "https://github.com/hzjanuary/bigdata-rag-system/actions/runs/41036006247",
+      "jobs": [
+        {
+          "id": 123996904800,
+          "name": "configuration",
+          "conclusion": "success",
+          "failed_steps": []
+        },
+        {
+          "id": 123996906966,
+          "name": "campaign",
+          "conclusion": "skipped",
+          "failed_steps": []
+        }
+      ],
+      "artifacts": [
+        {
+          "id": 12968006985,
+          "name": "trigger-inactive-41036006247",
+          "digest": "sha256:6ed33a6759f7bc550a7b28f8204307b5efc0dbe0a9d2c2243ed26892d3026f24",
+          "zip_bytes": 604,
+          "manifest_files": 1,
+          "verification": "PASS: GitHub ZIP digest, CRC, exact file set, each byte size/SHA-256",
+          "inactive_receipt": {
+            "campaign_id": "spec001-pr1-cpu-qdrant-once",
+            "source_sha": "59a7103314eba9d63863774ca55d65e5f21dc7a5",
+            "run_id": "41036006247",
+            "consumed_by_this_event": false,
+            "authorization_state": "not_evaluated_in_configuration",
+            "model_download_started": false
+          }
+        }
+      ]
+    }
+  ],
+  "artifacts_verified": 10,
+  "local_cpu_proof": "docs/release/evidence/bm25-remediation-local.json: 41 PASS with existing cache",
+  "deterministic_status": "RAG-12 PASS on original-vs-corrected regression, twelve seeds, full exact API restart and source CI",
+  "campaign_id": "spec001-pr1-cpu-qdrant-remediation-2",
+  "marker": "spec001-cpu-pr1-remediation-2-consumed",
+  "label_prefix": "cpuq2:",
+  "exact_activation_sha": "DETERMINE_AFTER_FINAL_POLICY_PUSH_AND_SOURCE_CI",
+  "window_utc": {
+    "start": "2026-10-30 10:00:00",
+    "end": "2026-10-31 00:00:00"
+  },
+  "local_policy_tests": "194 PASS / one skipped; focused known-history/archive/state mismatch coverage",
+  "read_only_actual_github_audit": {
+    "audit": "PASS",
+    "remote_writes": 0,
+    "model_calls": 0,
+    "old_failure": {
+      "run_id": 41029994294,
+      "source_sha": "ba78e94d82b7972e96a9bae962cbb8ada73d6619",
+      "marker_id": 123977248159,
+      "consumed": true,
+      "result": "FAIL",
+      "artifact_id": 12966475279,
+      "artifact_digest": "sha256:1caddf93d9ecb1616eac35cd925c6bff1bcdf89fbfe82607de3e3195d3fb5863",
+      "logs_sha256": "0faf2dcc519d79c8a0e3fe71839331df71fede2fa1dcfcd482da7ee8b331a2f6"
+    },
+    "complete_runs_read": 13,
+    "new_campaign_markers": 0,
+    "campaign_id": "spec001-pr1-cpu-qdrant-remediation-2",
+    "new_marker": "spec001-cpu-pr1-remediation-2-consumed",
+    "prefix": "cpuq2:",
+    "fixed_expiry": "2026-10-31T00:00:00+00:00",
+    "source_sha": "59a7103314eba9d63863774ca55d65e5f21dc7a5",
+    "source_archive_sha256": "611cc14d6cf16044922c186087588958ad8a9b30b36a4fa010c06f8606bde8ed",
+    "api_calls": 31,
+    "history_and_source_zip_digests_verified": true
+  },
+  "new_campaign_consumed": false,
+  "new_marker_created": false,
+  "new_label_created_or_applied": false,
+  "additional_independent_campaign_started": false,
+  "old_attempt_is_still_consumed_and_failed": true,
+  "old_private_poststate_limit": "Never uploaded; local reproduction does not prove absence of additional hosted causes",
+  "public_old_evidence_required": "Exact run/actor/source/job/steps/marker/receipt; pinned ZIP digest/manifests; available original named-failure logs; no broad prior-attempt waiver",
+  "source_proof_required": "Exact SHA, successful source/secret/export/upload; downloaded ZIP and source tar fully verified",
+  "replay_limit": "Complete accessible history and fixed reservation checks enforce one additional attempt; admin deletion/retention/policy changes cannot be made mathematically immutable. No automatic retry.",
+  "acceptance": {
+    "PASS": 21,
+    "FAIL": 1,
+    "BLOCKED": 2,
+    "RAG-12": "PASS",
+    "RAG-15": "BLOCKED",
+    "RAG-20": "BLOCKED until second independent path completes",
+    "RAG-21": "FAIL known OS image conditions"
+  },
+  "preserved_phase1_evidence": [
+    {
+      "path": ".local/bm25-remediation-2/phase1-remote/configuration-pr-artifacts.json",
+      "bytes": 939,
+      "sha256": "030023e70406fd696033077e29d4009d83c43715840f4f54cf42bbb22c22e4b0"
+    },
+    {
+      "path": ".local/bm25-remediation-2/phase1-remote/configuration-pr-jobs.json",
+      "bytes": 4271,
+      "sha256": "f1fa0a1e8f0f28b1023c0fa91ee8b53bde47595ed7fcaed15b3b9f499374357f"
+    },
+    {
+      "path": ".local/bm25-remediation-2/phase1-remote/configuration-pr-logs.zip",
+      "bytes": 11721,
+      "sha256": "7700bef5c26680fac9e2b9a260782d2788cf882279e174f352cb08f007ee63ee"
+    },
+    {
+      "path": ".local/bm25-remediation-2/phase1-remote/configuration-pr-run.json",
+      "bytes": 15063,
+      "sha256": "ea5eaa51cf8830cd9fab751bc37d5b77a017f2a7b477d375516cd2927a1fe6c0"
+    },
+    {
+      "path": ".local/bm25-remediation-2/phase1-remote/configuration-push-artifacts.json",
+      "bytes": 939,
+      "sha256": "5755057625a0a2d3dcf4fae0108f746473dc430546b915ee7e6547c79f60b874"
+    },
+    {
+      "path": ".local/bm25-remediation-2/phase1-remote/configuration-push-jobs.json",
+      "bytes": 4271,
+      "sha256": "81a533a503aeac2b1fe4f8c4f585e9cdee773bd061fa5c87ae67817fa7a943f3"
+    },
+    {
+      "path": ".local/bm25-remediation-2/phase1-remote/configuration-push-logs.zip",
+      "bytes": 11725,
+      "sha256": "1f367dfc47550740ab253fcb26e17ef99460db283231d3111f08650637d8691c"
+    },
+    {
+      "path": ".local/bm25-remediation-2/phase1-remote/configuration-push-run.json",
+      "bytes": 15061,
+      "sha256": "76eb622b8816c16cae99254996eeca4a3e2d6d11b815dafea8994623cc981ba9"
+    },
+    {
+      "path": ".local/bm25-remediation-2/phase1-remote/image-core-41035999451/checksums.json",
+      "bytes": 1114,
+      "sha256": "44f010a68da96ec94a834a4a8826634dd2c08119841c98d5738dadbb24538a48"
+    },
+    {
+      "path": ".local/bm25-remediation-2/phase1-remote/image-core-41035999451/environment.json",
+      "bytes": 899,
+      "sha256": "5be82d0c367a5fae0f569253126bfa8b7c843eeddc906230a6a27c08c65fb308"
+    },
+    {
+      "path": ".local/bm25-remediation-2/phase1-remote/image-core-41035999451/image-inspect.json",
+      "bytes": 4150,
+      "sha256": "76ce842a13af5d35090ce8f32f09020efe9a2249e33dfa08bec879de010d5f44"
+    },
+    {
+      "path": ".local/bm25-remediation-2/phase1-remote/image-core-41035999451/image-inventory.json",
+      "bytes": 2807,
+      "sha256": "36ce723780c287f8ff6c8b18b2fe2041a897275f6a7766e279fc92a94077f0ac"
+    },
+    {
+      "path": ".local/bm25-remediation-2/phase1-remote/image-core-41035999451/image-licenses.json",
+      "bytes": 553159,
+      "sha256": "f02680c08c21070ec483c65d872da6a414657e1478c6c0cbac830aefab2b579c"
+    },
+    {
+      "path": ".local/bm25-remediation-2/phase1-remote/image-core-41035999451/image-sbom.json",
+      "bytes": 219142,
+      "sha256": "3188c1703aaa80361a26ce650b57e97673b108d34b21d12d6d7d4f83644a3702"
+    },
+    {
+      "path": ".local/bm25-remediation-2/phase1-remote/image-core-41035999451/image-vulnerabilities.json",
+      "bytes": 503581,
+      "sha256": "4b084bf8fef31d2c8b59022faa8bac7467624acf344c1705ddccc90b26a93ea6"
+    },
+    {
+      "path": ".local/bm25-remediation-2/phase1-remote/image-core-41035999451/runtime-license-inventory.json",
+      "bytes": 7539,
+      "sha256": "eb7e6b8b9a25e48dc70f7d6e55ad275407e9847f962b47e0e2aa50f631eba4dc"
+    },
+    {
+      "path": ".local/bm25-remediation-2/phase1-remote/image-core-41035999451.zip",
+      "bytes": 116326,
+      "sha256": "5e42101de573f1586f4f85f58d0e5d4d3382f9012bcfd8be83f10de2dd9f8702"
+    },
+    {
+      "path": ".local/bm25-remediation-2/phase1-remote/image-core-41036006533/checksums.json",
+      "bytes": 1114,
+      "sha256": "3e90502de935e691da7ebd0e6977d054c7a479ba78e6a316206df5f380928e25"
+    },
+    {
+      "path": ".local/bm25-remediation-2/phase1-remote/image-core-41036006533/environment.json",
+      "bytes": 907,
+      "sha256": "7971c9ebe4bb568dde100d7c51ff14019a562653e3540290e28bea3fc228dac9"
+    },
+    {
+      "path": ".local/bm25-remediation-2/phase1-remote/image-core-41036006533/image-inspect.json",
+      "bytes": 4150,
+      "sha256": "add10320e882fece4c32979c3f170a19bc0e0c70166e4ccd1437ef7b560a47d6"
+    },
+    {
+      "path": ".local/bm25-remediation-2/phase1-remote/image-core-41036006533/image-inventory.json",
+      "bytes": 2807,
+      "sha256": "deea720b6ed7002825a7d1d11565f5be0e2f43079700a7cb022825ece0a27c9a"
+    },
+    {
+      "path": ".local/bm25-remediation-2/phase1-remote/image-core-41036006533/image-licenses.json",
+      "bytes": 553159,
+      "sha256": "e0602e510970ef7c0d34b17c75c37fc3859d90380e4f6e14cfbbc71d131e5467"
+    },
+    {
+      "path": ".local/bm25-remediation-2/phase1-remote/image-core-41036006533/image-sbom.json",
+      "bytes": 219142,
+      "sha256": "6db76562a2874aba3d9b323e3d5388437ccfbb34a9b46a01b7225302d3f77fdd"
+    },
+    {
+      "path": ".local/bm25-remediation-2/phase1-remote/image-core-41036006533/image-vulnerabilities.json",
+      "bytes": 503581,
+      "sha256": "7cb4b6bdf93715dfd1af4fd53170da86b921d262d53ea8431702ff9e45e3f679"
+    },
+    {
+      "path": ".local/bm25-remediation-2/phase1-remote/image-core-41036006533/runtime-license-inventory.json",
+      "bytes": 7539,
+      "sha256": "eb7e6b8b9a25e48dc70f7d6e55ad275407e9847f962b47e0e2aa50f631eba4dc"
+    },
+    {
+      "path": ".local/bm25-remediation-2/phase1-remote/image-core-41036006533.zip",
+      "bytes": 116321,
+      "sha256": "f2419cfd86a4da5592c52e749c7b1b3198d080e608b5bf85034dfdedcd1001db"
+    },
+    {
+      "path": ".local/bm25-remediation-2/phase1-remote/image-qdrant-41035999451/checksums.json",
+      "bytes": 795,
+      "sha256": "dfd913e08fac52eaafd550b98f36ed4a5ee33659296addc90c359a1b9c32d8f5"
+    },
+    {
+      "path": ".local/bm25-remediation-2/phase1-remote/image-qdrant-41035999451/environment.json",
+      "bytes": 899,
+      "sha256": "5be82d0c367a5fae0f569253126bfa8b7c843eeddc906230a6a27c08c65fb308"
+    },
+    {
+      "path": ".local/bm25-remediation-2/phase1-remote/image-qdrant-41035999451/image-inspect.json",
+      "bytes": 5942,
+      "sha256": "e0ea627b585e18d60e0427abc9141e7acf20d390a513afe8568c0017a5b79519"
+    },
+    {
+      "path": ".local/bm25-remediation-2/phase1-remote/image-qdrant-41035999451/image-licenses.json",
+      "bytes": 1153042,
+      "sha256": "d252368918426cdc6b2afb8da8bcd73bd9bc7893e60917bbe59d12e4263f59bc"
+    },
+    {
+      "path": ".local/bm25-remediation-2/phase1-remote/image-qdrant-41035999451/image-sbom.json",
+      "bytes": 828444,
+      "sha256": "f6007c6bebb3f1eef8782ed709c1fa91d0a3b54efcc88a84a1178086735859cd"
+    },
+    {
+      "path": ".local/bm25-remediation-2/phase1-remote/image-qdrant-41035999451/image-vulnerabilities.json",
+      "bytes": 914868,
+      "sha256": "a73108a343225f26cdd5e2c4fd0eb7d5e0d072b28fdc061da1683ce1bb33a780"
+    },
+    {
+      "path": ".local/bm25-remediation-2/phase1-remote/image-qdrant-41035999451.zip",
+      "bytes": 221904,
+      "sha256": "a7df544f97942bbbcefdbe3c9b12a082f8d65bbec62eb509bd49745fccb56183"
+    },
+    {
+      "path": ".local/bm25-remediation-2/phase1-remote/image-qdrant-41036006533/checksums.json",
+      "bytes": 795,
+      "sha256": "697b571f04364a0e5fbc6cbc458d825c552d207bf2edd773c856b27f59de2be8"
+    },
+    {
+      "path": ".local/bm25-remediation-2/phase1-remote/image-qdrant-41036006533/environment.json",
+      "bytes": 907,
+      "sha256": "7971c9ebe4bb568dde100d7c51ff14019a562653e3540290e28bea3fc228dac9"
+    },
+    {
+      "path": ".local/bm25-remediation-2/phase1-remote/image-qdrant-41036006533/image-inspect.json",
+      "bytes": 5942,
+      "sha256": "7f8d778c5423792f9ed12da0ddfbd714baefabccdbaabe04afa9f5de8af91694"
+    },
+    {
+      "path": ".local/bm25-remediation-2/phase1-remote/image-qdrant-41036006533/image-licenses.json",
+      "bytes": 1153041,
+      "sha256": "9b128c65eb19bf91edabb3a466714f9d88eda72d5b0d87ed77621a5cb1d0e415"
+    },
+    {
+      "path": ".local/bm25-remediation-2/phase1-remote/image-qdrant-41036006533/image-sbom.json",
+      "bytes": 828444,
+      "sha256": "d8bce5eac231d173130e537125d8dd1c9756a66204d3e82e09778768f8230a6a"
+    },
+    {
+      "path": ".local/bm25-remediation-2/phase1-remote/image-qdrant-41036006533/image-vulnerabilities.json",
+      "bytes": 914868,
+      "sha256": "72c9c285d18916db11fb5220b3bf07cd34bd303a3116d49e3f6ac352867b939b"
+    },
+    {
+      "path": ".local/bm25-remediation-2/phase1-remote/image-qdrant-41036006533.zip",
+      "bytes": 221951,
+      "sha256": "ca2f6296d98c373590c248c6b066025929c2badb21887a301c2210662e0595eb"
+    },
+    {
+      "path": ".local/bm25-remediation-2/phase1-remote/image-ui-41035999451/checksums.json",
+      "bytes": 960,
+      "sha256": "5a51b0a0113be44f6b2f55366f9c27a3313654aca388e3e37eda41c05b25935e"
+    },
+    {
+      "path": ".local/bm25-remediation-2/phase1-remote/image-ui-41035999451/environment.json",
+      "bytes": 899,
+      "sha256": "5be82d0c367a5fae0f569253126bfa8b7c843eeddc906230a6a27c08c65fb308"
+    },
+    {
+      "path": ".local/bm25-remediation-2/phase1-remote/image-ui-41035999451/image-inspect.json",
+      "bytes": 3729,
+      "sha256": "856563b317671811cd3921392c1d3b10427e7f4d33c662561300287e4ff85863"
+    },
+    {
+      "path": ".local/bm25-remediation-2/phase1-remote/image-ui-41035999451/image-licenses.json",
+      "bytes": 572714,
+      "sha256": "11c0e8e9ba0f76cbbf5318fe0b59a7d34eea2881767d08728ceb2ac4dd65b5be"
+    },
+    {
+      "path": ".local/bm25-remediation-2/phase1-remote/image-ui-41035999451/image-sbom.json",
+      "bytes": 243357,
+      "sha256": "45f8f444475b6eb215d39331be485b6918082cebbdd9945c95374b914783b820"
+    },
+    {
+      "path": ".local/bm25-remediation-2/phase1-remote/image-ui-41035999451/image-vulnerabilities.json",
+      "bytes": 515242,
+      "sha256": "d00206cebbd184671626e55406009169f45fa742ab26fd20650df2d6b309a57c"
+    },
+    {
+      "path": ".local/bm25-remediation-2/phase1-remote/image-ui-41035999451/runtime-license-inventory.json",
+      "bytes": 12163,
+      "sha256": "8c3e8b3c43c9fe80ec22e0a358c8b842227bf7f19f8224e9963daa252f737710"
+    },
+    {
+      "path": ".local/bm25-remediation-2/phase1-remote/image-ui-41035999451.zip",
+      "bytes": 119915,
+      "sha256": "f619ba2c6e3343bd31f3ad23efe981f109255682ac8ef751a7032b1cf8b71354"
+    },
+    {
+      "path": ".local/bm25-remediation-2/phase1-remote/image-ui-41036006533/checksums.json",
+      "bytes": 960,
+      "sha256": "430c1f8acb659789a7aaaa228a6a398ee287b15e0ec391f134e130a19f8b5dc1"
+    },
+    {
+      "path": ".local/bm25-remediation-2/phase1-remote/image-ui-41036006533/environment.json",
+      "bytes": 907,
+      "sha256": "7971c9ebe4bb568dde100d7c51ff14019a562653e3540290e28bea3fc228dac9"
+    },
+    {
+      "path": ".local/bm25-remediation-2/phase1-remote/image-ui-41036006533/image-inspect.json",
+      "bytes": 3729,
+      "sha256": "b7df16b2a2ff31e46d866d140c7de4989f0fb741f29e0282705a19d0b4d310d2"
+    },
+    {
+      "path": ".local/bm25-remediation-2/phase1-remote/image-ui-41036006533/image-licenses.json",
+      "bytes": 572714,
+      "sha256": "a3722826fad4a92c01a4d49bc8f9a902525fb5c3a37101cc365f842105798bc1"
+    },
+    {
+      "path": ".local/bm25-remediation-2/phase1-remote/image-ui-41036006533/image-sbom.json",
+      "bytes": 243357,
+      "sha256": "26aed22788c369517d4092e39274965b7a2c697fb448b6c81bfcc32ed95d8f90"
+    },
+    {
+      "path": ".local/bm25-remediation-2/phase1-remote/image-ui-41036006533/image-vulnerabilities.json",
+      "bytes": 515242,
+      "sha256": "3846da2b7b3ec56ab2a19d29e47a5d5ff37a0441440043790a682a934e06dc92"
+    },
+    {
+      "path": ".local/bm25-remediation-2/phase1-remote/image-ui-41036006533/runtime-license-inventory.json",
+      "bytes": 12163,
+      "sha256": "8c3e8b3c43c9fe80ec22e0a358c8b842227bf7f19f8224e9963daa252f737710"
+    },
+    {
+      "path": ".local/bm25-remediation-2/phase1-remote/image-ui-41036006533.zip",
+      "bytes": 119921,
+      "sha256": "beb4e20468dd6dab613ee30c79d0f74336c01b32690c4d460f43322a382b70d9"
+    },
+    {
+      "path": ".local/bm25-remediation-2/phase1-remote/pr-artifacts.json",
+      "bytes": 3608,
+      "sha256": "d3606d03b5b6de16359f992b51670edf9621731023336838111bca7c001b2145"
+    },
+    {
+      "path": ".local/bm25-remediation-2/phase1-remote/pr-jobs.json",
+      "bytes": 23518,
+      "sha256": "79287a5e26fa2c921dd2484f2ad4515bcac15bf3beeb8eef757674e761626308"
+    },
+    {
+      "path": ".local/bm25-remediation-2/phase1-remote/pr-logs.zip",
+      "bytes": 130241,
+      "sha256": "60eef2e1bd6905034baf45c4e70a6519d8142d1409453bb0189a5209b6bbddd1"
+    },
+    {
+      "path": ".local/bm25-remediation-2/phase1-remote/pr-run.json",
+      "bytes": 15040,
+      "sha256": "bce43e4cf967e87a7b5c0d1d62ede9ccd7b7a6512285a528723875fcf73c6151"
+    },
+    {
+      "path": ".local/bm25-remediation-2/phase1-remote/push-artifacts.json",
+      "bytes": 3608,
+      "sha256": "c8138f7160fa454b3c2b89656a6050da09d8550378796c6c2e1da0ba6f4b7ca6"
+    },
+    {
+      "path": ".local/bm25-remediation-2/phase1-remote/push-jobs.json",
+      "bytes": 23518,
+      "sha256": "f155e3223ee3acd57880d32ff142f80f0f79ee966fe297f2af300505be4ad5e2"
+    },
+    {
+      "path": ".local/bm25-remediation-2/phase1-remote/push-logs.zip",
+      "bytes": 129480,
+      "sha256": "ff0a1bea30faab5d4c094488dae3ecad812a9773e5d5fa3648860d9b8a0abbc9"
+    },
+    {
+      "path": ".local/bm25-remediation-2/phase1-remote/push-run.json",
+      "bytes": 15038,
+      "sha256": "60be87ede548ffbff2d827e13f21f86b832ab046e14ca1bf89253751e5dfa429"
+    },
+    {
+      "path": ".local/bm25-remediation-2/phase1-remote/source-41035999451/archive-verification.json",
+      "bytes": 177,
+      "sha256": "ef691eef3fa6134e692f26483e09dc54911fe266153a97f9630427ef23a1e520"
+    },
+    {
+      "path": ".local/bm25-remediation-2/phase1-remote/source-41035999451/checksums.json",
+      "bytes": 1554,
+      "sha256": "e4e492ebd68c037b18892ba92a2327a05df14e37c0b769f542c4c61e1be599db"
+    },
+    {
+      "path": ".local/bm25-remediation-2/phase1-remote/source-41035999451/environment.json",
+      "bytes": 899,
+      "sha256": "5be82d0c367a5fae0f569253126bfa8b7c843eeddc906230a6a27c08c65fb308"
+    },
+    {
+      "path": ".local/bm25-remediation-2/phase1-remote/source-41035999451/history-secret-review.json",
+      "bytes": 511,
+      "sha256": "682e3b5711b431743af050c88662df024218062e2b95c95c70d6e1afe78418a4"
+    },
+    {
+      "path": ".local/bm25-remediation-2/phase1-remote/source-41035999451/history-secrets.json",
+      "bytes": 873,
+      "sha256": "e16f81ecf04d6f2cef6378e6d5791a029b6f28e93819653e879bceff40d448b0"
+    },
+    {
+      "path": ".local/bm25-remediation-2/phase1-remote/source-41035999451/junit.xml",
+      "bytes": 19931,
+      "sha256": "7421d4c9aa736b6afd898f6f5a11181f07b1c7ca4222eaeddcd0481066f1486b"
+    },
+    {
+      "path": ".local/bm25-remediation-2/phase1-remote/source-41035999451/license-inventory.json",
+      "bytes": 17688,
+      "sha256": "acd53437817e96b4a84b13f1e6b55c362b8e982c8a54c84e5aac85ee98d90b84"
+    },
+    {
+      "path": ".local/bm25-remediation-2/phase1-remote/source-41035999451/python-audit.json",
+      "bytes": 2174,
+      "sha256": "e0c7c24c6cce3f6ee636c85048b7851d73674e57d72112113e68cd2bb747168e"
+    },
+    {
+      "path": ".local/bm25-remediation-2/phase1-remote/source-41035999451/python-sbom.json",
+      "bytes": 59274,
+      "sha256": "1fe8bf05336850d6f704b073cce2cd506f2886281bf58882675d353fbf07da8f"
+    },
+    {
+      "path": ".local/bm25-remediation-2/phase1-remote/source-41035999451/source-manifest.json",
+      "bytes": 17480,
+      "sha256": "a121fdb6939b19be261ab7926179af983494976432a97b35530619ea40124f39"
+    },
+    {
+      "path": ".local/bm25-remediation-2/phase1-remote/source-41035999451/source.tar",
+      "bytes": 1024000,
+      "sha256": "611cc14d6cf16044922c186087588958ad8a9b30b36a4fa010c06f8606bde8ed"
+    },
+    {
+      "path": ".local/bm25-remediation-2/phase1-remote/source-41035999451.zip",
+      "bytes": 275840,
+      "sha256": "921a1f3aeffcc5346a3792a6ee8e89a76c891e217e0ca755e6875e8a39688af1"
+    },
+    {
+      "path": ".local/bm25-remediation-2/phase1-remote/source-41036006533/archive-verification.json",
+      "bytes": 177,
+      "sha256": "ef691eef3fa6134e692f26483e09dc54911fe266153a97f9630427ef23a1e520"
+    },
+    {
+      "path": ".local/bm25-remediation-2/phase1-remote/source-41036006533/checksums.json",
+      "bytes": 1554,
+      "sha256": "af932a0898ec2cd2247d572947e65b3435e03d32de0a5b4ccc8797c90aaf9baa"
+    },
+    {
+      "path": ".local/bm25-remediation-2/phase1-remote/source-41036006533/environment.json",
+      "bytes": 907,
+      "sha256": "7971c9ebe4bb568dde100d7c51ff14019a562653e3540290e28bea3fc228dac9"
+    },
+    {
+      "path": ".local/bm25-remediation-2/phase1-remote/source-41036006533/history-secret-review.json",
+      "bytes": 511,
+      "sha256": "682e3b5711b431743af050c88662df024218062e2b95c95c70d6e1afe78418a4"
+    },
+    {
+      "path": ".local/bm25-remediation-2/phase1-remote/source-41036006533/history-secrets.json",
+      "bytes": 873,
+      "sha256": "e16f81ecf04d6f2cef6378e6d5791a029b6f28e93819653e879bceff40d448b0"
+    },
+    {
+      "path": ".local/bm25-remediation-2/phase1-remote/source-41036006533/junit.xml",
+      "bytes": 19931,
+      "sha256": "c993b8c8ff07d095677487268dd0c271554be16626ab4eade2b82a55dbe8a799"
+    },
+    {
+      "path": ".local/bm25-remediation-2/phase1-remote/source-41036006533/license-inventory.json",
+      "bytes": 17688,
+      "sha256": "acd53437817e96b4a84b13f1e6b55c362b8e982c8a54c84e5aac85ee98d90b84"
+    },
+    {
+      "path": ".local/bm25-remediation-2/phase1-remote/source-41036006533/python-audit.json",
+      "bytes": 2174,
+      "sha256": "e0c7c24c6cce3f6ee636c85048b7851d73674e57d72112113e68cd2bb747168e"
+    },
+    {
+      "path": ".local/bm25-remediation-2/phase1-remote/source-41036006533/python-sbom.json",
+      "bytes": 59274,
+      "sha256": "83afe73dd53b080ec869272ba439a0c6bc14fbf01f85f900478a6ed80b67be93"
+    },
+    {
+      "path": ".local/bm25-remediation-2/phase1-remote/source-41036006533/source-manifest.json",
+      "bytes": 17480,
+      "sha256": "a121fdb6939b19be261ab7926179af983494976432a97b35530619ea40124f39"
+    },
+    {
+      "path": ".local/bm25-remediation-2/phase1-remote/source-41036006533/source.tar",
+      "bytes": 1024000,
+      "sha256": "611cc14d6cf16044922c186087588958ad8a9b30b36a4fa010c06f8606bde8ed"
+    },
+    {
+      "path": ".local/bm25-remediation-2/phase1-remote/source-41036006533.zip",
+      "bytes": 275809,
+      "sha256": "bba2e29a4c69488826fe35c4bc77fecbb269910ba05cf8fceedcf61be41c7a06"
+    },
+    {
+      "path": ".local/bm25-remediation-2/phase1-remote/trigger-inactive-41035999381/checksums.json",
+      "bytes": 175,
+      "sha256": "7bc2a482a79e9634667b67775bc5cf79ca2af8dd770e7d33119444bd00d72790"
+    },
+    {
+      "path": ".local/bm25-remediation-2/phase1-remote/trigger-inactive-41035999381/trigger-inactive.json",
+      "bytes": 267,
+      "sha256": "08800825df0f0506f590a6920236ac3a247f12de432e9ad13cff54e65914d759"
+    },
+    {
+      "path": ".local/bm25-remediation-2/phase1-remote/trigger-inactive-41035999381.zip",
+      "bytes": 604,
+      "sha256": "d742597e9ecfffd750f7791911d60efafda833984084d682144f97ec2ba544f6"
+    },
+    {
+      "path": ".local/bm25-remediation-2/phase1-remote/trigger-inactive-41036006247/checksums.json",
+      "bytes": 175,
+      "sha256": "8c737714feae28db5565d6de0066b9e596aac81794ccd8b79cc326d93d3f49ba"
+    },
+    {
+      "path": ".local/bm25-remediation-2/phase1-remote/trigger-inactive-41036006247/trigger-inactive.json",
+      "bytes": 267,
+      "sha256": "3bc7947801b2caf087a7250629d556152ba9542358da8b98d3499b07c931b4cf"
+    },
+    {
+      "path": ".local/bm25-remediation-2/phase1-remote/trigger-inactive-41036006247.zip",
+      "bytes": 604,
+      "sha256": "6ed33a6759f7bc550a7b28f8204307b5efc0dbe0a9d2c2243ed26892d3026f24"
+    },
+    {
+      "path": ".local/bm25-remediation-2/phase1-remote/verification.json",
+      "bytes": 11527,
+      "sha256": "5168d2805af68073aab6ee8acfb1233652d1a281b3e6c636b7b0dc4a4e7f2f22"
+    }
+  ]
+}

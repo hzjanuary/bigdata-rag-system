@@ -34,3 +34,17 @@ logs/
 
 # Docker env override
 .env.local
+.local/
+.pytest_cache/
+.ruff_cache/
+.coverage
+htmlcov/
+*.sqlite3*
+*.onnx
+*.safetensors
+*.bin
+*.pdf
+*.docx
+!tests/fixtures/**
+
+.mypy_cache/

@@ -1,0 +1,9 @@
+{
+  "image_id": "sha256:f3cbbbdb849765cd0290f25d3c1dca69f71d4f6d5499b59b0734d9674d850e01",
+  "source_sha": "02ad20787fd5a8c475aa0efa2e0802e98fb74d8b",
+  "health_http": 200,
+  "root_http": 200,
+  "no_operator_config_or_data_mount": true,
+  "scope": "HTTP startup only; no browser search or generation; API ACL tested separately",
+  "result": "PASS"
+}

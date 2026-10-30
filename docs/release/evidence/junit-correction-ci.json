@@ -1,0 +1,871 @@
+{
+  "status": "REMOTE_VERIFIED_EXPECTED_IMAGE_SECURITY_FAIL",
+  "tested_source_sha": "d54b899d665b04dff2db3bd8b7415f96d8b36c9a",
+  "draft_pr": "https://github.com/hzjanuary/bigdata-rag-system/pull/1",
+  "preserved_evidence_commit": "a9b68db879d2b6bf17cbd82f2f45170d7b5168fc",
+  "pushed_fix_commit": "d54b899d665b04dff2db3bd8b7415f96d8b36c9a",
+  "previous_failed_runs_preserved": [
+    41006969209,
+    41006993655
+  ],
+  "local_correction_report": "docs/release/evidence/junit-correction.json",
+  "remote_runs": [
+    {
+      "id": 41008646193,
+      "kind": "push",
+      "head_sha": "d54b899d665b04dff2db3bd8b7415f96d8b36c9a",
+      "event": "push",
+      "conclusion": "failure",
+      "url": "https://github.com/hzjanuary/bigdata-rag-system/actions/runs/41008646193",
+      "jobs": [
+        {
+          "id": 123909244781,
+          "name": "source",
+          "conclusion": "success",
+          "failed_steps": []
+        },
+        {
+          "id": 123909427920,
+          "name": "images (ui)",
+          "conclusion": "failure",
+          "failed_steps": [
+            "Unchanged HIGH/CRITICAL security gate"
+          ]
+        },
+        {
+          "id": 123909427947,
+          "name": "images (qdrant)",
+          "conclusion": "failure",
+          "failed_steps": [
+            "Unchanged HIGH/CRITICAL security gate"
+          ]
+        },
+        {
+          "id": 123909428028,
+          "name": "images (core)",
+          "conclusion": "failure",
+          "failed_steps": [
+            "Unchanged HIGH/CRITICAL security gate"
+          ]
+        },
+        {
+          "id": 123909429549,
+          "name": "independent-cpu",
+          "conclusion": "skipped",
+          "failed_steps": []
+        }
+      ],
+      "artifacts": [
+        {
+          "id": 12956980779,
+          "name": "source-41008646193",
+          "digest": "sha256:2b4c31744be5821136e6acfd5dedebb3a4cdb2cb10064eeb51994ea98cc37331",
+          "zip_bytes": 210791,
+          "manifest_files": 10,
+          "verification": "PASS: GitHub ZIP digest, CRC, exact file set, each byte size/SHA-256",
+          "archive": {
+            "result": "PASS",
+            "source_sha": "d54b899d665b04dff2db3bd8b7415f96d8b36c9a",
+            "files": 94,
+            "archive_sha256": "71d0ec6409dde0a07df21d5bc477cfcba6dcec16a5ac455053a6dddefa38f2df"
+          },
+          "junit": {
+            "bytes": 13082,
+            "cases": 115,
+            "max_name_characters": 97,
+            "suite_counts": {
+              "tests": 115,
+              "failures": 0,
+              "errors": 0,
+              "skipped": 1
+            }
+          }
+        },
+        {
+          "id": 12956234383,
+          "name": "image-ui-41008646193",
+          "digest": "sha256:fec6b60f772789c4c4b5804dc5b2ab736d5b824c64bed5f95778890c262e2462",
+          "zip_bytes": 119885,
+          "manifest_files": 6,
+          "verification": "PASS: GitHub ZIP digest, CRC, exact file set, each byte size/SHA-256",
+          "image": {
+            "variant": "ui",
+            "image_id": "sha256:1e6d88f5b44fda716eb4fd6fc4ca9e5f52b41231ad984f0b6f27c6d25d2a3606",
+            "source_label": "d54b899d665b04dff2db3bd8b7415f96d8b36c9a",
+            "severity_counts": {
+              "HIGH": 44
+            },
+            "distinct_high_critical_cves": 8,
+            "new_high_critical_records": [],
+            "removed_high_critical_records": [],
+            "new_license_records_vs_local": [],
+            "license_scan_records": 690,
+            "security_gate_actual_exit": 1
+          }
+        },
+        {
+          "id": 12956079873,
+          "name": "image-core-41008646193",
+          "digest": "sha256:aa18584752dbdad65d6a94c7227fe4b7c44464dc51fa4e7528c4d277e06884d6",
+          "zip_bytes": 116346,
+          "manifest_files": 7,
+          "verification": "PASS: GitHub ZIP digest, CRC, exact file set, each byte size/SHA-256",
+          "image": {
+            "variant": "core",
+            "image_id": "sha256:651aebf32b1fce107f6b45adabaaa53ac4fe9fc53ce839f53df1f15e6abdd9d3",
+            "source_label": "d54b899d665b04dff2db3bd8b7415f96d8b36c9a",
+            "severity_counts": {
+              "HIGH": 44
+            },
+            "distinct_high_critical_cves": 8,
+            "new_high_critical_records": [],
+            "removed_high_critical_records": [],
+            "new_license_records_vs_local": [],
+            "license_scan_records": 665,
+            "security_gate_actual_exit": 1
+          }
+        },
+        {
+          "id": 12955709331,
+          "name": "image-qdrant-41008646193",
+          "digest": "sha256:6400ae3db799edd6dce02812210d9f4fec7d6d5b0efed44678e3a13ed9f362a6",
+          "zip_bytes": 221879,
+          "manifest_files": 5,
+          "verification": "PASS: GitHub ZIP digest, CRC, exact file set, each byte size/SHA-256",
+          "image": {
+            "variant": "qdrant",
+            "image_id": "sha256:726aee9bfdc9d9b88438a19a397185db92b52e36447ca7132b379f0beaf135b8",
+            "source_label": "d54b899d665b04dff2db3bd8b7415f96d8b36c9a",
+            "severity_counts": {
+              "HIGH": 43
+            },
+            "distinct_high_critical_cves": 8,
+            "new_high_critical_records": [],
+            "removed_high_critical_records": [],
+            "new_license_records_vs_local": [],
+            "license_scan_records": 1347,
+            "security_gate_actual_exit": 1
+          }
+        }
+      ]
+    },
+    {
+      "id": 41008651605,
+      "kind": "pr",
+      "head_sha": "d54b899d665b04dff2db3bd8b7415f96d8b36c9a",
+      "event": "pull_request",
+      "conclusion": "failure",
+      "url": "https://github.com/hzjanuary/bigdata-rag-system/actions/runs/41008651605",
+      "jobs": [
+        {
+          "id": 123909261754,
+          "name": "source",
+          "conclusion": "success",
+          "failed_steps": []
+        },
+        {
+          "id": 123909462637,
+          "name": "images (ui)",
+          "conclusion": "failure",
+          "failed_steps": [
+            "Unchanged HIGH/CRITICAL security gate"
+          ]
+        },
+        {
+          "id": 123909462689,
+          "name": "images (qdrant)",
+          "conclusion": "failure",
+          "failed_steps": [
+            "Unchanged HIGH/CRITICAL security gate"
+          ]
+        },
+        {
+          "id": 123909462733,
+          "name": "images (core)",
+          "conclusion": "failure",
+          "failed_steps": [
+            "Unchanged HIGH/CRITICAL security gate"
+          ]
+        },
+        {
+          "id": 123909464524,
+          "name": "independent-cpu",
+          "conclusion": "skipped",
+          "failed_steps": []
+        }
+      ],
+      "artifacts": [
+        {
+          "id": 12957020599,
+          "name": "image-core-41008651605",
+          "digest": "sha256:d836a382beca5d8bb38d6c36d8d0d818c12fb309a2fd952c76d9c26f1b94fcfe",
+          "zip_bytes": 116329,
+          "manifest_files": 7,
+          "verification": "PASS: GitHub ZIP digest, CRC, exact file set, each byte size/SHA-256",
+          "image": {
+            "variant": "core",
+            "image_id": "sha256:8b1cb36be8a1bbeb2972bcf69ff564aea45485082d5e5137cc691f3333a14aa1",
+            "source_label": "d54b899d665b04dff2db3bd8b7415f96d8b36c9a",
+            "severity_counts": {
+              "HIGH": 44
+            },
+            "distinct_high_critical_cves": 8,
+            "new_high_critical_records": [],
+            "removed_high_critical_records": [],
+            "new_license_records_vs_local": [],
+            "license_scan_records": 665,
+            "security_gate_actual_exit": 1
+          }
+        },
+        {
+          "id": 12956337422,
+          "name": "source-41008651605",
+          "digest": "sha256:5669244d1b93f2d434129427926d72cd557acc9622558d3779f211480c7b78cc",
+          "zip_bytes": 210807,
+          "manifest_files": 10,
+          "verification": "PASS: GitHub ZIP digest, CRC, exact file set, each byte size/SHA-256",
+          "archive": {
+            "result": "PASS",
+            "source_sha": "d54b899d665b04dff2db3bd8b7415f96d8b36c9a",
+            "files": 94,
+            "archive_sha256": "71d0ec6409dde0a07df21d5bc477cfcba6dcec16a5ac455053a6dddefa38f2df"
+          },
+          "junit": {
+            "bytes": 13082,
+            "cases": 115,
+            "max_name_characters": 97,
+            "suite_counts": {
+              "tests": 115,
+              "failures": 0,
+              "errors": 0,
+              "skipped": 1
+            }
+          }
+        },
+        {
+          "id": 12956074887,
+          "name": "image-ui-41008651605",
+          "digest": "sha256:a7d52039725ffdf3b4dcadfaaf3572332ab6a81c4c1fe2e89c568852e6a96703",
+          "zip_bytes": 119928,
+          "manifest_files": 6,
+          "verification": "PASS: GitHub ZIP digest, CRC, exact file set, each byte size/SHA-256",
+          "image": {
+            "variant": "ui",
+            "image_id": "sha256:4aad551716106cf068e997471f5f5b5589a8e829a99464e0575746b5aff6d788",
+            "source_label": "d54b899d665b04dff2db3bd8b7415f96d8b36c9a",
+            "severity_counts": {
+              "HIGH": 44
+            },
+            "distinct_high_critical_cves": 8,
+            "new_high_critical_records": [],
+            "removed_high_critical_records": [],
+            "new_license_records_vs_local": [],
+            "license_scan_records": 690,
+            "security_gate_actual_exit": 1
+          }
+        },
+        {
+          "id": 12955973491,
+          "name": "image-qdrant-41008651605",
+          "digest": "sha256:df483afde7c0f9f66921b4cd391b03b62255e7e8cb299d8b6528b43e344f612a",
+          "zip_bytes": 221894,
+          "manifest_files": 5,
+          "verification": "PASS: GitHub ZIP digest, CRC, exact file set, each byte size/SHA-256",
+          "image": {
+            "variant": "qdrant",
+            "image_id": "sha256:9651456876b57c5e56238b4b144624c99cf6fbbd1c4ab499692b3eb29908a7d4",
+            "source_label": "d54b899d665b04dff2db3bd8b7415f96d8b36c9a",
+            "severity_counts": {
+              "HIGH": 43
+            },
+            "distinct_high_critical_cves": 8,
+            "new_high_critical_records": [],
+            "removed_high_critical_records": [],
+            "new_license_records_vs_local": [],
+            "license_scan_records": 1347,
+            "security_gate_actual_exit": 1
+          }
+        }
+      ]
+    }
+  ],
+  "artifact_zip_count": 8,
+  "all_artifact_digests_manifests_checksums_verified": true,
+  "remote_runner": {
+    "source_sha": "d54b899d665b04dff2db3bd8b7415f96d8b36c9a",
+    "os_release": "PRETTY_NAME=\"Ubuntu 24.04.5 LTS\"\nNAME=\"Ubuntu\"\nVERSION_ID=\"24.04\"\nVERSION=\"24.04.5 LTS (Noble Numbat)\"\nVERSION_CODENAME=noble\nID=ubuntu\nID_LIKE=debian\nHOME_URL=\"https://www.ubuntu.com/\"\nSUPPORT_URL=\"https://help.ubuntu.com/\"\nBUG_REPORT_URL=\"https://bugs.launchpad.net/ubuntu/\"\nPRIVACY_POLICY_URL=\"https://www.ubuntu.com/legal/terms-and-policies/privacy-policy\"\nUBUNTU_CODENAME=noble\nLOGO=ubuntu-logo\n",
+    "kernel": "7.0.0-1017-azure",
+    "python": "3.12.15",
+    "docker_server": "28.0.4",
+    "github_hosted": true,
+    "runner": {
+      "RUNNER_OS": "Linux",
+      "RUNNER_ARCH": "X64",
+      "RUNNER_ENVIRONMENT": "github-hosted",
+      "ImageOS": "ubuntu24",
+      "ImageVersion": "20261026.354.1",
+      "GITHUB_RUN_ID": "41008651605",
+      "GITHUB_RUN_ATTEMPT": "1",
+      "GITHUB_EVENT_NAME": "pull_request"
+    }
+  },
+  "junit_sizes": {
+    "original_retained": 6407084,
+    "fresh_before_fix": 6407083,
+    "local_after": 13067,
+    "remote": {
+      "41008646193": 13082,
+      "41008651605": 13082
+    }
+  },
+  "source_integrity": {
+    "archive_sha256": "71d0ec6409dde0a07df21d5bc477cfcba6dcec16a5ac455053a6dddefa38f2df",
+    "tracked_files": 94,
+    "runtime_packaging_workflow_changed_by_fix": false,
+    "original_payload_assertions_preserved_by_ast": true,
+    "security_artifact_limits_changed": false
+  },
+  "security_disposition": {
+    "core_high": 44,
+    "qdrant_high": 43,
+    "ui_high": 44,
+    "critical": 0,
+    "distinct_high_cves_per_image": 8,
+    "count_scope": "Per-image installed package findings; do not sum as unique CVEs",
+    "new_or_removed_high_critical_records": 0,
+    "new_license_records_vs_local": 0,
+    "raw_reports_preserved": true,
+    "severity_thresholds": "HIGH,CRITICAL, exit-code 1 unchanged",
+    "database_limit": "Fresh hosted scanners downloaded their own DB; DB metadata.json was not separately exported. Raw reports/logs retained; every HIGH/CRITICAL ID/package/version/severity/fix tuple matches baseline. No database identity equality claim."
+  },
+  "cpu_campaign": {
+    "status": "NOT_STARTED / independent-cpu SKIPPED on both synchronize/push runs",
+    "authorization_consumed": false,
+    "downloads": 0,
+    "embedding_calls": 0,
+    "generative_calls": 0,
+    "prepared_workflow": "docs/release/cpu-once.workflow.yml",
+    "operator_instructions": "docs/release/CPU-CAMPAIGN-TRIGGER.md",
+    "static_review": {
+      "prepared_file": "docs/release/cpu-once.workflow.yml",
+      "sha256": "37ddf6b0ba4697b4ee5023a67be9660b7fdd035e957b8a4231734119c3885007",
+      "yaml_parse": "PASS",
+      "embedded_python_compile": "PASS (2 blocks; not executed)",
+      "exact_sha_and_first_attempt_guards": "PASS static inspection",
+      "trigger_installed": false,
+      "operator_label_applied": false,
+      "model_campaign_started": false,
+      "live_api_permission_and_single_use_execution": "NOT_RUN; final operator decision required"
+    },
+    "operator_action_required": "Review/install inert workflow with normal feature push, inspect installation SHA, then owner applies exact SHA label once before fixed expiry; no trigger executed in this task",
+    "single_use_limit": "No immutable external authority; administrator deletion/modification can defeat marker controls. API/permission failures are fail-closed, no automatic retry."
+  },
+  "acceptance": {
+    "PASS": 21,
+    "FAIL": 1,
+    "BLOCKED": 2,
+    "RAG-15": "BLOCKED: generative campaign not authorized",
+    "RAG-20": "BLOCKED: independent CPU/model campaign not executed",
+    "RAG-21": "FAIL: known OS security gates still exit 1; oversized JUnit export defect corrected and remote source artifacts verified",
+    "other_PASS_rows": "Retained historical acceptance scope, plus current source CI; no new whole-stack CPU qualification claim"
+  },
+  "readiness": {
+    "source_functional_ci": "PASS at exact pushed SHA",
+    "source_only_preview": "Reviewable source; final readiness pending independent CPU campaign and explicit source-release decision. No publication authorized.",
+    "docker_images": "NOT_APPROVED: known HIGH OS findings, all six actual remote security gates exit 1",
+    "live_generation": "NOT_AUTHORIZED / NOT_RUN"
+  },
+  "retained_remote_files": [
+    {
+      "path": ".local/junit-resume-20261030/remote/image-core-41008646193/checksums.json",
+      "bytes": 1114,
+      "sha256": "b3b3a812987aa86d2dcdd34100a3b024ee44927ca392aff9cd69147be6847547"
+    },
+    {
+      "path": ".local/junit-resume-20261030/remote/image-core-41008646193/environment.json",
+      "bytes": 899,
+      "sha256": "1b1ea17a8ab892e1011fc661a013dc15c562ef58df78995c80b71781b5aa753e"
+    },
+    {
+      "path": ".local/junit-resume-20261030/remote/image-core-41008646193/image-inspect.json",
+      "bytes": 4149,
+      "sha256": "c6ff3f45392c57ac9fc15f45d3398bba2aa79fedc40feb1304165493d30724e2"
+    },
+    {
+      "path": ".local/junit-resume-20261030/remote/image-core-41008646193/image-inventory.json",
+      "bytes": 2807,
+      "sha256": "6177d7fba9e5210b6809d114df4b5aa16fee6b523ee8a624975857703105cc9d"
+    },
+    {
+      "path": ".local/junit-resume-20261030/remote/image-core-41008646193/image-licenses.json",
+      "bytes": 553158,
+      "sha256": "1da16a37d64a3acd346a52efaec272fe8c2512f0eea2f23989f13621010b169d"
+    },
+    {
+      "path": ".local/junit-resume-20261030/remote/image-core-41008646193/image-sbom.json",
+      "bytes": 219142,
+      "sha256": "fe4690cc5a7fd3def65b2ea4ac8d65c672271476cb6543478678ed9e7cb7cf82"
+    },
+    {
+      "path": ".local/junit-resume-20261030/remote/image-core-41008646193/image-vulnerabilities.json",
+      "bytes": 503642,
+      "sha256": "a342b285bcc50aa58f36b4b3eff43e0f24f93c0ce8fabf29295cd0a550a265b4"
+    },
+    {
+      "path": ".local/junit-resume-20261030/remote/image-core-41008646193/runtime-license-inventory.json",
+      "bytes": 7539,
+      "sha256": "eb7e6b8b9a25e48dc70f7d6e55ad275407e9847f962b47e0e2aa50f631eba4dc"
+    },
+    {
+      "path": ".local/junit-resume-20261030/remote/image-core-41008646193.zip",
+      "bytes": 116346,
+      "sha256": "aa18584752dbdad65d6a94c7227fe4b7c44464dc51fa4e7528c4d277e06884d6"
+    },
+    {
+      "path": ".local/junit-resume-20261030/remote/image-core-41008651605/checksums.json",
+      "bytes": 1114,
+      "sha256": "f0ea0832c767554876ed3f5ff0cd622eaeb89ea63a3d844c1958c2bcb4078cac"
+    },
+    {
+      "path": ".local/junit-resume-20261030/remote/image-core-41008651605/environment.json",
+      "bytes": 907,
+      "sha256": "51f4687d12e64a616f6fbe3a812eb6cd5f7beef8173e2b7c5715dc714b49a491"
+    },
+    {
+      "path": ".local/junit-resume-20261030/remote/image-core-41008651605/image-inspect.json",
+      "bytes": 4150,
+      "sha256": "5fac8ffb7e4e132e3b5065f861d94461a019a146ded99a50930311e56001ee91"
+    },
+    {
+      "path": ".local/junit-resume-20261030/remote/image-core-41008651605/image-inventory.json",
+      "bytes": 2807,
+      "sha256": "6b2ca8555cbe5f67273e47890ee38686c799ad7df249475a6b0beb3a0c967800"
+    },
+    {
+      "path": ".local/junit-resume-20261030/remote/image-core-41008651605/image-licenses.json",
+      "bytes": 553159,
+      "sha256": "8e1c4c08b3e1963d6bccf72c8afa62570c1270cefd0ea236c9b2f745d6f2dbd4"
+    },
+    {
+      "path": ".local/junit-resume-20261030/remote/image-core-41008651605/image-sbom.json",
+      "bytes": 219142,
+      "sha256": "5031b1b0347596b09b8f36126d0c04760eb94bda516482b035150ddc9553ecd6"
+    },
+    {
+      "path": ".local/junit-resume-20261030/remote/image-core-41008651605/image-vulnerabilities.json",
+      "bytes": 503643,
+      "sha256": "d2b82107f42194d238ade9326b8e234c7eabe3fca08b4c6a8c1f55ff0565a610"
+    },
+    {
+      "path": ".local/junit-resume-20261030/remote/image-core-41008651605/runtime-license-inventory.json",
+      "bytes": 7539,
+      "sha256": "eb7e6b8b9a25e48dc70f7d6e55ad275407e9847f962b47e0e2aa50f631eba4dc"
+    },
+    {
+      "path": ".local/junit-resume-20261030/remote/image-core-41008651605.zip",
+      "bytes": 116329,
+      "sha256": "d836a382beca5d8bb38d6c36d8d0d818c12fb309a2fd952c76d9c26f1b94fcfe"
+    },
+    {
+      "path": ".local/junit-resume-20261030/remote/image-qdrant-41008646193/checksums.json",
+      "bytes": 795,
+      "sha256": "086a6952a5cf55a3d4328d74492d1368e486244ea9664519bdf1cd4693a5e9d1"
+    },
+    {
+      "path": ".local/junit-resume-20261030/remote/image-qdrant-41008646193/environment.json",
+      "bytes": 899,
+      "sha256": "1b1ea17a8ab892e1011fc661a013dc15c562ef58df78995c80b71781b5aa753e"
+    },
+    {
+      "path": ".local/junit-resume-20261030/remote/image-qdrant-41008646193/image-inspect.json",
+      "bytes": 5941,
+      "sha256": "5cd953231acf09eff97a2ef42dc2fa86b933ee0a5a3799f60400812763607ff4"
+    },
+    {
+      "path": ".local/junit-resume-20261030/remote/image-qdrant-41008646193/image-licenses.json",
+      "bytes": 1153041,
+      "sha256": "53c395e38a28109aa205e5292de53dae7b31105e11b00b7e3e90062fc1452dcb"
+    },
+    {
+      "path": ".local/junit-resume-20261030/remote/image-qdrant-41008646193/image-sbom.json",
+      "bytes": 828444,
+      "sha256": "dd85baaacf26f4b77ed5ccc44e0c8b386cb00fd6e987f123104bf652bd268c6e"
+    },
+    {
+      "path": ".local/junit-resume-20261030/remote/image-qdrant-41008646193/image-vulnerabilities.json",
+      "bytes": 914929,
+      "sha256": "60f4727edfd11fbe94be2ae6967d790664b74ed6b59e02819664eb23d9461438"
+    },
+    {
+      "path": ".local/junit-resume-20261030/remote/image-qdrant-41008646193.zip",
+      "bytes": 221879,
+      "sha256": "6400ae3db799edd6dce02812210d9f4fec7d6d5b0efed44678e3a13ed9f362a6"
+    },
+    {
+      "path": ".local/junit-resume-20261030/remote/image-qdrant-41008651605/checksums.json",
+      "bytes": 795,
+      "sha256": "dc253a583d01862276b01d2881668de7d81019832fca386ed3262f7dd72c9a02"
+    },
+    {
+      "path": ".local/junit-resume-20261030/remote/image-qdrant-41008651605/environment.json",
+      "bytes": 907,
+      "sha256": "51f4687d12e64a616f6fbe3a812eb6cd5f7beef8173e2b7c5715dc714b49a491"
+    },
+    {
+      "path": ".local/junit-resume-20261030/remote/image-qdrant-41008651605/image-inspect.json",
+      "bytes": 5942,
+      "sha256": "7b792d70a8c0da996db7c3e68003e6a8d8851d772fc4edbf75af152c3a885681"
+    },
+    {
+      "path": ".local/junit-resume-20261030/remote/image-qdrant-41008651605/image-licenses.json",
+      "bytes": 1153042,
+      "sha256": "4f2735b011c5b10bf0421a1c6dcdd55331d1cb9667c7b0da70f622e3ac407a28"
+    },
+    {
+      "path": ".local/junit-resume-20261030/remote/image-qdrant-41008651605/image-sbom.json",
+      "bytes": 828444,
+      "sha256": "dbcaa45a861310cb445ed179e9d430d36389ed86a7f1d544535f487650355a43"
+    },
+    {
+      "path": ".local/junit-resume-20261030/remote/image-qdrant-41008651605/image-vulnerabilities.json",
+      "bytes": 914930,
+      "sha256": "3a7759e8d50488e7a2eb0d4546aa2f5f7e8e327a0d46b19c93d481de72eb93b2"
+    },
+    {
+      "path": ".local/junit-resume-20261030/remote/image-qdrant-41008651605.zip",
+      "bytes": 221894,
+      "sha256": "df483afde7c0f9f66921b4cd391b03b62255e7e8cb299d8b6528b43e344f612a"
+    },
+    {
+      "path": ".local/junit-resume-20261030/remote/image-ui-41008646193/checksums.json",
+      "bytes": 960,
+      "sha256": "f1f391c2577fbe35441764ed71899736c6d38f013460f9d3cc86c8366d13dcef"
+    },
+    {
+      "path": ".local/junit-resume-20261030/remote/image-ui-41008646193/environment.json",
+      "bytes": 899,
+      "sha256": "1b1ea17a8ab892e1011fc661a013dc15c562ef58df78995c80b71781b5aa753e"
+    },
+    {
+      "path": ".local/junit-resume-20261030/remote/image-ui-41008646193/image-inspect.json",
+      "bytes": 3729,
+      "sha256": "0e336c1acd8065a003d320b952d01ee03919f95c4184467e179081cdb461571f"
+    },
+    {
+      "path": ".local/junit-resume-20261030/remote/image-ui-41008646193/image-licenses.json",
+      "bytes": 572714,
+      "sha256": "5b6ca85088acf2794513408499a4fbce3a8cf837ed4879b77c216a9cb10ce49b"
+    },
+    {
+      "path": ".local/junit-resume-20261030/remote/image-ui-41008646193/image-sbom.json",
+      "bytes": 243357,
+      "sha256": "f2bd7c41c08172fc5a41f06280a0930fabca02894ce103b1ca82807f9bc041ab"
+    },
+    {
+      "path": ".local/junit-resume-20261030/remote/image-ui-41008646193/image-vulnerabilities.json",
+      "bytes": 515304,
+      "sha256": "190113a70faa1c88d3308c555d493efb496967c32e3f32585997833cf6299de8"
+    },
+    {
+      "path": ".local/junit-resume-20261030/remote/image-ui-41008646193/runtime-license-inventory.json",
+      "bytes": 12163,
+      "sha256": "8c3e8b3c43c9fe80ec22e0a358c8b842227bf7f19f8224e9963daa252f737710"
+    },
+    {
+      "path": ".local/junit-resume-20261030/remote/image-ui-41008646193.zip",
+      "bytes": 119885,
+      "sha256": "fec6b60f772789c4c4b5804dc5b2ab736d5b824c64bed5f95778890c262e2462"
+    },
+    {
+      "path": ".local/junit-resume-20261030/remote/image-ui-41008651605/checksums.json",
+      "bytes": 960,
+      "sha256": "0c0fbcae9f257b8ef222dadd84dbfca111a0aafb7b9bd505da503c8ee57cef72"
+    },
+    {
+      "path": ".local/junit-resume-20261030/remote/image-ui-41008651605/environment.json",
+      "bytes": 907,
+      "sha256": "51f4687d12e64a616f6fbe3a812eb6cd5f7beef8173e2b7c5715dc714b49a491"
+    },
+    {
+      "path": ".local/junit-resume-20261030/remote/image-ui-41008651605/image-inspect.json",
+      "bytes": 3729,
+      "sha256": "c735be8b9fb6f636d3d9c32bbd0e4288062d5a62782e2d256fb4d68b8fc31574"
+    },
+    {
+      "path": ".local/junit-resume-20261030/remote/image-ui-41008651605/image-licenses.json",
+      "bytes": 572714,
+      "sha256": "f4c0d288116f6e9aed33ad3fbec1d1ffd0c229cb57651e630940d42af660e322"
+    },
+    {
+      "path": ".local/junit-resume-20261030/remote/image-ui-41008651605/image-sbom.json",
+      "bytes": 243357,
+      "sha256": "b50fb07174f22520a3b0d1d8afcb29de633a299a6133301e9ae606d83cb5fd8d"
+    },
+    {
+      "path": ".local/junit-resume-20261030/remote/image-ui-41008651605/image-vulnerabilities.json",
+      "bytes": 515304,
+      "sha256": "24d285a4a0cc16e50c273296ce451e264c0565413434ce167e46527573da521d"
+    },
+    {
+      "path": ".local/junit-resume-20261030/remote/image-ui-41008651605/runtime-license-inventory.json",
+      "bytes": 12163,
+      "sha256": "8c3e8b3c43c9fe80ec22e0a358c8b842227bf7f19f8224e9963daa252f737710"
+    },
+    {
+      "path": ".local/junit-resume-20261030/remote/image-ui-41008651605.zip",
+      "bytes": 119928,
+      "sha256": "a7d52039725ffdf3b4dcadfaaf3572332ab6a81c4c1fe2e89c568852e6a96703"
+    },
+    {
+      "path": ".local/junit-resume-20261030/remote/pr-artifacts-source.json",
+      "bytes": 756,
+      "sha256": "c3a7b31219eca9da8f42bd558f9f38b21fbec3ba63def1464868602f7f351005"
+    },
+    {
+      "path": ".local/junit-resume-20261030/remote/pr-artifacts.json",
+      "bytes": 3608,
+      "sha256": "879111bb106c2698155b50ab9624b4b03e879784eae65cc96a9d336ee07b9639"
+    },
+    {
+      "path": ".local/junit-resume-20261030/remote/pr-jobs.json",
+      "bytes": 24640,
+      "sha256": "f77c57c00e1971729d6177e289d176499dd455ab9c30f1fd63cc8925f62a528d"
+    },
+    {
+      "path": ".local/junit-resume-20261030/remote/pr-logs.zip",
+      "bytes": 129487,
+      "sha256": "f0ae1c299b9342c9c20969ac1749a89babcde21fedbfa3bb939d4fcc5988c45d"
+    },
+    {
+      "path": ".local/junit-resume-20261030/remote/pr-run.json",
+      "bytes": 15039,
+      "sha256": "4da57327e74825c99a2c086ab2d7ba0fcc25cc445d3c3c9f0e3922d6e2bf5f39"
+    },
+    {
+      "path": ".local/junit-resume-20261030/remote/push-artifacts.json",
+      "bytes": 3608,
+      "sha256": "5fcd84d7961c38362edc5d8ae58a4f7f2869d735d694bea989ac2d89901e8721"
+    },
+    {
+      "path": ".local/junit-resume-20261030/remote/push-jobs.json",
+      "bytes": 24640,
+      "sha256": "9d0cc9c8bcef47d67634fa2b25c95319c9c29d6ae0052dfa1e2284b19adce802"
+    },
+    {
+      "path": ".local/junit-resume-20261030/remote/push-logs.zip",
+      "bytes": 129208,
+      "sha256": "32e7c2e5ba39a07242a12e98dcf11ae2de9d7f021be2e162c59bbb9feb9c90c6"
+    },
+    {
+      "path": ".local/junit-resume-20261030/remote/push-run.json",
+      "bytes": 15034,
+      "sha256": "d901ce0d8cb6e3879e6567a4d80f6cc99a903e0dbb5adc1b7062b2eca7d352e1"
+    },
+    {
+      "path": ".local/junit-resume-20261030/remote/source-41008646193/archive-verification.json",
+      "bytes": 176,
+      "sha256": "6e472b2b2b1a71a889ddc9cb12c5b0f557caa9377349da2e27dd7aa3d55c194a"
+    },
+    {
+      "path": ".local/junit-resume-20261030/remote/source-41008646193/checksums.json",
+      "bytes": 1553,
+      "sha256": "04b49d0af93e20b3459359402e006906b3f29be3afc72186f81fa87a6f1be420"
+    },
+    {
+      "path": ".local/junit-resume-20261030/remote/source-41008646193/environment.json",
+      "bytes": 899,
+      "sha256": "1b1ea17a8ab892e1011fc661a013dc15c562ef58df78995c80b71781b5aa753e"
+    },
+    {
+      "path": ".local/junit-resume-20261030/remote/source-41008646193/history-secret-review.json",
+      "bytes": 511,
+      "sha256": "682e3b5711b431743af050c88662df024218062e2b95c95c70d6e1afe78418a4"
+    },
+    {
+      "path": ".local/junit-resume-20261030/remote/source-41008646193/history-secrets.json",
+      "bytes": 873,
+      "sha256": "e16f81ecf04d6f2cef6378e6d5791a029b6f28e93819653e879bceff40d448b0"
+    },
+    {
+      "path": ".local/junit-resume-20261030/remote/source-41008646193/junit.xml",
+      "bytes": 13082,
+      "sha256": "5f2eeac6623e3cf843cf6e6c3501bed86c20ec71ef3852fb5b7c366cd5fc137f"
+    },
+    {
+      "path": ".local/junit-resume-20261030/remote/source-41008646193/license-inventory.json",
+      "bytes": 17688,
+      "sha256": "acd53437817e96b4a84b13f1e6b55c362b8e982c8a54c84e5aac85ee98d90b84"
+    },
+    {
+      "path": ".local/junit-resume-20261030/remote/source-41008646193/python-audit.json",
+      "bytes": 2174,
+      "sha256": "e0c7c24c6cce3f6ee636c85048b7851d73674e57d72112113e68cd2bb747168e"
+    },
+    {
+      "path": ".local/junit-resume-20261030/remote/source-41008646193/python-sbom.json",
+      "bytes": 59274,
+      "sha256": "b4b9ac3bebf6e43d76f285bbe6b714d0de271444c9e7e8dbc409ca2787ef958e"
+    },
+    {
+      "path": ".local/junit-resume-20261030/remote/source-41008646193/source-manifest.json",
+      "bytes": 15203,
+      "sha256": "a72fc8f829e7f945d517bf1c65b11dd94d6d7c65a2a741ef027d4f2f7a0dd9fd"
+    },
+    {
+      "path": ".local/junit-resume-20261030/remote/source-41008646193/source.tar",
+      "bytes": 778240,
+      "sha256": "71d0ec6409dde0a07df21d5bc477cfcba6dcec16a5ac455053a6dddefa38f2df"
+    },
+    {
+      "path": ".local/junit-resume-20261030/remote/source-41008646193.zip",
+      "bytes": 210791,
+      "sha256": "2b4c31744be5821136e6acfd5dedebb3a4cdb2cb10064eeb51994ea98cc37331"
+    },
+    {
+      "path": ".local/junit-resume-20261030/remote/source-41008651605/archive-verification.json",
+      "bytes": 176,
+      "sha256": "6e472b2b2b1a71a889ddc9cb12c5b0f557caa9377349da2e27dd7aa3d55c194a"
+    },
+    {
+      "path": ".local/junit-resume-20261030/remote/source-41008651605/checksums.json",
+      "bytes": 1553,
+      "sha256": "2e6012351d96f0e4d37c70549764a6ebe3adb1ac3697890b5ff4317497bf340c"
+    },
+    {
+      "path": ".local/junit-resume-20261030/remote/source-41008651605/environment.json",
+      "bytes": 907,
+      "sha256": "51f4687d12e64a616f6fbe3a812eb6cd5f7beef8173e2b7c5715dc714b49a491"
+    },
+    {
+      "path": ".local/junit-resume-20261030/remote/source-41008651605/history-secret-review.json",
+      "bytes": 511,
+      "sha256": "682e3b5711b431743af050c88662df024218062e2b95c95c70d6e1afe78418a4"
+    },
+    {
+      "path": ".local/junit-resume-20261030/remote/source-41008651605/history-secrets.json",
+      "bytes": 873,
+      "sha256": "e16f81ecf04d6f2cef6378e6d5791a029b6f28e93819653e879bceff40d448b0"
+    },
+    {
+      "path": ".local/junit-resume-20261030/remote/source-41008651605/junit.xml",
+      "bytes": 13082,
+      "sha256": "60d8b389aed5dd54a6d7ee446e49ecbad329105152c8a63e08005f5d6c767515"
+    },
+    {
+      "path": ".local/junit-resume-20261030/remote/source-41008651605/license-inventory.json",
+      "bytes": 17688,
+      "sha256": "acd53437817e96b4a84b13f1e6b55c362b8e982c8a54c84e5aac85ee98d90b84"
+    },
+    {
+      "path": ".local/junit-resume-20261030/remote/source-41008651605/python-audit.json",
+      "bytes": 2174,
+      "sha256": "e0c7c24c6cce3f6ee636c85048b7851d73674e57d72112113e68cd2bb747168e"
+    },
+    {
+      "path": ".local/junit-resume-20261030/remote/source-41008651605/python-sbom.json",
+      "bytes": 59274,
+      "sha256": "12aad61bbb0137d9f842ad05778a25422b9f3eff9dfeb42986f79d4059b204c3"
+    },
+    {
+      "path": ".local/junit-resume-20261030/remote/source-41008651605/source-manifest.json",
+      "bytes": 15203,
+      "sha256": "a72fc8f829e7f945d517bf1c65b11dd94d6d7c65a2a741ef027d4f2f7a0dd9fd"
+    },
+    {
+      "path": ".local/junit-resume-20261030/remote/source-41008651605/source.tar",
+      "bytes": 778240,
+      "sha256": "71d0ec6409dde0a07df21d5bc477cfcba6dcec16a5ac455053a6dddefa38f2df"
+    },
+    {
+      "path": ".local/junit-resume-20261030/remote/source-41008651605.zip",
+      "bytes": 210807,
+      "sha256": "5669244d1b93f2d434129427926d72cd557acc9622558d3779f211480c7b78cc"
+    },
+    {
+      "path": ".local/junit-resume-20261030/remote/source-pr/archive-verification.json",
+      "bytes": 176,
+      "sha256": "6e472b2b2b1a71a889ddc9cb12c5b0f557caa9377349da2e27dd7aa3d55c194a"
+    },
+    {
+      "path": ".local/junit-resume-20261030/remote/source-pr/checksums.json",
+      "bytes": 1553,
+      "sha256": "2e6012351d96f0e4d37c70549764a6ebe3adb1ac3697890b5ff4317497bf340c"
+    },
+    {
+      "path": ".local/junit-resume-20261030/remote/source-pr/environment.json",
+      "bytes": 907,
+      "sha256": "51f4687d12e64a616f6fbe3a812eb6cd5f7beef8173e2b7c5715dc714b49a491"
+    },
+    {
+      "path": ".local/junit-resume-20261030/remote/source-pr/history-secret-review.json",
+      "bytes": 511,
+      "sha256": "682e3b5711b431743af050c88662df024218062e2b95c95c70d6e1afe78418a4"
+    },
+    {
+      "path": ".local/junit-resume-20261030/remote/source-pr/history-secrets.json",
+      "bytes": 873,
+      "sha256": "e16f81ecf04d6f2cef6378e6d5791a029b6f28e93819653e879bceff40d448b0"
+    },
+    {
+      "path": ".local/junit-resume-20261030/remote/source-pr/junit.xml",
+      "bytes": 13082,
+      "sha256": "60d8b389aed5dd54a6d7ee446e49ecbad329105152c8a63e08005f5d6c767515"
+    },
+    {
+      "path": ".local/junit-resume-20261030/remote/source-pr/license-inventory.json",
+      "bytes": 17688,
+      "sha256": "acd53437817e96b4a84b13f1e6b55c362b8e982c8a54c84e5aac85ee98d90b84"
+    },
+    {
+      "path": ".local/junit-resume-20261030/remote/source-pr/python-audit.json",
+      "bytes": 2174,
+      "sha256": "e0c7c24c6cce3f6ee636c85048b7851d73674e57d72112113e68cd2bb747168e"
+    },
+    {
+      "path": ".local/junit-resume-20261030/remote/source-pr/python-sbom.json",
+      "bytes": 59274,
+      "sha256": "12aad61bbb0137d9f842ad05778a25422b9f3eff9dfeb42986f79d4059b204c3"
+    },
+    {
+      "path": ".local/junit-resume-20261030/remote/source-pr/source-manifest.json",
+      "bytes": 15203,
+      "sha256": "a72fc8f829e7f945d517bf1c65b11dd94d6d7c65a2a741ef027d4f2f7a0dd9fd"
+    },
+    {
+      "path": ".local/junit-resume-20261030/remote/source-pr/source.tar",
+      "bytes": 778240,
+      "sha256": "71d0ec6409dde0a07df21d5bc477cfcba6dcec16a5ac455053a6dddefa38f2df"
+    },
+    {
+      "path": ".local/junit-resume-20261030/remote/source-pr.zip",
+      "bytes": 210807,
+      "sha256": "5669244d1b93f2d434129427926d72cd557acc9622558d3779f211480c7b78cc"
+    },
+    {
+      "path": ".local/junit-resume-20261030/remote/verification.json",
+      "bytes": 9133,
+      "sha256": "4a572ad8dffb5d38bc613d32b92a350695e46a419de7a09010afd670228f98a0"
+    }
+  ],
+  "final_documentation_review": {
+    "classification": "Verified public technical prose false positive, no credential; unpublished draft wording rephrased with identical meaning. No detector, rule, allowlist or history change.",
+    "draft_path": "docs/release/CPU-CAMPAIGN-TRIGGER.md",
+    "original_public_lines_sha256": "6163f507119ea75d7761b615aeb5644f3f9cf36bdb179cf2c3738324e81beafc",
+    "first_scan_exit": 1,
+    "second_scan_exit": 0,
+    "preserved_evidence": [
+      {
+        "path": ".local/junit-resume-20261030/final-source-secrets.log",
+        "sha256": "224ff3385eef3d76792745b7c7ae68a933660bf7f25b43116440ab5cf0bc483d"
+      },
+      {
+        "path": ".local/junit-resume-20261030/final-source-findings.json",
+        "sha256": "e72c7fe8f99c296caad5d8b631eb578a8a07b1932fd7668da63d2ba58339c553"
+      },
+      {
+        "path": ".local/junit-resume-20261030/final-source-secrets-2.log",
+        "sha256": "91343bf365808b17511a6f176b22c0cb419f060fba4018dd6beaee191517d7de"
+      }
+    ]
+  }
+}

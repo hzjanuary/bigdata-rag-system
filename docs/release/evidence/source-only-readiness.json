@@ -1,0 +1,326 @@
+{
+  "recommendation": "SOURCE-ONLY READY FOR OWNER DECISION",
+  "publication_authorized": false,
+  "runtime_tested_sha": "287212be8f5683221d2449158331e59d4c639c15",
+  "pr_head_at_review": "287212be8f5683221d2449158331e59d4c639c15",
+  "local_prior_documentation_commit": "e2dc53794ebaf8da85ab7cff7696bec22df0bb75",
+  "local_candidate": "Subsequent reconciliation commit, documentation/evidence-only; exact commit and archive digest retained in ignored final handoff manifest to avoid self-reference.",
+  "runtime_source_archive_sha256": "95b9ef21d11df4d98678e85bb38b1906f92326394e0b1097426a318535c9e0b6",
+  "campaign_images": {
+    "core": "sha256:c69881b500ac2ef060d845063db473f69c1e0f7f5672b0f68651049dff51c969",
+    "qdrant": "sha256:05227f8fccb7abfe5553aabdc0f36762058e1730eba9a2cb1a81577d01d15033",
+    "identity_kind": "Local runner Docker image IDs, not published registry descriptors",
+    "build_source_sha": "287212be8f5683221d2449158331e59d4c639c15",
+    "limit": "Functional campaign builds differ from separate source-CI security scan builds; no byte-identical claim or separate campaign image-config inspection export."
+  },
+  "security_scan_images": [
+    {
+      "variant": "core",
+      "image_id": "sha256:62e373fe13b881f33c79d8d3bbe52aabde71045e1cb3d022240e1c40bdeb2439",
+      "source_label": "287212be8f5683221d2449158331e59d4c639c15",
+      "severity_counts": {
+        "HIGH": 44
+      },
+      "distinct_high_critical_cves": 8,
+      "new_high_critical_records": [],
+      "removed_high_critical_records": [],
+      "license_records_unchanged": true,
+      "actual_security_gate_exit": 1,
+      "artifact_id": 12969555839,
+      "artifact_zip_digest": "sha256:8e302b8cdb5520031600052c22bf26ece5c4c6bcd0fdfd7ef9378a2eb40a4823"
+    },
+    {
+      "variant": "ui",
+      "image_id": "sha256:88f87a6b3e3ac835927725008229e04888f39204b139f72aaeacb4683f3e2e96",
+      "source_label": "287212be8f5683221d2449158331e59d4c639c15",
+      "severity_counts": {
+        "HIGH": 44
+      },
+      "distinct_high_critical_cves": 8,
+      "new_high_critical_records": [],
+      "removed_high_critical_records": [],
+      "license_records_unchanged": true,
+      "actual_security_gate_exit": 1,
+      "artifact_id": 12968877744,
+      "artifact_zip_digest": "sha256:260f122fdd38d9626d5bde66bd3dd38523d3ea109c83d0ed3f2d8d522ae2d1a0"
+    },
+    {
+      "variant": "qdrant",
+      "image_id": "sha256:21341cd65f3688f126370e35aaec868570ca8ce5dc4b461da2da150c5ed6bc44",
+      "source_label": "287212be8f5683221d2449158331e59d4c639c15",
+      "severity_counts": {
+        "HIGH": 43
+      },
+      "distinct_high_critical_cves": 8,
+      "new_high_critical_records": [],
+      "removed_high_critical_records": [],
+      "license_records_unchanged": true,
+      "actual_security_gate_exit": 1,
+      "artifact_id": 12968453916,
+      "artifact_zip_digest": "sha256:7a839ab0a0ac39a0f5c4a30f22c83450225723a97606fb18bfb586cf198978b8"
+    }
+  ],
+  "source_ci": [
+    {
+      "id": 41038452232,
+      "head_sha": "287212be8f5683221d2449158331e59d4c639c15",
+      "overall": "failure",
+      "jobs": [
+        {
+          "id": 124005003602,
+          "name": "source",
+          "conclusion": "success",
+          "failed_steps": []
+        },
+        {
+          "id": 124005374943,
+          "name": "images (core)",
+          "conclusion": "failure",
+          "failed_steps": [
+            "Unchanged HIGH/CRITICAL security gate"
+          ]
+        },
+        {
+          "id": 124005374947,
+          "name": "images (ui)",
+          "conclusion": "failure",
+          "failed_steps": [
+            "Unchanged HIGH/CRITICAL security gate"
+          ]
+        },
+        {
+          "id": 124005375113,
+          "name": "images (qdrant)",
+          "conclusion": "failure",
+          "failed_steps": [
+            "Unchanged HIGH/CRITICAL security gate"
+          ]
+        }
+      ]
+    },
+    {
+      "id": 41038457036,
+      "head_sha": "287212be8f5683221d2449158331e59d4c639c15",
+      "overall": "failure",
+      "jobs": [
+        {
+          "id": 124005019817,
+          "name": "source",
+          "conclusion": "success",
+          "failed_steps": []
+        },
+        {
+          "id": 124005452637,
+          "name": "images (qdrant)",
+          "conclusion": "failure",
+          "failed_steps": [
+            "Unchanged HIGH/CRITICAL security gate"
+          ]
+        },
+        {
+          "id": 124005452714,
+          "name": "images (core)",
+          "conclusion": "failure",
+          "failed_steps": [
+            "Unchanged HIGH/CRITICAL security gate"
+          ]
+        },
+        {
+          "id": 124005452878,
+          "name": "images (ui)",
+          "conclusion": "failure",
+          "failed_steps": [
+            "Unchanged HIGH/CRITICAL security gate"
+          ]
+        }
+      ]
+    }
+  ],
+  "local_verification": {
+    "deterministic": "194 PASS / one skipped; actual JUnit generated",
+    "real_qdrant_contract": "1 PASS, existing fixture-vector contract against fresh disposable actual Qdrant server",
+    "qdrant_host_limit": "Default subnet pools exhausted before first launch; separate successful probe used existing default bridge and loopback ephemeral port. No retained data/networks deleted, no source change.",
+    "ruff_black_mypy": "PASS",
+    "lock_frozen_install": "PASS",
+    "license_inventory": {
+      "scope": "development",
+      "packages": 92,
+      "unapproved": 0
+    },
+    "hash_locked_runtime_dependency_audit": {
+      "packages": 38,
+      "known_vulnerabilities": 0
+    },
+    "compose_default_and_optional_ui": "PASS",
+    "model_acquisition_or_cpu_campaign_this_reconciliation": false,
+    "junit": {
+      "bytes": 23672,
+      "cases": 195,
+      "passed": 194,
+      "skipped": 1,
+      "failures": 0,
+      "errors": 0,
+      "parseable": true,
+      "below_original_artifact_limit": true
+    },
+    "source_archive_and_private_path_gate": "PASS: 113 exact regular text source files; staged tree archive exact membership/size/hash, no weights/private state",
+    "current_source_secret_scan": "PASS: zero findings on exact archive, unchanged pinned scanner",
+    "history_secret_gate": "PASS_WITH_REVIEWED_PUBLIC_HASH: exactly one original public Git blob false positive, raw exit1; zero unreviewed findings, no new exceptions",
+    "runtime_packaging_input_equivalence": {
+      "baseline_sha": "287212be8f5683221d2449158331e59d4c639c15",
+      "non_documentation_inputs_compared": 67,
+      "result": "PASS: all bytes unchanged; git diff has no executable/packaging/mode changes"
+    },
+    "artifact_gate": "PASS on isolated copy of actual sanitized campaign reports; original artifact unchanged",
+    "readme_cli_bootstrap": "PASS: actual CLI help/private init, config0600/state0700; no model/provider/network call"
+  },
+  "acceptance": {
+    "PASS": [
+      "RAG-01",
+      "RAG-02",
+      "RAG-03",
+      "RAG-04",
+      "RAG-05",
+      "RAG-06",
+      "RAG-07",
+      "RAG-08",
+      "RAG-09",
+      "RAG-10",
+      "RAG-11",
+      "RAG-12",
+      "RAG-13",
+      "RAG-14",
+      "RAG-16",
+      "RAG-17",
+      "RAG-18",
+      "RAG-19",
+      "RAG-20",
+      "RAG-22",
+      "RAG-23",
+      "RAG-24"
+    ],
+    "FAIL": [
+      "RAG-21"
+    ],
+    "BLOCKED": [
+      "RAG-15"
+    ],
+    "totals": {
+      "PASS": 22,
+      "FAIL": 1,
+      "BLOCKED": 1
+    }
+  },
+  "pr": {
+    "url": "https://github.com/hzjanuary/bigdata-rag-system/pull/1",
+    "state": "open",
+    "draft": true,
+    "merged": false,
+    "labels_preserved": [
+      "cpuq1:ba78e94d82b7972e96a9bae962cbb8ada73d6619",
+      "cpuq2:287212be8f5683221d2449158331e59d4c639c15"
+    ]
+  },
+  "main_protection": {
+    "read_only_review": true,
+    "rulesets": [
+      {
+        "id": 26194925,
+        "name": "main \u2014 changes through pull requests",
+        "enforcement": "active",
+        "bypass_actors": [],
+        "conditions": {
+          "ref_name": {
+            "exclude": [],
+            "include": [
+              "refs/heads/main"
+            ]
+          }
+        },
+        "rules": [
+          {
+            "type": "pull_request",
+            "parameters": {
+              "required_approving_review_count": 0,
+              "dismiss_stale_reviews_on_push": false,
+              "required_reviewers": [],
+              "require_code_owner_review": false,
+              "require_last_push_approval": false,
+              "required_review_thread_resolution": true,
+              "require_extra_approval_for_unattributed_changes": true,
+              "allowed_merge_methods": [
+                "merge",
+                "squash"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "id": 26194913,
+        "name": "main \u2014 prevent deletion and force pushes",
+        "enforcement": "active",
+        "bypass_actors": [],
+        "conditions": {
+          "ref_name": {
+            "exclude": [],
+            "include": [
+              "refs/heads/main"
+            ]
+          }
+        },
+        "rules": [
+          {
+            "type": "deletion"
+          },
+          {
+            "type": "non_fast_forward"
+          }
+        ]
+      },
+      {
+        "id": 26194964,
+        "name": "main \u2014 require source CI (not vulnerable images)",
+        "enforcement": "active",
+        "bypass_actors": [],
+        "conditions": {
+          "ref_name": {
+            "exclude": [],
+            "include": [
+              "refs/heads/main"
+            ]
+          }
+        },
+        "rules": [
+          {
+            "type": "required_status_checks",
+            "parameters": {
+              "strict_required_status_checks_policy": true,
+              "do_not_enforce_on_create": true,
+              "required_status_checks": [
+                {
+                  "context": "source",
+                  "integration_id": 15368
+                }
+              ]
+            }
+          }
+        ]
+      }
+    ],
+    "classic_protection_api": 404,
+    "effective_ruleset_protection": true,
+    "unresolved_review_threads": 0,
+    "no_settings_changed_or_bypassed": true
+  },
+  "license": "Project MIT LICENSE and NOTICE unchanged. Refreshed development inventory includes existing locked Black/MyPy dependencies; runtime/UI inventories retain their scopes.",
+  "remaining": [
+    "Explicit owner approval for source-only preview in this repository.",
+    "Normal push of documentation/evidence commits and required source CI on final PR HEAD before authorized merge/release; no CPU rerun for docs-only delta.",
+    "Follow active main rulesets, keep main up to date, resolve threads and obtain authorization to transition Draft/merge.",
+    "Explicit exact release commit/tag/version and source-only GitHub pre-release authorization; reverify final archive/hash.",
+    "Any executable/packaging change requires a new verification decision.",
+    "Image publication blocked: core44/Qdrant43/UI44 HIGH findings; raw scans and exit1 retained.",
+    "RAG-15 live generative provider verification remains separately authorized scope."
+  ]
+}

@@ -1,0 +1,120 @@
+name: locked-core
+on:
+  push:
+    branches: [feat/spec-001-oss-rag-core]
+  pull_request:
+    types: [opened, synchronize, reopened]
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: spec001-${{ github.event_name }}-${{ github.ref }}
+  cancel-in-progress: false
+jobs:
+  source:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
+          fetch-depth: 0
+          persist-credentials: false
+      - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065
+        with:
+          python-version: '3.12'
+      - run: python -m pip install uv==0.9.7
+      - run: uv sync --frozen && uv lock --check
+      - run: uv run python scripts/runner_environment.py
+      - run: uv run ruff check . && uv run ruff format --check rag_core scripts tests
+      - run: uv run black --check rag_core scripts tests api_main.py main.py config.py app.py
+      - run: uv run mypy
+      - run: uv run pytest -q --junitxml=.local/ci-evidence/junit.xml
+      - run: uv run python scripts/source_gate.py --output .local/ci-evidence/source-manifest.json
+      - run: uv run python scripts/license_gate.py --development-environment --output .local/ci-evidence/license-inventory.json
+      - name: Exact archive and historical secret gates
+        id: source_secrets
+        run: |
+          archive_dir=$(mktemp -d)
+          git archive --format=tar -o .local/ci-evidence/source.tar HEAD
+          tar -xf .local/ci-evidence/source.tar -C "$archive_dir"
+          uv run python scripts/verify_archive.py .local/ci-evidence/source.tar .local/ci-evidence/source-manifest.json > .local/ci-evidence/archive-verification.json
+          docker run --rm -v "$archive_dir:/source:ro" zricethezav/gitleaks@sha256:c00b6bd0aeb3071cbcb79009cb16a60dd9e0a7c60e2be9ab65d25e6bc8abbb7f dir /source --redact=100
+          uv run python scripts/history_secret_gate.py
+          cp .local/history-secret-review.json .local/ci-evidence/
+          cp .local/history-secrets.json .local/ci-evidence/
+      - run: uv run pip-audit --require-hashes --disable-pip --no-deps -r requirements.txt --format=json --output .local/ci-evidence/python-audit.json
+      - run: uv run cyclonedx-py requirements requirements.txt --output-file .local/ci-evidence/python-sbom.json --output-format JSON
+      - run: docker compose config --quiet && docker compose -f docker-compose.yml -f docker-compose.ui.yml --profile ui config --quiet
+      - name: Real Qdrant integration without inference
+        run: |
+          docker build --build-arg SOURCE_REVISION="$(git rev-parse HEAD)" -f Dockerfile.qdrant -t workspace-rag-qdrant:local .
+          uv run python scripts/ci_qdrant.py
+      - name: Verify exported reports
+        id: evidence_guard
+        if: always()
+        run: uv run python scripts/evidence_gate.py .local/ci-evidence
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        if: always() && steps.evidence_guard.outcome == 'success' && steps.source_secrets.outcome == 'success'
+        with:
+          name: source-${{ github.run_id }}
+          path: .local/ci-evidence/
+          if-no-files-found: error
+          retention-days: 14
+  images:
+    needs: source
+    runs-on: ubuntu-24.04
+    timeout-minutes: 25
+    strategy:
+      fail-fast: false
+      matrix:
+        variant: [core, qdrant, ui]
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
+          persist-credentials: false
+      - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065
+        with:
+          python-version: '3.12'
+      - run: python -m pip install uv==0.9.7 && uv sync --frozen
+      - run: uv run python scripts/runner_environment.py
+      - name: Build selected image
+        env:
+          VARIANT: ${{ matrix.variant }}
+        run: |
+          case "$VARIANT" in
+            core) file=Dockerfile; image=workspace-rag-core:local ;;
+            qdrant) file=Dockerfile.qdrant; image=workspace-rag-qdrant:local ;;
+            ui) file=Dockerfile.ui; image=workspace-rag-ui:local ;;
+          esac
+          docker build --build-arg SOURCE_REVISION="$(git rev-parse HEAD)" -f "$file" -t "$image" .
+          echo "RAG_TEST_IMAGE=$image" >> "$GITHUB_ENV"
+          docker image inspect "$image" > .local/ci-evidence/image-inspect.json
+      - name: Core locked payload inventory and smoke
+        if: matrix.variant == 'core'
+        run: |
+          uv run python scripts/image_inventory.py "$RAG_TEST_IMAGE" > .local/ci-evidence/image-inventory.json
+          docker run --rm --network none --read-only "$RAG_TEST_IMAGE" --help
+      - name: Python image license inventory
+        if: matrix.variant != 'qdrant'
+        run: docker run --rm --network none --entrypoint python -i "$RAG_TEST_IMAGE" - --output /dev/stdout --quiet < scripts/license_gate.py > .local/ci-evidence/runtime-license-inventory.json
+      - name: Actual image SBOM and license scan
+        run: |
+          scanner=aquasec/trivy@sha256:790fd66d1697395d8693d1acaa1ea702406a20f109b6fc7bac8db623eca6c06c
+          docker run --rm -v /var/run/docker.sock:/var/run/docker.sock -v "$PWD/.local/ci-evidence:/output" "$scanner" image --format cyclonedx --output /output/image-sbom.json "$RAG_TEST_IMAGE"
+          docker run --rm -v /var/run/docker.sock:/var/run/docker.sock -v "$PWD/.local/ci-evidence:/output" "$scanner" image --scanners license --format json --output /output/image-licenses.json "$RAG_TEST_IMAGE"
+      - name: Unchanged HIGH/CRITICAL security gate
+        run: |
+          docker run --rm -v /var/run/docker.sock:/var/run/docker.sock -v "$PWD/.local/ci-evidence:/output" aquasec/trivy@sha256:790fd66d1697395d8693d1acaa1ea702406a20f109b6fc7bac8db623eca6c06c image --scanners vuln --severity HIGH,CRITICAL --exit-code 1 --format json --output /output/image-vulnerabilities.json "$RAG_TEST_IMAGE"
+      - name: Verify exported reports
+        id: evidence_guard
+        if: always()
+        run: uv run python scripts/evidence_gate.py .local/ci-evidence
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        if: always() && steps.evidence_guard.outcome == 'success'
+        with:
+          name: image-${{ matrix.variant }}-${{ github.run_id }}
+          path: .local/ci-evidence/
+          if-no-files-found: error
+          retention-days: 14

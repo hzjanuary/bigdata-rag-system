@@ -1,0 +1,11 @@
+{
+  "source_sha": "0e476bd16ec75c189c58616b4f4eae9688acfed7",
+  "tests": 100,
+  "failures": 0,
+  "errors": 0,
+  "skipped": 1,
+  "passed": 99,
+  "command": "uv run pytest -q --junitxml=.local/junit-final.xml",
+  "real_qdrant_contract": "1 passed separately, fixture vectors, no inference",
+  "junit_sha256": "8246ce5589ac40f1f08466531feedfecfe84861dc1a921aed00be67b92864a25"
+}
