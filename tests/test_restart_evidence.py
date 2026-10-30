@@ -126,3 +126,32 @@ def test_missing_search_is_failure_not_fabricated_no_match():
     assert diagnostic["after"]["search"] is None
     assert not diagnostic["checks"]["retrieval status after API restart"]
     assert not diagnostic["checks"]["persisted job COMPLETED after API restart"]
+
+
+@pytest.mark.parametrize(
+    "arguments",
+    [
+        ["--project", "../unsafe"],
+        ["--project", "spec001-1234567890", "--resume-project", "spec001-1234567890"],
+    ],
+    ids=["unsafe-project", "fresh-resume-conflict"],
+)
+def test_local_network_project_option_rejects_unsafe_reuse(arguments, monkeypatch, tmp_path):
+    monkeypatch.syspath_prepend(str(ROOT / "scripts"))
+    campaign = load("isolated_acceptance")
+    monkeypatch.setattr(
+        "sys.argv",
+        [
+            "campaign",
+            "--approved-local-model-test",
+            "--model-dir",
+            str(tmp_path / "absent-model"),
+            "--evidence",
+            str(tmp_path / "result.json"),
+            *arguments,
+        ],
+    )
+    with pytest.raises(SystemExit) as caught:
+        campaign.main()
+    assert caught.value.code == 2
+    assert not (tmp_path / "result.json").exists()

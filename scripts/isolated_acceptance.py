@@ -94,14 +94,22 @@ def main():
     parser.add_argument("--model-dir", type=Path, required=True)
     parser.add_argument("--evidence", type=Path, required=True)
     parser.add_argument(
+        "--project", help="Fresh disposable project ID for preprovisioned local networks"
+    )
+    parser.add_argument(
         "--resume-project",
         help="Continue the same stopped disposable campaign after a verified terminal failure",
     )
     args = parser.parse_args()
     os.umask(0o077)
-    if args.resume_project and not re.fullmatch(r"spec001-[0-9a-f]{10}", args.resume_project):
+    if args.project and args.resume_project:
+        parser.error("fresh project and resume are mutually exclusive")
+    if any(
+        value and not re.fullmatch(r"spec001-[0-9a-f]{10}", value)
+        for value in (args.project, args.resume_project)
+    ):
         parser.error("invalid disposable project ID")
-    project = args.resume_project or "spec001-" + uuid.uuid4().hex[:10]
+    project = args.resume_project or args.project or "spec001-" + uuid.uuid4().hex[:10]
     root = ROOT / ".local" / project
     config = root / "config" / "config.json"
     if args.resume_project:
