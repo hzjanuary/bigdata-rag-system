@@ -1,0 +1,23 @@
+Workspace RAG Core
+Copyright (c) 2026 Hoang Nguyen. Project-owned code: MIT (see LICENSE).
+
+Third-party components retain their own licenses. No model weights, operator
+content, credentials, Qdrant binaries or external datasets are bundled in source.
+See docs/provider-models.md and docs/release/license-inventory.json.
+
+Qdrant server: Apache-2.0 (https://github.com/qdrant/qdrant).
+Optional explicitly acquired all-MiniLM-L6-v2 weights/tokenizer: Apache-2.0,
+https://huggingface.co/sentence-transformers/all-MiniLM-L6-v2 (pinned revision in code).
+ONNX Runtime: MIT; Hugging Face tokenizers: Apache-2.0; NumPy: BSD-3-Clause;
+pypdf: BSD-3-Clause; defusedxml: PSF-2.0; FastAPI: MIT; Starlette: BSD-3-Clause;
+Uvicorn: BSD-3-Clause; qdrant-client: Apache-2.0; HTTPX: BSD-3-Clause;
+Pydantic: MIT. Optional Streamlit: Apache-2.0.
+Python: PSF-2.0; Debian base image: aggregate licenses for included OS packages,
+not a single license. An image requires its own SBOM and vulnerability review.
+The MIT license does not relicense these components or provider outputs.
+
+Development-only audit/SBOM tooling also installs chardet (LGPL-2.1-or-later)
+and rfc3987 (GPL-3.0-or-later). Those tools and packages are not in the core
+runtime image and are not relicensed by this project's MIT license. Their exact
+metadata and development scope are recorded in the license inventory. The runtime
+license gate does not permit these development-only exceptions.

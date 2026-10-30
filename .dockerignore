@@ -1,0 +1,10 @@
+**
+!pyproject.toml
+!uv.lock
+!rag_core/
+!rag_core/*.py
+!LICENSE
+!NOTICE
+!app.py
+**/__pycache__
+**/*.pyc

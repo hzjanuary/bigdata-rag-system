@@ -1,65 +1,22 @@
-# ──────────────────────────────────────────────────────────────────────────────
-# easyResearch Big Data — Dockerfile
-# Supports CUDA 12.6 (GPU) or CPU-only mode
-# ──────────────────────────────────────────────────────────────────────────────
+FROM ghcr.io/astral-sh/uv:0.9.7@sha256:ba4857bf2a068e9bc0e64eed8563b065908a4cd6bfb66b531a9c424c8e25e142 AS uv
+FROM python:3.12-slim@sha256:aa943ce411423c7582288f18707ff66eddcbaeb510502d747a72aeb34f30d159 AS builder
+COPY --from=uv /uv /usr/local/bin/uv
+WORKDIR /build
+ENV UV_PYTHON_DOWNLOADS=never UV_LINK_MODE=copy UV_PROJECT_ENVIRONMENT=/opt/venv
+COPY pyproject.toml uv.lock LICENSE NOTICE ./
+COPY rag_core ./rag_core
+RUN uv sync --frozen --no-dev --no-editable --no-cache
 
-# Base: Python 3.11 with CUDA 12.6 (devel for torch compatibility)
-# Use nvidia/cuda image for GPU support; switch to python:3.11-slim for CPU-only.
-ARG BASE_IMAGE=pytorch/pytorch:2.3.0-cuda12.1-cudnn8-runtime
-FROM ${BASE_IMAGE}
-
-# Metadata
-LABEL maintainer="easyResearch"
-LABEL description="Production-Grade RAG System with Big Data Pipeline"
-LABEL version="0.1.0"
-
-# Set environment variables
-ENV PYTHONUNBUFFERED=1 \
-    PYTHONDONTWRITEBYTECODE=1 \
-    DEBIAN_FRONTEND=noninteractive \
-    PIP_NO_CACHE_DIR=1 \
-    PIP_DISABLE_PIP_VERSION_CHECK=1
-
-# Install system dependencies
-RUN apt-get update && apt-get install -y --no-install-recommends \
-    build-essential \
-    git \
-    libpoppler-cpp-dev \
-    poppler-utils \
-    tesseract-ocr \
-    libmagic1 \
-    curl \
-    && apt-get clean \
-    && rm -rf /var/lib/apt/lists/*
-
-# Set working directory
-WORKDIR /app
-
-# Copy requirements first (for Docker layer caching)
-COPY requirements.txt .
-
-# Install Python dependencies
-# PyTorch already included in base image (pytorch/pytorch).
-# We install everything else from requirements.txt, skipping torch/torchvision/torchaudio
-# to avoid re-downloading the large CUDA wheels unnecessarily.
-RUN pip install --upgrade pip && \
-    grep -v -E "^(torch|torchvision|torchaudio|--extra-index-url)" requirements.txt \
-    | pip install -r /dev/stdin
-
-# Copy application source code
-COPY . .
-
-# Create necessary directories
-RUN mkdir -p \
-    uploads \
-    database/chat_history \
-    database/summaries \
-    logs
-
-# Expose ports
-# 8501 = Streamlit UI
-# 8000 = FastAPI Backend
-EXPOSE 8501 8000
-
-# Default command (override in docker-compose)
-CMD ["streamlit", "run", "app.py", "--server.port=8501", "--server.address=0.0.0.0"]
+FROM python:3.12-slim@sha256:aa943ce411423c7582288f18707ff66eddcbaeb510502d747a72aeb34f30d159
+ARG SOURCE_REVISION=unverified
+LABEL org.opencontainers.image.revision=$SOURCE_REVISION
+ENV PYTHONUNBUFFERED=1 PYTHONDONTWRITEBYTECODE=1 PATH=/opt/venv/bin:$PATH RAG_CONFIG=/private/config/config.json HF_HUB_OFFLINE=1 TRANSFORMERS_OFFLINE=1
+RUN python -m pip uninstall -y pip && rm -rf /usr/local/lib/python3.12/ensurepip && groupadd --gid 10001 rag && useradd --uid 10001 --gid 10001 --no-create-home rag && mkdir /private && chown rag:rag /private
+COPY --from=builder /opt/venv /opt/venv
+COPY LICENSE NOTICE /usr/share/doc/rag-core/
+USER 10001:10001
+WORKDIR /private
+EXPOSE 8000
+HEALTHCHECK --interval=15s --timeout=6s CMD ["python", "-c", "import urllib.request; urllib.request.urlopen('http://127.0.0.1:8000/health',timeout=5)"]
+ENTRYPOINT ["rag"]
+CMD ["serve", "--host", "0.0.0.0"]

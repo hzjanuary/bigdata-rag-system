@@ -1,0 +1,55 @@
+name: locked-core
+on: [push, pull_request, workflow_dispatch]
+permissions:
+  contents: read
+jobs:
+  checks:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+      - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065
+        with:
+          python-version: '3.12'
+      - run: python -m pip install uv==0.9.7
+      - run: uv sync --frozen
+      - run: mkdir -p .local
+      - run: uv run ruff check . && uv run ruff format --check rag_core scripts tests
+      - run: uv run pytest -q --junitxml=.local/junit.xml
+      - run: uv run python scripts/source_gate.py --output .local/source-manifest.json
+      - run: uv run python scripts/license_gate.py --development-environment --output .local/license-inventory.json
+      - name: Exact source and historical secrets
+        run: |
+          archive_dir=$(mktemp -d)
+          git archive --format=tar -o .local/source.tar HEAD
+          tar -xf .local/source.tar -C "$archive_dir"
+          uv run python scripts/verify_archive.py .local/source.tar .local/source-manifest.json
+          docker run --rm -v "$archive_dir:/source:ro" zricethezav/gitleaks@sha256:c00b6bd0aeb3071cbcb79009cb16a60dd9e0a7c60e2be9ab65d25e6bc8abbb7f dir /source --redact=100
+          uv run python scripts/history_secret_gate.py
+      - run: uv run pip-audit --require-hashes --disable-pip --no-deps -r requirements.txt --format=json --output .local/python-audit.json
+      - run: uv run cyclonedx-py requirements requirements.txt --output-file .local/python-sbom.json --output-format JSON
+      - name: Build and inspect actual CPU image
+        run: |
+          docker build --build-arg SOURCE_REVISION="$GITHUB_SHA" -t workspace-rag-core:local .
+          uv run python scripts/image_inventory.py workspace-rag-core:local > .local/image-inventory.json
+          docker build --build-arg SOURCE_REVISION="$GITHUB_SHA" -f Dockerfile.qdrant -t workspace-rag-qdrant:local .
+          docker run --rm --network none --entrypoint python -i workspace-rag-core:local - --output /dev/stdout --quiet < scripts/license_gate.py > .local/runtime-license-inventory.json
+      - name: Actual Qdrant integration without inference
+        run: uv run python scripts/ci_qdrant.py
+      - name: Image security gate (no inference)
+        run: |
+          status=0
+          for image in workspace-rag-core:local workspace-rag-qdrant:local; do
+            if ! docker run --rm -v /var/run/docker.sock:/var/run/docker.sock -v "$PWD/.local:/output" aquasec/trivy@sha256:790fd66d1697395d8693d1acaa1ea702406a20f109b6fc7bac8db623eca6c06c image --scanners vuln --severity HIGH,CRITICAL --exit-code 1 --format json --output "/output/${image%:*}-scan.json" "$image"; then
+              status=1
+            fi
+          done
+          exit "$status"
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        if: always()
+        with:
+          name: verification
+          path: .local/*.json

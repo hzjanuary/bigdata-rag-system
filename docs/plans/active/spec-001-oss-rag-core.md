@@ -34,3 +34,12 @@ The full matrix is in `docs/release/verification.md`. Each criterion starts NOT_
 ## Execution log
 
 - S0 baseline and history detector completed; runtime implementation has not begun at this commit.
+
+### Local implementation progress (2026-10-30)
+
+- S1/S2/S3 implemented in local runtime commit 8fa3c35 plus the following focused hardening changes: fail-closed ACLs/private bootstrap, durable idempotent manifest/Qdrant indexing, CPU ONNX embeddings, bounded parsers, hybrid retrieval/citations, disabled-by-default real provider adapter, CLI, and private backup/restore.
+- User explicitly approved ONE isolated acceptance campaign with the pinned MiniLM ONNX model. Acquired only the ONNX file and tokenizer from the official pinned repository into ignored .local cache; upstream revision, LFS SHA-256 and Git blob integrity verified. No other model or generation authorized.
+- Current deterministic tests pass; actual Qdrant contract and final CPU corpus/restart/restore evidence are being gathered. No live model acceptance result is claimed until that campaign completes.
+- S4 packaging/docs/CI/gates prepared. Runtime Python vulnerability audit: zero known vulnerabilities after updating the initially vulnerable pypdf/Starlette pins. Initial CPU image OS scan finds inherited Debian HIGH vulnerabilities without listed fixes; retain raw output and keep image-security NO-GO, with no gate bypass.
+- Docker 29 internal-only networks suppress host port publishing. Corrected topology: Qdrant internal only, API also attached to an ingress bridge with loopback-only host binding; optional UI on ingress only. The API bridge permits outbound connectivity, while generation stays disabled in config. Docs updated accordingly.
+- Previous goal turns classified as progress: runtime, tests and packaging changed authoritative state. No goal-owned acceptance process was live on resume; missing prior process handles were revalidated with OS/container state before restarting checks.

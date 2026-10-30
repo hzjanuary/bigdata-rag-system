@@ -1,0 +1,20 @@
+# Explicit opt-in client UI. Start separately after: uv sync --extra ui --frozen
+services:
+  ui:
+    profiles: [ui]
+    build:
+      context: .
+      dockerfile: Dockerfile.ui
+    image: workspace-rag-ui:local
+    user: '10001:10001'
+    read_only: true
+    cap_drop: [ALL]
+    security_opt: [no-new-privileges:true]
+    pids_limit: 64
+    mem_limit: 512m
+    cpus: 1
+    ports: ['127.0.0.1:8501:8501']
+    environment:
+      RAG_API_URL: http://api:8000
+    tmpfs: ['/tmp:size=32m,mode=1777']
+    networks: [ingress]
