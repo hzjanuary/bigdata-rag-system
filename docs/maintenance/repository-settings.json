@@ -1,0 +1,4 @@
+{
+  "name": "multi-workspace-rag-engine",
+  "description": "Self-hosted, CPU-first multi-workspace RAG engine with secure document ingestion, ONNX embeddings, Qdrant hybrid search, durable jobs, and source-grounded citations."
+}

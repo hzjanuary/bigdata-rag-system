@@ -1,0 +1,21 @@
+{
+  "names": [
+    "cpu-inference",
+    "document-ingestion",
+    "document-retrieval",
+    "fastapi",
+    "hybrid-search",
+    "multi-workspace",
+    "onnxruntime",
+    "pdf-processing",
+    "python",
+    "qdrant",
+    "rag",
+    "rag-engine",
+    "retrieval-augmented-generation",
+    "self-hosted",
+    "semantic-search",
+    "sentence-transformers",
+    "vector-search"
+  ]
+}

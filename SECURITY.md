@@ -1,4 +1,4 @@
-# Security policy
+# Security policy — Multi-Workspace RAG Engine
 
 This is an early self-hosted source preview. No version currently has an SLA or
 production certification. Supported security testing targets the current SPEC-001
@@ -27,9 +27,9 @@ disclosed findings. This does not approve Docker image publication or deployment
 Operators must independently review dependencies, OS packages, model/provider data
 policies, credentials, network exposure and their environment. Unrestricted Internet
 exposure is not certified. Raw reports in retained GitHub Actions artifacts:
-[core](https://github.com/hzjanuary/bigdata-rag-system/actions/runs/41038457036/artifacts/12969555839),
-[Qdrant](https://github.com/hzjanuary/bigdata-rag-system/actions/runs/41038457036/artifacts/12968453916),
-[UI](https://github.com/hzjanuary/bigdata-rag-system/actions/runs/41038457036/artifacts/12968877744).
+[core](https://github.com/hzjanuary/multi-workspace-rag-engine/actions/runs/41038457036/artifacts/12969555839),
+[Qdrant](https://github.com/hzjanuary/multi-workspace-rag-engine/actions/runs/41038457036/artifacts/12968453916),
+[UI](https://github.com/hzjanuary/multi-workspace-rag-engine/actions/runs/41038457036/artifacts/12968877744).
 Actions artifact links have finite retention; original reports/checksums also remain
 preserved in the operator's local evidence. No finding is waived by source release.
 

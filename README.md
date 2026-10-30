@@ -1,4 +1,6 @@
-# Workspace RAG Core — early source preview
+# Multi-Workspace RAG Engine — early source preview
+
+Self-hosted, CPU-first multi-workspace RAG engine with secure document ingestion, ONNX embeddings, Qdrant hybrid search, durable jobs, and source-grounded citations.
 
 Private, CPU-first document retrieval with Qdrant, SQLite job metadata, an authenticated
 API and CLI. Ingest UTF-8 text, PDF text pages and DOCX paragraphs, then search with
@@ -20,15 +22,20 @@ PDF page (TXT/DOCX page is null). Generation is disabled by default.
 > credentials, network exposure and your deployment environment. CPU embeddings,
 > real Qdrant indexing/retrieval and source citations have independent verification;
 > unrestricted Internet exposure is not certified. Raw per-image security reports:
-> [core](https://github.com/hzjanuary/bigdata-rag-system/actions/runs/41038457036/artifacts/12969555839),
-> [Qdrant](https://github.com/hzjanuary/bigdata-rag-system/actions/runs/41038457036/artifacts/12968453916),
-> [UI](https://github.com/hzjanuary/bigdata-rag-system/actions/runs/41038457036/artifacts/12968877744).
+> [core](https://github.com/hzjanuary/multi-workspace-rag-engine/actions/runs/41038457036/artifacts/12969555839),
+> [Qdrant](https://github.com/hzjanuary/multi-workspace-rag-engine/actions/runs/41038457036/artifacts/12968453916),
+> [UI](https://github.com/hzjanuary/multi-workspace-rag-engine/actions/runs/41038457036/artifacts/12968877744).
 
 This replaces the historical easyResearch prototype. Existing uploads/collections
 are **not migrated or reset** automatically. Preserve old volumes and check out the
 original history separately if needed. This is a single-instance self-hosted core,
 not a distributed SaaS. See [verification](docs/release/verification.md) for actual
 tested identities, limitations and separate source/image release decisions.
+
+Repository branding follows `hzjanuary/multi-workspace-rag-engine`. Existing package,
+CLI, API title, image tags and private config/storage names remain compatible.
+See the [reference audit and rename/retirement review](docs/maintenance/repository-rebranding.md);
+v0.1.0 and original campaign records retain their historical identities.
 
 ## Local first run (Linux, Python 3.12)
 
@@ -133,7 +140,7 @@ uv run pip-audit --require-hashes --disable-pip --no-deps -r requirements.txt
 
 Deterministic tests forbid network access and inject fixtures through Python only.
 Fixtures are never selectable production models/providers. The independent campaign
-at [run 41040402221](https://github.com/hzjanuary/bigdata-rag-system/actions/runs/41040402221)
+at [run 41040402221](https://github.com/hzjanuary/multi-workspace-rag-engine/actions/runs/41040402221)
 passed all 41 real CPU/Qdrant checks at runtime source
 `287212be8f5683221d2449158331e59d4c639c15`. RAG-20 is PASS; overall SPEC-001 remains
 **22 PASS / one FAIL / one BLOCKED**, including image-security FAIL and live
