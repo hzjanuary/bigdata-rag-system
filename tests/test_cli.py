@@ -46,3 +46,18 @@ def test_stdin_input_validation(settings, monkeypatch, arguments, data, code):
     args = cli.parser().parse_args(["ingest", "a" * 32, *arguments])
     with pytest.raises(RagError, match=code):
         cli.execute(args)
+
+
+def test_storage_errors_never_echo_private_paths(monkeypatch, capsys):
+    import sqlite3
+
+    monkeypatch.setattr(cli.sys, "argv", ["rag", "doctor"])
+
+    def fail(_):
+        raise sqlite3.OperationalError("/private/operator/credentials SECRET-SENTINEL")
+
+    monkeypatch.setattr(cli, "execute", fail)
+    with pytest.raises(SystemExit):
+        cli.main()
+    captured = capsys.readouterr()
+    assert captured.err.strip() == '{"error": "storage_error"}'

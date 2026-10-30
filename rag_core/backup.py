@@ -45,6 +45,9 @@ def create(settings: Settings, destination: Path) -> dict:
             target = sqlite3.connect(dbpath)
             try:
                 source.backup(target)
+                # A portable standalone backup must not need WAL/SHM sidecars on
+                # a read-only backup mount.
+                target.execute("PRAGMA journal_mode=DELETE")
             finally:
                 target.close()
         dbpath.chmod(0o600)
@@ -120,7 +123,9 @@ def restore(settings: Settings, source: Path) -> dict:
                 or db.execute("SELECT count(*) FROM jobs").fetchone()[0]
             ):
                 raise RagError("restore_requires_empty_installation")
-        backup_db = sqlite3.connect(f"file:{source / 'metadata.sqlite3'}?mode=ro", uri=True)
+        backup_db = sqlite3.connect(
+            (source / "metadata.sqlite3").absolute().as_uri() + "?mode=ro&immutable=1", uri=True
+        )
         try:
             if backup_db.execute("PRAGMA integrity_check").fetchone()[0] != "ok":
                 raise RagError("backup_integrity_error")

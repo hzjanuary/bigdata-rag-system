@@ -51,6 +51,10 @@ def test_backup_restore_contract_and_tamper(settings, tmp_path, monkeypatch, ser
     destination = tmp_path / "backup"
     result = backup.create(settings, destination)
     assert result == {"status": "backed_up", "points": 1}
+    import sqlite3
+
+    with sqlite3.connect(destination / "metadata.sqlite3") as snapshot:
+        assert snapshot.execute("PRAGMA journal_mode").fetchone()[0] == "delete"
     with pytest.raises(RagError, match="backup_destination_exists"):
         backup.create(settings, destination)
     restore_state = tmp_path / "restored"

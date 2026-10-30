@@ -1,6 +1,7 @@
 import argparse
 import json
 import os
+import sqlite3
 import stat
 import sys
 from pathlib import Path
@@ -197,6 +198,9 @@ def main():
         raise SystemExit(1) from None
     except (OSError, ValueError, httpx.HTTPError):
         print(json.dumps({"error": "local_or_network_error"}), file=sys.stderr)
+        raise SystemExit(1) from None
+    except sqlite3.Error:
+        print(json.dumps({"error": "storage_error"}), file=sys.stderr)
         raise SystemExit(1) from None
 
 
