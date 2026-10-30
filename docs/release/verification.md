@@ -1,5 +1,92 @@
 # SPEC-001 verification ledger — 2026-10-30
 
+## JUnit correction: remote verification complete
+
+Normal push preserved `a9b68db` and advanced existing Draft PR #1 to exact tested
+SHA **`d54b899d665b04dff2db3bd8b7415f96d8b36c9a`**. No active workflow, runtime or
+packaging input changed. Only short `ids` were added to three existing parameter
+lists, with five focused regressions. [Local evidence](evidence/junit-correction.json)
+and [remote evidence](evidence/junit-correction-ci.json) retain the original failure,
+before/after hashes, job results, every artifact digest and raw-report checksum.
+
+The expansion was caused by pytest's default IDs serializing synthetic byte
+payloads in parser, source-artifact and stdin tests. Original testcase names were
+200,048 / 2,000,050 / 4,194,361 characters respectively. Adding IDs only to the parser
+would still leave the report oversized. AST comparison proves the three original
+files are otherwise identical: no payload, case, exception or assertion changed.
+
+| Evidence | Original retained | Fresh before fix | Local after fix | Both hosted runs |
+| --- | --- | --- | --- | --- |
+| Full-suite JUnit bytes | 6,407,084 | 6,407,083 | 13,067 | 13,082 each |
+| Export guard | FAIL | FAIL | PASS | PASS |
+
+Timing/path serialization explains small size differences; the artifact limit is
+still **2,000,000 bytes**. The full actual CI pytest command was used. Corrected XML
+has 115 unique classname/name pairs, maximum name length 97, **114 PASS / one
+skipped / zero errors/failures**; every previous case remains. The focused regression
+fails on the retained detached `a9b68db` checkout and passes after correction. It
+executes all 23 affected cases, checks actual XML/checksum export, preserves real
+child-suite failure/skip details, and rejects oversized/unauthorized/binary exports.
+No failure truncation or JUnit/security exclusion was introduced.
+
+| Genuine Actions run at tested SHA | Source | Core / Qdrant / UI | Independent CPU |
+| --- | --- | --- | --- |
+| [Push 41008646193](https://github.com/hzjanuary/bigdata-rag-system/actions/runs/41008646193) | PASS | FAIL / FAIL / FAIL | SKIPPED |
+| [PR synchronize 41008651605](https://github.com/hzjanuary/bigdata-rag-system/actions/runs/41008651605) | PASS | FAIL / FAIL / FAIL | SKIPPED |
+
+Both source jobs passed full deterministic tests, actual Qdrant integration,
+frozen lock, Ruff/format/Black/MyPy, source/archive/private-path/current/history
+secret checks, license inventory, zero-finding Python audit, SBOM and Compose.
+All **eight artifacts uploaded and were downloaded**: one source plus three image
+artifacts per run. GitHub ZIP digests, CRCs, exact manifest membership and every
+file byte size/SHA-256 passed verification. Both source archives match the 94-file
+manifest at tested SHA; archive SHA-256 is
+`71d0ec6409dde0a07df21d5bc477cfcba6dcec16a5ac455053a6dddefa38f2df`.
+Raw ZIPs, extracted reports, full logs and API responses remain under ignored
+`.local/junit-resume-20261030/remote/`; their hashes are in the remote evidence.
+
+All six actual hosted image builds/license/SBOM/export steps completed; each image
+job failed **only** its unchanged HIGH/CRITICAL gate, actual exit **1** confirmed
+in downloaded logs. Per run: core **44 HIGH**, Qdrant **43 HIGH**, optional UI
+**44 HIGH**, zero CRITICAL. Each has eight distinct HIGH CVEs; package findings
+are not summed into an invented unique-CVE count. Exact ID/package/version/severity/
+fix tuples and license records match preserved local scans; no new finding or
+exception. Hosted scanners fetched fresh DBs, but standalone DB metadata was not
+exported: identical DB identity is not claimed. Raw scanner reports remain intact.
+
+Local checks rerun: **114 PASS / one skipped**, five focused regressions, separate
+actual Qdrant contract **one PASS**, lock, Ruff/format/Black/MyPy (13 modules), source/
+archive/current/history secret gates, 92-package approved license inventory and
+zero-finding dependency audit. Existing disposable Qdrant image was reused; no
+local release-image rebuild, model acquisition or CPU/model rerun occurred.
+
+**Independent campaign: NOT_STARTED, authorization unconsumed.** Both hosted model
+jobs SKIPPED as required by the unchanged opened-only condition. The inert
+[one-time workflow template](cpu-once.workflow.yml) and [operator instructions](CPU-CAMPAIGN-TRIGGER.md)
+are prepared outside `.github/workflows`. They bind PR #1 and exact tested SHA,
+require the owner's SHA-specific label action, serialize runs, block reruns, reserve
+a persistent check marker before acquisition and expire at 2026-10-31 00:00 UTC.
+YAML and both embedded Python blocks were statically validated; no live check-write
+permission/trigger claim, installation, label action or consumption occurred. Admin
+deletion/modification cannot be prevented absolutely; final operator review,
+installation and explicit label action are required. No dispatch/default-branch
+assumption, new PR or automatic synchronize campaign is used.
+
+**Source-only preview recommendation:** source is reviewable and remote source CI
+is PASS; final preview readiness remains pending the independent CPU campaign and
+an explicit source-release decision. **Docker image approval remains NO-GO** due
+known HIGH findings. RAG-15/20 stay BLOCKED and RAG-21 stays FAIL, totals unchanged
+at **21 PASS / 1 FAIL / 2 BLOCKED**. The new JUnit defect is corrected with genuine
+remote artifact evidence. No merge/tag/release/deploy/image publication/generative
+call occurred. Final docs/template are committed locally after CI, without another
+push; the remote tested SHA above is kept distinct from the local evidence HEAD.
+Final draft secret scanning detected one public-prose false positive in the trigger
+instructions; the wording was rephrased and scan passed. Original redacted finding,
+public-line hash and both scan logs are preserved in the remote evidence report.
+No detector rule, allowlist or security exception changed.
+
+## Local correction checkpoint before push (historical)
+
 **JUnit correction resumed under explicit authorization.** Historical failure and
 stop evidence below remain unchanged. Only three parametrized-test ID lists and
 focused regression tests changed; runtime, packaging, workflow, payloads/assertions
@@ -171,8 +258,8 @@ F/U/L/A above supply exact source/image identities for every referenced evidence
 | RAG-17 | PASS | U error/caplog/stdout redaction with secret/content/path sentinels, including CLI storage failures; default access/prompt traces absent; authenticated fixed-schema events only. |
 | RAG-18 | PASS | L actual Qdrant stop -> readiness/search 503; restart restores identical committed retrieval. U/Q outage and dimension contracts. |
 | RAG-19 | PASS | L actual private logical backup and read-only restore to a separate Qdrant, exact source hashes/manifests/jobs/capability hashes, ranking within 1e-6 float round-trip tolerance. Original documents/volumes untouched. |
-| RAG-20 | BLOCKED | Local secure CPU Compose verified by L/I. The follow-up source job ran on genuine hosted Ubuntu, but its prerequisite export failed and independent-cpu was SKIPPED. No independent real-model stack qualification is claimed. |
-| RAG-21 | FAIL | Original actual image gates exit **1** (V; unchanged 44/43/44 HIGH). Follow-up remote source subchecks pass, but overall CI FAILS at evidence export; remote image jobs SKIPPED. Exact runs and new defect are recorded above. |
+| RAG-20 | BLOCKED | Local secure CPU Compose verified by L/I. Corrected source CI now PASS on genuine hosted Ubuntu, but independent-cpu stays SKIPPED on synchronize/push. Inert one-time trigger prepared; no independent real-model stack qualification or campaign consumption claimed. |
+| RAG-21 | FAIL | JUnit export defect corrected; source jobs/artifacts PASS in runs 41008646193/41008651605 at d54b899. All three actual hosted image jobs per run execute and security gates exit **1**, unchanged 44/43/44 HIGH. Raw reports/checksums preserved, no suppression. |
 | RAG-22 | PASS | S exact tracked-file/archive inventory and adversarial bypass tests; I excludes private/model/index data and unused bundled ONNX demo graphs; no operator fixtures in source. One historical public-hash detector finding independently reviewed, not hidden. |
 | RAG-23 | PASS | C + L README/CLI walkthrough; required architecture/self-host/provider/security/backup/contribution/license/NOTICE/release docs and inventories present. No production, GPU, OCR, provider-quality or benchmark claims. |
 | RAG-24 | PASS | This explicit review separates source preview, actual model evidence, LIVE provider scope, remote CI and image security. Neither publication decision is inferred from deterministic tests. |

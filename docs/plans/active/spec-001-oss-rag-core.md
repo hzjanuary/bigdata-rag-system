@@ -1,8 +1,8 @@
 # SPEC-001 execution plan
 
-Current checkpoint: explicitly authorized narrow JUnit correction is locally
-verified; normal push/PR #1 CI pending. Previous stop evidence remains historical.
-No model campaign is authorized to start automatically in this follow-up.
+Current checkpoint: narrow JUnit correction remotely verified at d54b899; source
+jobs/artifacts PASS, known image security gates FAIL. Inert one-time CPU trigger
+prepared for operator review, not installed/executed. Plan remains active.
 
 Started 2026-10-29. Branch: `feat/spec-001-oss-rag-core`.
 Authoritative requirements: `docs/specs/SPEC-001-open-source-rag-core.md` (unchanged).
@@ -140,3 +140,35 @@ The full matrix is in `docs/release/verification.md`. Each criterion starts NOT_
   existing Draft PR update, genuine source/image CI and artifact/hash collection.
   Only after source outcome is verified, prepare a reviewed explicit one-time CPU
   trigger without executing it. Keep RAG-15/20 BLOCKED and RAG-21 FAIL.
+
+### JUnit correction remote completion and trigger preparation (2026-10-30)
+
+- Normal push preserved a9b68db and advanced existing Draft PR #1 to exact tested
+  SHA d54b899d665b04dff2db3bd8b7415f96d8b36c9a. No active workflow/runtime/package
+  change, force push, second PR or history rewrite.
+- Push run 41008646193 and synchronize run 41008651605 completed: source PASS;
+  core/Qdrant/UI jobs FAIL solely at unchanged HIGH/CRITICAL exit-1 gates;
+  independent-cpu SKIPPED. Hosted JUnit is 13,082 bytes in each run, 114 PASS /
+  one skipped. Actual Qdrant/source/archive/secrets/license/audit gates PASS.
+- Eight uploaded artifacts downloaded/verified: GitHub ZIP digests, CRCs, exact
+  manifests, every file size/hash, source archive at tested SHA. Three raw image
+  reports/SBOM/license scans per run retained unchanged. Core 44 HIGH, Qdrant 43,
+  UI 44, zero CRITICAL; exact HIGH records and licenses match baseline.
+- New JUnit defect RESOLVED; RAG-21 remains FAIL on original image conditions.
+  RAG-15 and RAG-20 remain BLOCKED; 21 PASS / 1 FAIL / 2 BLOCKED retained.
+- Prepared docs/release/cpu-once.workflow.yml is inert; no .github workflow change
+  or operator label action. Reviewed exact target d54b899, PR #1 owner/SHA label,
+  serialized single-use check marker before acquisition, first-attempt guards,
+  fixed expiry 2026-10-31 00:00 UTC, pinned official model checks unchanged.
+  YAML/embedded Python statically validated; live permissions/trigger NOT_RUN.
+- Final operator review/install/label action required. Check retention/admin
+  deletion limits documented; no absolute immutable exactly-once guarantee.
+  Source artifact/history/API/permission errors stop before download; no unguarded
+  fallback, new PR, ordinary rerun or automatic synchronize model campaign.
+- Original independent model campaign remains unconsumed, zero downloads or
+  embedding/generative calls. No local release-image rebuild. Source-only review
+  is supported by PASS source CI; final preview awaits independent CPU evidence
+  and separate release decision. Docker approval remains NO-GO.
+- Final evidence/template committed locally without push to stop after remote
+  verification and avoid more CI. All historical logs/XML/scans/state preserved;
+  full results in docs/release/evidence/junit-correction-ci.json and verification.md.
