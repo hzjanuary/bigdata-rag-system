@@ -322,7 +322,8 @@ def test_inactive_cli_has_no_api_or_consumption(approval, tmp_path, monkeypatch)
     )
     policy.main()
     report = json.loads((policy.DIRECTORY / "trigger-inactive.json").read_text())
-    assert report["consumed"] is False and report["model_download_started"] is False
+    assert report["consumed_by_this_event"] is False and report["model_download_started"] is False
+    assert "consumed" not in report  # Configuration must not reset a historical budget record.
 
 
 def test_workflow_has_one_guarded_acquisition_and_no_provider():

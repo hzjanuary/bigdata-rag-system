@@ -1,6 +1,37 @@
 # SPEC-001 verification ledger — 2026-10-30
 
-## Authorized BM25 correction and additional-campaign preparation in progress
+## BM25 corrected: deterministic/local CPU proof complete, source CI pending
+
+The only production change is sorted query-term traversal. The original six-process
+regression still fails on preserved original code; the corrected test passes at
+seeds 0/1/2/3/7/11. Twelve independent probes produce identical ordered results,
+with RRF/dense/reranker and all non-BM25 fields unchanged. No-match and rerank opt-out
+controls pass. Local suite: **168 PASS / one skipped**, actual Qdrant contract one
+PASS; Ruff/format/Black/MyPy, frozen lock, license92, zero-finding dependency audit
+and source/archive/current/history secret gates pass.
+
+Corrected core image plus cached official model completed **41/41 real local CPU/
+Qdrant checks**, including eight exact restart diagnostics, outage/retry, actual
+RUNNING-worker SIGKILL/recovery and independent backup/restore. Model was not
+reacquired. Original failed local startup (exhausted Docker default subnet pools,
+zero checks) remains retained; four new explicit nonoverlapping IPAM networks were
+created for the new project/restore, without deleting retained state/networks.
+[Local evidence](evidence/bm25-remediation-local.json) identifies exact tested source,
+image labels/digests, vectors/tolerances, provenance, hashes and every check.
+
+Restart observations contain safe identities/content hashes and exact score deltas
+before individual assertions. Full response fingerprints prevent unknown schema
+fields from being silently ignored by public projection. Inactive event receipts
+now state consumed_by_this_event=false, without incorrectly resetting a historical
+campaign budget. No original cpuq1 evidence/marker was changed.
+
+RAG-12 is **PASS on demonstrated corrected behavior**, totals **21 PASS / one FAIL /
+two BLOCKED**. RAG-20 is still BLOCKED: this Linux Mint run is local evidence only.
+The hosted failure stays consumed/FAIL with its missing post-state limitation.
+Next: normal push/source CI; only after successful source evidence prepare the
+separately authorized cpuq2 policy. No activation label or new hosted campaign.
+
+## Initial correction checkpoint (historical)
 
 Only production change: canonical BM25 term traversal (`for term in sorted(terms)`).
 Formula/parameters/RRF/dense/reranker/schema/ACL/thresholds remain unchanged. Six-seed
@@ -369,7 +400,7 @@ F/U/L/A above supply exact source/image identities for every referenced evidence
 | RAG-09 | PASS | U partial Qdrant-write failure and cancellation immediately before publication; committed-manifest filtering hides staged points. L real worker crash preserves prior acknowledged state and completes idempotently. |
 | RAG-10 | PASS | U + Q + L: no ingest reset/delete path; retries preserve collections; destructive scope/confirmation audited. L CLI deletes only a newly created empty trial workspace. |
 | RAG-11 | PASS | L + A: approved official pinned MiniLM ONNX, CPU-only pooling/normalization reference, real Qdrant, synthetic TXT/PDF/DOCX corpus, persisted retrieval/citations. No fixture satisfies this row. |
-| RAG-12 | FAIL | New offline cross-process regression confirms BM25 score nondeterminism from unordered set traversal; previous U/L evidence was insufficient across process hash seeds. Ordered results/citations remain identical in the reproduced case; canonical traversal proposal passes in isolated copy, production correction pending. |
+| RAG-12 | PASS | Canonical term traversal fixed the confirmed defect. Original regression fails; corrected six-seed and twelve-process checks pass with exact full outputs. Real cached CPU/Qdrant API restart has unchanged identities/order/citations and exactly identical ranking scores; RRF/dense/rerank/no-match controls pass. See bm25-remediation-local.json; original failure remains historical evidence. |
 | RAG-13 | PASS | L actual source byte/hash download, persisted chunks and PDF page 2; TXT/DOCX page null, no fabricated URL; actual unrelated query returns no_match. U failure/no-match integrity. |
 | RAG-14 | PASS | U real-adapter mock HTTP contracts for disabled/default, bounded calls/deadline/tokens/response, hostile text and invalid citations; L generation_disabled. No production fixture or fake fallback. |
 | RAG-15 | BLOCKED | **LIVE generation not authorized**, not run. No external provider/credential/availability/answer-quality claim. Separate approval and privately configured credentials are required. |
@@ -383,7 +414,7 @@ F/U/L/A above supply exact source/image identities for every referenced evidence
 | RAG-23 | PASS | C + L README/CLI walkthrough; required architecture/self-host/provider/security/backup/contribution/license/NOTICE/release docs and inventories present. No production, GPU, OCR, provider-quality or benchmark claims. |
 | RAG-24 | PASS | This explicit review separates source preview, actual model evidence, LIVE provider scope, remote CI and image security. Neither publication decision is inferred from deterministic tests. |
 
-Totals: **20 PASS, 2 BLOCKED, 2 FAIL**. Previous PASS rows retain their stated
+Totals: **21 PASS, 2 BLOCKED, 1 FAIL**. Previous PASS rows retain their stated
 historical evidence scope; they are not a claim that the full current hosted stack
 was requalified. No acceptance criterion was edited to obtain PASS.
 

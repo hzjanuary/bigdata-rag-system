@@ -1,9 +1,9 @@
 # SPEC-001 execution plan
 
-Current checkpoint: hosted run 41029994294 consumed and FAIL at restart assertion.
-Offline diagnosis confirms cross-process BM25 summation nondeterminism; production
-unchanged, proposal/regression only. No second live campaign; new authorization
-required. Current assessment 20 PASS / two FAIL / two BLOCKED, plan active.
+Current checkpoint: minimal sorted-term fix verified across processes and full local
+CPU/Qdrant path (41 PASS). Source CI pending before preparing separate authorized
+cpuq2 policy. Original hosted run/marker consumed and retained. Current 21/1/2;
+no independent campaign activation, plan active.
 
 Started 2026-10-29. Branch: `feat/spec-001-oss-rag-core`.
 Authoritative requirements: `docs/specs/SPEC-001-open-source-rag-core.md` (unchanged).
@@ -240,3 +240,24 @@ The full matrix is in `docs/release/verification.md`. Each criterion starts NOT_
 - No commit/push, production patch, marker removal, label reapplication, workflow
   rerun, model acquisition or second live campaign. Fresh independent-host campaign
   requires separate explicit authorization/budget; preserve consumed attempt.
+
+### Authorized deterministic remediation (2026-10-30)
+
+- One production line canonicalizes term traversal; algorithm/parameters/thresholds/
+  schema/citations/ACL unchanged. Original regression preserved/red, fixed six-seed
+  test green; twelve probes bit-identical. RRF/dense/rerank/no-match unchanged.
+- Restart checkpoint now captures safe before/after readiness/job/document/chunk/
+  status/ordered-hit/provenance/ranking evidence before eight independent exact
+  assertions. No tolerance substitution or raw database/config/document upload.
+- 168 deterministic PASS/one skipped; real Qdrant contract PASS; quality/lock,
+  license92/audit0/source/archive/secret/history gates PASS.
+- Real cached CPU model + corrected image full local path 41 PASS including crash,
+  outage/retry and standalone backup/restore. Zero model reacquisition. Preserve
+  initial zero-check failure caused by exhausted host IP pools; explicit fresh
+  project/network option and four checked-IPAM networks avoid deleting retained data.
+- RAG-12 PASS on evidence, RAG-15/20 BLOCKED, RAG-21 FAIL: 21/1/2. Old hosted
+  run41029994294/marker123977248159 remain consumed/FAIL, no reinterpretation.
+- Next authorized step: normal push and actual source CI. Unexpected new source
+  failures stop before activation preparation. Only then implement/audit cpuq2's
+  distinct identity/marker/label, preserving exactly the known prior failure and
+  rejecting all other attempts/missing history. Never create/apply activation label.

@@ -371,7 +371,8 @@ def main():
                 "campaign_id": CAMPAIGN,
                 "source_sha": checkout,
                 "run_id": env["GITHUB_RUN_ID"],
-                "consumed": False,
+                "consumed_by_this_event": False,
+                "authorization_state": "not_evaluated_in_configuration",
                 "model_download_started": False,
             },
         )
