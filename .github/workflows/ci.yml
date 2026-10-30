@@ -33,6 +33,7 @@ jobs:
       - run: uv run python scripts/source_gate.py --output .local/ci-evidence/source-manifest.json
       - run: uv run python scripts/license_gate.py --development-environment --output .local/ci-evidence/license-inventory.json
       - name: Exact archive and historical secret gates
+        id: source_secrets
         run: |
           archive_dir=$(mktemp -d)
           git archive --format=tar -o .local/ci-evidence/source.tar HEAD
@@ -50,10 +51,11 @@ jobs:
           docker build --build-arg SOURCE_REVISION="$(git rev-parse HEAD)" -f Dockerfile.qdrant -t workspace-rag-qdrant:local .
           uv run python scripts/ci_qdrant.py
       - name: Verify exported reports
+        id: evidence_guard
         if: always()
         run: uv run python scripts/evidence_gate.py .local/ci-evidence
       - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
-        if: always()
+        if: always() && steps.evidence_guard.outcome == 'success' && steps.source_secrets.outcome == 'success'
         with:
           name: source-${{ github.run_id }}
           path: .local/ci-evidence/
@@ -106,10 +108,11 @@ jobs:
         run: |
           docker run --rm -v /var/run/docker.sock:/var/run/docker.sock -v "$PWD/.local/ci-evidence:/output" aquasec/trivy@sha256:790fd66d1697395d8693d1acaa1ea702406a20f109b6fc7bac8db623eca6c06c image --scanners vuln --severity HIGH,CRITICAL --exit-code 1 --format json --output /output/image-vulnerabilities.json "$RAG_TEST_IMAGE"
       - name: Verify exported reports
+        id: evidence_guard
         if: always()
         run: uv run python scripts/evidence_gate.py .local/ci-evidence
       - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
-        if: always()
+        if: always() && steps.evidence_guard.outcome == 'success'
         with:
           name: image-${{ matrix.variant }}-${{ github.run_id }}
           path: .local/ci-evidence/
@@ -144,10 +147,11 @@ jobs:
         timeout-minutes: 12
         run: uv run python scripts/isolated_acceptance.py --approved-local-model-test --model-dir .local/models/minilm-10dbd2f --evidence .local/ci-evidence/real-cpu-qdrant.json
       - name: Verify exported reports
+        id: evidence_guard
         if: always()
         run: uv run python scripts/evidence_gate.py .local/ci-evidence
       - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
-        if: always()
+        if: always() && steps.evidence_guard.outcome == 'success'
         with:
           name: independent-cpu-${{ github.run_id }}
           path: .local/ci-evidence/

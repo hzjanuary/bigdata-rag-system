@@ -35,5 +35,6 @@ def test_only_allowlisted_evidence_directory_uploaded():
             s for s in job["steps"] if s.get("uses", "").startswith("actions/upload-artifact@")
         ]
         assert len(uploads) == 1
+        assert "steps.evidence_guard.outcome == 'success'" in uploads[0]["if"]
         assert uploads[0]["with"]["path"] == ".local/ci-evidence/"
         assert any("scripts/evidence_gate.py" in s.get("run", "") for s in job["steps"])
