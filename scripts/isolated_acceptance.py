@@ -1,6 +1,6 @@
 """ONE explicit local model campaign: real CPU image/Qdrant, crash/outage/restore.
 
-Never run by CI or startup. Requires pre-acquired verified model; downloads nothing.
+Run in CI only for the explicitly authorized independent campaign; never at startup. Requires pre-acquired verified model; downloads nothing.
 Only creates isolated Compose projects named spec001-<random>. No operator volumes.
 """
 
@@ -18,6 +18,7 @@ import zipfile
 from pathlib import Path
 
 import httpx
+from acceptance_helpers import equivalent_search
 from pypdf import PdfWriter
 from pypdf.generic import DecodedStreamObject, DictionaryObject, NameObject
 
@@ -217,7 +218,10 @@ ref=np.einsum('bth,bt->bh',h,mask)/mask.sum(1)[:,None]; ref/=np.linalg.norm(ref,
 assert np.max(np.abs(v-ref))<1e-5
 assert np.max(np.abs(v[0]-single))<1e-5
 assert np.max(np.abs(np.linalg.norm(v,axis=1)-1))<1e-5
-print(json.dumps({'dimension':v.shape[1],'pooling':'mask-weighted-mean','normalization':'l2','reference_max_abs_error':float(np.max(np.abs(v-ref))),'providers':m.session.get_providers()}))
+assert m.tokenizer.token_to_id('[PAD]')==0 and m.tokenizer.token_to_id('[CLS]')==101 and m.tokenizer.token_to_id('[SEP]')==102
+assert m.tokenizer.truncation['max_length']==256
+assert len(m.tokenizer.encode('rainwater '*1000).ids)==256
+print(json.dumps({'dimension':v.shape[1],'pooling':'mask-weighted-mean','normalization':'l2','reference_max_abs_error':float(np.max(np.abs(v-ref))),'batch_single_max_abs_error':float(np.max(np.abs(v[0]-single))),'l2_norms':np.linalg.norm(v,axis=1).tolist(),'embeddings':v.tolist(),'truncation':m.tokenizer.truncation,'padding':m.tokenizer.padding,'providers':m.session.get_providers()}))
 """
         pooling = json.loads(cp("exec", "-T", "api", "python", "-c", reference))
         report["pooling"] = pooling
@@ -254,6 +258,27 @@ print(json.dumps({'dimension':v.shape[1],'pooling':'mask-weighted-mean','normali
                 ("library.docx", docx),
             ]
         }
+        endpoint = f"/workspaces/{wa}/documents"
+        check(
+            "actual oversized upload rejected",
+            client.post(
+                endpoint,
+                params={"filename": "large.txt"},
+                content=b"x" * (4 * 1024 * 1024 + 1),
+                headers={"Content-Type": "text/plain"},
+            ).status_code
+            == 413,
+        )
+        check(
+            "actual traversal basename rejected",
+            client.post(
+                endpoint,
+                params={"filename": "../escape.txt"},
+                content=b"test",
+                headers={"Content-Type": "text/plain"},
+            ).status_code
+            == 400,
+        )
         query = {"query": "What is the blue rainwater tank capacity?"}
         found = request("POST", f"/workspaces/{wa}/search", json=query)
         check(
@@ -262,6 +287,16 @@ print(json.dumps({'dimension':v.shape[1],'pooling':'mask-weighted-mean','normali
             and any(
                 m["ranking"]["dense_cosine"] is not None and m["ranking"]["bm25"] > 0
                 for m in found["matches"]
+            ),
+        )
+        report["search_results"] = found
+        check(
+            "actual rerank opt-out",
+            all(
+                m["ranking"]["reranker"] == "disabled"
+                for m in request(
+                    "POST", f"/workspaces/{wa}/search", json={**query, "rerank": False}
+                )["matches"]
             ),
         )
         check("CLI/API search parity", cli("search", wa, query["query"]) == found)
@@ -325,11 +360,40 @@ print(json.dumps({'dimension':v.shape[1],'pooling':'mask-weighted-mean','normali
             "real Qdrant outage search 503",
             client.post(f"/workspaces/{wa}/search", json=query).status_code == 503,
         )
+        retry_bytes = (
+            b"Synthetic retry orchard: irrigation uses rainwater and bounded durable jobs."
+        )
+        failed_retry = request(
+            "POST",
+            f"/workspaces/{wa}/documents",
+            params={"filename": "retry.txt"},
+            content=retry_bytes,
+            headers={"Content-Type": "text/plain"},
+        )
+        failed_state = wait(lambda: terminal(wa, failed_retry["id"]))
+        check(
+            "real outage ingest fails without manifest publication",
+            failed_state["state"] == "FAILED"
+            and len(request("GET", f"/workspaces/{wa}/documents")) == 2,
+        )
         cp("start", "qdrant")
         wait(lambda: client.get("/health").status_code == 200)
         check(
             "Qdrant restart preserves committed points",
             request("POST", f"/workspaces/{wa}/search", json=query) == found,
+        )
+        retried = request(
+            "POST",
+            f"/workspaces/{wa}/documents",
+            params={"filename": "retry.txt"},
+            content=retry_bytes,
+            headers={"Content-Type": "text/plain"},
+        )
+        check(
+            "actual failed ingest retry completes without reset",
+            wait(lambda: terminal(wa, retried["id"]))["state"] == "COMPLETED"
+            and retried["id"] != failed_retry["id"]
+            and request("GET", f"/workspaces/{wa}/jobs/{first['id']}")["state"] == "COMPLETED",
         )
         # Force an actual crash while a live worker awaits Qdrant, then recover durable job.
         qid, aid = cp("ps", "-q", "qdrant").strip(), cp("ps", "-q", "api").strip()
@@ -353,9 +417,32 @@ print(json.dumps({'dimension':v.shape[1],'pooling':'mask-weighted-mean','normali
         check(
             "actual RUNNING worker crash recovers without reset",
             wait(lambda: terminal(wa, crash["id"]))["state"] == "COMPLETED"
-            and len(request("GET", f"/workspaces/{wa}/documents")) == 3,
+            and len(request("GET", f"/workspaces/{wa}/documents")) == 4,
         )
         expected_after_crash = request("POST", f"/workspaces/{wa}/search", json=query)
+        snapshot_code = """
+import json
+from rag_core.settings import load_settings
+from rag_core.store import Store
+from rag_core.vectors import Vectors,collection
+s=load_settings(); db=Store(s); v=Vectors(s); rows=[]
+for w in db.list_workspaces('owner'):
+ c=v.client.get_collection(collection(w['id']))
+ rows.append({'workspace':w['id'],'points':c.points_count,'dimension':c.config.params.vectors.size,'status':c.status.value})
+with db.connect() as con:
+ jobs=[dict(r) for r in con.execute('SELECT id,workspace,document,filename,state,checkpoint FROM jobs ORDER BY created')]
+ chunks=con.execute('SELECT count(*) FROM chunks').fetchone()[0]
+print(json.dumps({'collections':rows,'jobs':jobs,'committed_chunks':chunks}))
+"""
+        report["state_before_backup"] = json.loads(
+            cp("exec", "-T", "api", "python", "-c", snapshot_code)
+        )
+        check(
+            "acknowledged Qdrant points equal committed SQLite chunks",
+            sum(row["points"] for row in report["state_before_backup"]["collections"])
+            == report["state_before_backup"]["committed_chunks"],
+        )
+
         cp("stop", "api")
         network = json.loads(run(["docker", "inspect", qid]))[0]["NetworkSettings"]["Networks"]
         network = next(iter(network))
@@ -435,7 +522,9 @@ print(json.dumps({'dimension':v.shape[1],'pooling':'mask-weighted-mean','normali
         wait(lambda: client.get("/health").status_code == 200)
         check(
             "restored source/manifests/ranking/job history intact",
-            request("POST", f"/workspaces/{wa}/search", json=query) == expected_after_crash
+            equivalent_search(
+                request("POST", f"/workspaces/{wa}/search", json=query), expected_after_crash
+            )
             and request("GET", f"/workspaces/{wa}/jobs/{first['id']}")["state"] == "COMPLETED"
             and client.get(f"/workspaces/{wa}/documents/{first['document']}/content").content
             == original,
@@ -447,6 +536,16 @@ print(json.dumps({'dimension':v.shape[1],'pooling':'mask-weighted-mean','normali
                 headers={"Authorization": "Bearer " + b["capability"]},
             ).status_code
             == 404,
+        )
+        report["state_after_restore"] = json.loads(
+            run(
+                restore_compose + ["exec", "-T", "api", "python", "-c", snapshot_code],
+                env=restore_env,
+            )
+        )
+        check(
+            "all durable jobs and Qdrant collection counts survive restore",
+            report["state_after_restore"] == report["state_before_backup"],
         )
         report["result"] = "PASS"
     except BaseException as exc:

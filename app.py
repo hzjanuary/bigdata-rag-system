@@ -1,4 +1,5 @@
 """Optional Streamlit client. Talks only to authenticated API; no direct storage access."""
+
 import os
 
 import httpx

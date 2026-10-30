@@ -44,7 +44,7 @@ def rank(
     bm_order = sorted(lexical, key=lambda c: (-lexical[c], c))[:64]
     dense_scores = {cid: score for cid, score in dense if score >= 0.35}
     dense_order = sorted(dense_scores, key=lambda c: (-dense_scores[c], c))
-    fused = {}
+    fused: dict[str, float] = {}
     for order in (bm_order, dense_order):
         for i, cid in enumerate(order):
             fused[cid] = fused.get(cid, 0) + 1 / (60 + i + 1)

@@ -5,6 +5,7 @@ import sqlite3
 import stat
 import sys
 from pathlib import Path
+from typing import Any
 
 import httpx
 
@@ -117,7 +118,8 @@ def execute(args):
     token = os.environ.get(args.token_env, "") if args.token_env else settings.owner_token
     if args.token_env and not token:
         raise RagError("capability_environment_missing")
-    method, path, kwargs = "GET", "/workspaces", {}
+    method, path = "GET", "/workspaces"
+    kwargs: dict[str, Any] = {}
     if args.command == "doctor":
         with httpx.Client(base_url=settings.api_url, timeout=10, trust_env=False) as client:
             response = client.get("/health")

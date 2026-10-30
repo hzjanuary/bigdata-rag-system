@@ -7,17 +7,25 @@ import resource
 import subprocess
 import sys
 import zipfile
+from typing import TypedDict
 
 from defusedxml import ElementTree
 
 from .errors import RagError
 from .settings import MAX_FILE
 
+
+class ExtractedPage(TypedDict):
+    page: int | None
+    text: str
+
+
 MAX_TEXT = 200_000
 MAX_CHUNKS = 320
 
 
 def extract(data: bytes, extension: str) -> list[dict]:
+    pages: list[ExtractedPage]
     if not data or len(data) > MAX_FILE:
         raise RagError("file_size_limit", 413)
     if extension == ".txt":
@@ -34,12 +42,12 @@ def extract(data: bytes, extension: str) -> list[dict]:
         if reader.is_encrypted or len(reader.pages) > 100:
             raise RagError("pdf_limit")
         pages, total = [], 0
-        for i, page in enumerate(reader.pages):
+        for i, pdf_page in enumerate(reader.pages):
             # Reject huge decoded streams before the text parser handles operators.
-            stream = page.get_contents()
+            stream = pdf_page.get_contents()
             if stream and len(stream.get_data()) > 2 * 1024 * 1024:
                 raise RagError("pdf_stream_limit")
-            text = page.extract_text() or ""
+            text = pdf_page.extract_text() or ""
             total += len(text)
             if total > MAX_TEXT:
                 raise RagError("extraction_limit")
@@ -67,7 +75,7 @@ def extract(data: bytes, extension: str) -> list[dict]:
         raise RagError("unsupported_format", 415)
     if sum(len(p["text"]) for p in pages) > MAX_TEXT:
         raise RagError("extraction_limit")
-    chunks = []
+    chunks: list[dict] = []
     for page in pages:
         for start in range(0, len(page["text"]), 700):
             text = page["text"][start : start + 800]

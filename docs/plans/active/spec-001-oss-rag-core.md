@@ -54,3 +54,25 @@ The full matrix is in `docs/release/verification.md`. Each criterion starts NOT_
 - Current source and archive gates, full-history detector review, locked install, licenses and Python security checks completed. Raw image HIGH/CRITICAL gates deliberately fail (exit 1); no inference in CI or remote provider call was made.
 - Acceptance: 21 PASS / 2 BLOCKED / 1 FAIL. Source-preview NO-GO and image-security NO-GO are independent. Do not archive this plan while RAG-15, pristine-host qualification, remote CI and image-security disposition are outstanding.
 - No push, merge, Git tag, public source/image release, remote deployment or paid/generative call. Required next approvals and exact blockers are in docs/release/verification.md.
+
+### Authorized follow-up (2026-10-30, supersedes previous execution prohibitions)
+
+- User now authorizes normal feature-branch push, ONE Draft PR to main, genuine
+  GitHub Actions and ONE independent Ubuntu 24.04 CPU/MiniLM/Qdrant campaign.
+- Phase 1 identified the exact original FAIL: RAG-21, whose image-security gates
+  actually return 1 for known Debian OS findings; remote CI was not run. Supported
+  stable package candidates equal installed versions; no ordinary RAG function
+  defect caused this failure. Original evidence/raw scans preserved under
+  .local/followup-20261030/baseline, with hashes.
+- User explicitly selected observational CI while RAG-21 remains FAIL. No CVE
+  suppression, severity reduction, gate exception or unsupported distro mixing.
+- New CI separates source checks, three image/security/license/SBOM jobs and the
+  single CPU campaign (same-repository Draft PR opened event only). Push or PR
+  synchronization does not download models or perform inference.
+- Local verification tooling adds locked Black/MyPy, bounded official acquisition
+  (two pinned files, fixed byte limits, 180-second wall limit), precise tokenizer,
+  pooling/L2/embedding evidence and actual failed-index retry/resource checks.
+- Generative LLM inference, merge, Git tag, release/deploy and image publication
+  remain prohibited. RAG-15 stays BLOCKED; separate proposal is in release/.
+- Remote run IDs, actual host evidence, artifacts and final source-only readiness
+  will be recorded only after genuine CI completes. Plan remains active meanwhile.

@@ -77,7 +77,8 @@ def create_app(
     )
     app.state.service = service
     app.state.generator = generator
-    rate_lock, windows = threading.Lock(), {}
+    rate_lock = threading.Lock()
+    windows: dict[str, tuple[int, int]] = {}
     inflight = 0
 
     @app.middleware("http")

@@ -19,7 +19,7 @@ dependencies = [
 ui = ["streamlit==1.66.1"]
 
 [dependency-groups]
-dev = ["pytest==9.0.1", "pytest-cov==7.0.0", "ruff==0.14.6", "pip-audit==2.9.0", "cyclonedx-bom==7.2.1"]
+dev = ["pytest==9.0.1", "pytest-cov==7.0.0", "ruff==0.14.6", "pip-audit==2.9.0", "cyclonedx-bom==7.2.1", "black==26.10.1", "mypy==2.4.1"]
 
 [project.scripts]
 rag = "rag_core.cli:main"
@@ -38,3 +38,16 @@ target-version = "py312"
 [tool.ruff.lint]
 select = ["E", "F", "I", "B", "UP"]
 ignore = ["E501", "B008"]
+
+[tool.black]
+line-length = 100
+target-version = ["py312"]
+
+[tool.mypy]
+python_version = "3.12"
+check_untyped_defs = true
+files = ["rag_core"]
+
+[[tool.mypy.overrides]]
+module = ["onnxruntime", "tokenizers", "defusedxml.*"]
+ignore_missing_imports = true

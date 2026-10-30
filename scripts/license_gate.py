@@ -109,9 +109,9 @@ def main():
     args.output.write_text(
         json.dumps(
             {
-                "scope": "development tools and core"
-                if args.development_environment
-                else "runtime",
+                "scope": (
+                    "development tools and core" if args.development_environment else "runtime"
+                ),
                 "packages": rows,
                 "unknown_or_unapproved": failures,
             },

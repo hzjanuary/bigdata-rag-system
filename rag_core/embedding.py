@@ -1,11 +1,16 @@
 import hashlib
 import json
 import threading
+from typing import TYPE_CHECKING
 
 import numpy as np
 
 from .errors import RagError
 from .settings import MODEL_ID, MODEL_REVISION, Settings, private_path
+
+if TYPE_CHECKING:
+    from onnxruntime import InferenceSession
+
 
 ONNX_SHA256 = "6fd5d72fe4589f189f8ebc006442dbb529bb7ce38f8082112682524616046452"
 # Tokenizer pinned after upstream Git blob verification in acquisition.
@@ -23,7 +28,7 @@ class OnnxEmbedder:
 
     def __init__(self, settings: Settings):
         self.settings = settings
-        self.session = None
+        self.session: InferenceSession | None = None
         self.lock = threading.Lock()
 
     def _load(self):
@@ -67,6 +72,8 @@ class OnnxEmbedder:
         with self.lock:
             if self.session is None:
                 self._load()
+            if self.session is None:
+                raise RagError("model_integrity_error", 503)
             vectors = []
             for start in range(0, len(texts), 16):
                 tokens = self.tokenizer.encode_batch(texts[start : start + 16])
