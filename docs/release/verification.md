@@ -1,6 +1,50 @@
 # SPEC-001 verification ledger — 2026-10-30
 
-## Operator-only trigger installation (local verification complete; remote pending)
+## Operator activation boundary — installed and remotely verified inactive
+
+Final remote PR #1 head is **`ba78e94d82b7972e96a9bae962cbb8ada73d6619`**.
+The exact future operator label is
+**`cpuq1:ba78e94d82b7972e96a9bae962cbb8ada73d6619`**.
+It was resolved after normal push, not copied from a previous tested revision.
+Earlier local evidence commit `1ccf0d0` is preserved in pushed history.
+
+| Actual run at final remote head | Outcome |
+| --- | --- |
+| [Source/image push 41012209423](https://github.com/hzjanuary/bigdata-rag-system/actions/runs/41012209423) | source PASS; three image jobs FAIL only at known security gate |
+| [Source/image PR 41012213478](https://github.com/hzjanuary/bigdata-rag-system/actions/runs/41012213478) | source PASS; three image jobs FAIL only at known security gate |
+| [Trigger push 41012209492](https://github.com/hzjanuary/bigdata-rag-system/actions/runs/41012209492) | configuration PASS; campaign SKIPPED |
+| [Trigger PR synchronize 41012213570](https://github.com/hzjanuary/bigdata-rag-system/actions/runs/41012213570) | configuration PASS; campaign SKIPPED |
+
+Both source jobs passed 154 tests / one skipped, actual Qdrant contract, lock,
+quality, source/archive/current/history secrets, license/audit/SBOM and Compose.
+JUnit is 17,978 / 17,977 bytes, valid unique-name XML under the unchanged 2 MB gate.
+All **10 artifacts** were downloaded and verified against GitHub ZIP digests, CRCs,
+exact checksum manifests and every file size/hash. Six actual image reports retain
+44/43/44 HIGH (core/Qdrant/UI), zero CRITICAL, identical HIGH/fix/license records;
+actual security exits are 1. No severity change, CVE suppression or image approval.
+
+Downloaded inactive receipts explicitly show `consumed=false` and
+`model_download_started=false`. Read-only API checks confirm PR labels empty,
+consumption marker count zero, and installed workflow bytes equal reviewed local
+bytes. No activation label/marker/model download/CPU campaign/generative call was
+created or executed. Source/trigger tests establish valid inactive configuration;
+live label handling/check-write permission is deliberately untested at this boundary.
+
+Complete machine-readable [remote evidence](evidence/cpu-trigger-remote.json) records
+all run IDs, artifact digests, source/image identities and retained log hashes.
+[Operator instructions](CPU-CAMPAIGN-TRIGGER.md) describe exact-head history/source
+checks, the reservation, fixed expiry and replay limits. Operator must review this
+head and apply the exact label separately, as `hzjanuary`, to PR #1 once before
+**2026-10-31 00:00 UTC (07:00 Vietnam)**. Missing history/evidence or any mismatch
+rejects before acquisition; no rerun or automatic extension fallback. Administrative
+history deletion/policy changes preclude a mathematical exactly-once guarantee.
+
+Final evidence is committed locally after remote verification without another
+push, keeping this activation head stable. RAG-15 and RAG-20 remain BLOCKED;
+RAG-21 remains FAIL. Totals **21 PASS / 1 FAIL / 2 BLOCKED**. Stop before activation;
+no source/image release, merge, tag, deployment or generative campaign is authorized.
+
+## Trigger local verification checkpoint before push (historical)
 
 Explicit authorization now covers implementing/pushing the trigger, without
 activation. `.github/workflows/spec001-cpu-once.yml` and `scripts/cpu_campaign.py`
@@ -289,8 +333,8 @@ F/U/L/A above supply exact source/image identities for every referenced evidence
 | RAG-17 | PASS | U error/caplog/stdout redaction with secret/content/path sentinels, including CLI storage failures; default access/prompt traces absent; authenticated fixed-schema events only. |
 | RAG-18 | PASS | L actual Qdrant stop -> readiness/search 503; restart restores identical committed retrieval. U/Q outage and dimension contracts. |
 | RAG-19 | PASS | L actual private logical backup and read-only restore to a separate Qdrant, exact source hashes/manifests/jobs/capability hashes, ranking within 1e-6 float round-trip tolerance. Original documents/volumes untouched. |
-| RAG-20 | BLOCKED | Local secure CPU Compose verified by L/I. Corrected source CI now PASS on genuine hosted Ubuntu, but independent-cpu stays SKIPPED on synchronize/push. Inert one-time trigger prepared; no independent real-model stack qualification or campaign consumption claimed. |
-| RAG-21 | FAIL | JUnit export defect corrected; source jobs/artifacts PASS in runs 41008646193/41008651605 at d54b899. All three actual hosted image jobs per run execute and security gates exit **1**, unchanged 44/43/44 HIGH. Raw reports/checksums preserved, no suppression. |
+| RAG-20 | BLOCKED | Local CPU evidence retained; final ba78e94 source CI PASS and installed trigger configuration PASS, campaign SKIPPED on push/synchronize. No label/marker/consumption or independent real-model acceptance yet. Separate owner activation required. |
+| RAG-21 | FAIL | Latest source jobs/artifacts PASS in runs 41012209423/41012213478 at ba78e94 (154 PASS, one skipped). All three actual hosted image jobs per run execute and security gates exit **1**, unchanged 44/43/44 HIGH. Raw reports/checksums preserved, no suppression. |
 | RAG-22 | PASS | S exact tracked-file/archive inventory and adversarial bypass tests; I excludes private/model/index data and unused bundled ONNX demo graphs; no operator fixtures in source. One historical public-hash detector finding independently reviewed, not hidden. |
 | RAG-23 | PASS | C + L README/CLI walkthrough; required architecture/self-host/provider/security/backup/contribution/license/NOTICE/release docs and inventories present. No production, GPU, OCR, provider-quality or benchmark claims. |
 | RAG-24 | PASS | This explicit review separates source preview, actual model evidence, LIVE provider scope, remote CI and image security. Neither publication decision is inferred from deterministic tests. |

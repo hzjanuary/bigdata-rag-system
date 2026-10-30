@@ -1,8 +1,8 @@
 # SPEC-001 execution plan
 
-Current checkpoint: operator-only trigger implementation locally verified; normal
-push/source CI pending. Preparation does not activate or consume the campaign.
-Plan remains active; RAG-15/20 BLOCKED and RAG-21 FAIL.
+Current checkpoint: trigger installed at remote ba78e94; both source jobs and both
+inactive configuration runs PASS. Campaign SKIPPED, no label/marker/consumption.
+STOP at separate operator activation boundary. Plan remains active, 21/1/2 unchanged.
 
 Started 2026-10-29. Branch: `feat/spec-001-oss-rag-core`.
 Authoritative requirements: `docs/specs/SPEC-001-open-source-rag-core.md` (unchanged).
@@ -192,3 +192,25 @@ The full matrix is in `docs/release/verification.md`. Each criterion starts NOT_
   Ruff/Black/MyPy, license/audit and actionlint syntax/expression checks PASS.
   Next: source/archive/secret gates, normal push, existing PR #1 update and genuine
   source/configuration CI; record exact remote SHA/label and stop before activation.
+
+### Installed trigger: final operator boundary (2026-10-30)
+
+- Normal push preserved 1ccf0d0; final remote PR #1 head
+  ba78e94d82b7972e96a9bae962cbb8ada73d6619. Owner activation label, determined
+  AFTER push: cpuq1:ba78e94d82b7972e96a9bae962cbb8ada73d6619.
+- Source runs 41012209423 (push), 41012213478 (PR): source PASS, 154 tests / one
+  skipped, actual Qdrant and all source/security/license/tooling checks PASS.
+  Image jobs FAIL solely at known HIGH/CRITICAL gates, raw reports/exits retained.
+- Trigger runs 41012209492 / 41012213570: configuration PASS, campaign SKIPPED.
+  Inactive receipts explicitly consumed=false, model_download_started=false.
+  API confirms labels empty, marker count zero, installed workflow byte match.
+- All ten artifacts downloaded and verified: GitHub ZIP digests, CRCs, manifests,
+  per-file sizes/hashes, exact source archive. No new HIGH/CRITICAL/license records;
+  per image core44/Qdrant43/UI44 HIGH, zero CRITICAL; no gate changes or exceptions.
+- STOP before operator action. No label creation/application, marker, model command,
+  CPU acceptance, generation, merge/tag/release/deploy/image publication occurred.
+  Operator must review exact remote head, then apply the exact label once before
+  fixed expiry 2026-10-31 00:00 UTC. Admin/retention replay limits documented.
+- Remote machine evidence: docs/release/evidence/cpu-trigger-remote.json; local
+  evidence docs commit kept without another push to preserve reviewed activation
+  head. RAG-15/20 BLOCKED, RAG-21 FAIL; 21 PASS / 1 FAIL / 2 BLOCKED, plan active.
