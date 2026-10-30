@@ -1,8 +1,9 @@
 # SPEC-001 execution plan
 
-Current checkpoint: trigger installed at remote ba78e94; both source jobs and both
-inactive configuration runs PASS. Campaign SKIPPED, no label/marker/consumption.
-STOP at separate operator activation boundary. Plan remains active, 21/1/2 unchanged.
+Current checkpoint: hosted run 41029994294 consumed and FAIL at restart assertion.
+Offline diagnosis confirms cross-process BM25 summation nondeterminism; production
+unchanged, proposal/regression only. No second live campaign; new authorization
+required. Current assessment 20 PASS / two FAIL / two BLOCKED, plan active.
 
 Started 2026-10-29. Branch: `feat/spec-001-oss-rag-core`.
 Authoritative requirements: `docs/specs/SPEC-001-open-source-rag-core.md` (unchanged).
@@ -214,3 +215,28 @@ The full matrix is in `docs/release/verification.md`. Each criterion starts NOT_
 - Remote machine evidence: docs/release/evidence/cpu-trigger-remote.json; local
   evidence docs commit kept without another push to preserve reviewed activation
   head. RAG-15/20 BLOCKED, RAG-21 FAIL; 21 PASS / 1 FAIL / 2 BLOCKED, plan active.
+
+### Consumed campaign diagnosis (2026-10-30)
+
+- Owner-triggered run 41029994294 at ba78e94: reservation/acquisition PASS; 21
+  checks PASS, then named API-restart assertion FAIL. Artifact 12966475279 ZIP
+  digest/CRCs/manifest verified. Private result never uploaded; hosted post-job/
+  retrieval values unavailable. Preserve all original evidence and marker123977248159.
+- Bounded offline diagnosis with existing verified model, fresh private synthetic
+  state and existing local Qdrant image: actual API restart retains COMPLETED jobs,
+  chunks and points/vectors, readiness200 and exact hit order/text/citations. Only
+  BM25 differs by one ULP. Twelve pure hash-seeded processes isolate set-order
+  floating summation; no inference/storage dependency needed for counterexample.
+- New focused regression intentionally FAILS current production and PASSES the
+  one-line sorted-term proposal in an isolated copied package. Existing tests
+  (new red test excluded explicitly)154 PASS/one skipped. Production untouched.
+- Preserve an auxiliary diagnostic timeout caused by changed ephemeral Docker host
+  port; rediscovery confirms Qdrant200 and unchanged point hashes. Do not attribute
+  local probe plumbing to original internal-DNS Compose campaign.
+- RAG-12 now FAIL due confirmed determinism defect; RAG-15/20 BLOCKED, RAG-21 FAIL:
+  20 PASS/two FAIL/two BLOCKED. Proposed correction and safe split checkpoint
+  diagnostics await review. Original hosted operand/delta cannot be proven from
+  exported data; do not claim original run PASS or blanket storage failure.
+- No commit/push, production patch, marker removal, label reapplication, workflow
+  rerun, model acquisition or second live campaign. Fresh independent-host campaign
+  requires separate explicit authorization/budget; preserve consumed attempt.

@@ -1,6 +1,50 @@
 # SPEC-001 verification ledger — 2026-10-30
 
-## Operator activation boundary — installed and remotely verified inactive
+## Authorized BM25 correction and additional-campaign preparation in progress
+
+Only production change: canonical BM25 term traversal (`for term in sorted(terms)`).
+Formula/parameters/RRF/dense/reranker/schema/ACL/thresholds remain unchanged. Six-seed
+regression fails on preserved original source and passes after correction; twelve
+fresh processes now give identical outputs. Other ranking fields match the original
+probe exactly. Restart diagnostics capture readiness/job/identity/status/order/
+provenance/exact scores before individual assertions, with hash-only content and a
+strict public projection. No numerical tolerance replaces deterministic checks.
+
+Existing diagnosis/run41029994294/marker evidence is preserved, including the
+distinction between reproduced local mechanism and unavailable hosted post-state.
+Local source-quality and focused tests pass; corrected full CPU image/model/Qdrant
+verification is pending before push. RAG-12 remains FAIL until that proof is recorded.
+The owner separately authorizes preparation of one additional campaign; it must
+have new cpuq2 identity/marker and a separate exact-SHA owner label after source CI.
+No second independent campaign or activation is performed during preparation.
+
+## Consumed hosted campaign 41029994294 — failed restart checkpoint, diagnosed offline
+
+The owner subsequently activated run
+[41029994294](https://github.com/hzjanuary/bigdata-rag-system/actions/runs/41029994294)
+at ba78e94. Model acquisition/reservation succeeded; 21 checks passed before
+`AssertionError: API process restart preserves job and retrieval`. Marker
+123977248159 is **consumed and retained**. Raw private runner result was not
+uploaded; the checksum-verified artifact contains only pre-restart retrieval.
+No original post-restart job/search values can be reconstructed from that artifact.
+
+[Diagnosis](CPU-RUN-41029994294-DIAGNOSIS.md) and
+[machine evidence](evidence/cpu-run-41029994294-diagnosis.json) preserve original
+hashes/logs and distinguish direct hosted observations from offline reproduction.
+Real cached CPU model + local API/Qdrant reproduction retained COMPLETED jobs,
+SQLite chunks, vector hashes, readiness, identities/order/citations. Only one BM25
+float changed by 4.440892098500626e-16. Pure fresh-process probes isolate unordered
+set traversal/non-associative summation as the production mechanism. Original
+hosted post-state is unavailable, so its exact operand/delta remains unproven.
+
+A new cross-process regression fails on unchanged production and passes with a
+one-line canonical-term-order proposal in an isolated copy. Production is not
+patched, committed or pushed. RAG-12 is now FAIL on newly confirmed nondeterminism;
+current totals **20 PASS / two FAIL / two BLOCKED**. RAG-15/20 stay BLOCKED and
+RAG-21's known image FAIL remains. A fresh independent campaign needs new explicit
+authorization; no marker/label/rerun/download or second live campaign occurred.
+
+## Previous operator activation boundary (historical)
 
 Final remote PR #1 head is **`ba78e94d82b7972e96a9bae962cbb8ada73d6619`**.
 The exact future operator label is
@@ -325,7 +369,7 @@ F/U/L/A above supply exact source/image identities for every referenced evidence
 | RAG-09 | PASS | U partial Qdrant-write failure and cancellation immediately before publication; committed-manifest filtering hides staged points. L real worker crash preserves prior acknowledged state and completes idempotently. |
 | RAG-10 | PASS | U + Q + L: no ingest reset/delete path; retries preserve collections; destructive scope/confirmation audited. L CLI deletes only a newly created empty trial workspace. |
 | RAG-11 | PASS | L + A: approved official pinned MiniLM ONNX, CPU-only pooling/normalization reference, real Qdrant, synthetic TXT/PDF/DOCX corpus, persisted retrieval/citations. No fixture satisfies this row. |
-| RAG-12 | PASS | U reproducible BM25/RRF/term-coverage rerank and opt-out; Q actual server dimension mismatch/filter contracts; L dense+BM25 provenance; A final runtime code/binary equivalence. |
+| RAG-12 | FAIL | New offline cross-process regression confirms BM25 score nondeterminism from unordered set traversal; previous U/L evidence was insufficient across process hash seeds. Ordered results/citations remain identical in the reproduced case; canonical traversal proposal passes in isolated copy, production correction pending. |
 | RAG-13 | PASS | L actual source byte/hash download, persisted chunks and PDF page 2; TXT/DOCX page null, no fabricated URL; actual unrelated query returns no_match. U failure/no-match integrity. |
 | RAG-14 | PASS | U real-adapter mock HTTP contracts for disabled/default, bounded calls/deadline/tokens/response, hostile text and invalid citations; L generation_disabled. No production fixture or fake fallback. |
 | RAG-15 | BLOCKED | **LIVE generation not authorized**, not run. No external provider/credential/availability/answer-quality claim. Separate approval and privately configured credentials are required. |
@@ -333,13 +377,13 @@ F/U/L/A above supply exact source/image identities for every referenced evidence
 | RAG-17 | PASS | U error/caplog/stdout redaction with secret/content/path sentinels, including CLI storage failures; default access/prompt traces absent; authenticated fixed-schema events only. |
 | RAG-18 | PASS | L actual Qdrant stop -> readiness/search 503; restart restores identical committed retrieval. U/Q outage and dimension contracts. |
 | RAG-19 | PASS | L actual private logical backup and read-only restore to a separate Qdrant, exact source hashes/manifests/jobs/capability hashes, ranking within 1e-6 float round-trip tolerance. Original documents/volumes untouched. |
-| RAG-20 | BLOCKED | Local CPU evidence retained; final ba78e94 source CI PASS and installed trigger configuration PASS, campaign SKIPPED on push/synchronize. No label/marker/consumption or independent real-model acceptance yet. Separate owner activation required. |
+| RAG-20 | BLOCKED | Hosted campaign 41029994294 consumed authorization and passed 21 checks, then failed restart assertion before remaining outage/crash/restore scenarios. Local diagnosis is not independent-host completion. New explicit campaign authorization required; preserve original marker. |
 | RAG-21 | FAIL | Latest source jobs/artifacts PASS in runs 41012209423/41012213478 at ba78e94 (154 PASS, one skipped). All three actual hosted image jobs per run execute and security gates exit **1**, unchanged 44/43/44 HIGH. Raw reports/checksums preserved, no suppression. |
 | RAG-22 | PASS | S exact tracked-file/archive inventory and adversarial bypass tests; I excludes private/model/index data and unused bundled ONNX demo graphs; no operator fixtures in source. One historical public-hash detector finding independently reviewed, not hidden. |
 | RAG-23 | PASS | C + L README/CLI walkthrough; required architecture/self-host/provider/security/backup/contribution/license/NOTICE/release docs and inventories present. No production, GPU, OCR, provider-quality or benchmark claims. |
 | RAG-24 | PASS | This explicit review separates source preview, actual model evidence, LIVE provider scope, remote CI and image security. Neither publication decision is inferred from deterministic tests. |
 
-Totals: **21 PASS, 2 BLOCKED, 1 FAIL**. Previous PASS rows retain their stated
+Totals: **20 PASS, 2 BLOCKED, 2 FAIL**. Previous PASS rows retain their stated
 historical evidence scope; they are not a claim that the full current hosted stack
 was requalified. No acceptance criterion was edited to obtain PASS.
 

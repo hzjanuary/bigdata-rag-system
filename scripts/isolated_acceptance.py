@@ -18,7 +18,7 @@ import zipfile
 from pathlib import Path
 
 import httpx
-from acceptance_helpers import equivalent_search
+from acceptance_helpers import equivalent_search, restart_comparison, restart_observation
 from pypdf import PdfWriter
 from pypdf.generic import DecodedStreamObject, DictionaryObject, NameObject
 
@@ -164,8 +164,8 @@ def main():
         )
 
     def check(name, condition):
+        checks.append({"name": name, "status": "PASS" if condition else "FAIL"})
         assert condition, name
-        checks.append({"name": name, "status": "PASS"})
 
     client = httpx.Client(
         base_url=f"http://127.0.0.1:{port}",
@@ -347,13 +347,57 @@ print(json.dumps({'dimension':v.shape[1],'pooling':'mask-weighted-mean','normali
             client.post(f"/workspaces/{wa}/ask", json=query).json()
             == {"error": "generation_disabled"},
         )
-        cp("restart", "api")
-        wait(lambda: client.get("/health").status_code == 200)
-        check(
-            "API process restart preserves job and retrieval",
-            cli("job", "show", wa, first["id"])["state"] == "COMPLETED"
-            and request("POST", f"/workspaces/{wa}/search", json=query) == found,
+        # Identity-only snapshots: no source bytes, database dumps or capabilities.
+        identity_code = """
+import hashlib,json,sqlite3
+from rag_core.settings import load_settings
+s=load_settings()
+with sqlite3.connect("file:"+str(s.state_dir/"metadata.sqlite3")+"?mode=ro",uri=True) as db:
+ db.row_factory=sqlite3.Row
+ documents=[dict(r) for r in db.execute('SELECT id,workspace,content_hash FROM documents ORDER BY workspace,id')]
+ chunks=[]
+ for r in db.execute('SELECT id,workspace,document,page,ordinal,start,end,text FROM chunks ORDER BY workspace,id'):
+  item=dict(r); item['text_sha256']=hashlib.sha256(item.pop('text').encode()).hexdigest(); chunks.append(item)
+print(json.dumps({'documents':documents,'chunks':chunks}))
+"""
+        restart = report["api_restart"] = {"phase": "before_restart"}
+        before = restart_observation(
+            client.get("/health").status_code,
+            cli("job", "show", wa, first["id"])["state"],
+            json.loads(cp("exec", "-T", "api", "python", "-c", identity_code)),
+            found,
         )
+        restart["before"] = before
+        cp("restart", "api")
+        restart["phase"] = "readiness"
+
+        def restarted_ready():
+            restart["ready_status"] = client.get("/health").status_code
+            return restart["ready_status"] == 200
+
+        try:
+            wait(restarted_ready)
+        except Exception:
+            checks.append({"name": "API readiness after restart", "status": "FAIL"})
+            raise
+        restart["phase"] = "observing_job_and_retrieval"
+        job_response = client.get(f"/workspaces/{wa}/jobs/{first['id']}")
+        restart["job_http_status"] = job_response.status_code
+        after_job = job_response.json().get("state") if job_response.is_success else None
+        search_response = client.post(f"/workspaces/{wa}/search", json=query)
+        restart["search_http_status"] = search_response.status_code
+        after_search = search_response.json() if search_response.is_success else None
+        after = restart_observation(
+            restart["ready_status"],
+            after_job,
+            json.loads(cp("exec", "-T", "api", "python", "-c", identity_code)),
+            after_search,
+            search_response.status_code,
+        )
+        # Every available before/after observation is attached BEFORE assertions.
+        restart.update(restart_comparison(before, after))
+        for name, condition in restart["checks"].items():
+            check(name, condition)
         cp("stop", "qdrant")
         check("real Qdrant outage readiness 503", client.get("/health").status_code == 503)
         check(

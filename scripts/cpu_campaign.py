@@ -266,6 +266,80 @@ def public_acceptance(raw):
                 {k: hit[k] for k in fields if k in hit} for hit in raw["search_results"]["matches"]
             ],
         }
+    if "api_restart" in raw:
+        source = raw["api_restart"]
+        allowed = ("phase", "ready_status", "job_http_status", "search_http_status")
+        restart = {k: source[k] for k in allowed if k in source}
+        for side in ("before", "after"):
+            if side not in source:
+                continue
+            view = source[side]
+            observation = {k: view[k] for k in ("ready_status", "job_state", "search_http_status")}
+            observation["documents"] = [
+                {k: d[k] for k in ("id", "workspace", "content_hash")} for d in view["documents"]
+            ]
+            observation["chunks"] = [
+                {
+                    k: c[k]
+                    for k in (
+                        "id",
+                        "workspace",
+                        "document",
+                        "page",
+                        "ordinal",
+                        "start",
+                        "end",
+                        "text_sha256",
+                    )
+                }
+                for c in view["chunks"]
+            ]
+            observation["search"] = None
+            if view["search"] is not None:
+                fields = (
+                    "id",
+                    "workspace",
+                    "document",
+                    "filename",
+                    "content_hash",
+                    "page",
+                    "ordinal",
+                    "start",
+                    "end",
+                    "citation",
+                    "excerpt_sha256",
+                    "provenance_sha256",
+                    "ranking_sha256",
+                )
+                scores = ("dense_cosine", "bm25", "rrf", "reranker", "term_coverage", "score")
+                observation["search"] = {
+                    "status": view["search"]["status"],
+                    "matches": [
+                        {
+                            **{k: m[k] for k in fields if k in m},
+                            "ranking": {k: m["ranking"][k] for k in scores if k in m["ranking"]},
+                        }
+                        for m in view["search"]["matches"]
+                    ],
+                }
+            restart[side] = observation
+        names = (
+            "API readiness after restart",
+            "persisted job COMPLETED after API restart",
+            "persisted document identities after API restart",
+            "persisted chunk identities after API restart",
+            "retrieval status after API restart",
+            "retrieval hit IDs and order after API restart",
+            "source citation provenance after API restart",
+            "exact ranking scores after API restart",
+        )
+        restart["checks"] = {k: source["checks"][k] for k in names if k in source.get("checks", {})}
+        restart["ranking_differences"] = [
+            {k: d[k] for k in ("hit_index", "field", "before", "after", "absolute_delta") if k in d}
+            for d in source.get("ranking_differences", [])
+            if d["field"] in {"dense_cosine", "bm25", "rrf", "reranker", "term_coverage", "score"}
+        ]
+        result["api_restart"] = restart
     for name in ("state_before_backup", "state_after_restore"):
         if name in raw:
             state = raw[name]

@@ -34,7 +34,7 @@ def rank(
     lexical = {}
     for cid, tf in tokens.items():
         score = 0.0
-        for term in terms:
+        for term in sorted(terms):
             df = frequencies[term]
             freq = tf[term]
             idf = math.log(1 + (len(chunks) - df + 0.5) / (df + 0.5))

@@ -1,0 +1,193 @@
+{
+  "run_id": 41029994294,
+  "url": "https://github.com/hzjanuary/bigdata-rag-system/actions/runs/41029994294",
+  "tested_source_sha": "ba78e94d82b7972e96a9bae962cbb8ada73d6619",
+  "current_local_head": "f0f09c4f5638c1e30c453254561b1c5c54416f44",
+  "original_private_runner_result": "NOT_AVAILABLE: never uploaded; no access to disposed runner file. Do not infer missing post-restart values.",
+  "official_artifact": {
+    "id": 12966475279,
+    "name": "independent-cpu-41029994294",
+    "zip_sha256": "1caddf93d9ecb1616eac35cd925c6bff1bcdf89fbfe82607de3e3195d3fb5863",
+    "zip_crc_and_manifest_checksums": "PASS"
+  },
+  "original_run": {
+    "consumed": true,
+    "marker_id": 123977248159,
+    "acquisition_outcome": "success",
+    "acceptance_outcome": "failure",
+    "passed_checks_before_failure": 21,
+    "failure": "AssertionError: API process restart preserves job and retrieval",
+    "exported_post_restart_job_or_search": false,
+    "api_health_gate": "Reached health HTTP 200; otherwise wait would throw a different error",
+    "unresolved_original_branch": "Combined short-circuit boolean does not record whether job.state failed or which retrieval fields changed",
+    "model": {
+      "model_id": "sentence-transformers/all-MiniLM-L6-v2",
+      "revision": "10dbd2f06a8baf40ad285b037edda610c1b9a57c",
+      "license": "Apache-2.0",
+      "files": {
+        "onnx/model.onnx": {
+          "sha256": "6fd5d72fe4589f189f8ebc006442dbb529bb7ce38f8082112682524616046452",
+          "size": 90405214,
+          "git_blob": "7d35d33d315a1ce897ce7cca38d42234e1d55add"
+        },
+        "tokenizer.json": {
+          "sha256": "be50c3628f2bf5bb5e3a7f17b1f74611b2561a3a27eeab05e5aa30f411572037",
+          "size": 466247,
+          "git_blob": "cb202bfe2e3c98645018a6d12f182a434c9d3e02"
+        }
+      }
+    },
+    "pooling": {
+      "dimension": 384,
+      "pooling": "mask-weighted-mean",
+      "normalization": "l2",
+      "reference_max_abs_error": 1.7898752063816303e-08,
+      "batch_single_max_abs_error": 0.0,
+      "l2_norms": [
+        1.000000016007465,
+        0.9999999949888099
+      ],
+      "providers": [
+        "CPUExecutionProvider"
+      ]
+    },
+    "image_id": "sha256:4e1c24912865605f91b2717f0bad434630191e62b9508fa5854ea03876067124",
+    "qdrant_image_id": "sha256:e6794d2893f72c7c39e45c58a990b41df5da8af2647f894863823e60ffed30ef"
+  },
+  "confirmed_offline_root_cause": {
+    "location": "rag_core/service.py rank(), for term in terms",
+    "cause": "Unordered query-term set changes traversal across process hash seeds; non-associative floating summation produces different exported BM25 values for identical data.",
+    "counterexample": "12 fresh Python processes, fixed identical corpus/dense scores, hash seeds 0..11: three distinct BM25 encodings; only BM25 field differs.",
+    "network": "Pure ranking counterexample denies all socket connections; real restart probe permits loopback only; Qdrant telemetry disabled, existing local image/model reused.",
+    "real_cpu_api_qdrant_probe": {
+      "first_job_state": "COMPLETED",
+      "health_after_restart": 200,
+      "durable_job_rows_equal": true,
+      "sqlite_chunk_identity_equal": true,
+      "qdrant_points_vectors_equal": true,
+      "strict_retrieval_equal": false,
+      "same_order": true,
+      "differences": [
+        {
+          "path": "/matches/0/ranking/bm25",
+          "before": 3.292419763002416,
+          "after": 3.2924197630024166,
+          "absolute_delta": 4.440892098500626e-16,
+          "ulp_delta": 1.0
+        }
+      ],
+      "existing_tolerant_comparator": true,
+      "original_offline_result_sha256": "2f287961ab92fbf650711d5ab97c6faa01f25654339aa9990aed559a9de4a006",
+      "original_offline_result_path": ".local/cpu-run-diagnosis-41029994294/offline-dcb78bc1/result.json",
+      "total_jobs": 3,
+      "committed_chunks": 4,
+      "qdrant_collections": 2,
+      "auxiliary_qdrant_observation": {
+        "original_ephemeral_port": "32776",
+        "current_ephemeral_port": "32778",
+        "ready": 200,
+        "collections": 2,
+        "point_vectors_payload_hashes_equal": true,
+        "original_probe_limit": "Sidecar used ephemeral host binding and did not rediscover assigned port on restart; server logs show recovery/listening. This is local diagnostic plumbing, not original Compose internal-DNS configuration."
+      }
+    },
+    "scope_limit": "Offline local Linux Mint diagnosis, not a second independent-host campaign or release acceptance; original remote post-state unavailable."
+  },
+  "proposed_minimal_remediation": {
+    "production": "Canonicalize term traversal: for term in sorted(terms). Proposed patch retained locally; production source NOT modified.",
+    "evidence": "Split durable-job, readiness and retrieval assertions; record sanitized pre/post ordered identities and numeric deltas before asserting; explicitly whitelist diagnostics in exporter. No raw database/config/capability fields.",
+    "no_weakening": "Do not merely round scores, relax equality, pin global PYTHONHASHSEED or declare storage lost without data. Existing comparator tolerance accepts local difference diagnostically, not used to convert original run to PASS."
+  },
+  "regression": {
+    "test": "tests/test_rank_process_stability.py",
+    "current_production": "1 FAIL, expected demonstration of deterministic contract violation",
+    "isolated_one_line_proposal": "1 PASS on copied package only; repository production untouched",
+    "existing_deterministic_suite": "154 PASS / one skipped, new failing regression excluded explicitly"
+  },
+  "authorization": {
+    "new_independent_host_authorization_required": true,
+    "reason": "Original campaign was consumed and failed before outage/crash/restore checks. Preserve marker; no automatic retry or second live campaign under original authorization.",
+    "marker_removed": false,
+    "label_reapplied": false,
+    "workflow_rerun": false,
+    "model_reacquired": false,
+    "push_or_publish": false,
+    "new_live_campaign": false
+  },
+  "acceptance_disposition": {
+    "PASS": 20,
+    "FAIL": 2,
+    "BLOCKED": 2,
+    "RAG-12": "FAIL: newly confirmed cross-process BM25 nondeterminism; prior PASS scope was within-process tests",
+    "RAG-15": "BLOCKED: no generation authorization",
+    "RAG-20": "BLOCKED: independent campaign incomplete; fresh authorization required",
+    "RAG-21": "FAIL: known image security findings unchanged"
+  },
+  "preserved_evidence": [
+    {
+      "path": ".local/cpu-run-diagnosis-41029994294/artifact.zip",
+      "bytes": 11958,
+      "sha256": "1caddf93d9ecb1616eac35cd925c6bff1bcdf89fbfe82607de3e3195d3fb5863"
+    },
+    {
+      "path": ".local/cpu-run-diagnosis-41029994294/run.log",
+      "bytes": 93150,
+      "sha256": "c53c5e5eeeacdd5b13e194726525e876705faff9a6b3571083af5c9b1e936e39"
+    },
+    {
+      "path": ".local/cpu-run-diagnosis-41029994294/run.json",
+      "bytes": 13509,
+      "sha256": "8a8a853271ae0306c094c29f2a0e7ef6ce96a26a9e40a1ae6ca7d2f9f23223c2"
+    },
+    {
+      "path": ".local/cpu-run-diagnosis-41029994294/jobs.json",
+      "bytes": 5141,
+      "sha256": "1a029147aad9e748ec22b2a5d740de6171b181073162c6dd44001d7030e7bb06"
+    },
+    {
+      "path": ".local/cpu-run-diagnosis-41029994294/artifacts.json",
+      "bytes": 764,
+      "sha256": "284a43d7880f582d4767472a67dd9bb12ce75b0a0299e30c07809e2978ed3c24"
+    },
+    {
+      "path": ".local/cpu-run-diagnosis-41029994294/hashseed-results.json",
+      "bytes": 19488,
+      "sha256": "034e0c0baf777be84f27e174392e8a8c110b480f6ae2ef69529dec92a72fc1fa"
+    },
+    {
+      "path": ".local/cpu-run-diagnosis-41029994294/offline-restart-diff.json",
+      "bytes": 1261,
+      "sha256": "7bb1a52951caf4e38b9a9f27abc0c9161bb7e894bb5020fe89012a52113a6f43"
+    },
+    {
+      "path": ".local/cpu-run-diagnosis-41029994294/qdrant-retained-state-check.json",
+      "bytes": 395,
+      "sha256": "3bcbc7c81754e41d4fc040096a3bd13d182eb23b55fa51587ed90371a59ae732"
+    },
+    {
+      "path": ".local/cpu-run-diagnosis-41029994294/offline-probe.log",
+      "bytes": 1179,
+      "sha256": "2e0ed9f25c3b365ca202e446190a98ffae0ec2f88266a0086519bb28b9ee028c"
+    },
+    {
+      "path": ".local/cpu-run-diagnosis-41029994294/regression-current.log",
+      "bytes": 3014,
+      "sha256": "aeb35e3cac5d8a4dd913ed3b98c0d0452bbc1ba8778f09eb04a8e7700eaee776"
+    },
+    {
+      "path": ".local/cpu-run-diagnosis-41029994294/regression-proposed.log",
+      "bytes": 98,
+      "sha256": "45dec644b5d1477e1f73de52d9d53911c7e838fb10778eaf86aa26323a2912db"
+    },
+    {
+      "path": ".local/cpu-run-diagnosis-41029994294/baseline-tests.log",
+      "bytes": 785,
+      "sha256": "de9817d0f8ed425aa0ec9ce6ed1f488744ff98bd010de594d5bd33f2cf38e7c0"
+    },
+    {
+      "path": ".local/cpu-run-diagnosis-41029994294/proposed-deterministic-bm25.patch",
+      "bytes": 345,
+      "sha256": "0189e59c13c72d6e5d62b171ce913efe30e70accce6a0441052f1d0a64563450"
+    }
+  ]
+}
