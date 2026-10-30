@@ -26,6 +26,20 @@ spec.loader.exec_module(gate)
         ("docs/x.txt", b"\0binary", False),
         ("docs/large.txt", b"x" * 2_000_001, False),
     ],
+    ids=[
+        "root-env",
+        "nested-env",
+        "model-cache",
+        "binary-pdf",
+        "upload",
+        "database",
+        "symlink",
+        "literal-bearer",
+        "private-key",
+        "private-path",
+        "binary-nul",
+        "oversized-text",
+    ],
 )
 def test_gate_catches_bypasses(path, data, symlink):
     with pytest.raises(ValueError):

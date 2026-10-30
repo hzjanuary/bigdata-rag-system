@@ -1,5 +1,9 @@
 # SPEC-001 execution plan
 
+Current checkpoint: explicitly authorized narrow JUnit correction is locally
+verified; normal push/PR #1 CI pending. Previous stop evidence remains historical.
+No model campaign is authorized to start automatically in this follow-up.
+
 Started 2026-10-29. Branch: `feat/spec-001-oss-rag-core`.
 Authoritative requirements: `docs/specs/SPEC-001-open-source-rag-core.md` (unchanged).
 
@@ -112,3 +116,27 @@ The full matrix is in `docs/release/verification.md`. Each criterion starts NOT_
 - Details, exact source/image digests, model revision/hash, run URLs and retained
   log/report hashes: `docs/release/verification.md` and
   `docs/release/evidence/followup-remote-ci.json`.
+
+### Authorized JUnit correction (2026-10-30)
+
+- Original local XML 6,407,084 bytes; fresh before-fix reproduction 6,407,083 bytes
+  (timing serialization differs). Actual retained push/PR logs show the same
+  unchanged source/evidence size guard rejecting export.
+- All three payload-sized default IDs required correction: parser (200,048 name
+  characters), artifact guard (2,000,050), stdin (4,194,361). Explicit short unique
+  IDs preserve every original AST node other than the added ids keyword.
+- Five focused regressions exercise actual child pytest XML: all 23 original large
+  payload cases, accurate failure/skip reporting, checksum export, and continued
+  rejection of oversized/unauthorized/binary artifacts. The bounded-name regression
+  fails against a retained detached a9b68db worktree, passes after correction.
+- Full deterministic suite 114 PASS / one skipped; actual Qdrant contract one PASS
+  using existing disposable image, no rebuild. Lock/Ruff/format/Black/MyPy pass;
+  license inventory 92 approved packages; Python audit zero; history gate retains
+  only the reviewed immutable public-hash false positive.
+- Actual CI pytest command emits valid unique-name JUnit of 13,067 bytes; all 110
+  previous cases remain and five regressions were added. Artifact gate unchanged.
+  No runtime/packaging/workflow changes; no release image rebuild or model call.
+- Next: exact source/archive/current/history secret gates, normal feature push,
+  existing Draft PR update, genuine source/image CI and artifact/hash collection.
+  Only after source outcome is verified, prepare a reviewed explicit one-time CPU
+  trigger without executing it. Keep RAG-15/20 BLOCKED and RAG-21 FAIL.

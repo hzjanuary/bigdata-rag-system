@@ -1,0 +1,141 @@
+{
+  "status": "LOCAL_PASS_REMOTE_PENDING",
+  "baseline_local_commit": "a9b68db879d2b6bf17cbd82f2f45170d7b5168fc",
+  "previous_remote_sha": "11736f527612fc659a201b13e38d13c7278e1476",
+  "historical_failed_runs": [
+    41006969209,
+    41006993655
+  ],
+  "historical_original_junit_bytes": 6407084,
+  "reproduction": {
+    "bytes": 6407083,
+    "sha256": "971a3be9b361cd06d0c44d8f33e97634472942036c385eb902aa0eb7f79c07d5",
+    "cases": 110,
+    "largest_names": [
+      {
+        "class": "tests.test_cli",
+        "name_length": 4194361
+      },
+      {
+        "class": "tests.test_artifacts",
+        "name_length": 2000050
+      },
+      {
+        "class": "tests.test_ingestion",
+        "name_length": 200048
+      }
+    ],
+    "gate_error": "binary or oversized source artifact"
+  },
+  "junit_after": {
+    "tests": 115,
+    "passed": 114,
+    "skipped": 1,
+    "failures": 0,
+    "errors": 0,
+    "all_previous_cases_preserved": true,
+    "unique_classname_name_pairs": true,
+    "max_name_characters": 97,
+    "junit_bytes": 13067,
+    "sha256": "7b2f49983af848f7fab7439865e2e418a917015efb0105089fd781dc6216f719",
+    "artifact_gate": "PASS (unchanged)",
+    "historical_original_bytes": 6407084,
+    "fresh_before_bytes": 6407083
+  },
+  "preserved_payload_assertions": [
+    {
+      "file": "tests/test_ingestion.py",
+      "only_change": "one ids keyword; identical original AST otherwise"
+    },
+    {
+      "file": "tests/test_artifacts.py",
+      "only_change": "one ids keyword; identical original AST otherwise"
+    },
+    {
+      "file": "tests/test_cli.py",
+      "only_change": "one ids keyword; identical original AST otherwise"
+    }
+  ],
+  "regression_demonstration": {
+    "before": "Expected FAIL at a9b68db in retained detached worktree: largest testcase name 4194361 characters",
+    "after": "5 focused tests PASS, including 23 unchanged original parametrized cases; real child-suite failure/skip preserved; oversized/unauthorized/binary exports rejected"
+  },
+  "local_results": {
+    "pytest": "114 passed, 1 skipped",
+    "actual_qdrant": "1 passed separately, existing local disposable fixture image; no rebuild",
+    "lock_ruff_black_mypy": "PASS; 13 MyPy source modules",
+    "license": "92 packages, zero unknown/unapproved",
+    "dependency_audit": "zero known findings",
+    "historical_secrets": "PASS with exact reviewed historical public hash; no unknown finding"
+  },
+  "unchanged": [
+    "runtime rag_core",
+    "packaging and dependency inputs",
+    "all original large payloads/cases/assertions",
+    "source/evidence gates and 2000000-byte limit",
+    "workflow including model opened-only condition"
+  ],
+  "model_campaign": "NOT_STARTED; no download/inference; original independent campaign remains unconsumed",
+  "files": [
+    {
+      "path": ".local/junit-resume-20261030/reproduction.json",
+      "bytes": 435,
+      "sha256": "905a20daac9968c8264f7cd58f4a1d00d2fa4530f47c9f30dca11c88e7c3edb0"
+    },
+    {
+      "path": ".local/junit-resume-20261030/payload-preservation.json",
+      "bytes": 354,
+      "sha256": "ce8a52e73974b5dd59c83adf9aec1702dfdb1a7e79aba52ec0a37cb85b569333"
+    },
+    {
+      "path": ".local/junit-resume-20261030/regression-before.log",
+      "bytes": 3220,
+      "sha256": "f314f18b7fabb575bee70544e200470550c5dcd7a88540eb9e8f754915cf673d"
+    },
+    {
+      "path": ".local/junit-resume-20261030/focused.log",
+      "bytes": 611,
+      "sha256": "84c29d28332728a7deb0dff46ecc3cbbbfbe58c5999ed3efa3ba3cedd2f99fc3"
+    },
+    {
+      "path": ".local/junit-resume-20261030/pytest-before.log",
+      "bytes": 704,
+      "sha256": "d197f547e700ca1f61cc8df617791899a09676981a6e0a4c749570f71dafdc2d"
+    },
+    {
+      "path": ".local/junit-resume-20261030/pytest-after.log",
+      "bytes": 705,
+      "sha256": "ba23f792e63d8b926d49e0a2314f2626d5eeaef25475f14286326acad0a23084"
+    },
+    {
+      "path": ".local/junit-resume-20261030/junit-after.xml",
+      "bytes": 13067,
+      "sha256": "7b2f49983af848f7fab7439865e2e418a917015efb0105089fd781dc6216f719"
+    },
+    {
+      "path": ".local/junit-resume-20261030/junit-verification.json",
+      "bytes": 408,
+      "sha256": "a2bc7d16543704eeb2d638cb031bbf7f038e10dd7c3de3b4ae1c3c67472f7022"
+    },
+    {
+      "path": ".local/junit-resume-20261030/qdrant.log",
+      "bytes": 611,
+      "sha256": "628f6f8559f9f88bbb7a224052b97322efaed4c13ee2c50bcdacb212babf0f9f"
+    },
+    {
+      "path": ".local/junit-resume-20261030/licenses.json",
+      "bytes": 17688,
+      "sha256": "acd53437817e96b4a84b13f1e6b55c362b8e982c8a54c84e5aac85ee98d90b84"
+    },
+    {
+      "path": ".local/junit-resume-20261030/python-audit.json",
+      "bytes": 2174,
+      "sha256": "e0c7c24c6cce3f6ee636c85048b7851d73674e57d72112113e68cd2bb747168e"
+    },
+    {
+      "path": ".local/junit-resume-20261030/history-check-precommit.json",
+      "bytes": 463,
+      "sha256": "05543d171b2ebbaaebd1b16a93a8c880e26408e32dda0041c648544a5381a5af"
+    }
+  ]
+}

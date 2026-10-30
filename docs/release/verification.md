@@ -1,5 +1,19 @@
 # SPEC-001 verification ledger — 2026-10-30
 
+**JUnit correction resumed under explicit authorization.** Historical failure and
+stop evidence below remain unchanged. Only three parametrized-test ID lists and
+focused regression tests changed; runtime, packaging, workflow, payloads/assertions
+and the 2,000,000-byte artifact guard are unchanged. Local full-suite JUnit is now
+13,067 bytes: **114 PASS / one skipped**, and the existing export gate accepts it.
+The regression fails against preserved commit `a9b68db` and passes after correction.
+One real Qdrant contract passes separately; no image rebuild/model download/inference
+was performed. [Local correction evidence](evidence/junit-correction.json) records
+AST preservation, report hashes and reporting/security regressions. A normal push
+to existing Draft PR #1 and genuine remote verification are pending. The one-time
+independent CPU campaign remains unconsumed and will not be started automatically.
+
+## Preserved previous remote stop checkpoint
+
 **Follow-up stopped after a new CI evidence-export defect.** Normal push completed
 at `11736f527612fc659a201b13e38d13c7278e1476`; one [Draft PR #1](https://github.com/hzjanuary/bigdata-rag-system/pull/1)
 targets main. Both genuine Actions runs finished FAIL. The user permitted observing

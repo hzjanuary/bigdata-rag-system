@@ -63,6 +63,15 @@ def test_pdf_page_limit_and_encryption():
         (b"", ".txt"),
         (b"x" * (MAX_TEXT + 1), ".txt"),
     ],
+    ids=[
+        "invalid-nul",
+        "invalid-utf8",
+        "malformed-pdf",
+        "malformed-docx",
+        "unsupported-extension",
+        "empty-text",
+        "oversized-text",
+    ],
 )
 def test_parser_rejects_invalid_or_oversized(data, ext):
     with pytest.raises((RagError, UnicodeError)):

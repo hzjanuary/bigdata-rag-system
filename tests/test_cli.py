@@ -39,6 +39,7 @@ def test_bounded_stdin_upload(settings, monkeypatch):
         (["-", "--filename", "large.txt"], b"x" * (MAX_FILE + 1), "file_size_limit"),
         (["file.txt", "--filename", "other.txt"], b"text", "filename_only_with_stdin"),
     ],
+    ids=["missing-filename", "traversal-filename", "oversized-stdin", "filename-with-file"],
 )
 def test_stdin_input_validation(settings, monkeypatch, arguments, data, code):
     monkeypatch.setattr(cli, "load_settings", lambda _: settings)
