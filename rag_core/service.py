@@ -28,17 +28,17 @@ def rank(
     if not terms or not chunks:
         return []
     tokens = {c["id"]: Counter(tokenize(c["text"])) for c in chunks}
-    avg = sum(sum(t.values()) for t in tokens.values()) / len(chunks)
+    lengths = {cid: sum(tf.values()) for cid, tf in tokens.items()}
+    frequencies = Counter(term for tf in tokens.values() for term in tf)
+    avg = sum(lengths.values()) / len(chunks)
     lexical = {}
     for cid, tf in tokens.items():
         score = 0.0
         for term in terms:
-            df = sum(term in t for t in tokens.values())
+            df = frequencies[term]
             freq = tf[term]
             idf = math.log(1 + (len(chunks) - df + 0.5) / (df + 0.5))
-            score += (
-                idf * freq * 2.5 / (freq + 1.5 * (0.25 + 0.75 * sum(tf.values()) / max(avg, 1)))
-            )
+            score += idf * freq * 2.5 / (freq + 1.5 * (0.25 + 0.75 * lengths[cid] / max(avg, 1)))
         if score > 0:
             lexical[cid] = score
     bm_order = sorted(lexical, key=lambda c: (-lexical[c], c))[:64]
@@ -135,10 +135,12 @@ class Service:
     def cancel(self, principal: str, wid: str, jid: str) -> dict:
         self.job(principal, wid, jid)
         with self.store.connect() as db:
-            db.execute(
+            changed = db.execute(
                 "UPDATE jobs SET state='CANCELLED',content=NULL,updated=? WHERE id=? AND workspace=? AND state IN ('QUEUED','RUNNING')",
                 (time.time(), jid, wid),
-            )
+            ).rowcount
+            if changed != 1:
+                raise RagError("job_not_cancellable", 409)
             self.store.audit(db, "ingest_cancelled", wid, jid)
         return self.job(principal, wid, jid)
 

@@ -1,6 +1,8 @@
 import json
 import os
 import re
+import subprocess
+import sys
 import threading
 import time
 
@@ -66,26 +68,47 @@ class Generator:
             if time.monotonic() - self.last_call < 10:
                 raise RagError("provider_rate_limit", 429)
             self.last_call = time.monotonic()
-            deadline = time.monotonic() + self.settings.provider_timeout
-            with httpx.Client(
-                timeout=min(5, self.settings.provider_timeout),
-                follow_redirects=False,
-                transport=self.transport,
-                trust_env=False,
-            ) as client:
-                with client.stream(
-                    "POST",
-                    self.settings.provider_url.rstrip("/") + "/chat/completions",
-                    headers={"Authorization": "Bearer " + key, "Content-Type": "application/json"},
-                    content=encoded,
-                ) as response:
-                    if response.status_code != 200:
-                        raise RagError("provider_request_failed", 502)
-                    raw = bytearray()
-                    for part in response.iter_bytes():
-                        raw.extend(part)
-                        if len(raw) > 32_768 or time.monotonic() > deadline:
-                            raise RagError("provider_response_budget", 502)
+            from .provider_http import request_once
+
+            url = self.settings.provider_url.rstrip("/") + "/chat/completions"
+            if self.transport is not None:  # Test-only injected transport, never config-selectable.
+                raw = request_once(
+                    url, key, encoded, self.settings.provider_timeout, self.transport
+                )
+            else:
+                try:
+                    child = subprocess.run(
+                        [sys.executable, "-m", "rag_core.provider_http"],
+                        input=json.dumps(
+                            {
+                                "url": url,
+                                "key": key,
+                                "payload": payload,
+                                "timeout": self.settings.provider_timeout,
+                            }
+                        ).encode(),
+                        capture_output=True,
+                        timeout=self.settings.provider_timeout,
+                        env={
+                            "PATH": os.environ.get("PATH", ""),
+                            "PYTHONPATH": os.pathsep.join(sys.path),
+                        },
+                        check=False,
+                    )
+                except subprocess.TimeoutExpired:
+                    raise RagError("provider_timeout", 504) from None
+                if child.returncode:
+                    code = child.stdout.decode(errors="ignore").strip()
+                    if code not in {
+                        "provider_request_failed",
+                        "provider_response_budget",
+                        "provider_timeout",
+                    }:
+                        code = "provider_invalid_response"
+                    raise RagError(code, 504 if code == "provider_timeout" else 502)
+                raw = child.stdout
+                if len(raw) > 32768:
+                    raise RagError("provider_response_budget", 502)
             result = json.loads(raw)
             choice = result["choices"][0]
             if choice.get("finish_reason") != "stop":

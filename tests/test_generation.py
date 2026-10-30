@@ -164,3 +164,20 @@ def test_provider_timeout_and_response_cap(service, spaces, monkeypatch):
             settings,
             transport=httpx.MockTransport(lambda r: httpx.Response(200, content=b"x" * 40000)),
         ).ask(service, "owner", wid, "orchard")
+
+
+def test_production_provider_hard_deadline_kills_child(service, spaces, monkeypatch):
+    import subprocess
+
+    wid, _ = evidence(service, spaces)
+    settings = configured(service, monkeypatch)
+
+    def timed_out(command, **kwargs):
+        assert "test-credential" not in " ".join(command)
+        assert kwargs["timeout"] == settings.provider_timeout
+        assert "RAG_PROVIDER_KEY" not in kwargs["env"]
+        raise subprocess.TimeoutExpired(command, kwargs["timeout"])
+
+    monkeypatch.setattr(subprocess, "run", timed_out)
+    with pytest.raises(RagError, match="provider_timeout"):
+        Generator(settings).ask(service, "owner", wid, "orchard")

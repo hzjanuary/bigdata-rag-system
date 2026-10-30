@@ -14,10 +14,21 @@ from .settings import MAX_FILE, config_path, filename, initialize, load_settings
 def read_local(path: Path) -> bytes:
     """CLI-only local import. No symlink component or non-regular input accepted."""
     path = path.absolute()
-    for component in [*path.parents, path]:
-        if component.is_symlink():
-            raise RagError("unsafe_import_path")
-    fd = os.open(path, os.O_RDONLY | os.O_NOFOLLOW | os.O_NONBLOCK)
+    directory_fd = os.open(path.anchor, os.O_RDONLY | os.O_DIRECTORY)
+    try:
+        # Resolve each directory relative to an already-open descriptor. A concurrent
+        # symlink swap cannot redirect the subsequent file open to another tree.
+        for component in path.parts[1:-1]:
+            next_fd = os.open(
+                component, os.O_RDONLY | os.O_DIRECTORY | os.O_NOFOLLOW, dir_fd=directory_fd
+            )
+            os.close(directory_fd)
+            directory_fd = next_fd
+        fd = os.open(path.name, os.O_RDONLY | os.O_NOFOLLOW | os.O_NONBLOCK, dir_fd=directory_fd)
+    except OSError:
+        raise RagError("unsafe_import_path") from None
+    finally:
+        os.close(directory_fd)
     with os.fdopen(fd, "rb") as stream:
         info = os.fstat(stream.fileno())
         if not stat.S_ISREG(info.st_mode):

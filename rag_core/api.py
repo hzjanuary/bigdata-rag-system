@@ -118,9 +118,9 @@ def create_app(
                 data = bytearray()
                 async with asyncio.timeout(20):
                     async for part in request.stream():
-                        data.extend(part)
-                        if len(data) > 16_384:
+                        if len(data) + len(part) > 16_384:
                             raise RagError("request_size_limit", 413)
+                        data.extend(part)
                 request._body = bytes(data)
             return await call_next(request)
         except RagError as exc:
@@ -188,9 +188,9 @@ def create_app(
         try:
             async with asyncio.timeout(20):
                 async for chunk in request.stream():
-                    data.extend(chunk)
-                    if len(data) > MAX_FILE:
+                    if len(data) + len(chunk) > MAX_FILE:
                         raise RagError("file_size_limit", 413)
+                    data.extend(chunk)
         except TimeoutError:
             raise RagError("request_timeout", 408) from None
         return await asyncio.to_thread(service.submit, p, wid, filename, bytes(data))

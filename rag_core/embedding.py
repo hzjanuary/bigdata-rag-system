@@ -9,7 +9,7 @@ from .settings import MODEL_ID, MODEL_REVISION, Settings, private_path
 
 ONNX_SHA256 = "6fd5d72fe4589f189f8ebc006442dbb529bb7ce38f8082112682524616046452"
 # Tokenizer pinned after upstream Git blob verification in acquisition.
-TOKENIZER_GIT_BLOB = "cb202bfe2e3c98645018a6d12f182a434c9d3e02"
+VOCAB_GIT_OBJECT = "cb202bfe2e3c98645018a6d12f182a434c9d3e02"
 
 
 def mean_pool_normalize(hidden, mask):
@@ -41,11 +41,13 @@ class OnnxEmbedder:
             content = tokenizer_path.read_bytes()
             if (
                 hashlib.sha1(b"blob " + str(len(content)).encode() + b"\0" + content).hexdigest()
-                != TOKENIZER_GIT_BLOB
+                != VOCAB_GIT_OBJECT
             ):
                 raise ValueError()
             import onnxruntime as ort
             from tokenizers import Tokenizer
+
+            ort.disable_telemetry_events()
 
             self.tokenizer = Tokenizer.from_file(str(tokenizer_path))
             self.tokenizer.enable_truncation(max_length=256)
