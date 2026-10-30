@@ -1,0 +1,65 @@
+{
+  "owner": "hzjanuary",
+  "repository": "hzjanuary/bigdata-rag-system",
+  "authorization_date": "2026-10-30",
+  "decision": "AUTHORIZE_SOURCE_ONLY_GITHUB_PRERELEASE",
+  "title": "v0.1.0 \u2014 Initial Multi-Workspace RAG Source Preview",
+  "tag": "v0.1.0",
+  "pr": 1,
+  "release_commit_policy": "Exact verified merged main commit after normal PR merge; no moving branch or unreviewed runtime delta",
+  "runtime_tested_sha": "287212be8f5683221d2449158331e59d4c639c15",
+  "preserved_documentation_commits": [
+    "e2dc53794ebaf8da85ab7cff7696bec22df0bb75",
+    "9f849a05d48d41f25dd2e56f898b8feda33cf289"
+  ],
+  "independent_run": 41040402221,
+  "independent_checks_passed": 41,
+  "artifact_sha256": "30a57bc2c2a7df2a6b0399936134a05e88d5df8da00ff8465e05f9458734164c",
+  "allowed": [
+    "Normal feature-branch push",
+    "Existing PR metadata update and ready-for-review transition",
+    "Genuine source/image CI without CPU campaign",
+    "Normal merge preserving history and existing rulesets",
+    "Annotated v0.1.0 tag on verified merged main",
+    "One GitHub PRE-RELEASE with generated source ZIP/tar.gz only",
+    "Download and verify actual public archives"
+  ],
+  "prohibited": [
+    "Additional model acquisition or inference",
+    "Generative LLM or paid API calls",
+    "Campaign or workflow reruns",
+    "Campaign marker or label changes",
+    "Docker image publication",
+    "Deployment",
+    "Ruleset changes or bypass",
+    "Force push or history rewrite",
+    "Repository rename",
+    "Deleting retained private state or evidence"
+  ],
+  "acceptance": {
+    "PASS": 22,
+    "FAIL": [
+      "RAG-21"
+    ],
+    "BLOCKED": [
+      "RAG-15"
+    ]
+  },
+  "accepted_recorded_image_findings": {
+    "core": {
+      "HIGH": 44,
+      "CRITICAL": 0
+    },
+    "qdrant": {
+      "HIGH": 43,
+      "CRITICAL": 0
+    },
+    "ui": {
+      "HIGH": 44,
+      "CRITICAL": 0
+    }
+  },
+  "security_approval_for_prebuilt_images": false,
+  "production_or_internet_exposure_certification": false,
+  "new_unexpected_defect_policy": "STOP before merging; new runtime or packaging changes require reassessment"
+}

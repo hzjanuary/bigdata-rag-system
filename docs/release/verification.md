@@ -1,6 +1,26 @@
 # SPEC-001 verification ledger — 2026-10-30
 
-## Final reconciliation — SOURCE-ONLY READY FOR OWNER DECISION
+## Owner-authorized source-only publication — final source gates required
+
+The owner explicitly authorized **v0.1.0 — Initial Multi-Workspace RAG Source
+Preview** as a GitHub **PRE-RELEASE with generated source ZIP/tar.gz only**.
+Normal feature-branch push, final source CI, ready-for-review transition, normal PR
+merge and annotated tag on the verified merged main commit are authorized, subject
+to existing rulesets. No bypass, history rewrite, deployment, image publication,
+additional model acquisition/inference or CPU campaign. RAG15 stays BLOCKED and
+RAG21 stays FAIL; acceptance remains **22 PASS / one FAIL / one BLOCKED**.
+
+Preserve e2dc537 and9f849a0 plus all prior evidence. All changes after independently
+tested runtime287212b are documentation/evidence only; new executable or packaging
+changes stop publication for reassessment. Final pushed head, merge/tag identities,
+actual source CI/artifact checks and public archive checksums are recorded in PR#1,
+the release notes and the ignored publication handoff manifest after execution.
+Historical no-publication checkpoints below are superseded only by this explicit
+source-only authorization, never by a security waiver. See the
+[authorization record](evidence/source-publication-authorization.json) and
+[release notes](v0.1.0.md). Raw image findings remain linked in SECURITY.md.
+
+## Final reconciliation (historical owner-decision checkpoint)
 
 The actual [independent run41040402221](https://github.com/hzjanuary/bigdata-rag-system/actions/runs/41040402221)
 completed **41/41 real CPU/Qdrant checks PASS**, attempt **1**, on fresh

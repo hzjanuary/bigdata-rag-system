@@ -22,6 +22,17 @@ Pinned builds and default isolation do not resolve these OS findings. No prebuil
 Docker image is approved for publication or production use. Source-only readiness
 is a separate owner decision; the complete CI workflow remains FAIL.
 
+The owner has authorized v0.1.0 as a source-only GitHub pre-release despite those
+disclosed findings. This does not approve Docker image publication or deployment.
+Operators must independently review dependencies, OS packages, model/provider data
+policies, credentials, network exposure and their environment. Unrestricted Internet
+exposure is not certified. Raw reports in retained GitHub Actions artifacts:
+[core](https://github.com/hzjanuary/bigdata-rag-system/actions/runs/41038457036/artifacts/12969555839),
+[Qdrant](https://github.com/hzjanuary/bigdata-rag-system/actions/runs/41038457036/artifacts/12968453916),
+[UI](https://github.com/hzjanuary/bigdata-rag-system/actions/runs/41038457036/artifacts/12968877744).
+Actions artifact links have finite retention; original reports/checksums also remain
+preserved in the operator's local evidence. No finding is waived by source release.
+
 RAG-15 remains BLOCKED: genuine generative LLM answering has not been live-verified.
 Generation defaults to disabled. No provider availability, billing, privacy or answer
 quality claim follows from embedding/Qdrant tests. A new live-provider campaign

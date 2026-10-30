@@ -1,10 +1,13 @@
 # SPEC-001 execution plan
 
-Current checkpoint: independent campaign41040402221 at runtime287212b verified
+Current authorization: owner approves v0.1.0 source-only GitHub pre-release,
+normal documentation push/source CI/PR merge/annotated tag, following all rulesets.
+No images, deployment, generation or additional CPU campaign. Stop after publication.
+Historical reconciliation checkpoint: independent campaign41040402221 at runtime287212b verified
 41/41 PASS, attempt1; artifact ZIP and every manifest size/hash verified. RAG20 PASS,
 RAG12 PASS, RAG15 BLOCKED, RAG21 FAIL: **22 PASS / one FAIL / one BLOCKED**.
-SOURCE-ONLY READY FOR OWNER DECISION; plan remains active. STOP before any push of
-new reconciliation evidence, Draft transition, merge/tag/release/image publication.
+SOURCE-ONLY READY FOR OWNER DECISION was superseded by the explicit source-only
+publication decision. Plan remains active because RAG15/21 remain unresolved.
 Both CPU authorizations are consumed; no rerun or additional campaign.
 
 Started 2026-10-29. Branch: `feat/spec-001-oss-rag-core`.

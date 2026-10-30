@@ -16,6 +16,13 @@ PDF page (TXT/DOCX page is null). Generation is disabled by default.
 > **not** been live-verified (RAG-15); keep generation disabled unless separately
 > authorized and privately configured. Read [SECURITY.md](SECURITY.md) and the
 > [actual acceptance/CI evidence](docs/release/verification.md) before installation.
+> Independently review dependencies, OS packages, model/provider data policies,
+> credentials, network exposure and your deployment environment. CPU embeddings,
+> real Qdrant indexing/retrieval and source citations have independent verification;
+> unrestricted Internet exposure is not certified. Raw per-image security reports:
+> [core](https://github.com/hzjanuary/bigdata-rag-system/actions/runs/41038457036/artifacts/12969555839),
+> [Qdrant](https://github.com/hzjanuary/bigdata-rag-system/actions/runs/41038457036/artifacts/12968453916),
+> [UI](https://github.com/hzjanuary/bigdata-rag-system/actions/runs/41038457036/artifacts/12968877744).
 
 This replaces the historical easyResearch prototype. Existing uploads/collections
 are **not migrated or reset** automatically. Preserve old volumes and check out the

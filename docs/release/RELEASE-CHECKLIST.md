@@ -1,9 +1,10 @@
 # Source-only v0.1.0 owner decision checklist
 
-**SOURCE-ONLY READY FOR OWNER DECISION**, subject to the exact final source archive
-and checks recorded in verification.md. This is an early pre-release source preview,
-not production certification. This checklist grants no push/merge/tag/release,
-deployment or image-publication authority.
+**OWNER AUTHORIZED SOURCE-ONLY PRE-RELEASE**, subject to final source CI, exact
+archive checks and existing rulesets. This is an early source preview, not production
+certification. The owner's explicit decision authorizes normal push/PR merge,
+annotated v0.1.0 tag and GitHub pre-release containing generated sources only.
+No deployment, image publication, additional inference or campaign is authorized.
 
 ## Completed evidence, with separate boundaries
 
@@ -47,9 +48,9 @@ deployment or image-publication authority.
 
 ## Exact owner-authorized steps before publication
 
-- [ ] Owner explicitly accepts this repository's source-only preview scope and the
+- [x] Owner explicitly accepts this repository's source-only preview scope and the
   unresolved image/live boundaries. Decisions about other repositories do not apply.
-- [ ] Approve normal push of documentation/evidence-only commits if they should
+- [x] Approve normal push of documentation/evidence-only commits if they should
   become the release source. Preserve history and runtime287212b attestation; do not
   rerun consumed campaigns just because documentation HEAD changes.
 - [ ] Obtain genuine required source CI on the final pushed PR HEAD, with main
@@ -58,8 +59,9 @@ deployment or image-publication authority.
 - [ ] If any executable/packaging input changes during reconciliation/merge, stop
   for a new verification decision. Documentation-only ancestry is not permission
   to claim a different runtime was tested.
-- [ ] Owner separately approves merging PR #1 and the exact release commit/tag,
-  version and GitHub pre-release scope. None is performed by this checklist.
+- [x] Owner authorizes normal PR #1 merge and annotated v0.1.0 on the actual
+  verified merged main commit, with the exact title and source-only pre-release scope.
+  Execution remains conditional on all source checks and existing rulesets.
 - [ ] Generate source-only archive from that approved commit, verify every member/
   hash against its manifest, and publish SHA-256 with LICENSE/NOTICE/security
   notice and correct runtime-versus-documentation provenance.
