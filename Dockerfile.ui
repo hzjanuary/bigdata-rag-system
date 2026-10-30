@@ -5,7 +5,7 @@ WORKDIR /build
 ENV UV_PYTHON_DOWNLOADS=never UV_LINK_MODE=copy UV_PROJECT_ENVIRONMENT=/opt/venv
 COPY pyproject.toml uv.lock LICENSE NOTICE ./
 COPY rag_core ./rag_core
-RUN uv sync --frozen --no-dev --extra ui --no-editable --no-cache
+RUN uv sync --frozen --no-dev --extra ui --no-editable --no-cache && rm -rf /opt/venv/lib/python3.12/site-packages/onnxruntime/datasets
 FROM python:3.12-slim@sha256:aa943ce411423c7582288f18707ff66eddcbaeb510502d747a72aeb34f30d159
 ARG SOURCE_REVISION=unverified
 LABEL org.opencontainers.image.revision=$SOURCE_REVISION
