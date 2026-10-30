@@ -1,0 +1,34 @@
+{
+  "source_sha": "0e476bd16ec75c189c58616b4f4eae9688acfed7",
+  "clone_sha": "0e476bd16ec75c189c58616b4f4eae9688acfed7",
+  "method": "git clone --no-local; fresh venv, separate task cache previously cold-verified at 02ad207; frozen install; no host/operator config",
+  "checks": [
+    {
+      "command": "uv sync --frozen",
+      "exit_code": 0
+    },
+    {
+      "command": "uv run pytest -q",
+      "exit_code": 0
+    },
+    {
+      "command": "uv run ruff check .",
+      "exit_code": 0
+    },
+    {
+      "command": "uv run python scripts/source_gate.py",
+      "exit_code": 0
+    },
+    {
+      "command": "uv run rag --config $CLEAN_CLONE/.local/operator/config/config.json config init --state-dir $CLEAN_CLONE/.local/operator/state",
+      "exit_code": 0
+    },
+    {
+      "command": "uv run rag --help",
+      "exit_code": 0
+    }
+  ],
+  "no_tracked_model_or_database_files": true,
+  "tests": "99 passed, 1 skipped",
+  "result": "PASS"
+}

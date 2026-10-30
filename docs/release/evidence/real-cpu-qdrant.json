@@ -1,0 +1,562 @@
+{
+  "project": "spec001-b475944503",
+  "source_sha": "657cb5ceb3b92a0f46d743700387d21103351f7d",
+  "model": {
+    "model_id": "sentence-transformers/all-MiniLM-L6-v2",
+    "revision": "10dbd2f06a8baf40ad285b037edda610c1b9a57c",
+    "license": "Apache-2.0",
+    "files": {
+      "onnx/model.onnx": {
+        "sha256": "6fd5d72fe4589f189f8ebc006442dbb529bb7ce38f8082112682524616046452",
+        "size": 90405214,
+        "git_blob": "7d35d33d315a1ce897ce7cca38d42234e1d55add"
+      },
+      "tokenizer.json": {
+        "sha256": "be50c3628f2bf5bb5e3a7f17b1f74611b2561a3a27eeab05e5aa30f411572037",
+        "size": 466247,
+        "git_blob": "cb202bfe2e3c98645018a6d12f182a434c9d3e02"
+      }
+    }
+  },
+  "image_id": "sha256:707303da9d3ad0dc3b848abf9d7b7e52d341e3578b9289e2979158bd6def4158",
+  "qdrant_image_id": "sha256:371d25926ae70db120d7657a0cdc0ad3fe291f6c29ff5e70aef9db659f5f199d",
+  "checks": [
+    {
+      "name": "actual image + private non-root Qdrant CPU readiness",
+      "status": "PASS",
+      "tested_source_sha": "7edabab7990945fa3e960d912d24179090e47b37",
+      "tested_image_id": "sha256:4572df634a14160c3a7490c76066cfa7a89cb9d4b20faa3ebed92b5f96b485a3"
+    },
+    {
+      "name": "anonymous API rejected",
+      "status": "PASS",
+      "tested_source_sha": "7edabab7990945fa3e960d912d24179090e47b37",
+      "tested_image_id": "sha256:4572df634a14160c3a7490c76066cfa7a89cb9d4b20faa3ebed92b5f96b485a3"
+    },
+    {
+      "name": "CLI/API workspace parity",
+      "status": "PASS",
+      "tested_source_sha": "7edabab7990945fa3e960d912d24179090e47b37",
+      "tested_image_id": "sha256:4572df634a14160c3a7490c76066cfa7a89cb9d4b20faa3ebed92b5f96b485a3"
+    },
+    {
+      "name": "actual ONNX mask mean, L2, batch/single invariance",
+      "status": "PASS",
+      "tested_source_sha": "7edabab7990945fa3e960d912d24179090e47b37",
+      "tested_image_id": "sha256:4572df634a14160c3a7490c76066cfa7a89cb9d4b20faa3ebed92b5f96b485a3"
+    },
+    {
+      "name": "real TXT ingestion completes",
+      "status": "PASS",
+      "tested_source_sha": "7edabab7990945fa3e960d912d24179090e47b37",
+      "tested_image_id": "sha256:4572df634a14160c3a7490c76066cfa7a89cb9d4b20faa3ebed92b5f96b485a3"
+    },
+    {
+      "name": "real orchard.pdf ingestion completes",
+      "status": "PASS",
+      "tested_source_sha": "7edabab7990945fa3e960d912d24179090e47b37",
+      "tested_image_id": "sha256:4572df634a14160c3a7490c76066cfa7a89cb9d4b20faa3ebed92b5f96b485a3"
+    },
+    {
+      "name": "real library.docx ingestion completes",
+      "status": "PASS",
+      "tested_source_sha": "7edabab7990945fa3e960d912d24179090e47b37",
+      "tested_image_id": "sha256:4572df634a14160c3a7490c76066cfa7a89cb9d4b20faa3ebed92b5f96b485a3"
+    },
+    {
+      "name": "actual dense + BM25 + rerank retrieves rainwater evidence",
+      "status": "PASS",
+      "tested_source_sha": "7edabab7990945fa3e960d912d24179090e47b37",
+      "tested_image_id": "sha256:4572df634a14160c3a7490c76066cfa7a89cb9d4b20faa3ebed92b5f96b485a3"
+    },
+    {
+      "name": "CLI/API search parity",
+      "status": "PASS",
+      "tested_source_sha": "7edabab7990945fa3e960d912d24179090e47b37",
+      "tested_image_id": "sha256:4572df634a14160c3a7490c76066cfa7a89cb9d4b20faa3ebed92b5f96b485a3"
+    },
+    {
+      "name": "actual PDF page 2 provenance",
+      "status": "PASS",
+      "tested_source_sha": "7edabab7990945fa3e960d912d24179090e47b37",
+      "tested_image_id": "sha256:4572df634a14160c3a7490c76066cfa7a89cb9d4b20faa3ebed92b5f96b485a3"
+    },
+    {
+      "name": "persisted authorized citation 9badbf91d0225a0f8aea94a1154d01d1",
+      "status": "PASS",
+      "tested_source_sha": "7edabab7990945fa3e960d912d24179090e47b37",
+      "tested_image_id": "sha256:4572df634a14160c3a7490c76066cfa7a89cb9d4b20faa3ebed92b5f96b485a3"
+    },
+    {
+      "name": "persisted authorized citation e8527e55c9105d9381f0c3886a0bb11e",
+      "status": "PASS",
+      "tested_source_sha": "7edabab7990945fa3e960d912d24179090e47b37",
+      "tested_image_id": "sha256:4572df634a14160c3a7490c76066cfa7a89cb9d4b20faa3ebed92b5f96b485a3"
+    },
+    {
+      "name": "original source download hash",
+      "status": "PASS",
+      "tested_source_sha": "7edabab7990945fa3e960d912d24179090e47b37",
+      "tested_image_id": "sha256:4572df634a14160c3a7490c76066cfa7a89cb9d4b20faa3ebed92b5f96b485a3"
+    },
+    {
+      "name": "duplicate ingestion idempotent",
+      "status": "PASS",
+      "tested_source_sha": "7edabab7990945fa3e960d912d24179090e47b37",
+      "tested_image_id": "sha256:4572df634a14160c3a7490c76066cfa7a89cb9d4b20faa3ebed92b5f96b485a3"
+    },
+    {
+      "name": "cross-workspace search denied",
+      "status": "PASS",
+      "tested_source_sha": "7edabab7990945fa3e960d912d24179090e47b37",
+      "tested_image_id": "sha256:4572df634a14160c3a7490c76066cfa7a89cb9d4b20faa3ebed92b5f96b485a3"
+    },
+    {
+      "name": "cross-workspace deletion denied",
+      "status": "PASS",
+      "tested_source_sha": "7edabab7990945fa3e960d912d24179090e47b37",
+      "tested_image_id": "sha256:4572df634a14160c3a7490c76066cfa7a89cb9d4b20faa3ebed92b5f96b485a3"
+    },
+    {
+      "name": "no-match explicit on unrelated query",
+      "status": "PASS",
+      "tested_source_sha": "7edabab7990945fa3e960d912d24179090e47b37",
+      "tested_image_id": "sha256:4572df634a14160c3a7490c76066cfa7a89cb9d4b20faa3ebed92b5f96b485a3"
+    },
+    {
+      "name": "generation remains disabled",
+      "status": "PASS",
+      "tested_source_sha": "7edabab7990945fa3e960d912d24179090e47b37",
+      "tested_image_id": "sha256:4572df634a14160c3a7490c76066cfa7a89cb9d4b20faa3ebed92b5f96b485a3"
+    },
+    {
+      "name": "API process restart preserves job and retrieval",
+      "status": "PASS",
+      "tested_source_sha": "7edabab7990945fa3e960d912d24179090e47b37",
+      "tested_image_id": "sha256:4572df634a14160c3a7490c76066cfa7a89cb9d4b20faa3ebed92b5f96b485a3"
+    },
+    {
+      "name": "real Qdrant outage readiness 503",
+      "status": "PASS",
+      "tested_source_sha": "7edabab7990945fa3e960d912d24179090e47b37",
+      "tested_image_id": "sha256:4572df634a14160c3a7490c76066cfa7a89cb9d4b20faa3ebed92b5f96b485a3"
+    },
+    {
+      "name": "real Qdrant outage search 503",
+      "status": "PASS",
+      "tested_source_sha": "7edabab7990945fa3e960d912d24179090e47b37",
+      "tested_image_id": "sha256:4572df634a14160c3a7490c76066cfa7a89cb9d4b20faa3ebed92b5f96b485a3"
+    },
+    {
+      "name": "Qdrant restart preserves committed points",
+      "status": "PASS",
+      "tested_source_sha": "7edabab7990945fa3e960d912d24179090e47b37",
+      "tested_image_id": "sha256:4572df634a14160c3a7490c76066cfa7a89cb9d4b20faa3ebed92b5f96b485a3"
+    },
+    {
+      "name": "actual RUNNING worker crash recovers without reset",
+      "status": "PASS",
+      "tested_source_sha": "7edabab7990945fa3e960d912d24179090e47b37",
+      "tested_image_id": "sha256:4572df634a14160c3a7490c76066cfa7a89cb9d4b20faa3ebed92b5f96b485a3"
+    },
+    {
+      "name": "offline real Qdrant + SQLite consistent backup",
+      "status": "PASS",
+      "tested_source_sha": "7edabab7990945fa3e960d912d24179090e47b37",
+      "tested_image_id": "sha256:4572df634a14160c3a7490c76066cfa7a89cb9d4b20faa3ebed92b5f96b485a3"
+    },
+    {
+      "name": "final image reads retained real corpus and citations",
+      "status": "PASS",
+      "tested_source_sha": "657cb5ceb3b92a0f46d743700387d21103351f7d",
+      "tested_image_id": "sha256:707303da9d3ad0dc3b848abf9d7b7e52d341e3578b9289e2979158bd6def4158"
+    },
+    {
+      "name": "standalone SQLite snapshot and acknowledged vector backup",
+      "status": "PASS",
+      "tested_source_sha": "657cb5ceb3b92a0f46d743700387d21103351f7d",
+      "tested_image_id": "sha256:707303da9d3ad0dc3b848abf9d7b7e52d341e3578b9289e2979158bd6def4158"
+    },
+    {
+      "name": "snapshot needs no WAL or SHM on a read-only mount",
+      "status": "PASS",
+      "tested_source_sha": "657cb5ceb3b92a0f46d743700387d21103351f7d",
+      "tested_image_id": "sha256:707303da9d3ad0dc3b848abf9d7b7e52d341e3578b9289e2979158bd6def4158"
+    },
+    {
+      "name": "actual read-only restore into independent Qdrant acknowledged",
+      "status": "PASS",
+      "tested_source_sha": "657cb5ceb3b92a0f46d743700387d21103351f7d",
+      "tested_image_id": "sha256:707303da9d3ad0dc3b848abf9d7b7e52d341e3578b9289e2979158bd6def4158"
+    },
+    {
+      "name": "restored hybrid ranking citations and excerpts agree (1e-6 float tolerance)",
+      "status": "PASS",
+      "tested_source_sha": "657cb5ceb3b92a0f46d743700387d21103351f7d",
+      "tested_image_id": "sha256:707303da9d3ad0dc3b848abf9d7b7e52d341e3578b9289e2979158bd6def4158"
+    },
+    {
+      "name": "restored original source hash exact",
+      "status": "PASS",
+      "tested_source_sha": "657cb5ceb3b92a0f46d743700387d21103351f7d",
+      "tested_image_id": "sha256:707303da9d3ad0dc3b848abf9d7b7e52d341e3578b9289e2979158bd6def4158"
+    },
+    {
+      "name": "all job states checkpoints manifests and capability hashes survive",
+      "status": "PASS",
+      "tested_source_sha": "657cb5ceb3b92a0f46d743700387d21103351f7d",
+      "tested_image_id": "sha256:707303da9d3ad0dc3b848abf9d7b7e52d341e3578b9289e2979158bd6def4158"
+    },
+    {
+      "name": "post-restore capability has exact workspace scope",
+      "status": "PASS",
+      "tested_source_sha": "657cb5ceb3b92a0f46d743700387d21103351f7d",
+      "tested_image_id": "sha256:707303da9d3ad0dc3b848abf9d7b7e52d341e3578b9289e2979158bd6def4158"
+    },
+    {
+      "name": "actual CLI confirmed deletion preserves unrelated corpus",
+      "status": "PASS",
+      "tested_source_sha": "657cb5ceb3b92a0f46d743700387d21103351f7d",
+      "tested_image_id": "sha256:707303da9d3ad0dc3b848abf9d7b7e52d341e3578b9289e2979158bd6def4158"
+    },
+    {
+      "name": "final ingest retrieval parser and model source matches tested modules",
+      "status": "PASS",
+      "tested_source_sha": "657cb5ceb3b92a0f46d743700387d21103351f7d",
+      "tested_image_id": "sha256:707303da9d3ad0dc3b848abf9d7b7e52d341e3578b9289e2979158bd6def4158"
+    }
+  ],
+  "prior_attempts": [
+    {
+      "source_sha": "e1a3373dfd357ec718309c805c2c3ac8d7fc5729",
+      "image_id": "sha256:338be7e77eaed77a55a1c8ac9d0ef4dfec781203c2d780885330d2af5dc3a9fe",
+      "checks": [
+        {
+          "name": "actual image + private non-root Qdrant CPU readiness",
+          "status": "PASS"
+        },
+        {
+          "name": "anonymous API rejected",
+          "status": "PASS"
+        },
+        {
+          "name": "CLI/API workspace parity",
+          "status": "PASS"
+        },
+        {
+          "name": "actual ONNX mask mean, L2, batch/single invariance",
+          "status": "PASS"
+        }
+      ],
+      "result": "FAIL",
+      "failure_class": "RuntimeError"
+    },
+    {
+      "source_sha": "7edabab7990945fa3e960d912d24179090e47b37",
+      "image_id": "sha256:4572df634a14160c3a7490c76066cfa7a89cb9d4b20faa3ebed92b5f96b485a3",
+      "checks": [
+        {
+          "name": "actual image + private non-root Qdrant CPU readiness",
+          "status": "PASS"
+        },
+        {
+          "name": "anonymous API rejected",
+          "status": "PASS"
+        },
+        {
+          "name": "CLI/API workspace parity",
+          "status": "PASS"
+        },
+        {
+          "name": "actual ONNX mask mean, L2, batch/single invariance",
+          "status": "PASS"
+        },
+        {
+          "name": "real TXT ingestion completes",
+          "status": "PASS"
+        },
+        {
+          "name": "real orchard.pdf ingestion completes",
+          "status": "PASS"
+        },
+        {
+          "name": "real library.docx ingestion completes",
+          "status": "PASS"
+        },
+        {
+          "name": "actual dense + BM25 + rerank retrieves rainwater evidence",
+          "status": "PASS"
+        },
+        {
+          "name": "CLI/API search parity",
+          "status": "PASS"
+        },
+        {
+          "name": "actual PDF page 2 provenance",
+          "status": "PASS"
+        },
+        {
+          "name": "persisted authorized citation 9badbf91d0225a0f8aea94a1154d01d1",
+          "status": "PASS"
+        },
+        {
+          "name": "persisted authorized citation e8527e55c9105d9381f0c3886a0bb11e",
+          "status": "PASS"
+        },
+        {
+          "name": "original source download hash",
+          "status": "PASS"
+        },
+        {
+          "name": "duplicate ingestion idempotent",
+          "status": "PASS"
+        },
+        {
+          "name": "cross-workspace search denied",
+          "status": "PASS"
+        },
+        {
+          "name": "cross-workspace deletion denied",
+          "status": "PASS"
+        },
+        {
+          "name": "no-match explicit on unrelated query",
+          "status": "PASS"
+        },
+        {
+          "name": "generation remains disabled",
+          "status": "PASS"
+        },
+        {
+          "name": "API process restart preserves job and retrieval",
+          "status": "PASS"
+        },
+        {
+          "name": "real Qdrant outage readiness 503",
+          "status": "PASS"
+        },
+        {
+          "name": "real Qdrant outage search 503",
+          "status": "PASS"
+        },
+        {
+          "name": "Qdrant restart preserves committed points",
+          "status": "PASS"
+        },
+        {
+          "name": "actual RUNNING worker crash recovers without reset",
+          "status": "PASS"
+        },
+        {
+          "name": "offline real Qdrant + SQLite consistent backup",
+          "status": "PASS"
+        }
+      ],
+      "result": "FAIL",
+      "failure_class": "RuntimeError"
+    },
+    {
+      "source_sha": "657cb5ceb3b92a0f46d743700387d21103351f7d",
+      "image_id": "sha256:707303da9d3ad0dc3b848abf9d7b7e52d341e3578b9289e2979158bd6def4158",
+      "checks": [
+        {
+          "name": "actual image + private non-root Qdrant CPU readiness",
+          "status": "PASS",
+          "tested_source_sha": "7edabab7990945fa3e960d912d24179090e47b37",
+          "tested_image_id": "sha256:4572df634a14160c3a7490c76066cfa7a89cb9d4b20faa3ebed92b5f96b485a3"
+        },
+        {
+          "name": "anonymous API rejected",
+          "status": "PASS",
+          "tested_source_sha": "7edabab7990945fa3e960d912d24179090e47b37",
+          "tested_image_id": "sha256:4572df634a14160c3a7490c76066cfa7a89cb9d4b20faa3ebed92b5f96b485a3"
+        },
+        {
+          "name": "CLI/API workspace parity",
+          "status": "PASS",
+          "tested_source_sha": "7edabab7990945fa3e960d912d24179090e47b37",
+          "tested_image_id": "sha256:4572df634a14160c3a7490c76066cfa7a89cb9d4b20faa3ebed92b5f96b485a3"
+        },
+        {
+          "name": "actual ONNX mask mean, L2, batch/single invariance",
+          "status": "PASS",
+          "tested_source_sha": "7edabab7990945fa3e960d912d24179090e47b37",
+          "tested_image_id": "sha256:4572df634a14160c3a7490c76066cfa7a89cb9d4b20faa3ebed92b5f96b485a3"
+        },
+        {
+          "name": "real TXT ingestion completes",
+          "status": "PASS",
+          "tested_source_sha": "7edabab7990945fa3e960d912d24179090e47b37",
+          "tested_image_id": "sha256:4572df634a14160c3a7490c76066cfa7a89cb9d4b20faa3ebed92b5f96b485a3"
+        },
+        {
+          "name": "real orchard.pdf ingestion completes",
+          "status": "PASS",
+          "tested_source_sha": "7edabab7990945fa3e960d912d24179090e47b37",
+          "tested_image_id": "sha256:4572df634a14160c3a7490c76066cfa7a89cb9d4b20faa3ebed92b5f96b485a3"
+        },
+        {
+          "name": "real library.docx ingestion completes",
+          "status": "PASS",
+          "tested_source_sha": "7edabab7990945fa3e960d912d24179090e47b37",
+          "tested_image_id": "sha256:4572df634a14160c3a7490c76066cfa7a89cb9d4b20faa3ebed92b5f96b485a3"
+        },
+        {
+          "name": "actual dense + BM25 + rerank retrieves rainwater evidence",
+          "status": "PASS",
+          "tested_source_sha": "7edabab7990945fa3e960d912d24179090e47b37",
+          "tested_image_id": "sha256:4572df634a14160c3a7490c76066cfa7a89cb9d4b20faa3ebed92b5f96b485a3"
+        },
+        {
+          "name": "CLI/API search parity",
+          "status": "PASS",
+          "tested_source_sha": "7edabab7990945fa3e960d912d24179090e47b37",
+          "tested_image_id": "sha256:4572df634a14160c3a7490c76066cfa7a89cb9d4b20faa3ebed92b5f96b485a3"
+        },
+        {
+          "name": "actual PDF page 2 provenance",
+          "status": "PASS",
+          "tested_source_sha": "7edabab7990945fa3e960d912d24179090e47b37",
+          "tested_image_id": "sha256:4572df634a14160c3a7490c76066cfa7a89cb9d4b20faa3ebed92b5f96b485a3"
+        },
+        {
+          "name": "persisted authorized citation 9badbf91d0225a0f8aea94a1154d01d1",
+          "status": "PASS",
+          "tested_source_sha": "7edabab7990945fa3e960d912d24179090e47b37",
+          "tested_image_id": "sha256:4572df634a14160c3a7490c76066cfa7a89cb9d4b20faa3ebed92b5f96b485a3"
+        },
+        {
+          "name": "persisted authorized citation e8527e55c9105d9381f0c3886a0bb11e",
+          "status": "PASS",
+          "tested_source_sha": "7edabab7990945fa3e960d912d24179090e47b37",
+          "tested_image_id": "sha256:4572df634a14160c3a7490c76066cfa7a89cb9d4b20faa3ebed92b5f96b485a3"
+        },
+        {
+          "name": "original source download hash",
+          "status": "PASS",
+          "tested_source_sha": "7edabab7990945fa3e960d912d24179090e47b37",
+          "tested_image_id": "sha256:4572df634a14160c3a7490c76066cfa7a89cb9d4b20faa3ebed92b5f96b485a3"
+        },
+        {
+          "name": "duplicate ingestion idempotent",
+          "status": "PASS",
+          "tested_source_sha": "7edabab7990945fa3e960d912d24179090e47b37",
+          "tested_image_id": "sha256:4572df634a14160c3a7490c76066cfa7a89cb9d4b20faa3ebed92b5f96b485a3"
+        },
+        {
+          "name": "cross-workspace search denied",
+          "status": "PASS",
+          "tested_source_sha": "7edabab7990945fa3e960d912d24179090e47b37",
+          "tested_image_id": "sha256:4572df634a14160c3a7490c76066cfa7a89cb9d4b20faa3ebed92b5f96b485a3"
+        },
+        {
+          "name": "cross-workspace deletion denied",
+          "status": "PASS",
+          "tested_source_sha": "7edabab7990945fa3e960d912d24179090e47b37",
+          "tested_image_id": "sha256:4572df634a14160c3a7490c76066cfa7a89cb9d4b20faa3ebed92b5f96b485a3"
+        },
+        {
+          "name": "no-match explicit on unrelated query",
+          "status": "PASS",
+          "tested_source_sha": "7edabab7990945fa3e960d912d24179090e47b37",
+          "tested_image_id": "sha256:4572df634a14160c3a7490c76066cfa7a89cb9d4b20faa3ebed92b5f96b485a3"
+        },
+        {
+          "name": "generation remains disabled",
+          "status": "PASS",
+          "tested_source_sha": "7edabab7990945fa3e960d912d24179090e47b37",
+          "tested_image_id": "sha256:4572df634a14160c3a7490c76066cfa7a89cb9d4b20faa3ebed92b5f96b485a3"
+        },
+        {
+          "name": "API process restart preserves job and retrieval",
+          "status": "PASS",
+          "tested_source_sha": "7edabab7990945fa3e960d912d24179090e47b37",
+          "tested_image_id": "sha256:4572df634a14160c3a7490c76066cfa7a89cb9d4b20faa3ebed92b5f96b485a3"
+        },
+        {
+          "name": "real Qdrant outage readiness 503",
+          "status": "PASS",
+          "tested_source_sha": "7edabab7990945fa3e960d912d24179090e47b37",
+          "tested_image_id": "sha256:4572df634a14160c3a7490c76066cfa7a89cb9d4b20faa3ebed92b5f96b485a3"
+        },
+        {
+          "name": "real Qdrant outage search 503",
+          "status": "PASS",
+          "tested_source_sha": "7edabab7990945fa3e960d912d24179090e47b37",
+          "tested_image_id": "sha256:4572df634a14160c3a7490c76066cfa7a89cb9d4b20faa3ebed92b5f96b485a3"
+        },
+        {
+          "name": "Qdrant restart preserves committed points",
+          "status": "PASS",
+          "tested_source_sha": "7edabab7990945fa3e960d912d24179090e47b37",
+          "tested_image_id": "sha256:4572df634a14160c3a7490c76066cfa7a89cb9d4b20faa3ebed92b5f96b485a3"
+        },
+        {
+          "name": "actual RUNNING worker crash recovers without reset",
+          "status": "PASS",
+          "tested_source_sha": "7edabab7990945fa3e960d912d24179090e47b37",
+          "tested_image_id": "sha256:4572df634a14160c3a7490c76066cfa7a89cb9d4b20faa3ebed92b5f96b485a3"
+        },
+        {
+          "name": "offline real Qdrant + SQLite consistent backup",
+          "status": "PASS",
+          "tested_source_sha": "7edabab7990945fa3e960d912d24179090e47b37",
+          "tested_image_id": "sha256:4572df634a14160c3a7490c76066cfa7a89cb9d4b20faa3ebed92b5f96b485a3"
+        },
+        {
+          "name": "final image reads retained real corpus and citations",
+          "status": "PASS",
+          "tested_source_sha": "657cb5ceb3b92a0f46d743700387d21103351f7d",
+          "tested_image_id": "sha256:707303da9d3ad0dc3b848abf9d7b7e52d341e3578b9289e2979158bd6def4158"
+        },
+        {
+          "name": "standalone SQLite snapshot and acknowledged vector backup",
+          "status": "PASS",
+          "tested_source_sha": "657cb5ceb3b92a0f46d743700387d21103351f7d",
+          "tested_image_id": "sha256:707303da9d3ad0dc3b848abf9d7b7e52d341e3578b9289e2979158bd6def4158"
+        },
+        {
+          "name": "snapshot needs no WAL or SHM on a read-only mount",
+          "status": "PASS",
+          "tested_source_sha": "657cb5ceb3b92a0f46d743700387d21103351f7d",
+          "tested_image_id": "sha256:707303da9d3ad0dc3b848abf9d7b7e52d341e3578b9289e2979158bd6def4158"
+        },
+        {
+          "name": "actual read-only restore into independent Qdrant acknowledged",
+          "status": "PASS",
+          "tested_source_sha": "657cb5ceb3b92a0f46d743700387d21103351f7d",
+          "tested_image_id": "sha256:707303da9d3ad0dc3b848abf9d7b7e52d341e3578b9289e2979158bd6def4158"
+        }
+      ],
+      "result": "FAIL",
+      "failure_class": "RuntimeError"
+    }
+  ],
+  "pooling": {
+    "dimension": 384,
+    "pooling": "mask-weighted-mean",
+    "normalization": "l2",
+    "reference_max_abs_error": 1.7898752063816303e-08,
+    "providers": [
+      "CPUExecutionProvider"
+    ]
+  },
+  "corpus_sha256": {
+    "orchard.txt": "6b21c5b3cecb609648b6c1ad4245970ec92bf402f7943095357d3471eae3d4e7",
+    "orchard.pdf": "6e022ec5e47571ead55abc8c3a33f749e368873c59545d4b7bee9f11a29a24dd",
+    "library.docx": "f60636fd69ca4f49efc8e2fa7cc1748c5c25fde6e08c32cd2a1bd64b5eb6c3a2"
+  },
+  "result": "PASS",
+  "resume_method": "same retained projects; new uniquely named backup; no reingest/reset",
+  "module_attestation": {
+    "compared_source": "7edabab7990945fa3e960d912d24179090e47b37",
+    "matches": {
+      "service.py": true,
+      "store.py": true,
+      "parsers.py": true,
+      "embedding.py": true,
+      "vectors.py": true,
+      "settings.py": true
+    }
+  }
+}

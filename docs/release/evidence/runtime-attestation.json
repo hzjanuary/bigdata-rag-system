@@ -1,0 +1,26 @@
+{
+  "tested_source_sha": "657cb5ceb3b92a0f46d743700387d21103351f7d",
+  "tested_image_id": "sha256:707303da9d3ad0dc3b848abf9d7b7e52d341e3578b9289e2979158bd6def4158",
+  "preserved_test_container": "spec001-b475944503-restore-api-1",
+  "final_source_sha": "02ad20787fd5a8c475aa0efa2e0802e98fb74d8b",
+  "final_image_id": "sha256:1dcee1bdcff9537a4ad508862f3967ff329335fbb4f71c7c29cbd28fe5346640",
+  "tested_runtime_sha256": "2b82121078a481cc149e300e84522e079787af53e72881517973df08613a5642",
+  "final_runtime_sha256": "8f2db18b1037198984e329c54aaf1f64c054a94708fbd1b81aaddebe94748ac5",
+  "runtime_files": 2688,
+  "changed_runtime_files": [
+    "workspace_rag_core-0.1.0.dist-info/RECORD",
+    "workspace_rag_core-0.1.0.dist-info/uv_cache.json"
+  ],
+  "tested_qdrant_image_id": "sha256:371d25926ae70db120d7657a0cdc0ad3fe291f6c29ff5e70aef9db659f5f199d",
+  "final_qdrant_image_id": "sha256:d9bbc4b11a2a7ae6ca86849280131d7c134a84602ae10317d118cc2a1cb4d647",
+  "qdrant_binary_sha256": "12eb59dbd9401b5e4b6bef8021e98ec5893276eed27f97dc02372719a22753d9",
+  "qdrant_binary_equal": true,
+  "result": "PASS_RUNTIME_CONTENT_WITH_DECLARED_INSTALL_METADATA_DIFFERENCES",
+  "all_files_byte_identical": false,
+  "executable_library_and_license_files_byte_identical": true,
+  "reviewed_metadata_differences": {
+    "uv_cache.json": "Only numeric installer timestamp differs; every other field equal",
+    "RECORD": "Only the uv_cache.json digest entry differs; all other manifest entries equal"
+  },
+  "verified_runtime_files": 2686
+}

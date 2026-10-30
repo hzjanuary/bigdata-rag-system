@@ -1,0 +1,52 @@
+{
+  "project": "spec001-b475944503",
+  "source_sha": "e1a3373dfd357ec718309c805c2c3ac8d7fc5729",
+  "model": {
+    "model_id": "sentence-transformers/all-MiniLM-L6-v2",
+    "revision": "10dbd2f06a8baf40ad285b037edda610c1b9a57c",
+    "license": "Apache-2.0",
+    "files": {
+      "onnx/model.onnx": {
+        "sha256": "6fd5d72fe4589f189f8ebc006442dbb529bb7ce38f8082112682524616046452",
+        "size": 90405214,
+        "git_blob": "7d35d33d315a1ce897ce7cca38d42234e1d55add"
+      },
+      "tokenizer.json": {
+        "sha256": "be50c3628f2bf5bb5e3a7f17b1f74611b2561a3a27eeab05e5aa30f411572037",
+        "size": 466247,
+        "git_blob": "cb202bfe2e3c98645018a6d12f182a434c9d3e02"
+      }
+    }
+  },
+  "image_id": "sha256:338be7e77eaed77a55a1c8ac9d0ef4dfec781203c2d780885330d2af5dc3a9fe",
+  "qdrant_image_id": "sha256:804df83817442dbef243535c69e59d40ebb4b8ae1f98c796801daa66f22eaaab",
+  "checks": [
+    {
+      "name": "actual image + private non-root Qdrant CPU readiness",
+      "status": "PASS"
+    },
+    {
+      "name": "anonymous API rejected",
+      "status": "PASS"
+    },
+    {
+      "name": "CLI/API workspace parity",
+      "status": "PASS"
+    },
+    {
+      "name": "actual ONNX mask mean, L2, batch/single invariance",
+      "status": "PASS"
+    }
+  ],
+  "pooling": {
+    "dimension": 384,
+    "pooling": "mask-weighted-mean",
+    "normalization": "l2",
+    "reference_max_abs_error": 1.7898752063816303e-08,
+    "providers": [
+      "CPUExecutionProvider"
+    ]
+  },
+  "result": "FAIL",
+  "failure_class": "RuntimeError"
+}

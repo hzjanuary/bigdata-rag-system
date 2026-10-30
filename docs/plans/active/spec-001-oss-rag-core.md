@@ -26,14 +26,15 @@ The full matrix is in `docs/release/verification.md`. Each criterion starts NOT_
 
 ## External constraints / pending evidence
 
-- RAG-11: model acquisition requires explicit operator approval; question submitted. No model download until granted.
+- RAG-11: approved acquisition and ONE same-project CPU/Qdrant campaign are COMPLETE (34 checks); no further model campaign authorized.
 - RAG-15: LIVE generation deliberately BLOCKED until separate approval and operator credentials; do not request secrets in chat.
-- Remote GitHub CI requires a push, prohibited in current scope; report separately.
+- RAG-20: local secure CPU Compose verified; a separate pristine Linux host/VM remains unqualified and needs a separately authorized environment/model campaign.
+- RAG-21: remote GitHub CI requires a push, prohibited in current scope. Local image gates fail on 44/43/44 HIGH OS findings (core/Qdrant/UI), no listed fixes; image distribution remains NO-GO.
 - Publication, tags, remote deploy and touching existing volumes remain prohibited.
 
 ## Execution log
 
-- S0 baseline and history detector completed; runtime implementation has not begun at this commit.
+- S0 checkpoint (0b09ca5): baseline/history detector completed before runtime implementation began.
 
 ### Local implementation progress (2026-10-30)
 
@@ -43,3 +44,13 @@ The full matrix is in `docs/release/verification.md`. Each criterion starts NOT_
 - S4 packaging/docs/CI/gates prepared. Runtime Python vulnerability audit: zero known vulnerabilities after updating the initially vulnerable pypdf/Starlette pins. Initial CPU image OS scan finds inherited Debian HIGH vulnerabilities without listed fixes; retain raw output and keep image-security NO-GO, with no gate bypass.
 - Docker 29 internal-only networks suppress host port publishing. Corrected topology: Qdrant internal only, API also attached to an ingress bridge with loopback-only host binding; optional UI on ingress only. The API bridge permits outbound connectivity, while generation stays disabled in config. Docs updated accordingly.
 - Previous goal turns classified as progress: runtime, tests and packaging changed authoritative state. No goal-owned acceptance process was live on resume; missing prior process handles were revalidated with OS/container state before restarting checks.
+
+### Delivery audit (2026-10-30)
+
+- Runtime/packaging F: 02ad20787fd5a8c475aa0efa2e0802e98fb74d8b; final tests/independent clone U: 0e476bd16ec75c189c58616b4f4eae9688acfed7. Difference: one startup-security test, no runtime change.
+- 99 deterministic tests passed / one actual-Qdrant test skipped in that run; the same real-Qdrant contract passed separately (1). One approved model campaign passed all 34 checks including actual worker SIGKILL, Qdrant stop/restart, source/page/chunk checks and independent backup/restore. All test data/volumes retained, stopped.
+- Final images are non-root and inventoried; exact OCI descriptors, labels, model hashes, SBOM/raw scan hashes and runtime-content attestation are in docs/release/evidence/. Full raw OS/image SBOMs and findings remain in ignored .local/scans/.
+- Two installer metadata files differ between the CPU-tested and final image only by verified build timestamps/RECORD checksum; all executable/library/license bytes match. No byte-identical image claim.
+- Current source and archive gates, full-history detector review, locked install, licenses and Python security checks completed. Raw image HIGH/CRITICAL gates deliberately fail (exit 1); no inference in CI or remote provider call was made.
+- Acceptance: 21 PASS / 2 BLOCKED / 1 FAIL. Source-preview NO-GO and image-security NO-GO are independent. Do not archive this plan while RAG-15, pristine-host qualification, remote CI and image-security disposition are outstanding.
+- No push, merge, Git tag, public source/image release, remote deployment or paid/generative call. Required next approvals and exact blockers are in docs/release/verification.md.
